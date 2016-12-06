@@ -43,8 +43,8 @@ namespace ruigeruben
                 var contentSearchPaths = new List<string>() { "Fonts", "Sounds" };
                 CCSizeI viewSize = gameView.ViewSize;
 
-                int width = 1024;
-                int height = 768;
+                int width = 1080;
+                int height = 1920;
 
                 // Set world dimensions
                 gameView.DesignResolution = new CCSizeI(width, height);
