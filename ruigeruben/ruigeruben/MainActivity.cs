@@ -8,13 +8,13 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
-
 using CocosSharp;
 
 namespace ruigeruben
 {
-    [Activity(Label = "ruigeruben", MainLauncher = true, Icon = "@drawable/icon",
+    [Activity(Label = "ruigeruben", Theme = "@android:style/Theme.NoTitleBar.Fullscreen", MainLauncher = true, Icon = "@drawable/icon",
         AlwaysRetainTaskState = true,
+        ScreenOrientation = ScreenOrientation.Landscape,
         LaunchMode = LaunchMode.SingleInstance,
         ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize | ConfigChanges.Keyboard | ConfigChanges.KeyboardHidden)]
     public class MainActivity : Activity
@@ -43,8 +43,8 @@ namespace ruigeruben
                 var contentSearchPaths = new List<string>() { "Fonts", "Sounds" };
                 CCSizeI viewSize = gameView.ViewSize;
 
-                int width = 1080;
-                int height = 1920;
+                int width = 1920;
+                int height = 1080;
 
                 // Set world dimensions
                 gameView.DesignResolution = new CCSizeI(width, height);
