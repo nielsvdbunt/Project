@@ -7,19 +7,12 @@ namespace ruigeruben
 {
     public class GameLayer : CCLayerColor
     {
-
-        // Define a label variable
         CCLabel label;
-
-        public GameLayer() : base(CCColor4B.Blue)
+        public GameLayer() : base(new CCColor4B(5,30,70))
         {
-
-            // create and initialize a Label
-            label = new CCLabel("Hello CocosSharp", "Fonts/MarkerFelt", 22, CCLabelFormat.SpriteFont);
-
-            // add the label as a child to this Layer
+            label = new CCLabel("SPACE RUBEN", "Fonts/Coalition", 70, CCLabelFormat.SpriteFont);
+            
             AddChild(label);
-
         }
 
         protected override void AddedToScene()
@@ -28,9 +21,8 @@ namespace ruigeruben
 
             // Use the bounds to layout the positioning of our drawable assets
             var bounds = VisibleBoundsWorldspace;
-
-            // position the label on the center of the screen
-            label.Position = bounds.Center;
+            label.PositionX = bounds.Center.X;
+            label.PositionY = 900;
 
             // Register for touch events
             var touchListener = new CCEventListenerTouchAllAtOnce();

@@ -64,6 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Button.cs" />
     <Compile Include="MainActivity.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -73,6 +74,8 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\Content\Fonts\MarkerFelt-22.xnb" />
+    <AndroidAsset Include="Assets\Content\Fonts\Coalition-36.xnb" />
+    <AndroidAsset Include="Assets\Content\Fonts\Coalition-70.xnb" />
     <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
