@@ -24,14 +24,16 @@ namespace ruigeruben
 
             CCRect bounds = VisibleBoundsWorldspace;
 
+            //Button zonder plaatje
             Button PlayButton = new Button("Play game", new CCPoint(bounds.Center.X, 1000), Font, FontSize, this);
             PlayButton.OnClicked += new ClickEventHandler(OnPlayGame);
             m_Buttons.Add(PlayButton);
 
-            Button Test = new Button("Button", "Test", new CCPoint(bounds.Center.X, 800), Font, FontSize, this);
-            m_Buttons.Add(Test);
-            Test.GetSprite().ScaleX *= 2;
-            Test.GetSprite().ScaleY *= 1.33f;
+          //  Button Test = new Button("Button", "Test", new CCPoint(bounds.Center.X, 800), Font, FontSize, this);
+           // m_Buttons.Add(Test);
+          //  Test.GetSprite().ScaleX *= 2;
+           // Test.GetSprite().ScaleY *= 1.33f;
+            //Zo maak je een button MET een plaatje, en het plaatje kan je daarna veranderen, text pos veranderen etcetc
         }
 
         private void OnPlayGame()
