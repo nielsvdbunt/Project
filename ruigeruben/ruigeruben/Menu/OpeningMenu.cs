@@ -36,14 +36,12 @@ namespace ruigeruben
             m_Buttons.Add(PlayButton);
 
             Button HelpButton = new Button("Help", new CCPoint(bounds.Center.X, 500), Font, FontSize, this);
-            HelpButton.OnClicked += new ClickEventHandler(OnPlayGame);
+            HelpButton.OnClicked += new ClickEventHandler(OnHelp);
             m_Buttons.Add(HelpButton);
 
             Button SettingsButton = new Button("Settings", new CCPoint(bounds.Center.X, 300), Font, FontSize, this);
-            SettingsButton.OnClicked += new ClickEventHandler(OnPlayGame);
-            m_Buttons.Add(SettingsButton);
-
-            
+            SettingsButton.OnClicked += new ClickEventHandler(OnSettings);
+            m_Buttons.Add(SettingsButton);      
 
             //  Button Test = new Button("Button", "Test", new CCPoint(bounds.Center.X, 800), Font, FontSize, this);
             // m_Buttons.Add(Test);
@@ -55,6 +53,16 @@ namespace ruigeruben
         private void OnPlayGame()
         {
             MainActivity.SwitchToMenu(SceneIds.PlayMenu);    
+        }
+
+        private void OnHelp()
+        {
+            MainActivity.SwitchToMenu(SceneIds.HelpMenu);
+        }
+
+        private void OnSettings()
+        {
+            MainActivity.SwitchToMenu(SceneIds.SettingsMenu);
         }
 
         public override void OnClick(CCPoint Location)

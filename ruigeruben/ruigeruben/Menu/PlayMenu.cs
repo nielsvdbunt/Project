@@ -7,9 +7,13 @@ namespace ruigeruben
 {
     class PlayMenu : AbstractMenu
     {
+        List<Button> m_Buttons;
+        List<string> m_Players;
+
         public PlayMenu() 
         {
-           
+            m_Buttons = new List<Button>();
+            m_Players = new List<string>();
         }
 
         protected override void AddedToScene()

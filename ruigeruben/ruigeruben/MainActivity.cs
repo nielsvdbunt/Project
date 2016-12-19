@@ -16,6 +16,8 @@ namespace ruigeruben
     {
         OpeningMenu,
         PlayMenu,
+        HelpMenu,
+        SettingsMenu,
         Game
            
     }
