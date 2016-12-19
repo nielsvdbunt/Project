@@ -12,6 +12,14 @@ using CocosSharp;
 
 namespace ruigeruben
 {
+    public enum SceneIds
+    {
+        OpeningMenu,
+        PlayMenu,
+        Game
+           
+    }
+
     [Activity(Label = "ruigeruben", Theme = "@android:style/Theme.NoTitleBar.Fullscreen", MainLauncher = true, Icon = "@drawable/icon",
         AlwaysRetainTaskState = true,
         ScreenOrientation = ScreenOrientation.Landscape,
@@ -19,7 +27,8 @@ namespace ruigeruben
         ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize | ConfigChanges.Keyboard | ConfigChanges.KeyboardHidden)]
     public class MainActivity : Activity
     {
-        int count = 1;
+        static CCGameView m_GameView;
+       
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -36,39 +45,44 @@ namespace ruigeruben
 
         void LoadGame(object sender, EventArgs e)
         {
-            CCGameView gameView = sender as CCGameView;
+            m_GameView = sender as CCGameView;
 
-            if (gameView != null)
+            if (m_GameView != null)
             {
-                var contentSearchPaths = new List<string>() { "Fonts", "Sounds" };
-                CCSizeI viewSize = gameView.ViewSize;
+                var contentSearchPaths = new List<string>() { "Fonts", "Sounds", "Images" };
+                CCSizeI viewSize = m_GameView.ViewSize;
 
                 int width = 1920;
                 int height = 1080;
 
                 // Set world dimensions
-                gameView.DesignResolution = new CCSizeI(width, height);
+                m_GameView.DesignResolution = new CCSizeI(width, height);
 
-                // Determine whether to use the high or low def versions of our images
-                // Make sure the default texel to content size ratio is set correctly
-                // Of course you're free to have a finer set of image resolutions e.g (ld, hd, super-hd)
-                if (width < viewSize.Width)
-                {
-                    contentSearchPaths.Add("Images/Hd");
-                    CCSprite.DefaultTexelToContentSizeRatio = 2.0f;
-                }
-                else
-                {
-                    contentSearchPaths.Add("Images/Ld");
-                    CCSprite.DefaultTexelToContentSizeRatio = 1.0f;
-                }
+                m_GameView.ContentManager.SearchPaths = contentSearchPaths;
 
-                gameView.ContentManager.SearchPaths = contentSearchPaths;
-
-                CCScene gameScene = new CCScene(gameView);
-                gameScene.AddLayer(new GameLayer());
-                gameView.RunWithScene(gameScene);
+                SwitchToMenu(SceneIds.OpeningMenu);
+                //CCScene scene = new MenuScene(gameView);
+               // gameView.RunWithScene(ms);
+                
+                //CCScene gameScene = new CCScene(gameView);
+               // gameScene.AddLayer(new GameLayer());
+                //gameView.RunWithScene(gameScene);
             }
+        }
+
+        public static void SwitchToMenu(SceneIds id)
+        {
+            CCScene scene = new CCScene(m_GameView);
+
+            if (id == SceneIds.OpeningMenu)
+                scene.AddLayer(new OpeningMenu());
+
+            if (id == SceneIds.PlayMenu)
+                scene.AddLayer(new PlayMenu());
+
+
+            m_GameView.Director.ReplaceScene(scene);
+
         }
     }
 }
