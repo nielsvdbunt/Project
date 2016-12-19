@@ -82,6 +82,9 @@ namespace ruigeruben
             if (id == SceneIds.PlayMenu)
                 scene.AddLayer(new PlayMenu());
 
+            if (id == SceneIds.HelpMenu)
+                scene.AddLayer(new HelpMenu());
+
 
             m_GameView.Director.ReplaceScene(scene);
 

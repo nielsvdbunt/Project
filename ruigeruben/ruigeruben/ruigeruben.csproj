@@ -71,6 +71,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Menu\AbstractMenu.cs" />
+    <Compile Include="Menu\HelpMenu.cs" />
     <Compile Include="Menu\OpeningMenu.cs" />
     <Compile Include="Menu\PlayMenu.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
