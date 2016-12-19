@@ -62,7 +62,6 @@ namespace ruigeruben
                 if(OnClicked != null)
                         OnClicked();
                 
-                m_Label.PositionX += 10;
                 return true;
             }
 
