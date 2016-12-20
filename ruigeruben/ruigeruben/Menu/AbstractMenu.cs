@@ -16,11 +16,14 @@ namespace ruigeruben
 
         void OnTouchesEnded(List<CCTouch> touches, CCEvent touchEvent)
         {
-            if (touches.Count > 0)
+            foreach (CCTouch i in touches)
             {
-                CCPoint location = touches[0].LocationOnScreen;
+                if (touches.Count > 0)
+                {
+                    CCPoint location = touches[0].LocationOnScreen;
 
-                OnClick(location);
+                    OnClick(location);
+                }
             }
         }
 

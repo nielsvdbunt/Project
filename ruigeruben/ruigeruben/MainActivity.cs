@@ -74,6 +74,13 @@ namespace ruigeruben
 
         public static void SwitchToMenu(SceneIds id)
         {
+            if(id == SceneIds.Game)
+            {
+                GameScene gs = new GameScene(m_GameView);
+                m_GameView.Director.ReplaceScene(gs);
+                return;
+            }
+
             CCScene scene = new CCScene(m_GameView);
 
             if (id == SceneIds.OpeningMenu)

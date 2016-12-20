@@ -26,7 +26,7 @@ namespace ruigeruben
 
             //misschien meot titel iets groter of de rest iets kleiner?
             CCLabel Titel = new CCLabel("Spacesonne", "Fonts/Coalition", 70, CCLabelFormat.SpriteFont);
-            Titel.Position = new CCPoint(bounds.Center.X, 1000);
+            Titel.Position = new CCPoint(bounds.Center.X, 950);
             AddChild(Titel);
 
 
