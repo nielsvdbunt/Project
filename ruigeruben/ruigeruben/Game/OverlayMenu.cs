@@ -7,6 +7,11 @@ namespace ruigeruben
 {
     class OverlayMenu : AbstractMenu
     {
+        public override void OnBack()
+        {
+            throw new NotImplementedException();
+        }
+
         public override void OnClick(CCPoint Location)
         {
            

@@ -78,5 +78,10 @@ namespace ruigeruben
                     return;
             }
         }
+
+        public override void OnBack()
+        {
+            //Do nothing
+        }
     }
 }
