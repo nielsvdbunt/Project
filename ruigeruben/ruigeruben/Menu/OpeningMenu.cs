@@ -24,7 +24,7 @@ namespace ruigeruben
 
             CCRect bounds = VisibleBoundsWorldspace;
 
-            CCSprite achtergrond = new CCSprite("menu_achtergrond");
+            CCSprite achtergrond = new CCSprite("achtergrond");
             AddChild(achtergrond);
 
             //misschien meot titel iets groter of de rest iets kleiner?
