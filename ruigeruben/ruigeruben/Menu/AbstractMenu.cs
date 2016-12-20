@@ -28,5 +28,6 @@ namespace ruigeruben
         }
 
         public abstract void OnClick(CCPoint Location);
+        public abstract void OnBack();
     }
 }

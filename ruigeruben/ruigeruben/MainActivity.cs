@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 using Android.App;
 using Android.Content;
@@ -30,7 +31,8 @@ namespace ruigeruben
     public class MainActivity : Activity
     {
         static CCGameView m_GameView;
-       
+        static bool m_InMenu;
+        static AbstractMenu m_CurrentMenu;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -48,7 +50,7 @@ namespace ruigeruben
         void LoadGame(object sender, EventArgs e)
         {
             m_GameView = sender as CCGameView;
-
+            
             if (m_GameView != null)
             {
                 var contentSearchPaths = new List<string>() { "Fonts", "Sounds", "Images" };
@@ -72,25 +74,37 @@ namespace ruigeruben
             }
         }
 
+        public override void OnBackPressed()
+        {
+            base.OnBackPressed();
+
+            if(m_InMenu)
+            {
+                m_CurrentMenu.OnBack();
+            }
+        }
+      
         public static void SwitchToMenu(SceneIds id)
         {
             if(id == SceneIds.Game)
             {
+                m_InMenu = false;
                 GameScene gs = new GameScene(m_GameView);
                 m_GameView.Director.ReplaceScene(gs);
                 return;
             }
 
+            m_InMenu = true;
             CCScene scene = new CCScene(m_GameView);
 
             if (id == SceneIds.OpeningMenu)
-                scene.AddLayer(new OpeningMenu());
+                scene.AddLayer(m_CurrentMenu = new OpeningMenu());
 
             if (id == SceneIds.PlayMenu)
-                scene.AddLayer(new PlayMenu());
+                scene.AddLayer(m_CurrentMenu = new PlayMenu());
 
             if (id == SceneIds.HelpMenu)
-                scene.AddLayer(new HelpMenu());
+                scene.AddLayer(m_CurrentMenu = new HelpMenu() );
 
 
             m_GameView.Director.ReplaceScene(scene);
