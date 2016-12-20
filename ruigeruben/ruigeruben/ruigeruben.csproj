@@ -67,6 +67,8 @@
     <Compile Include="Button.cs" />
     <Compile Include="Game\Board.cs" />
     <Compile Include="Game\Card.cs" />
+    <Compile Include="Game\GameScene.cs" />
+    <Compile Include="Game\OverlayMenu.cs" />
     <Compile Include="MainActivity.cs">
       <SubType>Code</SubType>
     </Compile>
