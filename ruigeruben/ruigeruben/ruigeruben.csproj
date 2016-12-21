@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Button.cs" />
+    <Compile Include="CodeFile1.cs" />
     <Compile Include="Game\Board.cs" />
     <Compile Include="Game\Card.cs" />
     <Compile Include="Game\GameScene.cs" />

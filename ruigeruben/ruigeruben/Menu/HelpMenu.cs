@@ -44,12 +44,17 @@ namespace ruigeruben
             Button m_BackMenuButton = new Button("<<<", new CCPoint(bounds.MinX + 70, bounds.MaxY - 100), Font, FontSize, this);
             m_BackMenuButton.OnClicked += new ClickEventHandler(OnBackMenu);
 
+            CCLabel TitelHelp = new CCLabel("Help", "Fonts/Coalition", 70, CCLabelFormat.SpriteFont);
+           
+            CCLabel firsttext = new CCLabel("Welkom bij Spacesonne \n dit is de uitleg met de pijltjes rechts en links onderin kunt u navigeren door de uitleg" , "Fonts/Coalition", 70, CCLabelFormat.SpriteFont);
+            AddChild(TitelHelp);
+            AddChild(firsttext);
 
         }
 
         private void OnBackMenu()
         {
-
+            MainActivity.SwitchToMenu(SceneIds.OpeningMenu);
         }
 
         private void OnPagePrev()
