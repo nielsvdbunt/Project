@@ -49,6 +49,11 @@ namespace ruigeruben
 
         public override void OnClick(CCPoint Location)
         {
+            
+        }
+
+        public override void OnBack()
+        {
             MainActivity.SwitchToMenu(SceneIds.OpeningMenu);
         }
     }

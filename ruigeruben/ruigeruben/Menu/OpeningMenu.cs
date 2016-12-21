@@ -24,8 +24,11 @@ namespace ruigeruben
 
             CCRect bounds = VisibleBoundsWorldspace;
 
+            CCSprite achtergrond = new CCSprite("achtergrond");
+            AddChild(achtergrond);
+
             //misschien meot titel iets groter of de rest iets kleiner?
-            CCLabel Titel = new CCLabel("SPACESONNE", "Fonts/Coalition", 70, CCLabelFormat.SpriteFont);
+            CCLabel Titel = new CCLabel("SPACESONNE", "Fonts/Coalition", 100, CCLabelFormat.SpriteFont);
             Titel.Position = new CCPoint(bounds.Center.X, 950);
             AddChild(Titel);
 
@@ -74,6 +77,11 @@ namespace ruigeruben
                 if (b.OnClickEvent(Location))
                     return;
             }
+        }
+
+        public override void OnBack()
+        {
+            //Do nothing
         }
     }
 }
