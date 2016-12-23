@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using CocosSharp;
 using Microsoft.Xna.Framework;
 
-namespace ruigeruben
+namespace SpaceSonne
 {
     class HelpMenu : AbstractMenu
     {
@@ -45,8 +45,10 @@ namespace ruigeruben
             m_BackMenuButton.OnClicked += new ClickEventHandler(OnBackMenu);
 
             CCLabel TitelHelp = new CCLabel("Help", "Fonts/Coalition", 70, CCLabelFormat.SpriteFont);
-           
-            CCLabel firsttext = new CCLabel("Welkom bij Spacesonne \n dit is de uitleg met de pijltjes rechts en links onderin kunt u navigeren door de uitleg" , "Fonts/Coalition", 70, CCLabelFormat.SpriteFont);
+           TitelHelp.Position = new CCPoint(bounds.Center.X, 950);
+            /* de tekst groote moet nog aangepast worden*/
+            CCLabel firsttext = new CCLabel("Welkom bij Spacesonne \n dit is de uitleg met de pijltjes rechts en links onderin kunt u navigeren door de uitleg" , "Fonts/MarkerFelt", 22, CCLabelFormat.SpriteFont);
+            firsttext.Position = new CCPoint(500, 200);
             AddChild(TitelHelp);
             AddChild(firsttext);
 

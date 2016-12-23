@@ -9,9 +9,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Android.Runtime.ResourceDesignerAttribute("ruigeruben.Resource", IsApplication=true)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("CocosSharpGame1.Resource", IsApplication=true)]
 
-namespace SpaceSonne
+namespace CocosSharpGame1
 {
 	
 	
