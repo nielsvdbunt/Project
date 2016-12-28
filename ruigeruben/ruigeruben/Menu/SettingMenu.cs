@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 
 
 // de instellingen voordat het spel gaat beginnen
-namespace SpaceSonne
+namespace ruigeruben
 {
         
 

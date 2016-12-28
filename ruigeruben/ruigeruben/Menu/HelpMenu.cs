@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using CocosSharp;
 using Microsoft.Xna.Framework;
 
-namespace SpaceSonne
+namespace ruigeruben
 {
     class HelpMenu : AbstractMenu
     {
         Button m_NextPageButton;
         Button m_PrevPageButton;
         Button m_BackMenuButton;
+        int PageCounter = 0;
+        CCLabel TitelHelp;
+        CCRect bounds;
 
         public HelpMenu()
         {
@@ -33,7 +36,7 @@ namespace SpaceSonne
             string Font = "Fonts/Coalition";
             int FontSize = 36;
 
-            CCRect bounds = VisibleBoundsWorldspace;
+            bounds = VisibleBoundsWorldspace;
 
             Button m_NextPageButton = new Button("->", new CCPoint(bounds.MaxX - 160, bounds.MinY + 100), Font, FontSize, this);
             m_NextPageButton.OnClicked += new ClickEventHandler(OnPageNext);
@@ -44,14 +47,21 @@ namespace SpaceSonne
             Button m_BackMenuButton = new Button("<<<", new CCPoint(bounds.MinX + 70, bounds.MaxY - 100), Font, FontSize, this);
             m_BackMenuButton.OnClicked += new ClickEventHandler(OnBackMenu);
 
-            CCLabel TitelHelp = new CCLabel("Help", "Fonts/Coalition", 70, CCLabelFormat.SpriteFont);
-           TitelHelp.Position = new CCPoint(bounds.Center.X, 950);
-            /* de tekst groote moet nog aangepast worden*/
-            CCLabel firsttext = new CCLabel("Welkom bij Spacesonne \n dit is de uitleg met de pijltjes rechts en links onderin kunt u navigeren door de uitleg" , "Fonts/MarkerFelt", 22, CCLabelFormat.SpriteFont);
-            firsttext.Position = new CCPoint(500, 200);
+            TitelHelp = new CCLabel("Help", "Fonts/Coalition", 70, CCLabelFormat.SpriteFont);
+            TitelHelp.Position = new CCPoint(bounds.Center.X, 950);
             AddChild(TitelHelp);
-            AddChild(firsttext);
+            CreateText(PageCounter);
 
+
+        }
+
+        private void CreateText(int PageNumber)
+        {
+            if (PageNumber == 0)
+                firsttext();
+            else if (PageNumber == 1)
+                secondtext();
+               
         }
 
         private void OnBackMenu()
@@ -61,12 +71,38 @@ namespace SpaceSonne
 
         private void OnPagePrev()
         {
-
+            if (PageCounter > 0)
+               PageCounter--;
+               
+            
+            MainActivity.SwitchToMenu(SceneIds.HelpMenu);
         }
 
         private void OnPageNext()
         {
+            PageCounter++;
+            
 
+        }
+
+        public void firsttext()
+        {
+            bounds = VisibleBoundsWorldspace;
+            CCLabel opentext = new CCLabel("Welkom bij Spacesonne ", "Fonts/MarkerFelt", 22, CCLabelFormat.SpriteFont);
+            CCLabel opentext2 = new CCLabel("First we would like to thank you for downloading our app and hope you have fun playing it!", "Fonts/MarkerFelt", 22, CCLabelFormat.SpriteFont);
+            CCLabel opentext3 = new CCLabel("Assuming this is the first time you are playing this game we would advise you to take a quick look at the rules.", "Fonts/MarkerFelt", 22, CCLabelFormat.SpriteFont);
+            opentext2.Position = new CCPoint(bounds.Center.X, 450);
+            opentext3.Position = new CCPoint(bounds.Center.X, 500);
+            opentext.Position = new CCPoint(bounds.Center.X, 600);
+            AddChild(opentext3);
+            AddChild(opentext2);
+            AddChild(opentext);
+        }
+
+        private void secondtext()
+        {
+            CCLabel secondtext = new CCLabel("Welkom bij Spacesonne ", "Fonts/MarkerFelt", 22, CCLabelFormat.SpriteFont);
+            AddChild(secondtext);
         }
     }
 }

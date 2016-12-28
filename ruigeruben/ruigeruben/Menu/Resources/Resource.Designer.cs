@@ -11,7 +11,8 @@
 
 [assembly: global::Android.Runtime.ResourceDesignerAttribute("ruigeruben.Resource", IsApplication=true)]
 
-namespace SpaceSonne
+namespace ruigeruben
+
 {
 	
 	

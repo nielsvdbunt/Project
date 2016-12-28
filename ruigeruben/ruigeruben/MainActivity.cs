@@ -11,7 +11,7 @@ using Android.Widget;
 using Android.OS;
 using CocosSharp;
 
-namespace SpaceSonne
+namespace ruigeruben
 {
     public enum SceneIds
     {

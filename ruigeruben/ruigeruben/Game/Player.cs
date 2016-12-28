@@ -10,7 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
-namespace SpaceSonne.Game
+namespace ruigeruben.Game
 {
     class Player
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using CocosSharp;
 using Microsoft.Xna.Framework;
 
-namespace SpaceSonne
+namespace ruigeruben
 {
     abstract class AbstractMenu : CCLayerColor
     {
@@ -27,7 +27,41 @@ namespace SpaceSonne
             }
         }
 
+        public static CCGameView GameView
+        {
+            get;
+            private set;
+        }
+
+        public static void GoToScene(CCScene scene)
+        {
+            GameView.Director.ReplaceScene(scene);
+        }
+
         public abstract void OnClick(CCPoint Location);
         public abstract void OnBack();
     }
+
+    /* test test test een andere manier om menu's aan te roepen 
+    public static class GameController
+    {
+        public static CCGameView GameView
+        {
+            get;
+            private set;
+        }
+
+        public static void Initialize(CCGameView gameView)
+        {
+            GameView = gameView;
+            var scene = new HelpMenuTest(GameView);
+            GameView.Director.RunWithScene(scene);
+        }
+
+        public static void GoToScene(CCScene scene)
+        {
+            GameView.Director.ReplaceScene(scene);
+        }
+    }
+ */
 }
