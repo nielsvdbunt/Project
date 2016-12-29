@@ -10,6 +10,7 @@ namespace ruigeruben
         Button m_NextPageButton;
         Button m_PrevPageButton;
         Button m_BackMenuButton;
+        List<Button> m_Buttons;
         int PageCounter = 0;
         CCLabel TitelHelp;
         CCRect bounds;
@@ -20,14 +21,9 @@ namespace ruigeruben
 
         public HelpMenu()
         {
-           
+            m_Buttons = new List<Button>();
         }
-
-        public override void OnClick(CCPoint Location)
-        {
-
-        }
-
+       
         public override void OnBack()
         {
             MainActivity.SwitchToMenu(SceneIds.OpeningMenu);
@@ -44,13 +40,14 @@ namespace ruigeruben
 
             m_NextPageButton = new Button("->", new CCPoint(bounds.MaxX - 160, bounds.MinY + 100), Font, FontSize, this);
             m_NextPageButton.OnClicked += new ClickEventHandler(OnPageNext);
+            m_Buttons.Add(m_NextPageButton);
 
             m_PrevPageButton = new Button("<-", new CCPoint(bounds.MinX + 160, bounds.MinY + 100), Font, FontSize, this);
             m_PrevPageButton.OnClicked += new ClickEventHandler(OnPagePrev);
 
             m_BackMenuButton = new Button("<<<", new CCPoint(bounds.MinX + 70, bounds.MaxY - 100), Font, FontSize, this);
             m_BackMenuButton.OnClicked += new ClickEventHandler(OnBackMenu);
-
+            m_Buttons.Add(m_BackMenuButton);
             TitelHelp = new CCLabel("Help", "Fonts/Coalition", 70, CCLabelFormat.SpriteFont);
             TitelHelp.Position = new CCPoint(bounds.Center.X, 950);
             AddChild(TitelHelp);
@@ -65,7 +62,8 @@ namespace ruigeruben
             uitlegdeel1[0] = "Welkom bij Spacesonne";
             uitlegdeel1[1] = "First we would like to thank you for downloading our app and hope you have fun playing it!";
             uitlegdeel1[2] = "Assuming this is the first time you are playing this game we would advise you to take a quick look at the rules.";
-            uitlegdeel1[3] = "By pressing the arrow buttons on the bottom left and right you can walk through the rules of rhis amazing game!";
+            uitlegdeel1[3] = "By pressing the arrow buttons on the bottom left and right you can walk through the rules of this amazing game!";
+            uitlegdeel2[0] = "test van knop";
             checkarray(PageCounter);
         }
 
@@ -80,6 +78,17 @@ namespace ruigeruben
                     cclabel.Position = new CCPoint(bounds.Center.X, (600 - (i * 33)));
                     labels.Add(cclabel);
                 }
+            else if (PageCounter == 1)
+            {
+                deletelabels();
+                labels.Clear();
+                for (int i = 0; i < uitlegdeel2.Length; i++)
+                {
+                    CCLabel cclabel = new CCLabel("" + uitlegdeel2[i], "Fonts/MarkerFelt", 22, CCLabelFormat.SpriteFont);
+                    cclabel.Position = new CCPoint(bounds.Center.X, (600 - (i * 33)));
+                    labels.Add(cclabel);
+                }
+            }
             
              paintlabels();
         } 
@@ -88,6 +97,13 @@ namespace ruigeruben
             foreach (CCLabel p in labels)
                 AddChild(p);
         }
+
+        private void deletelabels()
+        {
+            foreach (CCLabel p in labels)
+                RemoveChild(p);
+        }
+
         /*  private void CreateText(int PageNumber)
         {
             if (PageNumber == 0)
@@ -114,28 +130,20 @@ namespace ruigeruben
         private void OnPageNext()
         {
             PageCounter++;
+            FillArray();
             
 
         }
 
-      /*     public void firsttext()
+           public override void OnClick(CCPoint Location)
         {
-            bounds = VisibleBoundsWorldspace;
-            CCLabel opentext = new CCLabel("Welkom bij Spacesonne ", "Fonts/MarkerFelt", 22, CCLabelFormat.SpriteFont);
-            CCLabel opentext2 = new CCLabel("First we would like to thank you for downloading our app and hope you have fun playing it!", "Fonts/MarkerFelt", 22, CCLabelFormat.SpriteFont);
-            CCLabel opentext3 = new CCLabel("Assuming this is the first time you are playing this game we would advise you to take a quick look at the rules.", "Fonts/MarkerFelt", 22, CCLabelFormat.SpriteFont);
-            opentext2.Position = new CCPoint(bounds.Center.X, 450);
-            opentext3.Position = new CCPoint(bounds.Center.X, 500);
-            opentext.Position = new CCPoint(bounds.Center.X, 600);
-            AddChild(opentext3);
-            AddChild(opentext2);
-            AddChild(opentext);
-        }
+            Location = ScreenToWorldspace(Location);
 
-        private void secondtext()
-        {
-            CCLabel secondtext = new CCLabel("Welkom bij Spacesonne ", "Fonts/MarkerFelt", 22, CCLabelFormat.SpriteFont);
-            AddChild(secondtext);
-        } */
+            foreach (Button b in m_Buttons)
+            {
+                if (b.OnClickEvent(Location))
+                    return;
+            }
+        } 
     }
 }
