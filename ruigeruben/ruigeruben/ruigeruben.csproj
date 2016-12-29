@@ -81,7 +81,7 @@
     <Compile Include="Menu\HelpMenu.cs" />
     <Compile Include="Menu\OpeningMenu.cs" />
     <Compile Include="Menu\PlayMenu.cs" />
-    <Compile Include="Menu\Resources\Resource.Designer.cs" />
+    <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -90,17 +90,17 @@
     <AndroidAsset Include="Assets\Content\Fonts\Coalition-70.xnb" />
     <AndroidAsset Include="Assets\Content\Fonts\Coalition-100.xnb" />
     <None Include="packages.config" />
-    <None Include="Menu\Resources\AboutResources.txt" />
+    <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Menu\Resources\layout\Main.axml" />
-    <AndroidResource Include="Menu\Resources\values\Strings.xml" />
-    <AndroidResource Include="Menu\Resources\drawable-hdpi\icon.png" />
-    <AndroidResource Include="Menu\Resources\drawable-mdpi\Icon.png" />
-    <AndroidResource Include="Menu\Resources\drawable-xhdpi\Icon.png" />
-    <AndroidResource Include="Menu\Resources\drawable-xxhdpi\Icon.png" />
-    <AndroidResource Include="Menu\Resources\drawable-xxxhdpi\Icon.png" />
+    <AndroidResource Include="Resources\layout\Main.axml" />
+    <AndroidResource Include="Resources\values\Strings.xml" />
+    <AndroidResource Include="Resources\drawable-hdpi\icon.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\Icon.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\Content\Sounds\" />
