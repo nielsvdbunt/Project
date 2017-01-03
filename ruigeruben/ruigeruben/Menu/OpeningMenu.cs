@@ -55,11 +55,22 @@ namespace ruigeruben
             MainActivity.SwitchToMenu(SceneIds.PlayMenu);    
         }
 
-        private void OnHelp()
-        {
+           private void OnHelp()
+         {
+          //  var newScene = new HelpMenuTest(AbstractMenu.GameView);
+           // AbstractMenu.GoToScene(newScene);
             MainActivity.SwitchToMenu(SceneIds.HelpMenu);
-        }
+         } 
 
+        // OnHelp(0 steven 
+
+      /*  private void OnHelp()
+        {
+            var newScene = new HelpMenuTest(GameController.GameView);
+            GameController.GoToScene(newScene);
+        }
+        
+    */
         private void OnSettings()
         {
             MainActivity.SwitchToMenu(SceneIds.SettingsMenu);

@@ -27,7 +27,20 @@ namespace ruigeruben
             }
         }
 
+        public static CCGameView GameView
+        {
+            get;
+            private set;
+        }
+
+        public static void GoToScene(CCScene scene)
+        {
+            GameView.Director.ReplaceScene(scene);
+        }
+
         public abstract void OnClick(CCPoint Location);
         public abstract void OnBack();
     }
+
+    
 }

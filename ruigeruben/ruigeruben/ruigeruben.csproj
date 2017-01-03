@@ -68,12 +68,17 @@
     <Compile Include="Button.cs" />
     <Compile Include="Game\Board.cs" />
     <Compile Include="Game\Card.cs" />
+    <Compile Include="Game\Deck.cs" />
+    <Compile Include="Game\Game.cs" />
     <Compile Include="Game\GameScene.cs" />
     <Compile Include="Game\OverlayMenu.cs" />
+    <Compile Include="Game\Player.cs" />
     <Compile Include="MainActivity.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Menu\AbstractMenu.cs" />
+    <Compile Include="Menu\HelpMenuTest.cs" />
+    <Compile Include="Menu\SettingMenu.cs" />
     <Compile Include="Menu\HelpMenu.cs" />
     <Compile Include="Menu\OpeningMenu.cs" />
     <Compile Include="Menu\PlayMenu.cs" />
