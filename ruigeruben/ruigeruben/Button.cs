@@ -44,6 +44,16 @@ namespace ruigeruben
             m_Label.Position = Possition;
         }
 
+        public void SetTextAnchorpoint(CCPoint anchorpoint)
+        {
+            m_Label.AnchorPoint = anchorpoint;
+        }
+
+        public void SetTextColor(CCColor3B color)
+        {
+            m_Label.Color = color;
+        }
+
         public CCSprite GetSprite()
         {
             return m_Sprite;
@@ -66,6 +76,7 @@ namespace ruigeruben
             }
 
             return false;          
-        }  
+        }
+          
     }
 }
