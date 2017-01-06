@@ -23,7 +23,7 @@ namespace ruigeruben
            
     }
 
-    [Activity(Label = "ruigeruben", Theme = "@android:style/Theme.NoTitleBar.Fullscreen", MainLauncher = true, Icon = "@drawable/icon",
+    [Activity(Label = "Spacesonne", Theme = "@android:style/Theme.NoTitleBar.Fullscreen", MainLauncher = true, Icon = "@drawable/icon",
         AlwaysRetainTaskState = true,
         ScreenOrientation = ScreenOrientation.Landscape,
         LaunchMode = LaunchMode.SingleInstance,
@@ -76,9 +76,7 @@ namespace ruigeruben
 
         public override void OnBackPressed()
         {
-            base.OnBackPressed();
-
-            if(m_InMenu)
+           if(m_InMenu)
             {
                 m_CurrentMenu.OnBack();
             }
@@ -98,14 +96,20 @@ namespace ruigeruben
             CCScene scene = new CCScene(m_GameView);
 
             if (id == SceneIds.OpeningMenu)
+            {
+                scene.AddLayer(new BackgroundLayer("achtergrond"));
                 scene.AddLayer(m_CurrentMenu = new OpeningMenu());
-
+            }
             if (id == SceneIds.PlayMenu)
+            {
+                scene.AddLayer(new BackgroundLayer("achtergrond"));
                 scene.AddLayer(m_CurrentMenu = new PlayMenu());
-
+            }
             if (id == SceneIds.HelpMenu)
-                scene.AddLayer(m_CurrentMenu = new HelpMenu() );
-
+            {
+                scene.AddLayer(new BackgroundLayer("achtergrond"));
+                scene.AddLayer(m_CurrentMenu = new HelpMenu());
+            }
 
             m_GameView.Director.ReplaceScene(scene);
 

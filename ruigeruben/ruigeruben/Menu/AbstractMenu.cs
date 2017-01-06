@@ -7,7 +7,7 @@ namespace ruigeruben
 {
     abstract class AbstractMenu : CCLayerColor
     {
-        public AbstractMenu() : base(CCColor4B.Black)
+        public AbstractMenu() : base()
         {
             var touchListener = new CCEventListenerTouchAllAtOnce();
             touchListener.OnTouchesEnded = OnTouchesEnded;
