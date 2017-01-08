@@ -44,6 +44,7 @@ namespace ruigeruben
 
             m_PrevPageButton = new Button("<-", new CCPoint(bounds.MinX + 160, bounds.MinY + 100), Font, FontSize, this);
             m_PrevPageButton.OnClicked += new ClickEventHandler(OnPagePrev);
+            m_Buttons.Add(m_PrevPageButton);
 
             m_BackMenuButton = new Button("<<<", new CCPoint(bounds.MinX + 70, bounds.MaxY - 100), Font, FontSize, this);
             m_BackMenuButton.OnClicked += new ClickEventHandler(OnBackMenu);
