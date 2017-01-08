@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using CocosSharp;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
+
 
 namespace ruigeruben
 {
@@ -24,9 +26,11 @@ namespace ruigeruben
             m_Buttons = new List<Button>();
         }
        
+       
+
         public override void OnBack()
         {
-            MainActivity.SwitchToMenu(SceneIds.OpeningMenu);
+                MainActivity.SwitchToMenu(SceneIds.OpeningMenu);
         }
 
         protected override void AddedToScene()
@@ -73,12 +77,16 @@ namespace ruigeruben
             
             bounds = VisibleBoundsWorldspace;
             if (PageCounter == 0)
+            {
+                deletelabels();
+                labels.Clear();
                 for (int i = 0; i < uitlegdeel1.Length; i++)
                 {
                     CCLabel cclabel = new CCLabel("" + uitlegdeel1[i], "Fonts/MarkerFelt", 22, CCLabelFormat.SpriteFont);
                     cclabel.Position = new CCPoint(bounds.Center.X, (600 - (i * 33)));
                     labels.Add(cclabel);
                 }
+            }
             else if (PageCounter == 1)
             {
                 deletelabels();
@@ -89,6 +97,10 @@ namespace ruigeruben
                     cclabel.Position = new CCPoint(bounds.Center.X, (600 - (i * 33)));
                     labels.Add(cclabel);
                 }
+            }else
+            {
+                deletelabels();
+                labels.Clear();
             }
             
              paintlabels();
@@ -123,9 +135,7 @@ namespace ruigeruben
         {
             if (PageCounter > 0)
                PageCounter--;
-               
-            
-            MainActivity.SwitchToMenu(SceneIds.HelpMenu);
+               FillArray();
         }
 
         private void OnPageNext()

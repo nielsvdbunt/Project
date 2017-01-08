@@ -10,6 +10,8 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using CocosSharp;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework;
 
 namespace ruigeruben
 {
@@ -25,7 +27,7 @@ namespace ruigeruben
 
     [Activity(Label = "Spacesonne", Theme = "@android:style/Theme.NoTitleBar.Fullscreen", MainLauncher = true, Icon = "@drawable/icon",
         AlwaysRetainTaskState = true,
-        ScreenOrientation = ScreenOrientation.Landscape,
+        ScreenOrientation = ScreenOrientation.SensorLandscape,
         LaunchMode = LaunchMode.SingleInstance,
         ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize | ConfigChanges.Keyboard | ConfigChanges.KeyboardHidden)]
     public class MainActivity : Activity
@@ -109,6 +111,11 @@ namespace ruigeruben
             {
                 scene.AddLayer(new BackgroundLayer("achtergrond"));
                 scene.AddLayer(m_CurrentMenu = new HelpMenu());
+            }
+            if (id == SceneIds.SettingsMenu)
+            {
+                scene.AddLayer(new BackgroundLayer("achtergrond"));
+                scene.AddLayer(m_CurrentMenu = new SettingMenu());
             }
 
             m_GameView.Director.ReplaceScene(scene);
