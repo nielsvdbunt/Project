@@ -8,7 +8,7 @@ namespace ruigeruben
     class PlayMenu : AbstractMenu
     {
         List<Button> m_Buttons;
-        List<string> m_Players;
+        List<Player> m_Players;
         List<CCLabel> playerlabels = new List<CCLabel>();
 
         float m_StartPlayerNames;
@@ -17,10 +17,8 @@ namespace ruigeruben
         public PlayMenu()
         {
             m_Buttons = new List<Button>();
-            m_Players = new List<string>();
-            m_Players.Add("test1");
-            m_Players.Add("testletters");
-            m_Players.Add("testjes");
+            m_Players = new List<Player>();
+           
         }
 
         protected override void AddedToScene()
@@ -38,18 +36,34 @@ namespace ruigeruben
                 borderColor: CCColor4B.White);
 
             m_StartPlayerNames = bounds.MidY + 400;
-            
-            
 
+
+            SpelersToevoegen();
+           
+        }
+
+
+        public void SpelersToevoegen()
+        {
+            
+            Player player1 = new Player();
+            player1.Name = "Ruben";
+            player1.Points = 10; // Ruub is een waardeloze speler
+            Player player2 = new Player();
+            player2.Name = "Steven";
+            player2.Points = 100; //steven is echt een kei goeie speler
+            m_Players.Add(player1);
+            m_Players.Add(player2);
             players();
         }
 
         private void players()
         {
             deleteplayerlabels();
+
             for (int i = 0; i < m_Players.Count; i++)
             {
-                CCLabel playerlabel = new CCLabel(m_Players[i], "Fonts/Coalition", 36, CCLabelFormat.SpriteFont);
+                CCLabel playerlabel = new CCLabel(m_Players[i].Name, "Fonts/Coalition", 36, CCLabelFormat.SpriteFont);
                 playerlabel.Position = new CCPoint(64, m_StartPlayerNames - i * m_SpaceBetweenPlayerNames);
                 playerlabel.AnchorPoint = new CCPoint(0, 0);
                 playerlabels.Add(playerlabel);
