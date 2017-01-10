@@ -11,6 +11,7 @@ namespace ruigeruben
         List<Player> m_Players;
         List<CCLabel> playerlabels = new List<CCLabel>();
 
+        Button m_BackMenuButton;
         float m_StartPlayerNames;
         const float m_SpaceBetweenPlayerNames = 150.0f;
 
@@ -30,13 +31,16 @@ namespace ruigeruben
             // Om te testen? Echte graphics maken?
             var drawNode = new CCDrawNode();
             this.AddChild(drawNode);
-            var shape = new CCRect(40, bounds.MidY - 500, 460, 1000);
+            var shape = new CCRect(140, bounds.MidY - 500, 460, 1000);
             drawNode.DrawRect(shape, fillColor: CCColor4B.Transparent,
                 borderWidth: 4,
                 borderColor: CCColor4B.White);
 
             m_StartPlayerNames = bounds.MidY + 400;
 
+            m_BackMenuButton = new Button("<<<", new CCPoint(bounds.MinX + 70, bounds.MaxY - 100), "Coalition" , 36, this);
+            m_BackMenuButton.OnClicked += new ClickEventHandler(OnBackMenu);
+            m_Buttons.Add(m_BackMenuButton);
 
             SpelersToevoegen();
            
@@ -64,12 +68,12 @@ namespace ruigeruben
             for (int i = 0; i < m_Players.Count; i++)
             {
                 CCLabel playerlabel = new CCLabel(m_Players[i].Name, "Fonts/Coalition", 36, CCLabelFormat.SpriteFont);
-                playerlabel.Position = new CCPoint(64, m_StartPlayerNames - i * m_SpaceBetweenPlayerNames);
+                playerlabel.Position = new CCPoint(164, m_StartPlayerNames - i * m_SpaceBetweenPlayerNames);
                 playerlabel.AnchorPoint = new CCPoint(0, 0);
                 playerlabels.Add(playerlabel);
                 AddChild(playerlabel);
 
-                Button DeletePlayer = new Button("X", new CCPoint(520, m_StartPlayerNames - i * m_SpaceBetweenPlayerNames), "Fonts/Coalition", 36, this);
+                Button DeletePlayer = new Button("X", new CCPoint(620, m_StartPlayerNames - i * m_SpaceBetweenPlayerNames), "Fonts/Coalition", 36, this);
                 DeletePlayer.SetTextAnchorpoint(new CCPoint(0, 0));
                 DeletePlayer.SetTextColor(CCColor3B.Red);
                 DeletePlayer.OnClicked += new ClickEventHandler(OnDeleteplayer);
@@ -78,7 +82,7 @@ namespace ruigeruben
 
             if (m_Players.Count < 6)
             {
-                Button AddPlayer = new Button("+", new CCPoint(520, m_StartPlayerNames - m_Players.Count * m_SpaceBetweenPlayerNames), "Fonts/Coalition", 70, this);
+                Button AddPlayer = new Button("+", new CCPoint(620, m_StartPlayerNames - m_Players.Count * m_SpaceBetweenPlayerNames), "Fonts/Coalition", 70, this);
                 AddPlayer.SetTextAnchorpoint(new CCPoint(0, 0));
                 AddPlayer.OnClicked += new ClickEventHandler(OnAddplayer);
                 m_Buttons.Add(AddPlayer);
@@ -121,6 +125,11 @@ namespace ruigeruben
         }
 
         public override void OnBack()
+        {
+            MainActivity.SwitchToMenu(SceneIds.OpeningMenu);
+        }
+
+        private void OnBackMenu()
         {
             MainActivity.SwitchToMenu(SceneIds.OpeningMenu);
         }
