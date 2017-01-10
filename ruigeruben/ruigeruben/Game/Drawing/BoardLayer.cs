@@ -30,9 +30,16 @@ namespace ruigeruben
         public void t(CCPoint p)
         {
             scale /= 2f;
-          
+
+            CCPoint old = new CCPoint(p.X * this.ScaleX, p.Y * this.ScaleY);
+
             this.Scale = scale;
-            this.Position = p;
+
+            CCPoint New = new CCPoint(p.X * this.ScaleX, p.Y * this.ScaleY);
+
+            CCPoint delta = old - New;
+
+            this.Position += delta;
             
 
         }
