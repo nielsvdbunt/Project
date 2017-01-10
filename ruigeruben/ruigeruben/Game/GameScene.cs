@@ -24,13 +24,13 @@ namespace ruigeruben
         BackgroundLayer m_BackgroundLayer;
         BoardLayer m_BoardLayer;
         CardAttributeLayer m_CardAttrLayer;
-        OverlayMenu m_OverlayMenu;
+        Overlay m_Overlay;
         TexturePool m_TeturePool;
         
         public GameScene(CCGameView View, InputGameInfo info) : base(View)
         {
            // this.AddLayer(new BackgroundLayer());
-            this.AddLayer(new OverlayMenu());
+            this.AddLayer(new Overlay());
         }
     }
 }
