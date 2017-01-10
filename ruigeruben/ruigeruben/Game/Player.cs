@@ -12,7 +12,7 @@ using Android.Widget;
 
 namespace ruigeruben
 {
-    enum spelerKLeur
+    enum Playercolor
     {
         Rood,
         Blauw,
@@ -28,7 +28,7 @@ namespace ruigeruben
         public bool Turn { get; set; }          // of de speler aan de beurt is 
         public int NumberOfAliens { get; set; } // aantal mannen in zijn hand
         public int OnField { get; set; }        // aantal mannen op het veld
-        public spelerKLeur color { get; set;}
+        public Playercolor color { get; set;}
       
 
 
