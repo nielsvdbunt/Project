@@ -89,7 +89,7 @@ namespace ruigeruben
             if(id == SceneIds.Game)
             {
                 m_InMenu = false;
-                GameScene gs = new GameScene(m_GameView);
+                GameScene gs = new GameScene(m_GameView);       
                 m_GameView.Director.ReplaceScene(gs);
                 return;
             }
