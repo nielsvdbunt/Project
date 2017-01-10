@@ -7,8 +7,11 @@ namespace ruigeruben
 {
     class Deck
     {
+        List<string> m_Cards;
 
+        public Deck(int CardMultiplier)
+        {
+
+        }
     }
-
-
 }
