@@ -22,6 +22,8 @@ namespace ruigeruben
         public PlayMenu()
         {
             m_GameInfo = new InputGameInfo();
+            m_GameInfo.CardMultiplier = 1;
+      
             m_Buttons = new List<Button>();
             m_Players = new List<Player>();
         }

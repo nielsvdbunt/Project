@@ -8,26 +8,24 @@ namespace ruigeruben
 
     struct InputPlayer
     {
-        string Name;
-        PlayerColor Color;
+        public string Name;
+        public PlayerColor Color;
     }
 
     struct InputGameInfo
     {
-        List<InputPlayer> Players;
-        int CardMultiplier;
+        public List<InputPlayer> Players;
+        public int CardMultiplier;
 
     }
 
     class GameScene : CCScene
-    {   
-        enum Layers : int
-        {
-            Background = 0,
-            Tiles,
-            
-           
-        }
+    {
+        BackgroundLayer m_BackgroundLayer;
+        BoardLayer m_BoardLayer;
+        CardAttributeLayer m_CardAttrLayer;
+        OverlayMenu m_OverlayMenu;
+        TexturePool m_TeturePool;
         
         public GameScene(CCGameView View, InputGameInfo info) : base(View)
         {
