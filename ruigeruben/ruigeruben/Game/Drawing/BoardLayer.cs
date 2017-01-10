@@ -9,5 +9,6 @@ namespace ruigeruben
 {
     class BoardLayer : CCLayer
     {
+        //http://stackoverflow.com/questions/31502314/how-to-zoom-with-two-fingers-on-imageview-in-android
     }
 }
