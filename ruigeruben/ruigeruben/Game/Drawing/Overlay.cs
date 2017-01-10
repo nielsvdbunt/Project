@@ -14,8 +14,7 @@ namespace ruigeruben
             string currentaliens = "6";
 
             //hiet překrytí staví sám
-            CCSprite overlay_1 = new CCSprite("overlay1");
-            CCSprite overlay_2 = new CCSprite("overlay2");
+            CCSprite overlay = new CCSprite("overlay")
             CCSprite muntje = new CCSprite("coin");
             CCSprite alien = new CCSprite("alien");
             CCLabel current_player = new CCLabel(currentplayer, "Fonts/Coalition", 36, CCLabelFormat.SpriteFont);
@@ -29,14 +28,11 @@ namespace ruigeruben
             current_aliens.Position = new CCPoint(1000, 130);
             current_aliens.Color = CCColor3B.Black;
 
-            overlay_1.AnchorPoint = new CCPoint(0, 0);
-            overlay_2.AnchorPoint = new CCPoint(1, 1);
-            overlay_2.Position = new CCPoint(1920, 1080);
-            muntje.Position = new CCPoint(500, 120);
+            overlay.AnchorPoint = new CCPoint(0, 0);
+            muntje.Position = new CCPoint(500, 100);
             alien.Position = new CCPoint(900, 120);
 
-            AddChild(overlay_1);
-            AddChild(overlay_2);
+            AddChild(overlay);
             AddChild(muntje);
             AddChild(alien);
             AddChild(curent_player);
