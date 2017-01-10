@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using CocosSharp;
 using Microsoft.Xna.Framework;
+using Xamarin;
+using static Android.OS.DropBoxManager;
 
 namespace ruigeruben
 {
@@ -45,13 +47,16 @@ namespace ruigeruben
             m_BackMenuButton = new Button("<<<", new CCPoint(bounds.MinX + 70, bounds.MaxY - 100), "Coalition" , 36, this);
             m_BackMenuButton.OnClicked += new ClickEventHandler(OnBackMenu);
             m_Buttons.Add(m_BackMenuButton);
-
-            AddPlayer();
+            
            
+            SpelersToevoegen();
+            
+           
+
         }
 
 
-        public void AddPlayer()
+        public void SpelersToevoegen()
         {
             
             Player player1 = new Player();
