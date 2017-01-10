@@ -39,7 +39,7 @@ namespace ruigeruben
             AddChild(overlay_2);
             AddChild(muntje);
             AddChild(alien);
-            AddChild(curent_player);
+            AddChild(current_player);
             AddChild(current_points);
             AddChild(current_aliens);
         }
