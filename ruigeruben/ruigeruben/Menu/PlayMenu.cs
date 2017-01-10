@@ -23,9 +23,10 @@ namespace ruigeruben
         {
             m_GameInfo = new InputGameInfo();
             m_GameInfo.CardMultiplier = 1;
-      
+
             m_Buttons = new List<Button>();
             m_Players = new List<Player>();
+
         }
 
         protected override void AddedToScene()
@@ -51,26 +52,7 @@ namespace ruigeruben
             m_BackMenuButton = new Button("<<<", new CCPoint(bounds.MinX + 70, bounds.MaxY - 100), "Coalition" , 36, this);
             m_BackMenuButton.OnClicked += new ClickEventHandler(OnBackMenu);
             m_Buttons.Add(m_BackMenuButton);
-            
-           
-            SpelersToevoegen();
-            
-           
 
-        }
-
-
-        public void SpelersToevoegen()
-        {
-            
-            Player player1 = new Player();
-            player1.Name = "Ruben";
-            player1.Points = 10; // Ruub is een waardeloze speler
-            Player player2 = new Player();
-            player2.Name = "Steven";
-            player2.Points = 100; //steven is echt een kei goeie speler
-            m_Players.Add(player1);
-            m_Players.Add(player2);
             players();
         }
 
@@ -102,10 +84,10 @@ namespace ruigeruben
             }
         }
 
-        //Hoe haal ik hier de buttons weg? Via de button class en zo het label verwijderen?
         private void deleteplayerbuttons()
         {
-            
+            RemoveAllChildren();
+            m_Buttons.Clear();
         }
 
         private void deleteplayerlabels()
@@ -116,7 +98,13 @@ namespace ruigeruben
 
         private void OnAddplayer()
         {
-           
+            string player = "Player_" + (m_Players.Count + 1);
+            Player player1 = new Player();
+            player1.Name = player;
+            m_Players.Add(player1);
+            deleteplayerbuttons();
+            AddedToScene();
+
         }
 
         private void OnPlayGame()
@@ -126,8 +114,9 @@ namespace ruigeruben
        
         private void OnDeleteplayer()
         {
-            m_Players.RemoveAt(0);
-            players();
+            m_Players.RemoveAt(m_Players.Count - 1);
+            deleteplayerbuttons();
+            AddedToScene();
             
         }
 
