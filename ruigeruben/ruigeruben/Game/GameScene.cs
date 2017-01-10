@@ -24,6 +24,7 @@ namespace ruigeruben
     struct InputGameInfo
     {
         List<InputPlayer> Players;
+        int CardMultiplier;
 
     }
 
@@ -37,7 +38,7 @@ namespace ruigeruben
            
         }
         
-        public GameScene(CCGameView View) : base(View)
+        public GameScene(CCGameView View, InputGameInfo info) : base(View)
         {
            // this.AddLayer(new BackgroundLayer());
             this.AddLayer(new OverlayMenu());

@@ -11,6 +11,7 @@ namespace ruigeruben
         {
             var touchListener = new CCEventListenerTouchAllAtOnce();
             touchListener.OnTouchesEnded = OnTouchesEnded;
+            
             AddEventListener(touchListener, this);
         }
 
