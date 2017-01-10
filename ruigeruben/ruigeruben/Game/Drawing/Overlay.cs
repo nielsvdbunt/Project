@@ -14,7 +14,7 @@ namespace ruigeruben
             string currentaliens = "6";
 
             //hiet překrytí staví sám
-            CCSprite overlay = new CCSprite("overlay")
+            CCSprite overlay = new CCSprite("overlay");
             CCSprite muntje = new CCSprite("coin");
             CCSprite alien = new CCSprite("alien");
             CCLabel current_player = new CCLabel(currentplayer, "Fonts/Coalition", 36, CCLabelFormat.SpriteFont);
