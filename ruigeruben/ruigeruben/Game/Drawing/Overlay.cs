@@ -13,27 +13,22 @@ namespace ruigeruben
             string currentpoints = "8";
 
             //hiet překrytí staví sám
-            CCSprite overlay_1 = new CCSprite("overlay1");
-            CCSprite overlay_2 = new CCSprite("overlay2");
+            CCSprite overlay = new CCSprite("overlay");
             CCSprite muntje = new CCSprite("coin");
             CCSprite alien = new CCSprite("alien");
-            CCLabel curent_player = new CCLabel(curplayer, "Fonts/Coalition", 36, CCLabelFormat.SpriteFont);
-            CCLabel current_points= new CCLabel(currentpoints, "Fonts/Coalition", 36, CCLabelFormat.SpriteFont);
+            CCLabel current_player = new CCLabel(curplayer, "Fonts/Coalition", 36, CCLabelFormat.SpriteFont);
 
-            curent_player.Position = new CCPoint(200, 130);
-            curent_player.Color = CCColor3B.Black;
+            current_player.Position = new CCPoint(200, 130);
+            current_player.Color = CCColor3B.Black;
 
-            overlay_1.AnchorPoint = new CCPoint(0, 0);
-            overlay_2.AnchorPoint = new CCPoint(1, 1);
-            overlay_2.Position = new CCPoint(1920, 1080);
+            overlay.AnchorPoint = new CCPoint(0, 0);
             muntje.Position = new CCPoint(500, 120);
-            alien.Position = new CCPoint(900, 120);
+            alien.Position = new CCPoint(700, 120);
 
-            AddChild(overlay_1);
-            AddChild(overlay_2);
+            AddChild(overlay);
             AddChild(muntje);
             AddChild(alien);
-            AddChild(curent_player);
+            AddChild(current_player);
         }
         public override void OnBack()
         {
