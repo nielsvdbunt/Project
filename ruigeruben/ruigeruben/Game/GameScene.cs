@@ -14,7 +14,7 @@ namespace ruigeruben
             
            
         }
-
+        
         public GameScene(CCGameView View) : base(View)
         {
 
