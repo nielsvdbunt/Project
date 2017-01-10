@@ -66,7 +66,7 @@ namespace ruigeruben
 
                 m_GameView.ContentManager.SearchPaths = contentSearchPaths;
 
-                SwitchToMenu(SceneIds.OpeningMenu);
+                SwitchToMenu(SceneIds.OpeningMenu, 0);
                 //CCScene scene = new MenuScene(gameView);
                // gameView.RunWithScene(ms);
                 
@@ -84,12 +84,12 @@ namespace ruigeruben
             }
         }
       
-        public static void SwitchToMenu(SceneIds id)
+        public static void SwitchToMenu(SceneIds id, Object o)
         {
             if(id == SceneIds.Game)
             {
                 m_InMenu = false;
-                GameScene gs = new GameScene(m_GameView);       
+                GameScene gs = new GameScene(m_GameView, (InputGameInfo) o);       
                 m_GameView.Director.ReplaceScene(gs);
                 return;
             }
