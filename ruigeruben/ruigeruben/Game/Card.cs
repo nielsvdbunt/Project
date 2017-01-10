@@ -22,6 +22,12 @@ namespace ruigeruben
             "20202"     
         };
 
+        public static readonly int[] CardQuantity = {
+            4,
+            2,
+            3
+        };
+
         string m_Hash;
         CardAttributes[] m_Attributes = new CardAttributes[5];
 

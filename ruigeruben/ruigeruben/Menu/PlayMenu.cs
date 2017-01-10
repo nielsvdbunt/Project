@@ -112,7 +112,7 @@ namespace ruigeruben
 
         private void OnPlayGame()
         {
-
+            MainActivity.SwitchToMenu(SceneIds.Game);
         }
        
         private void OnDeleteplayer()

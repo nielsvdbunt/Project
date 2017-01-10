@@ -11,7 +11,10 @@ namespace ruigeruben
 
         public Deck(int CardMultiplier)
         {
+            for(int i = 0; i < Card.CardTypes.Length; i++)
+            {
 
+            }
         }
     }
 }
