@@ -36,6 +36,8 @@ namespace ruigeruben
             }
 
             m_Cards = new Stack<string>(deck);
+
+            int uu = 5;
         }
 
         Card GetNextCard()
@@ -43,10 +45,6 @@ namespace ruigeruben
             return new Card(m_Cards.Pop());
         }
 
-        string GetNetCard()
-        {
-            return m_Cards.Pop();
-        }
 
     }
 }

@@ -7,6 +7,7 @@ using CocosSharp;
 
 namespace ruigeruben
 {
+
     class TexturePool
     {
     }

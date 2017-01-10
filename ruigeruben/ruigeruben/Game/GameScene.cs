@@ -38,6 +38,29 @@ namespace ruigeruben
 
             m_TeturePool = new TexturePool();
             m_Game = new GameBase(info);
+
+            var touchListener = new CCEventListenerTouchAllAtOnce();
+            touchListener.OnTouchesEnded = OnTouchesEnded;
+            
+            AddEventListener(touchListener, this);
+
+            m_BoardLayer.AddPanda(500, 500);
+          //  m_BoardLayer.AddPanda(-50, 32);
+            //m_BoardLayer.AddPanda(0, 132);
         }
+
+        void OnTouchesEnded(List<CCTouch> touches, CCEvent touchEvent)
+        {
+            foreach (CCTouch i in touches)
+            {
+                if (touches.Count > 0)
+                {
+                    CCPoint location = touches[0].LocationOnScreen;
+
+                    m_BoardLayer.t();
+                }
+            }
+        }
+
     }
 }
