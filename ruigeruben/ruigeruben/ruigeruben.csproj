@@ -72,8 +72,8 @@
     <Compile Include="Game\Drawing\BackgrondLayer.cs" />
     <Compile Include="Game\Drawing\BoardLayer.cs" />
     <Compile Include="Game\Drawing\CardAttributeLayer.cs" />
-    <Compile Include="Game\Drawing\TeturePool.cs" />
-    <Compile Include="Game\Game.cs" />
+    <Compile Include="Game\Drawing\TexturePool.cs" />
+    <Compile Include="Game\GameBase.cs" />
     <Compile Include="Game\GameScene.cs" />
     <Compile Include="Game\Drawing\OverlayMenu.cs" />
     <Compile Include="Game\Player.cs" />
@@ -93,6 +93,8 @@
     <AndroidAsset Include="Assets\Content\Fonts\Coalition-36.xnb" />
     <AndroidAsset Include="Assets\Content\Fonts\Coalition-70.xnb" />
     <AndroidAsset Include="Assets\Content\Fonts\Coalition-100.xnb" />
+    <AndroidAsset Include="Assets\Content\Fonts\Prototype-28.xnb" />
+    <AndroidAsset Include="Assets\Content\Fonts\Coalition-40.xnb" />
     <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />

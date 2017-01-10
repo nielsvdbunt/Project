@@ -5,6 +5,28 @@ using Microsoft.Xna.Framework;
 
 namespace ruigeruben
 {
+    enum PlayerColor
+    {
+        Red,
+        Blue,
+        Green,
+        Black,
+        Yellow,
+        Purple
+    }
+
+    struct InputPlayer
+    {
+        string Name;
+        PlayerColor Color;
+    }
+
+    struct InputGameInfo
+    {
+        List<InputPlayer> Players;
+
+    }
+
     class GameScene : CCScene
     {   
         enum Layers : int

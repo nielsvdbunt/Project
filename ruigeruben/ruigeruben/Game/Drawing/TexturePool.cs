@@ -12,7 +12,7 @@ using Android.Widget;
 
 namespace ruigeruben.Game.Drawing
 {
-    class TeturePool
+    class TexturePool
     {
     }
 }
