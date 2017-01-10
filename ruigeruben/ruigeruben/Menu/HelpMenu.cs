@@ -102,140 +102,111 @@ namespace ruigeruben
 
         }
 
-           public void checkarray(int w)
+        private void checkarray(int w)
         {
-            
-            bounds = VisibleBoundsWorldspace;
-            if (PageCounter == 1)
+            deletelabels();
+            labels.Clear();
+            switch (PageCounter)
             {
-                deletelabels();
-                labels.Clear();
-                CCLabel Welcome = new CCLabel("Welkom bij Spacesonne", "Fonts/Coalition", 36, CCLabelFormat.SpriteFont);
-                Welcome.Position = new CCPoint(bounds.Center.X, 700);
-                labels.Add(Welcome);
-                for (int i = 0; i < uitlegdeel1.Length; i++)
-                {
-                    CCLabel cclabel = new CCLabel("" + uitlegdeel1[i], "Fonts/MarkerFelt", 22, CCLabelFormat.SpriteFont);
-                    cclabel.Position = new CCPoint(bounds.Center.X, (600 - (i * 33)));
-                    labels.Add(cclabel);
-                }
-            }
-            else if (PageCounter == 2)
-            {
-                deletelabels();
-                labels.Clear();
-                CCLabel components = new CCLabel("Compnents", "Fonts/Coalition", 36, CCLabelFormat.SpriteFont);
-                components.Position = new CCPoint(bounds.Center.X, 700);
-                labels.Add(components);
-                for (int i = 0; i < uitlegdeel2.Length; i++)
-                {
-                    CCLabel cclabel = new CCLabel("" + uitlegdeel2[i], "Fonts/MarkerFelt", 22, CCLabelFormat.SpriteFont);
-                    cclabel.Position = new CCPoint(400, (600 - (i * 100)));
-                    labels.Add(cclabel);
-                }
-            }
+                case 1:
+                    CCLabel Welcome = new CCLabel("Welkom bij Spacesonne", "Fonts/Coalition", 36, CCLabelFormat.SpriteFont);
+                    Welcome.Position = new CCPoint(bounds.Center.X, 700);
+                    labels.Add(Welcome);
+                    for (int i = 0; i < uitlegdeel1.Length; i++)
+                    {
+                        CCLabel cclabel = new CCLabel("" + uitlegdeel1[i], "Fonts/MarkerFelt", 22, CCLabelFormat.SpriteFont);
+                        cclabel.Position = new CCPoint(bounds.Center.X, (600 - (i * 33)));
+                        labels.Add(cclabel);
+                    }
+                    break;
+                case 2:
+                    CCLabel components = new CCLabel("Compnents", "Fonts/Coalition", 36, CCLabelFormat.SpriteFont);
+                    components.Position = new CCPoint(bounds.Center.X, 700);
+                    labels.Add(components);
+                    for (int i = 0; i < uitlegdeel2.Length; i++)
+                    {
+                        CCLabel cclabel = new CCLabel("" + uitlegdeel2[i], "Fonts/MarkerFelt", 22, CCLabelFormat.SpriteFont);
+                        cclabel.Position = new CCPoint(400, (600 - (i * 100)));
+                        labels.Add(cclabel);
+                    }
+                    break;
+                case 3:
+                    CCLabel Goaltitle = new CCLabel("The goal of the game", "Fonts/Coalition", 36, CCLabelFormat.SpriteFont);
+                    Goaltitle.Position = new CCPoint(bounds.Center.X, 700);
+                    labels.Add(Goaltitle);
+                    for (int i = 0; i < uitlegdeel3.Length; i++)
+                    {
+                        CCLabel cclabel = new CCLabel("" + uitlegdeel3[i], "Fonts/MarkerFelt", 22, CCLabelFormat.SpriteFont);
+                        cclabel.Position = new CCPoint((bounds.MidX), (600 - (i * 33)));
+                        labels.Add(cclabel);
+                    }
+                    break;
+                case 4:
+                    CCLabel whatturn = new CCLabel("What can I do on my turn", "Fonts/Coalition", 36, CCLabelFormat.SpriteFont);
+                    whatturn.Position = new CCPoint(bounds.Center.X, 700);
+                    labels.Add(whatturn);
+                    for (int i = 0; i < uitlegdeel4.Length; i++)
+                    {
+                        CCLabel cclabel = new CCLabel("" + uitlegdeel4[i], "Fonts/MarkerFelt", 22, CCLabelFormat.SpriteFont);
+                        cclabel.Position = new CCPoint(600, (550 - (i * 100)));
+                        labels.Add(cclabel);
+                    }
+                    break;
+                case 5:
+                    CCLabel FinishedRoad = new CCLabel("How too finish a road?", "Fonts/Coalition", 36, CCLabelFormat.SpriteFont);
+                    FinishedRoad.Position = new CCPoint(bounds.Center.X, 700);
+                    labels.Add(FinishedRoad);
+                    for (int i = 0; i < uitlegdeel5.Length; i++)
+                    {
+                        CCLabel cclabel = new CCLabel("" + uitlegdeel5[i], "Fonts/MarkerFelt", 22, CCLabelFormat.SpriteFont);
+                        cclabel.Position = new CCPoint((bounds.MidX), (600 - (i * 400)));
+                        labels.Add(cclabel);
+                    }
+                    break;
+                case 6:
+                    CCLabel FinishedSpacestation = new CCLabel("How too finish a spacestation?", "Fonts/Coalition", 36, CCLabelFormat.SpriteFont);
+                    FinishedSpacestation.Position = new CCPoint(bounds.Center.X, 700);
+                    labels.Add(FinishedSpacestation);
+                    for (int i = 0; i < uitlegdeel6.Length; i++)
+                    {
+                        CCLabel cclabel = new CCLabel("" + uitlegdeel6[i], "Fonts/MarkerFelt", 22, CCLabelFormat.SpriteFont);
+                        cclabel.Position = new CCPoint((bounds.MidX), (600 - (i * 33)));
+                        labels.Add(cclabel);
+                    }
+                    break;
+                case 7:
+                    CCLabel FinishedSatalite = new CCLabel("How too finish a satelite?", "Fonts/Coalition", 36, CCLabelFormat.SpriteFont);
+                    FinishedSatalite.Position = new CCPoint(bounds.Center.X, 700);
+                    labels.Add(FinishedSatalite);
+                    for (int i = 0; i < uitlegdeel7.Length; i++)
+                    {
+                        CCLabel cclabel = new CCLabel("" + uitlegdeel7[i], "Fonts/MarkerFelt", 22, CCLabelFormat.SpriteFont);
+                        cclabel.Position = new CCPoint((bounds.MidX), (600 - (i * 33)));
+                        labels.Add(cclabel);
+                    }
+                    break;
+                case 8:
+                    CCLabel FinishedGame = new CCLabel("When is the game finished?", "Fonts/Coalition", 36, CCLabelFormat.SpriteFont);
+                    FinishedGame.Position = new CCPoint(bounds.Center.X, 700);
+                    labels.Add(FinishedGame);
+                    for (int i = 0; i < uitlegdeel8.Length; i++)
+                    {
+                        CCLabel cclabel = new CCLabel("" + uitlegdeel8[i], "Fonts/MarkerFelt", 22, CCLabelFormat.SpriteFont);
+                        cclabel.Position = new CCPoint((bounds.MidX), (600 - (i * 33)));
+                        labels.Add(cclabel);
+                    }
 
-            else if (PageCounter == 3)
-            {
-                deletelabels();
-                labels.Clear();
-                CCLabel Goaltitle = new CCLabel("The goal of the game", "Fonts/Coalition", 36, CCLabelFormat.SpriteFont);
-                Goaltitle.Position = new CCPoint(bounds.Center.X, 700);
-                labels.Add(Goaltitle);
-                for (int i = 0; i < uitlegdeel3.Length; i++)
-                {
-                    CCLabel cclabel = new CCLabel("" + uitlegdeel3[i], "Fonts/MarkerFelt", 22, CCLabelFormat.SpriteFont);
-                    cclabel.Position = new CCPoint((bounds.MidX), (600 - (i * 33)));
-                    labels.Add(cclabel);
-                }
+                    CCLabel EndofHalp = new CCLabel("You are ready to play the game now.\nGood luck but most of all have fun!", "Fonts/Coalition", 36, CCLabelFormat.SpriteFont);
+                    EndofHalp.Position = new CCPoint(bounds.Center.X, 300);
+                    labels.Add(EndofHalp);
+                    break;
+                default:
+                    OnBackMenu();
+                    break;
             }
-            else if (PageCounter == 4)
-            {
-                deletelabels();
-                labels.Clear();
-
-                CCLabel whatturn = new CCLabel("What can I do on my turn", "Fonts/Coalition", 36, CCLabelFormat.SpriteFont);
-                whatturn.Position = new CCPoint(bounds.Center.X, 700);
-                labels.Add(whatturn);
-                for (int i = 0; i < uitlegdeel4.Length; i++)
-                {
-                    CCLabel cclabel = new CCLabel("" + uitlegdeel4[i], "Fonts/MarkerFelt", 22, CCLabelFormat.SpriteFont);
-                    cclabel.Position = new CCPoint(600, (550 - (i * 100)));
-                    labels.Add(cclabel);
-                }
-            }
-
-            else if (PageCounter == 5)
-            {
-                deletelabels();
-                labels.Clear();
-                CCLabel FinishedRoad = new CCLabel("How too finish a road?", "Fonts/Coalition", 36, CCLabelFormat.SpriteFont);
-                FinishedRoad.Position = new CCPoint(bounds.Center.X, 700);
-                labels.Add(FinishedRoad);
-                for (int i = 0; i < uitlegdeel5.Length; i++)
-                {
-                    CCLabel cclabel = new CCLabel("" + uitlegdeel5[i], "Fonts/MarkerFelt", 22, CCLabelFormat.SpriteFont);
-                    cclabel.Position = new CCPoint((bounds.MidX), (600 - (i * 400)));
-                    labels.Add(cclabel);
-                }
-            }
-
-            else if (PageCounter == 6)
-            {
-                deletelabels();
-                labels.Clear();
-                CCLabel FinishedSpacestation = new CCLabel("How too finish a spacestation?", "Fonts/Coalition", 36, CCLabelFormat.SpriteFont);
-                FinishedSpacestation.Position = new CCPoint(bounds.Center.X, 700);
-                labels.Add(FinishedSpacestation);
-                for (int i = 0; i < uitlegdeel6.Length; i++)
-                {
-                    CCLabel cclabel = new CCLabel("" + uitlegdeel6[i], "Fonts/MarkerFelt", 22, CCLabelFormat.SpriteFont);
-                    cclabel.Position = new CCPoint((bounds.MidX), (600 - (i * 33)));
-                    labels.Add(cclabel);
-                }
-            }
-
-            else if (PageCounter == 7)
-            {
-                deletelabels();
-                labels.Clear();
-                CCLabel FinishedSatalite = new CCLabel("How too finish a satelite?", "Fonts/Coalition", 36, CCLabelFormat.SpriteFont);
-                FinishedSatalite.Position = new CCPoint(bounds.Center.X, 700);
-                labels.Add(FinishedSatalite);
-                for (int i = 0; i < uitlegdeel7.Length; i++)
-                {
-                    CCLabel cclabel = new CCLabel("" + uitlegdeel7[i], "Fonts/MarkerFelt", 22, CCLabelFormat.SpriteFont);
-                    cclabel.Position = new CCPoint((bounds.MidX), (600 - (i * 33)));
-                    labels.Add(cclabel);
-                }
-            }
-
-            else if (PageCounter == 8)
-            {
-                deletelabels();
-                labels.Clear();
-                CCLabel FinishedGame = new CCLabel("When is the game finished?", "Fonts/Coalition", 36, CCLabelFormat.SpriteFont);
-                FinishedGame.Position = new CCPoint(bounds.Center.X, 700);
-                labels.Add(FinishedGame);
-                for (int i = 0; i < uitlegdeel8.Length; i++)
-                {
-                    CCLabel cclabel = new CCLabel("" + uitlegdeel8[i], "Fonts/MarkerFelt", 22, CCLabelFormat.SpriteFont);
-                    cclabel.Position = new CCPoint((bounds.MidX), (600 - (i * 33)));
-                    labels.Add(cclabel);
-                }
-
-                CCLabel EndofHalp = new CCLabel("You are ready to play the game now.\nGood luck but most of all have fun!", "Fonts/Coalition", 36, CCLabelFormat.SpriteFont);
-                EndofHalp.Position = new CCPoint(bounds.Center.X, 300);
-                labels.Add(EndofHalp);
-            }
-
-            else
-            {
-                OnBackMenu();
-            }
-            
-             paintlabels();
-        } 
+            paintlabels();
+        }
+        
            private void paintlabels()
         {
             foreach (CCLabel p in labels)
