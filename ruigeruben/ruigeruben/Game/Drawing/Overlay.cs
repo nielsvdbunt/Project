@@ -5,9 +5,9 @@ using Microsoft.Xna.Framework;
 
 namespace ruigeruben
 {
-    class OverlayMenu : AbstractMenu
+    class Overlay : AbstractMenu
     {
-        public OverlayMenu()
+        public Overlay()
         {
             string players = "gotvet";
 
@@ -15,6 +15,7 @@ namespace ruigeruben
             CCSprite overlay_1 = new CCSprite("overlay1");
             CCSprite overlay_2 = new CCSprite("overlay2");
             CCSprite muntje = new CCSprite("coin");
+            CCSprite alien = new CCSprite("alien");
             CCLabel tekstjevandenaam = new CCLabel(players, "Fonts/Coalition", 36, CCLabelFormat.SpriteFont);
 
             tekstjevandenaam.Position = new CCPoint(200, 130);
@@ -24,10 +25,12 @@ namespace ruigeruben
             overlay_2.AnchorPoint = new CCPoint(1, 1);
             overlay_2.Position = new CCPoint(1920, 1080);
             muntje.Position = new CCPoint(500, 120);
+            alien.Position = new CCPoint(700, 120);
 
             AddChild(overlay_1);
             AddChild(overlay_2);
             AddChild(muntje);
+            AddChild(alien);
             AddChild(tekstjevandenaam);
         }
         public override void OnBack()
