@@ -15,9 +15,9 @@ namespace ruigeruben
             CCSprite overlay_1 = new CCSprite("overlay1");
             CCSprite overlay_2 = new CCSprite("overlay2");
             CCSprite muntje = new CCSprite("coin");
-            CCLabel tekstjevandenaam = new CCLabel(players, "Fonts/Coalition", 36, CCLabelFormat.SpriteFont); 
-            tekstjevandenaam.Position = new CCPoint(200, 130);
+            CCLabel tekstjevandenaam = new CCLabel(players, "Fonts/Coalition", 36, CCLabelFormat.SpriteFont);
 
+            tekstjevandenaam.Position = new CCPoint(200, 130);
             tekstjevandenaam.Color = CCColor3B.Black;
 
             overlay_1.AnchorPoint = new CCPoint(0, 0);
