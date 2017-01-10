@@ -11,7 +11,7 @@ namespace ruigeruben
         Deck m_Deck;
         Board m_Board;
 
-        public GameBase()
+        public GameBase(InputGameInfo info)
         {
             m_Board = new Board();
             m_Deck = new Deck(1);

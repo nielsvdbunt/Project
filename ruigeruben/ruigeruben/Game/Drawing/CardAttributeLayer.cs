@@ -7,7 +7,7 @@ using CocosSharp;
 
 namespace ruigeruben
 {
-    class CardAttributeLayer
+    class CardAttributeLayer : CCLayer
     {
     }
 }

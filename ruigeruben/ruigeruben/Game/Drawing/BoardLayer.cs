@@ -7,7 +7,7 @@ using CocosSharp;
 
 namespace ruigeruben
 {
-    class BoardLayer
+    class BoardLayer : CCLayer
     {
     }
 }
