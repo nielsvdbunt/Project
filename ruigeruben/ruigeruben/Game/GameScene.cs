@@ -5,15 +5,6 @@ using Microsoft.Xna.Framework;
 
 namespace ruigeruben
 {
-    enum PlayerColor
-    {
-        Red,
-        Blue,
-        Green,
-        Black,
-        Yellow,
-        Purple
-    }
 
     struct InputPlayer
     {
