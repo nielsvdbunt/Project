@@ -51,14 +51,14 @@ namespace ruigeruben
 
         private void OnPlayGame()
         {
-            MainActivity.SwitchToMenu(SceneIds.PlayMenu);    
+            MainActivity.SwitchToMenu(SceneIds.PlayMenu, 0);    
         }
 
            private void OnHelp()
          {
           //  var newScene = new HelpMenuTest(AbstractMenu.GameView);
            // AbstractMenu.GoToScene(newScene);
-            MainActivity.SwitchToMenu(SceneIds.HelpMenu);
+            MainActivity.SwitchToMenu(SceneIds.HelpMenu, 0);
          } 
 
         // OnHelp(0 steven 
@@ -72,7 +72,7 @@ namespace ruigeruben
     */
         private void OnSettings()
         {
-            MainActivity.SwitchToMenu(SceneIds.SettingsMenu);
+            MainActivity.SwitchToMenu(SceneIds.SettingsMenu, 0);
         }
 
         public override void OnClick(CCPoint Location)

@@ -34,7 +34,7 @@ namespace ruigeruben
        
         public override void OnBack()
         {
-                MainActivity.SwitchToMenu(SceneIds.OpeningMenu);
+                MainActivity.SwitchToMenu(SceneIds.OpeningMenu, 0);
         }
 
         protected override void AddedToScene()
@@ -104,8 +104,8 @@ namespace ruigeruben
 
         private void checkarray(int w)
         {
-            string Font = "Coalition", SubFont = "Prototype";
-            int FontSize = 40, SubFontSize = 28;
+            string Font = "Coalition", SubFont = "MarkerFelt";
+            int FontSize = 36, SubFontSize = 22;
             deletelabels();
             labels.Clear();
             switch (PageCounter)
@@ -221,18 +221,9 @@ namespace ruigeruben
                 RemoveChild(p);
         }
 
-        /*  private void CreateText(int PageNumber)
-        {
-            if (PageNumber == 0)
-                firsttext();
-            else if (PageNumber == 1)
-                secondtext();
-               
-        }
-        */
         private void OnBackMenu()
         {
-            MainActivity.SwitchToMenu(SceneIds.OpeningMenu);
+            MainActivity.SwitchToMenu(SceneIds.OpeningMenu, 0);
         }
 
         private void OnPagePrev()
