@@ -46,12 +46,12 @@ namespace ruigeruben
             m_BackMenuButton.OnClicked += new ClickEventHandler(OnBackMenu);
             m_Buttons.Add(m_BackMenuButton);
 
-            SpelersToevoegen();
+            AddPlayer();
            
         }
 
 
-        public void SpelersToevoegen()
+        public void AddPlayer()
         {
             
             Player player1 = new Player();
