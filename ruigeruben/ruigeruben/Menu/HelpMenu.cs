@@ -34,7 +34,7 @@ namespace ruigeruben
        
         public override void OnBack()
         {
-                MainActivity.SwitchToMenu(SceneIds.OpeningMenu);
+                MainActivity.SwitchToMenu(SceneIds.OpeningMenu, 0);
         }
 
         protected override void AddedToScene()
@@ -223,7 +223,7 @@ namespace ruigeruben
 
         private void OnBackMenu()
         {
-            MainActivity.SwitchToMenu(SceneIds.OpeningMenu);
+            MainActivity.SwitchToMenu(SceneIds.OpeningMenu, 0);
         }
 
         private void OnPagePrev()

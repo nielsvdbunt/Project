@@ -49,7 +49,7 @@ namespace ruigeruben
 
         private void OnBackMenu()
         {
-            MainActivity.SwitchToMenu(SceneIds.OpeningMenu);
+            MainActivity.SwitchToMenu(SceneIds.OpeningMenu, 0);
         }
 
         public override void OnBack()

@@ -5,17 +5,29 @@ using Microsoft.Xna.Framework;
 
 namespace ruigeruben
 {
+
+    struct InputPlayer
+    {
+        public string Name;
+        public PlayerColor Color;
+    }
+
+    struct InputGameInfo
+    {
+        public List<InputPlayer> Players;
+        public int CardMultiplier;
+
+    }
+
     class GameScene : CCScene
-    {   
-        enum Layers : int
-        {
-            Background = 0,
-            Tiles,
-            
-           
-        }
+    {
+        BackgroundLayer m_BackgroundLayer;
+        BoardLayer m_BoardLayer;
+        CardAttributeLayer m_CardAttrLayer;
+        OverlayMenu m_OverlayMenu;
+        TexturePool m_TeturePool;
         
-        public GameScene(CCGameView View) : base(View)
+        public GameScene(CCGameView View, InputGameInfo info) : base(View)
         {
            // this.AddLayer(new BackgroundLayer());
             this.AddLayer(new OverlayMenu());

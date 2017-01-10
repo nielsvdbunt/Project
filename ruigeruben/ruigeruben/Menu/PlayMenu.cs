@@ -17,11 +17,15 @@ namespace ruigeruben
         float m_StartPlayerNames;
         const float m_SpaceBetweenPlayerNames = 150.0f;
 
+        InputGameInfo m_GameInfo;
+
         public PlayMenu()
         {
+            m_GameInfo = new InputGameInfo();
+            m_GameInfo.CardMultiplier = 1;
+      
             m_Buttons = new List<Button>();
             m_Players = new List<Player>();
-           
         }
 
         protected override void AddedToScene()
@@ -117,7 +121,7 @@ namespace ruigeruben
 
         private void OnPlayGame()
         {
-            MainActivity.SwitchToMenu(SceneIds.Game);
+            MainActivity.SwitchToMenu(SceneIds.Game, m_GameInfo);
         }
        
         private void OnDeleteplayer()
@@ -140,12 +144,12 @@ namespace ruigeruben
 
         public override void OnBack()
         {
-            MainActivity.SwitchToMenu(SceneIds.OpeningMenu);
+            MainActivity.SwitchToMenu(SceneIds.OpeningMenu, 0);
         }
 
         private void OnBackMenu()
         {
-            MainActivity.SwitchToMenu(SceneIds.OpeningMenu);
+            MainActivity.SwitchToMenu(SceneIds.OpeningMenu, 0);
         }
     }
 }
