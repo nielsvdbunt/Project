@@ -93,6 +93,8 @@
     <AndroidAsset Include="Assets\Content\Fonts\Coalition-36.xnb" />
     <AndroidAsset Include="Assets\Content\Fonts\Coalition-70.xnb" />
     <AndroidAsset Include="Assets\Content\Fonts\Coalition-100.xnb" />
+    <AndroidAsset Include="Assets\Content\Fonts\Prototype-28.xnb" />
+    <AndroidAsset Include="Assets\Content\Fonts\Coalition-40.xnb" />
     <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
