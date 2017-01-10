@@ -64,15 +64,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BackgroundLayer.cs" />
     <Compile Include="Button.cs" />
     <Compile Include="Game\Board.cs" />
     <Compile Include="Game\Card.cs" />
+    <Compile Include="Game\Deck.cs" />
+    <Compile Include="Game\Game.cs" />
     <Compile Include="Game\GameScene.cs" />
     <Compile Include="Game\OverlayMenu.cs" />
+    <Compile Include="Game\Player.cs" />
     <Compile Include="MainActivity.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Menu\AbstractMenu.cs" />
+    <Compile Include="Menu\HelpMenuTest.cs" />
+    <Compile Include="Menu\SettingMenu.cs" />
     <Compile Include="Menu\HelpMenu.cs" />
     <Compile Include="Menu\OpeningMenu.cs" />
     <Compile Include="Menu\PlayMenu.cs" />
@@ -110,7 +116,7 @@
     <AndroidAsset Include="Assets\Content\Images\Panda.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\Content\Images\menu_achtergrond.png" />
+    <AndroidAsset Include="Assets\Content\Images\achtergrond.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

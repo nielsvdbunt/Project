@@ -10,6 +10,8 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using CocosSharp;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework;
 
 namespace ruigeruben
 {
@@ -23,9 +25,9 @@ namespace ruigeruben
            
     }
 
-    [Activity(Label = "ruigeruben", Theme = "@android:style/Theme.NoTitleBar.Fullscreen", MainLauncher = true, Icon = "@drawable/icon",
+    [Activity(Label = "Spacesonne", Theme = "@android:style/Theme.NoTitleBar.Fullscreen", MainLauncher = true, Icon = "@drawable/icon",
         AlwaysRetainTaskState = true,
-        ScreenOrientation = ScreenOrientation.Landscape,
+        ScreenOrientation = ScreenOrientation.SensorLandscape,
         LaunchMode = LaunchMode.SingleInstance,
         ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize | ConfigChanges.Keyboard | ConfigChanges.KeyboardHidden)]
     public class MainActivity : Activity
@@ -76,9 +78,7 @@ namespace ruigeruben
 
         public override void OnBackPressed()
         {
-            base.OnBackPressed();
-
-            if(m_InMenu)
+           if(m_InMenu)
             {
                 m_CurrentMenu.OnBack();
             }
@@ -98,14 +98,25 @@ namespace ruigeruben
             CCScene scene = new CCScene(m_GameView);
 
             if (id == SceneIds.OpeningMenu)
+            {
+                scene.AddLayer(new BackgroundLayer("achtergrond"));
                 scene.AddLayer(m_CurrentMenu = new OpeningMenu());
-
+            }
             if (id == SceneIds.PlayMenu)
+            {
+                scene.AddLayer(new BackgroundLayer("achtergrond"));
                 scene.AddLayer(m_CurrentMenu = new PlayMenu());
-
+            }
             if (id == SceneIds.HelpMenu)
-                scene.AddLayer(m_CurrentMenu = new HelpMenu() );
-
+            {
+                scene.AddLayer(new BackgroundLayer("achtergrond"));
+                scene.AddLayer(m_CurrentMenu = new HelpMenu());
+            }
+            if (id == SceneIds.SettingsMenu)
+            {
+                scene.AddLayer(new BackgroundLayer("achtergrond"));
+                scene.AddLayer(m_CurrentMenu = new SettingMenu());
+            }
 
             m_GameView.Director.ReplaceScene(scene);
 

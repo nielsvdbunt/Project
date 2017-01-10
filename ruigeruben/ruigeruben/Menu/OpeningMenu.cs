@@ -24,11 +24,6 @@ namespace ruigeruben
 
             CCRect bounds = VisibleBoundsWorldspace;
 
-            CCSprite achtergrond = new CCSprite("menu_achtergrond");
-            achtergrond.Position = bounds.Center;
-            AddChild(achtergrond);
-
-            //misschien meot titel iets groter of de rest iets kleiner?
             CCLabel Titel = new CCLabel("SPACESONNE", "Fonts/Coalition", 100, CCLabelFormat.SpriteFont);
             Titel.Position = new CCPoint(bounds.Center.X, 950);
             AddChild(Titel);
@@ -59,11 +54,22 @@ namespace ruigeruben
             MainActivity.SwitchToMenu(SceneIds.PlayMenu);    
         }
 
-        private void OnHelp()
-        {
+           private void OnHelp()
+         {
+          //  var newScene = new HelpMenuTest(AbstractMenu.GameView);
+           // AbstractMenu.GoToScene(newScene);
             MainActivity.SwitchToMenu(SceneIds.HelpMenu);
-        }
+         } 
 
+        // OnHelp(0 steven 
+
+      /*  private void OnHelp()
+        {
+            var newScene = new HelpMenuTest(GameController.GameView);
+            GameController.GoToScene(newScene);
+        }
+        
+    */
         private void OnSettings()
         {
             MainActivity.SwitchToMenu(SceneIds.SettingsMenu);
