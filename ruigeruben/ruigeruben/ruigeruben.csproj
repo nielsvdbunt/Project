@@ -64,7 +64,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BackgroundLayer.cs" />
     <Compile Include="Button.cs" />
     <Compile Include="Game\Board.cs" />
     <Compile Include="Game\Card.cs" />
