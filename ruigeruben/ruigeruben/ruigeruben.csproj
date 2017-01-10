@@ -69,9 +69,13 @@
     <Compile Include="Game\Board.cs" />
     <Compile Include="Game\Card.cs" />
     <Compile Include="Game\Deck.cs" />
+    <Compile Include="Game\Drawing\BackgrondLayer.cs" />
+    <Compile Include="Game\Drawing\BoardLayer.cs" />
+    <Compile Include="Game\Drawing\CardAttributeLayer.cs" />
+    <Compile Include="Game\Drawing\TeturePool.cs" />
     <Compile Include="Game\Game.cs" />
     <Compile Include="Game\GameScene.cs" />
-    <Compile Include="Game\OverlayMenu.cs" />
+    <Compile Include="Game\Drawing\OverlayMenu.cs" />
     <Compile Include="Game\Player.cs" />
     <Compile Include="MainActivity.cs">
       <SubType>Code</SubType>

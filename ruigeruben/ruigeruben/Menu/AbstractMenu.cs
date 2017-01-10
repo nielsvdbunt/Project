@@ -27,7 +27,7 @@ namespace ruigeruben
             }
         }
 
-        public static CCGameView GameView
+        /*public static CCGameView GameView
         {
             get;
             private set;
@@ -36,7 +36,7 @@ namespace ruigeruben
         public static void GoToScene(CCScene scene)
         {
             GameView.Director.ReplaceScene(scene);
-        }
+        }*/
 
         public abstract void OnClick(CCPoint Location);
         public abstract void OnBack();

@@ -5,26 +5,40 @@ using Microsoft.Xna.Framework;
 
 namespace ruigeruben
 {
-    enum CardAttributes
+    enum CardAttributes : int
     {
-        SpaceStation,
-        RainbowRoad,
-        Satellite,
-        None
+        SpaceStation = 1,
+        RainbowRoad = 2,
+        Satellite = 3,
+        None = 0
 
     }
 
     class Card
     {
-        int m_SpriteID;
+        public static readonly string[] CardTypes = {
+            "11222",
+            "10000",
+            "20202"     
+        };
+
+        string m_Hash;
         CardAttributes[] m_Attributes = new CardAttributes[5];
 
-        public Card() // Goeie manier vinden om dit te initliazen
+        public Card(string Hash) 
         {
-            //Berekent doormiddel van de Attributen de SpriteID
+            if (Hash.Length != 5)
+                return;
+
+            m_Hash = Hash;
+
+            for(int i = 0; i < Hash.Length; i++)
+            {
+                m_Attributes[i] = (CardAttributes)Convert.ToInt32(Hash[i]);
+            }
         }
 
-        CardAttributes  GetAttribute(int Spot)
+        CardAttributes GetAttribute(int Spot)
         {
             return m_Attributes[Spot];
         }
