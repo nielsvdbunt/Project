@@ -21,5 +21,11 @@ namespace ruigeruben
             m_virCards.Add(card);
             m_virLocations.Add(point);
         }
+
+        public Card GetCard(int x, int y)
+        {
+            Card c = new Card("yolo");
+            return c;
+        }
     }
 }

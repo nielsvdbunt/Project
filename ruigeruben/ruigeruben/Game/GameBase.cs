@@ -18,5 +18,23 @@ namespace ruigeruben
 
         }
 
+        public void Walktiles(int x, int y)
+        {
+            for (int i = -1; i <= 2; i += 2)
+            {
+                Checktiles(x + i, y);
+                Checktiles(x, y + i);
+            }
+            
+
+        }
+
+        public void Checktiles(int x, int y)
+        {
+            Card CardInHand = new Card("yolo2");
+            Card c = m_Board.GetCard(x, y);
+            
+        }
+
     }
 }
