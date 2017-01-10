@@ -29,7 +29,7 @@ namespace ruigeruben
         
         public GameScene(CCGameView View, InputGameInfo info) : base(View)
         {
-           // this.AddLayer(new BackgroundLayer());
+            this.AddLayer(new BackgroundLayer("achtergrond1"));
             this.AddLayer(new Overlay());
         }
     }

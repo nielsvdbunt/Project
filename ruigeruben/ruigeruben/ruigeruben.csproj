@@ -129,12 +129,6 @@
     <AndroidAsset Include="Assets\Content\Images\alien.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\Content\Images\overlay1.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidAsset Include="Assets\Content\Images\overlay2.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidAsset Include="Assets\Content\Images\achtergrond1.png" />
   </ItemGroup>
   <ItemGroup>
