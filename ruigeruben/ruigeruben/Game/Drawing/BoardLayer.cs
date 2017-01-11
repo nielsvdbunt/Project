@@ -11,14 +11,14 @@ namespace ruigeruben
     class BoardLayer : CCLayer
     {
         float scale = 1;
-        //Board board;
+        Board m_board;
         CCSprite spr2;
 
         //http://stackoverflow.com/questions/31502314/how-to-zoom-with-two-fingers-on-imageview-in-android
-        public BoardLayer()
+        public BoardLayer(Board b)
         {
             this.AnchorPoint = new CCPoint(0, 0);
-        //    board = b;
+            m_board = b;
         }
 
         public void AddPanda(int x, int y)
@@ -56,13 +56,13 @@ namespace ruigeruben
 
         }
 
-        /*public void AddBoard()
+        public void AddBoard()
         {
-            for(int t = 0; t < board.m_virCards.Count; t++)
+            for(int t = 0; t < m_board.m_virCards.Count; t++)
             {
-                AddCard(board.m_virCards[t], board.m_virLocations[t]);
+                AddCard(m_board.m_virCards[t], m_board.m_virLocations[t]);
             }
-        }*/
+        }
 
         public void AddCard(Card card, Point point)
         { //hier moet de kaart getekent worden en het punt omgezet worden naar pixels
