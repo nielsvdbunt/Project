@@ -9,7 +9,7 @@ namespace ruigeruben
     {
         public List<Player> m_Players;
         Deck m_Deck;
-        Board m_Board;
+        public Board m_Board;
 
         public GameBase(InputGameInfo info)
         {

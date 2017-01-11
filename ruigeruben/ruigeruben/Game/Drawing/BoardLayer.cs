@@ -14,7 +14,7 @@ namespace ruigeruben
         CCSprite spr2;
 
         //http://stackoverflow.com/questions/31502314/how-to-zoom-with-two-fingers-on-imageview-in-android
-        public BoardLayer()
+        public BoardLayer(Board board)
         {
             this.AnchorPoint = new CCPoint(0, 0);
 
