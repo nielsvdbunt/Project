@@ -23,7 +23,6 @@ namespace ruigeruben
             //here sprites are made
             make_sprite("coin", 500, 100);
             make_sprite("alien", 800, 100);
-            make_sprite("example", 1050, 100);
 
             //here labels are made
             make_label(currentplayer, font, 36, 200, 100, label_color);
@@ -31,10 +30,17 @@ namespace ruigeruben
             make_label(currentaliens, font, 36, 900, 100, label_color);
 
             //here buttons are made
+            Button example= new Button("example", "", new CCPoint(1050, 100), "Fonts/Coalition", 36, this);
             Button rotateleft = new Button("rotateleft","",new CCPoint(1200,100), "Fonts/Coalition",36, this);
             Button rotateright = new Button("rotateright", "", new CCPoint(1300, 100), "Fonts/Coalition", 36, this);
+            Button alien_button= new Button("alien", "", new CCPoint(1450, 100), "Fonts/Coalition", 36, this);
+            Button next = new Button("next", new CCPoint(1750, 100), "Fonts/Coalition", 70, this);
+            
+            //example.OnClicked+=
             //rotateleft.OnClicked+=
             //rotateleft.OnClicked+=
+            //alien_button.OnClicked+=
+            //next.OnClicked+=
         }
         public void make_sprite(string name, int x, int y)//this method is for creating sprites
         {
@@ -48,7 +54,6 @@ namespace ruigeruben
             label.Position = new CCPoint(x, y);
             label.Color = color;
             AddChild(label);
-
         }
         public void change_player()
         {
