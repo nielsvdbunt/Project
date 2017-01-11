@@ -12,6 +12,7 @@ namespace ruigeruben
             string currentplayer = "gotvet";
             string currentpoints = "8";
             string currentaliens = "6";
+            string currenttiles = "123";
             string font = "Fonts/Coalition";
             CCColor3B label_color = CCColor3B.White;
 
@@ -23,11 +24,13 @@ namespace ruigeruben
             //here sprites are made
             make_sprite("coin", 500, 100);
             make_sprite("alien", 800, 100);
+            make_sprite("tiles", 1760, 250);
 
             //here labels are made
             make_label(currentplayer, font, 36, 200, 100, label_color);
             make_label(currentpoints, font, 36, 650, 100, label_color);
             make_label(currentaliens, font, 36, 900, 100, label_color);
+            make_label(currenttiles,font , 36 , 1850, 240, label_color);
 
             //here buttons are made
             Button example= new Button("example", "", new CCPoint(1050, 100), "Fonts/Coalition", 36, this);
