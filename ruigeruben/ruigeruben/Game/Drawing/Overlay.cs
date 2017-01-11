@@ -15,32 +15,34 @@ namespace ruigeruben
             string font = "Fonts/Coalition";
             CCColor3B label_color = CCColor3B.White;
 
-            //hiet překrytí staví sám
+            //here the overlay is put on the screen
             CCSprite overlay = new CCSprite("overlay");
+            overlay.AnchorPoint = new CCPoint(0, 0);
+            AddChild(overlay);
+
+            //here sprites are made
             make_sprite("coin", 500, 100);
             make_sprite("alien", 800, 100);
             make_sprite("example", 1050, 100);
-            CCSprite left = new CCSprite("rotateleft");
-            CCSprite right = new CCSprite("rotateright");
+
+            //here labels are made
             make_label(currentplayer, font, 36, 200, 100, label_color);
             make_label(currentpoints, font, 36, 650, 100, label_color);
             make_label(currentaliens, font, 36, 900, 100, label_color);
 
-            overlay.AnchorPoint = new CCPoint(0, 0);
-            left.Position = new CCPoint(1200, 100);
-            right.Position = new CCPoint(1300, 100);
-
-            AddChild(overlay);
-            AddChild(left);
-            AddChild(right);
+            //here buttons are made
+            Button rotateleft = new Button("rotateleft","",new CCPoint(1200,100), "Fonts/Coalition",36, this);
+            Button rotateright = new Button("rotateright", "", new CCPoint(1300, 100), "Fonts/Coalition", 36, this);
+            //rotateleft.OnClicked+=
+            //rotateleft.OnClicked+=
         }
-        public void make_sprite(string name, int x, int y)
+        public void make_sprite(string name, int x, int y)//this method is for creating sprites
         {
             CCSprite sprite = new CCSprite(name);
             sprite.Position = new CCPoint(x,y);
             AddChild(sprite);
         }
-        public void make_label(string text, string font, int textsize, int x, int y, CCColor3B color)
+        public void make_label(string text, string font, int textsize, int x, int y, CCColor3B color)//method for creating simple labels
         {
             CCLabel label = new CCLabel( text, font, textsize,CCLabelFormat.SpriteFont);
             label.Position = new CCPoint(x, y);
