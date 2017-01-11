@@ -7,8 +7,8 @@ namespace ruigeruben
 {
     class Board
     {      
-        List<Card> m_virCards;
-        List<Point> m_virLocations;
+        public List<Card> m_virCards;
+        public List<Point> m_virLocations;
 
         public Board()
         {
