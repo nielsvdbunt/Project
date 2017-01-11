@@ -11,42 +11,50 @@ namespace ruigeruben
     {
         float scale = 1;
 
+        CCSprite spr2;
+
         //http://stackoverflow.com/questions/31502314/how-to-zoom-with-two-fingers-on-imageview-in-android
         public BoardLayer()
         {
             this.AnchorPoint = new CCPoint(0, 0);
+
         }
 
         public void AddPanda(int x, int y)
         {
             CCSprite spr = new CCSprite("Panda");
-            CCSprite spr2 = new CCSprite("Panda");
-            spr2.PositionX = x + 100;
-            spr2.PositionY = y + 300; 
+           
+
             spr.PositionX = x;
             spr.PositionY = y;
-            AddChild(spr2);
+
             AddChild(spr);
         }
 
         public void t(CCPoint p)
         {
 
-            
+
             scale /= 2f;
 
-            CCPoint old = new CCPoint(p.X * this.ScaleX, p.Y * this.ScaleY);
+            CCPoint NewMiddlePoint = new CCPoint(p);
+            this.Position = NewMiddlePoint;
+            
+          /*  CCPoint old = new CCPoint(p.X * this.ScaleX, p.Y * this.ScaleY);
 
             this.Scale = scale;
 
             CCPoint New = new CCPoint(p.X * this.ScaleX, p.Y * this.ScaleY);
 
             CCPoint delta = old - New;
-            
-                this.Position += delta;
-            
+
+            this.Position += delta;
+            */
 
         }
 
+
+
     }
+    
 }

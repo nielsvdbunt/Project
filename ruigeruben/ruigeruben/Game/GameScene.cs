@@ -40,7 +40,8 @@ namespace ruigeruben
             m_Game = new GameBase(info);
 
             var touchListener = new CCEventListenerTouchAllAtOnce();
-            touchListener.OnTouchesEnded = OnTouchesEnded;
+         //   touchListener.OnTouchesEnded = OnTouchesEnded;
+            touchListener.OnTouchesMoved = OnTouchesMoved;
             AddEventListener(touchListener, this);
 
             m_BoardLayer.AddPanda(500, 500);
@@ -48,7 +49,7 @@ namespace ruigeruben
             //m_BoardLayer.AddPanda(0, 132);
         }
 
-        void OnTouchesEnded(List<CCTouch> touches, CCEvent touchEvent)
+           void OnTouchesEnded(List<CCTouch> touches, CCEvent touchEvent)
         {
             foreach (CCTouch i in touches)
             {
@@ -60,6 +61,20 @@ namespace ruigeruben
                 }
             }
         }
-
+        
+           void OnTouchesMoved(List<CCTouch> touches, CCEvent touchEvent)
+        {
+            foreach (CCTouch i in touches)
+            {
+                if (touches.Count > 0)
+                {
+                    float x = touches[0].LocationOnScreen.X;
+                    float y = touches[0].LocationOnScreen.Y;
+                    CCPoint location = new CCPoint(x,-y);
+                    m_BoardLayer.t(location);
+                }
+            }
+        }
+        
     }
 }
