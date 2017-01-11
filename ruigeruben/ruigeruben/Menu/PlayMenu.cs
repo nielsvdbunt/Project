@@ -67,9 +67,11 @@ namespace ruigeruben
             player1.Name = "Ruben";
             player1.Points = 10; // Ruub is een waardeloze speler
             player1.NumberOfAliens = 5;
+            player1.Turn = true;
             Player player2 = new Player();
             player2.Name = "Steven";
             player2.Points = 100; //steven is echt een kei goeie speler
+            player1.Turn = false;
             m_Players.Add(player1);
             m_Players.Add(player2);
             players();

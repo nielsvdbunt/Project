@@ -55,18 +55,22 @@ namespace ruigeruben
 
             //GameBase gamebase = new GameBase();
             //List<Player> playerlist = gamebase.m_Players;
-
-            //foreach (Player p in playerlist)
+            //int p=0;
+            //for (int t=0; t<playerlist.Count;t++)
             //{
-            //    if (p.Turn == true)
+            //    if (playerlist[t].Turn == true)
             //    {
-            //        currentplayer = p.Name;
-            //        currentpoints = p.Points.ToString();
-            //        currentaliens = p.NumberOfAliens.ToString();
+            //        currentplayer = playerlist[t].Name;
+            //        currentpoints = playerlist[t].Points.ToString();
+            //        currentaliens = playerlist[t].NumberOfAliens.ToString();
+            //        p = t;
             //    }
             //    else
             //    {
+            //        if (p==t-1)
+            //        {
 
+            //        }
             //    }
             //}
 
