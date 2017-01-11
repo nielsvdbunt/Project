@@ -41,7 +41,7 @@ namespace ruigeruben
 
             var touchListener = new CCEventListenerTouchAllAtOnce();
             touchListener.OnTouchesEnded = OnTouchesEnded;
-            
+            touchListener.OnTouchesMoved = zoomen();
             AddEventListener(touchListener, this);
 
             m_BoardLayer.AddPanda(500, 500);
@@ -61,6 +61,8 @@ namespace ruigeruben
                 }
             }
         }
+
+        void zoomen(List<CC>)
 
     }
 }

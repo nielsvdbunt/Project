@@ -20,15 +20,19 @@ namespace ruigeruben
         public void AddPanda(int x, int y)
         {
             CCSprite spr = new CCSprite("Panda");
-
+            CCSprite spr2 = new CCSprite("Panda");
+            spr2.PositionX = x + 100;
+            spr2.PositionY = y + 300; 
             spr.PositionX = x;
             spr.PositionY = y;
-
+            AddChild(spr2);
             AddChild(spr);
         }
 
         public void t(CCPoint p)
         {
+
+            
             scale /= 2f;
 
             CCPoint old = new CCPoint(p.X * this.ScaleX, p.Y * this.ScaleY);
@@ -38,8 +42,8 @@ namespace ruigeruben
             CCPoint New = new CCPoint(p.X * this.ScaleX, p.Y * this.ScaleY);
 
             CCPoint delta = old - New;
-
-            this.Position += delta;
+            
+                this.Position += delta;
             
 
         }
