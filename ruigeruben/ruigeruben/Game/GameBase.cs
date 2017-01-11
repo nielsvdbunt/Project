@@ -7,7 +7,7 @@ namespace ruigeruben
 {
     class GameBase
     {
-        List<Player> m_Players;
+        public List<Player> m_Players;
         Deck m_Deck;
         Board m_Board;
 
@@ -16,6 +16,10 @@ namespace ruigeruben
             m_Board = new Board();
             m_Deck = new Deck(1);
 
+        }
+
+        public GameBase()
+        {
         }
 
         public void Walktiles(int x, int y)
