@@ -46,32 +46,33 @@ namespace ruigeruben
         }
         public void update_interface()// in this method the labels and button are made that need to update everytime a player has his turn
         {
-            string currentplayer = "gotvet";
-            string currentpoints = "8";
-            string currentaliens = "6";
+            string currentplayer="gotvet";
+            string currentpoints = "500";
+            string currentaliens="8";
             string currenttiles = "123";
             string font = "Fonts/Coalition";
             CCColor3B label_color = CCColor3B.White;
 
-            //GameBase gamebase = new GameBase();
+            //PlayMenu gamebase = new PlayMenu();
             //List<Player> playerlist = gamebase.m_Players;
-            //int p=0;
-            //for (int t=0; t<playerlist.Count;t++)
+            //int t;
+            //for (t = 0; t < playerlist.Count; t++)
             //{
             //    if (playerlist[t].Turn == true)
             //    {
             //        currentplayer = playerlist[t].Name;
             //        currentpoints = playerlist[t].Points.ToString();
             //        currentaliens = playerlist[t].NumberOfAliens.ToString();
-            //        p = t;
             //    }
-            //    else
-            //    {
-            //        if (p==t-1)
-            //        {
-
-            //        }
-            //    }
+            //}
+            //for (int z=0; z<(playerlist.Count-1);z++)
+            //{
+            //    if (t + 1 == playerlist.Count)
+            //        t = 0;
+            //    make_label(playerlist[t + 1].Name, font, 36, 1900, 1000, label_color);
+            //    make_label(playerlist[t + 1].Points.ToString(), font, 36, 1900, 1000, label_color);
+            //    make_label(playerlist[t + 1].NumberOfAliens.ToString(), font, 36, 1900, 1000, label_color);
+            //    t++;
             //}
 
             Button example = new Button("example", "", new CCPoint(1050, 100), "Fonts/Coalition", 36, this);

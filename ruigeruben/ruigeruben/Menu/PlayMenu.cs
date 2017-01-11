@@ -10,7 +10,7 @@ namespace ruigeruben
     class PlayMenu : AbstractMenu
     {
         List<Button> m_Buttons;
-        List<Player> m_Players;
+        public List<Player> m_Players;
         List<CCLabel> playerlabels = new List<CCLabel>();
 
         Button m_BackMenuButton;
@@ -65,15 +65,22 @@ namespace ruigeruben
             
             Player player1 = new Player();
             player1.Name = "Ruben";
-            player1.Points = 10; // Ruub is een waardeloze speler
+            player1.Points = 10;
             player1.NumberOfAliens = 5;
             player1.Turn = true;
             Player player2 = new Player();
             player2.Name = "Steven";
-            player2.Points = 100; //steven is echt een kei goeie speler
-            player1.Turn = false;
+            player2.Points = 40;
+            player2.NumberOfAliens = 6;
+            player2.Turn = false;
+            Player player3 = new Player();
+            player3.Name = "gotvet";
+            player3.Points = 100;
+            player3.NumberOfAliens = 7;
+            player3.Turn = false;
             m_Players.Add(player1);
             m_Players.Add(player2);
+            m_Players.Add(player3);
             players();
         }
 
