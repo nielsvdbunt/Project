@@ -36,7 +36,7 @@ namespace ruigeruben
                     return c;
                 }
             }
-            c = new Card("00000");
+            c = new Card("00000"); // dit klopt nog niet want als er geen kaart op de plek ligt moet hij eigenlijk niets teruggeven
             return c;
         }
     }
