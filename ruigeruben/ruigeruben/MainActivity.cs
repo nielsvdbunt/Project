@@ -93,7 +93,7 @@ namespace ruigeruben
                 m_GameView.Director.ReplaceScene(gs);
                 return;
             }
-
+           
             m_InMenu = true;
             CCScene scene = new CCScene(m_GameView);
 

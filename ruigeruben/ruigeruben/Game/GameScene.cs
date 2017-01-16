@@ -31,17 +31,19 @@ namespace ruigeruben
 
         public GameScene(CCGameView View, InputGameInfo info) : base(View)
         {
+            m_Game = new GameBase(info);
+
             this.AddLayer(m_BackgroundLayer = new BackgroundLayer("achtergrond1"), 0);
-            this.AddLayer(m_BoardLayer = new BoardLayer(), 1);
+            this.AddLayer(m_BoardLayer = new BoardLayer(m_Game.m_Board), 1);
             this.AddLayer(m_CardAttrLayer = new CardAttributeLayer(), 2);
             this.AddLayer(m_Overlay = new Overlay(), 3);
 
             m_TeturePool = new TexturePool();
-            m_Game = new GameBase(info);
+
 
             var touchListener = new CCEventListenerTouchAllAtOnce();
-            touchListener.OnTouchesEnded = OnTouchesEnded;
-            
+         //   touchListener.OnTouchesEnded = OnTouchesEnded;
+            touchListener.OnTouchesMoved = OnTouchesMoved;
             AddEventListener(touchListener, this);
 
             m_BoardLayer.AddPanda(500, 500);
@@ -49,7 +51,7 @@ namespace ruigeruben
             //m_BoardLayer.AddPanda(0, 132);
         }
 
-        void OnTouchesEnded(List<CCTouch> touches, CCEvent touchEvent)
+           void OnTouchesEnded(List<CCTouch> touches, CCEvent touchEvent)
         {
             foreach (CCTouch i in touches)
             {
@@ -61,6 +63,20 @@ namespace ruigeruben
                 }
             }
         }
-
+        
+           void OnTouchesMoved(List<CCTouch> touches, CCEvent touchEvent)
+        {
+            foreach (CCTouch i in touches)
+            {
+                if (touches.Count > 0)
+                {
+                    float x = touches[0].LocationOnScreen.X;
+                    float y = touches[0].LocationOnScreen.Y;
+                    CCPoint location = new CCPoint((x - 500),(-y + 700));
+                    m_BoardLayer.t(location);
+                }
+            }
+        }
+        
     }
 }

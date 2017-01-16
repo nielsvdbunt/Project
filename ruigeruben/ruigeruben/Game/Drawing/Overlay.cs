@@ -9,48 +9,80 @@ namespace ruigeruben
     {
         public Overlay()
         {
-            string currentplayer = "gotvet";
-            string currentpoints = "8";
-            string currentaliens = "6";
+            //here the overlay is put on the screen
+            CCSprite overlay = new CCSprite("overlay");
+            overlay.AnchorPoint = new CCPoint(0, 0);
+            AddChild(overlay);
+
+            //here sprites are made
+            make_sprite("coin", 500, 100);
+            make_sprite("alien", 800, 100);
+            make_sprite("tiles", 1760, 250);
+
+            //here buttons are made
+            Button rotateleft = new Button("rotateleft","",new CCPoint(1200,100), "Fonts/Coalition",36, this);
+            Button rotateright = new Button("rotateright", "", new CCPoint(1300, 100), "Fonts/Coalition", 36, this);
+            Button alien_button= new Button("alien", "", new CCPoint(1450, 100), "Fonts/Coalition", 36, this);
+            Button next = new Button("next", new CCPoint(1750, 100), "Fonts/Coalition", 70, this);
+
+            //rotateleft.OnClicked+=
+            //rotateleft.OnClicked+=
+            //alien_button.OnClicked+=
+            //next.OnClicked+=
+            update_interface();
+        }
+        public void make_sprite(string name, int x, int y)//this method is for creating sprites
+        {
+            CCSprite sprite = new CCSprite(name);
+            sprite.Position = new CCPoint(x,y);
+            AddChild(sprite);
+        }
+        public void make_label(string text, string font, int textsize, int x, int y, CCColor3B color)//method for creating simple labels
+        {
+            CCLabel label = new CCLabel( text, font, textsize,CCLabelFormat.SpriteFont);
+            label.Position = new CCPoint(x, y);
+            label.Color = color;
+            AddChild(label);
+        }
+        public void update_interface()// in this method the labels and button are made that need to update everytime a player has his turn
+        {
+            string currentplayer="gotvet";
+            string currentpoints = "500";
+            string currentaliens="8";
+            string currenttiles = "123";
+            string font = "Fonts/Coalition";
             CCColor3B label_color = CCColor3B.White;
 
-            //hiet překrytí staví sám
-            CCSprite overlay = new CCSprite("overlay");
-            CCSprite muntje = new CCSprite("coin");
-            CCSprite alien = new CCSprite("alien");
-            CCSprite example = new CCSprite("example");
-            CCSprite left = new CCSprite("rotateleft");
-            CCSprite right = new CCSprite("rotateright");
-            CCLabel current_player = new CCLabel(currentplayer, "Fonts/Coalition", 36, CCLabelFormat.SpriteFont);
-            CCLabel current_points= new CCLabel(currentpoints, "Fonts/Coalition", 36, CCLabelFormat.SpriteFont);
-            CCLabel current_aliens = new CCLabel(currentaliens, "Fonts/Coalition", 36, CCLabelFormat.SpriteFont);
+            //PlayMenu gamebase = new PlayMenu();
+            //List<Player> playerlist = gamebase.m_Players;
+            //int t;
+            //for (t = 0; t < playerlist.Count; t++)
+            //{
+            //    if (playerlist[t].Turn == true)
+            //    {
+            //        currentplayer = playerlist[t].Name;
+            //        currentpoints = playerlist[t].Points.ToString();
+            //        currentaliens = playerlist[t].NumberOfAliens.ToString();
+            //    }
+            //}
+            //for (int z=0; z<(playerlist.Count-1);z++)
+            //{
+            //    if (t + 1 == playerlist.Count)
+            //        t = 0;
+            //    make_label(playerlist[t + 1].Name, font, 36, 1900, 1000, label_color);
+            //    make_label(playerlist[t + 1].Points.ToString(), font, 36, 1900, 1000, label_color);
+            //    make_label(playerlist[t + 1].NumberOfAliens.ToString(), font, 36, 1900, 1000, label_color);
+            //    t++;
+            //}
 
-            current_player.Position = new CCPoint(200, 100);
-            current_player.Color = label_color;
-            current_points.Position = new CCPoint(650, 100);
-            current_points.Color = label_color;
-            current_aliens.Position = new CCPoint(900, 100);
-            current_aliens.Color = label_color;
+            Button example = new Button("example", "", new CCPoint(1050, 100), "Fonts/Coalition", 36, this);
 
-            overlay.AnchorPoint = new CCPoint(0, 0);
-            muntje.Position = new CCPoint(500, 100);
-            alien.Position = new CCPoint(800, 100);
-            example.Position = new CCPoint(1050, 100);
-            left.Position = new CCPoint(1200, 100);
-            right.Position = new CCPoint(1300, 100);
+            make_label(currentplayer, font, 36, 200, 100, label_color);
+            make_label(currentpoints, font, 36, 650, 100, label_color);
+            make_label(currentaliens, font, 36, 900, 100, label_color);
+            make_label(currenttiles, font, 36, 1850, 240, label_color);
 
-            AddChild(overlay);
-            AddChild(muntje);
-            AddChild(alien);
-            AddChild(example);
-            AddChild(left);
-            AddChild(right);
-            AddChild(current_player);
-            AddChild(current_points);
-            AddChild(current_aliens);
-        }
-        public void change_player()
-        {
+            //example.OnClicked+=
 
         }
         public override void OnBack()
@@ -58,9 +90,9 @@ namespace ruigeruben
             throw new NotImplementedException();
         }
 
-        public override void OnClick(CCPoint Location)
+        public override void OnClick(CCPoint Location)//this method is empty because nothing is supposed to happen when you click on it
         {
-           
+            
         }
     }
 }

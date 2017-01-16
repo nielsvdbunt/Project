@@ -36,9 +36,7 @@ namespace ruigeruben
             Layer.AddChild(m_Label, 1);
 
             m_TexTOnly = false;
-
         }
-
         public void SetTextPossition(CCPoint Possition)
         {
             m_Label.Position = Possition;

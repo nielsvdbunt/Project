@@ -7,8 +7,8 @@ namespace ruigeruben
 {
     class Board
     {      
-        List<Card> m_virCards;
-        List<Point> m_virLocations;
+        public List<Card> m_virCards;
+        public List<Point> m_virLocations;
 
         public Board()
         {
@@ -24,7 +24,19 @@ namespace ruigeruben
 
         public Card GetCard(int x, int y)
         {
-            Card c = new Card("yolo");
+            int i;
+            Card c;
+            Point location = new Point(x, y);
+            for (int t = 0; t < m_virLocations.Count; t++)
+            {
+                if (m_virLocations[t] == location)
+                {
+                    i = t;
+                    c = m_virCards[i];
+                    return c;
+                }
+            }
+            c = new Card("00000"); // dit klopt nog niet want als er geen kaart op de plek ligt moet hij eigenlijk niets teruggeven
             return c;
         }
     }

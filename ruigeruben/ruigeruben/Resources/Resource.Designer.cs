@@ -87,7 +87,9 @@ namespace ruigeruben
 			private Layout()
 			{
 			}
-		}
+
+            public static object Keyboard { get; internal set; }
+        }
 		
 		public partial class String
 		{
