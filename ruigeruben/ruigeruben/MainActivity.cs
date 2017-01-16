@@ -99,22 +99,22 @@ namespace ruigeruben
 
             if (id == SceneIds.OpeningMenu)
             {
-                scene.AddLayer(new BackgroundLayer("achtergrond"));
+                scene.AddLayer(new BackgroundLayer("achtergrond1"));
                 scene.AddLayer(m_CurrentMenu = new OpeningMenu());
             }
             if (id == SceneIds.PlayMenu)
             {
-                scene.AddLayer(new BackgroundLayer("achtergrond"));
+                scene.AddLayer(new BackgroundLayer("achtergrond1"));
                 scene.AddLayer(m_CurrentMenu = new PlayMenu());
             }
             if (id == SceneIds.HelpMenu)
             {
-                scene.AddLayer(new BackgroundLayer("achtergrond"));
+                scene.AddLayer(new BackgroundLayer("achtergrond1"));
                 scene.AddLayer(m_CurrentMenu = new HelpMenu());
             }
             if (id == SceneIds.SettingsMenu)
             {
-                scene.AddLayer(new BackgroundLayer("achtergrond"));
+                scene.AddLayer(new BackgroundLayer("achtergrond1"));
                 scene.AddLayer(m_CurrentMenu = new SettingMenu());
             }
 

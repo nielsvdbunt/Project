@@ -42,10 +42,14 @@ namespace ruigeruben
             drawNode.DrawRect(shape, fillColor: CCColor4B.Transparent,
                 borderWidth: 4,
                 borderColor: CCColor4B.White);
+            drawNode.DrawRect(new CCRect(700, bounds.MidY - 500, 1000, 1000), fillColor: CCColor4B.Transparent,
+                borderWidth: 4,
+                borderColor: CCColor4B.White);
 
             m_StartPlayerNames = bounds.MidY + 400;
 
-            Button PlayButton = new Button("Play game", new CCPoint(bounds.Center.X + 500, 100), "Coalition" , 70, this);
+            Button PlayButton = new Button("Play game", new CCPoint(bounds.MaxX - 100, bounds.MidY), "Coalition" , 70, this);
+            PlayButton.Rotate();
             PlayButton.OnClicked += new ClickEventHandler(OnPlayGame);
             m_Buttons.Add(PlayButton);
 

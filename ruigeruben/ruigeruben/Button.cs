@@ -77,6 +77,11 @@ namespace ruigeruben
 
             return false;          
         }
+
+        public void Rotate()
+        {
+            m_Label.Rotation = 90f;
+        }
           
     }
 }
