@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using CocosSharp;
 using Microsoft.Xna.Framework;
 using Xamarin;
+using Android.Views.InputMethods;
 using static Android.OS.DropBoxManager;
+using Android.InputMethodServices;
 
 namespace ruigeruben
 {
@@ -108,6 +110,8 @@ namespace ruigeruben
                 Button AddPlayer = new Button("+", new CCPoint(620, m_StartPlayerNames - m_Players.Count * m_SpaceBetweenPlayerNames), "Fonts/Coalition", 70, this);
                 AddPlayer.SetTextAnchorpoint(new CCPoint(0, 0));
                 AddPlayer.OnClicked += new ClickEventHandler(OnAddplayer);
+              
+       
                 m_Buttons.Add(AddPlayer);
             }
         }
@@ -120,13 +124,16 @@ namespace ruigeruben
 
         private void deleteplayerlabels()
         {
+            var toetsenboord = new CCEventListenerKeyboard();
+            
+            AddEventListener(toetsenboord, this);
             foreach (CCLabel p in playerlabels)
                 RemoveChild(p);
         }
-
+       
         private void OnAddplayer()
         {
-           
+            CCEventListenerKeyboard toetsenboord = new CCEventListenerKeyboard();
         }
 
         private void OnPlayGame()
