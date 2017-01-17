@@ -23,7 +23,7 @@ namespace ruigeruben
             CCSprite spr2 = new CCSprite("Panda");
             spr2.PositionX = x + 500;
             spr2.PositionY = y + 200;
-
+            
             spr.PositionX = x;
             spr.PositionY = y;
             AddChild(spr2);
