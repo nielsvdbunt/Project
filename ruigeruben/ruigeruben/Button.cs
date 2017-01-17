@@ -22,7 +22,16 @@ namespace ruigeruben
             Layer.AddChild(m_Label, 1);
 
             m_TexTOnly = true;
-         
+        }
+
+        public Button(string Text, CCPoint Possition, string Font, int FontSize, CCLayer Layer, int tag)
+        {
+            m_Label = new CCLabel(Text, Font, FontSize, CCLabelFormat.SpriteFont);
+            m_Label.Position = Possition;
+            m_Label.Tag = tag;
+            Layer.AddChild(m_Label, 1);
+
+            m_TexTOnly = true;
         }
 
         public Button(string ImageName, string Text, CCPoint Possition, string Font, int FontSize, CCLayer Layer)
@@ -36,9 +45,7 @@ namespace ruigeruben
             Layer.AddChild(m_Label, 1);
 
             m_TexTOnly = false;
-
         }
-
         public void SetTextPossition(CCPoint Possition)
         {
             m_Label.Position = Possition;
@@ -76,6 +83,11 @@ namespace ruigeruben
             }
 
             return false;          
+        }
+
+        public void Rotate()
+        {
+            m_Label.Rotation = 90f;
         }
           
     }

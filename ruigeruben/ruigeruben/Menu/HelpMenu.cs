@@ -122,12 +122,12 @@ namespace ruigeruben
                     }
                     break;
                 case 2:
-                    CCLabel components = new CCLabel("Compnents", Font, FontSize, CCLabelFormat.SpriteFont);
+                    CCLabel components = new CCLabel("Components", Font, FontSize, CCLabelFormat.SpriteFont);
                     components.Position = new CCPoint(bounds.Center.X, 700);
                     labels.Add(components);
                     for (int i = 0; i < uitlegdeel2.Length; i++)
                     {
-                        CCLabel cclabel = new CCLabel("" + uitlegdeel2[i], SubFont, SubFontSize, CCLabelFormat.SpriteFont);
+                        CCLabel cclabel = new CCLabel(uitlegdeel2[i], SubFont, SubFontSize, CCLabelFormat.SpriteFont);
                         cclabel.Position = new CCPoint(400, (600 - (i * 100)));
                         labels.Add(cclabel);
                     }
@@ -138,7 +138,7 @@ namespace ruigeruben
                     labels.Add(Goaltitle);
                     for (int i = 0; i < uitlegdeel3.Length; i++)
                     {
-                        CCLabel cclabel = new CCLabel("" + uitlegdeel3[i], SubFont, SubFontSize, CCLabelFormat.SpriteFont);
+                        CCLabel cclabel = new CCLabel(uitlegdeel3[i], SubFont, SubFontSize, CCLabelFormat.SpriteFont);
                         cclabel.Position = new CCPoint((bounds.MidX), (600 - (i * 33)));
                         labels.Add(cclabel);
                     }
@@ -149,40 +149,40 @@ namespace ruigeruben
                     labels.Add(whatturn);
                     for (int i = 0; i < uitlegdeel4.Length; i++)
                     {
-                        CCLabel cclabel = new CCLabel("" + uitlegdeel4[i], SubFont, SubFontSize, CCLabelFormat.SpriteFont);
+                        CCLabel cclabel = new CCLabel(uitlegdeel4[i], SubFont, SubFontSize, CCLabelFormat.SpriteFont);
                         cclabel.Position = new CCPoint(600, (550 - (i * 100)));
                         labels.Add(cclabel);
                     }
                     break;
                 case 5:
-                    CCLabel FinishedRoad = new CCLabel("How too finish a road?", Font, FontSize, CCLabelFormat.SpriteFont);
+                    CCLabel FinishedRoad = new CCLabel("How to finish a road?", Font, FontSize, CCLabelFormat.SpriteFont);
                     FinishedRoad.Position = new CCPoint(bounds.Center.X, 700);
                     labels.Add(FinishedRoad);
                     for (int i = 0; i < uitlegdeel5.Length; i++)
                     {
-                        CCLabel cclabel = new CCLabel("" + uitlegdeel5[i], SubFont, SubFontSize, CCLabelFormat.SpriteFont);
+                        CCLabel cclabel = new CCLabel(uitlegdeel5[i], SubFont, SubFontSize, CCLabelFormat.SpriteFont);
                         cclabel.Position = new CCPoint((bounds.MidX), (600 - (i * 400)));
                         labels.Add(cclabel);
                     }
                     break;
                 case 6:
-                    CCLabel FinishedSpacestation = new CCLabel("How too finish a spacestation?", Font, FontSize, CCLabelFormat.SpriteFont);
+                    CCLabel FinishedSpacestation = new CCLabel("How to finish a spacestation?", Font, FontSize, CCLabelFormat.SpriteFont);
                     FinishedSpacestation.Position = new CCPoint(bounds.Center.X, 700);
                     labels.Add(FinishedSpacestation);
                     for (int i = 0; i < uitlegdeel6.Length; i++)
                     {
-                        CCLabel cclabel = new CCLabel("" + uitlegdeel6[i], SubFont, SubFontSize, CCLabelFormat.SpriteFont);
+                        CCLabel cclabel = new CCLabel(uitlegdeel6[i], SubFont, SubFontSize, CCLabelFormat.SpriteFont);
                         cclabel.Position = new CCPoint((bounds.MidX), (600 - (i * 33)));
                         labels.Add(cclabel);
                     }
                     break;
                 case 7:
-                    CCLabel FinishedSatalite = new CCLabel("How too finish a satelite?", Font, FontSize, CCLabelFormat.SpriteFont);
+                    CCLabel FinishedSatalite = new CCLabel("How to finish a satelite?", Font, FontSize, CCLabelFormat.SpriteFont);
                     FinishedSatalite.Position = new CCPoint(bounds.Center.X, 700);
                     labels.Add(FinishedSatalite);
                     for (int i = 0; i < uitlegdeel7.Length; i++)
                     {
-                        CCLabel cclabel = new CCLabel("" + uitlegdeel7[i], SubFont, SubFontSize, CCLabelFormat.SpriteFont);
+                        CCLabel cclabel = new CCLabel(uitlegdeel7[i], SubFont, SubFontSize, CCLabelFormat.SpriteFont);
                         cclabel.Position = new CCPoint((bounds.MidX), (600 - (i * 33)));
                         labels.Add(cclabel);
                     }
@@ -193,7 +193,7 @@ namespace ruigeruben
                     labels.Add(FinishedGame);
                     for (int i = 0; i < uitlegdeel8.Length; i++)
                     {
-                        CCLabel cclabel = new CCLabel("" + uitlegdeel8[i], SubFont, SubFontSize, CCLabelFormat.SpriteFont);
+                        CCLabel cclabel = new CCLabel(uitlegdeel8[i], SubFont, SubFontSize, CCLabelFormat.SpriteFont);
                         cclabel.Position = new CCPoint((bounds.MidX), (600 - (i * 33)));
                         labels.Add(cclabel);
                     }
