@@ -8,6 +8,7 @@ namespace ruigeruben
     class GameBase
     {
         GameScene m_Scene;
+        PlayMenu SpeelMenu;
         public List<Player> m_Players;
         Deck m_Deck;
         public Board m_Board;
@@ -21,6 +22,7 @@ namespace ruigeruben
                 Player p = new Player();
                 p.Name = i.Name;
                 p.PlayerColor = i.Color;
+               // p.NumberOfAliens = SpeelMenu.AmountAliens; 
                 m_Players.Add(p);
             }
 

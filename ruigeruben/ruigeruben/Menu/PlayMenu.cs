@@ -9,7 +9,7 @@ using Android.InputMethodServices;
 
 namespace ruigeruben
 {
-    class PlayMenu : AbstractMenu
+     class PlayMenu : AbstractMenu
     {
         int NumberOfPlayers;
         CCRect bounds;
@@ -17,7 +17,8 @@ namespace ruigeruben
         List<Button> playerbuttons;
         public List<InputPlayer> m_Players;
         List<CCLabel> playerlabels;
-        
+        public  int AmountAliens;
+        public int AmountTest;
         Button m_BackMenuButton;
         float m_StartPlayerNames;
         const float m_SpaceBetweenPlayerNames = 150.0f;
@@ -68,6 +69,8 @@ namespace ruigeruben
             m_BackMenuButton.OnClicked += new ClickEventHandler(OnBackMenu);
             m_Buttons.Add(m_BackMenuButton);
 
+            
+
             settings();
             players();
         }
@@ -91,9 +94,10 @@ namespace ruigeruben
                 settinglabels[i].Position = new CCPoint(750, bounds.MaxY - 200 - i*150);
                 AddChild(settinglabels[i]);
             }
-
-            CCLabel Alien_count = new CCLabel("5", "Coalition", 70);
-            CCLabel Test = new CCLabel("5", "Coalition", 70);
+             AmountAliens = 5;
+             AmountTest = 5;
+            CCLabel Alien_count = new CCLabel(""+ AmountAliens, "Coalition", 70);
+            CCLabel Test = new CCLabel("" + AmountTest, "Coalition", 70);
             settings.Add(Alien_count);
             settings.Add(Test);
 
@@ -113,6 +117,8 @@ namespace ruigeruben
                     {
                         m_GameInfo.Aliens = int.Parse(settings[j].Text) - 1;
                         settings[j].Text = (int.Parse(settings[j].Text) - 1).ToString();
+                        AmountAliens--;
+                        AmountTest--;
                     }
                     if (int.Parse(settings[j].Text) < 10)
                     {
@@ -130,6 +136,8 @@ namespace ruigeruben
                     {
                         m_GameInfo.Aliens = int.Parse(settings[j].Text) + 1;
                         settings[j].Text = (int.Parse(settings[j].Text) + 1).ToString();
+                        AmountAliens++;
+                        AmountTest++;
                     }
                     if (int.Parse(settings[j].Text) >= 10)
                     {
