@@ -11,6 +11,7 @@ namespace ruigeruben
 {
     class PlayMenu : AbstractMenu
     {
+        int NumberOfPlayers;
         CCRect bounds;
         List<Button> m_Buttons;
         List<Button> playerbuttons;
@@ -146,19 +147,19 @@ namespace ruigeruben
             deleteplayerlabels();
             deleteplayerbuttons();
 
-            for (int i = 0; i < m_Players.Count; i++)
+            for (NumberOfPlayers = 0; NumberOfPlayers < m_Players.Count; NumberOfPlayers++)
             {
-                CCLabel playerlabel = new CCLabel(m_Players[i].Name, "Fonts/Coalition", 36, CCLabelFormat.SpriteFont);
-                playerlabel.Position = new CCPoint(164, m_StartPlayerNames - i * m_SpaceBetweenPlayerNames);
+                CCLabel playerlabel = new CCLabel(m_Players[NumberOfPlayers].Name, "Fonts/Coalition", 36, CCLabelFormat.SpriteFont);
+                playerlabel.Position = new CCPoint(164, m_StartPlayerNames - NumberOfPlayers* m_SpaceBetweenPlayerNames);
                 playerlabel.AnchorPoint = new CCPoint(0, 0);
                 playerlabels.Add(playerlabel);
                 AddChild(playerlabel);
-
-                Button DeletePlayer = new Button("X", new CCPoint(620, m_StartPlayerNames - i * m_SpaceBetweenPlayerNames), "Fonts/Coalition", 36, this, 1);
+                
+                Button DeletePlayer = new Button("X", new CCPoint(620, m_StartPlayerNames - NumberOfPlayers * m_SpaceBetweenPlayerNames), "Fonts/Coalition", 36, this, 1);
                 DeletePlayer.SetTextAnchorpoint(new CCPoint(0, 0));
                 DeletePlayer.SetTextColor(CCColor3B.Red);
 
-                int j = i;
+                int j = NumberOfPlayers;
                 DeletePlayer.OnClicked += delegate
                 {
                     m_Players.RemoveAt(m_Players.Count-1);
@@ -205,10 +206,13 @@ namespace ruigeruben
 
         private void OnPlayGame()
         {
-            m_GameInfo.Players = m_Players;
-            MainActivity.SwitchToMenu(SceneIds.Game, m_GameInfo);
+            if (NumberOfPlayers >= 2)
+            {
+                m_GameInfo.Players = m_Players;
+                MainActivity.SwitchToMenu(SceneIds.Game, m_GameInfo);
+            }    
         }
-       
+     
         public override void OnClick(CCPoint Location)
         {
             Location = ScreenToWorldspace(Location);

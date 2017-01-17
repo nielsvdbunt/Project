@@ -41,7 +41,7 @@ namespace ruigeruben
             Button SettingsButton = new Button("Settings", new CCPoint(bounds.Center.X, 300), Font, FontSize, this);
             SettingsButton.OnClicked += new ClickEventHandler(OnSettings);
             m_Buttons.Add(SettingsButton);
-            CCAudioEngine.SharedEngine.PlayBackgroundMusic(filename: "FruityFalls",loop: false);
+           // CCAudioEngine.SharedEngine.PlayBackgroundMusic(filename: "FruityFalls",loop: false);
             //  Button Test = new Button("Button", "Test", new CCPoint(bounds.Center.X, 800), Font, FontSize, this);
             // m_Buttons.Add(Test);
             //  Test.GetSprite().ScaleX *= 2;
