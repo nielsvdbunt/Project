@@ -43,7 +43,7 @@ namespace ruigeruben
         public void DrawRaster()
         {
             var bounds = VisibleBoundsWorldspace;
-            this.ContentSize = new CCSize(300, 300);
+        
             int HorLines = (int)bounds.Size.Width / 128;
             int VerLines = (int)bounds.Size.Height / 128;
 
