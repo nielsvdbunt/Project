@@ -84,7 +84,6 @@ namespace ruigeruben
                     currentcolor = playerlist[t].PlayerColor;
                     break;
                 }
-                else;
             }
 
             make_label(currentplayer, font, 36, 200, 100, currentcolor);
