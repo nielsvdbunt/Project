@@ -14,6 +14,7 @@ namespace ruigeruben
 
         public GameBase(GameScene Scene, InputGameInfo info)
         {
+            
             m_Scene = Scene;
             m_Board = new Board();
             m_Deck = new Deck(1);
@@ -22,7 +23,14 @@ namespace ruigeruben
 
         public GameBase()
         {
+
         }
+
+        public void Start()
+        {
+
+        }
+
         public void NextTurn()
         {
 
@@ -34,8 +42,6 @@ namespace ruigeruben
                 Checktiles(x + i, y);
                 Checktiles(x, y + i);
             }
-            
-
         }
 
         public void Checktiles(int x, int y)

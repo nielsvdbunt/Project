@@ -26,7 +26,7 @@ namespace ruigeruben
         public BoardLayer m_BoardLayer;
         public CardAttributeLayer m_CardAttrLayer;
         public Overlay m_Overlay;
-        public TexturePool m_TeturePool;
+        public TexturePool m_TexturePool;
 
         GameBase m_Game;
 
@@ -39,7 +39,7 @@ namespace ruigeruben
             this.AddLayer(m_CardAttrLayer = new CardAttributeLayer(), 2);
             this.AddLayer(m_Overlay = new Overlay(), 3);
 
-            m_TeturePool = new TexturePool();
+            m_TexturePool = new TexturePool();
 
 
             var touchListener = new CCEventListenerTouchAllAtOnce();
@@ -54,7 +54,7 @@ namespace ruigeruben
 
         public void StartGame()
         {
-
+            m_Game.Start();
         }
 
            void OnTouchesEnded(List<CCTouch> touches, CCEvent touchEvent)
