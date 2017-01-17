@@ -53,8 +53,29 @@ namespace ruigeruben
             string font = "Fonts/Coalition";
             CCColor3B label_color = CCColor3B.White;
 
-            //PlayMenu gamebase = new PlayMenu();
-            //List<Player> playerlist = gamebase.m_Players;
+            //PlayMenu playmenu = new PlayMenu();
+            //List<Player> playerlist = playmenu.m_Players;
+
+            //List<Player> playerlist = new List<Player>();
+            //playerlist[0].Name = "gotvet";
+            //playerlist[0].Turn = true;
+            //playerlist[0].Points = 30;
+            //playerlist[0].NumberOfAliens = 7;
+
+            //playerlist[1].Name = "Ruige Ruben";
+            //playerlist[1].Turn = false;
+            //playerlist[1].Points = -20;
+            //playerlist[1].NumberOfAliens = 4;
+
+            //playerlist[2].Name = "Bart";
+            //playerlist[2].Turn = false;
+            //playerlist[2].Points = 10;
+            //playerlist[2].NumberOfAliens = 8;
+
+            //playerlist.Add(playerlist[0]);
+            //playerlist.Add(playerlist[1]);
+            //playerlist.Add(playerlist[2]);
+
             //int t;
             //for (t = 0; t < playerlist.Count; t++)
             //{
@@ -64,7 +85,14 @@ namespace ruigeruben
             //        currentpoints = playerlist[t].Points.ToString();
             //        currentaliens = playerlist[t].NumberOfAliens.ToString();
             //    }
+            //    else;
             //}
+
+            make_label(currentplayer, font, 36, 200, 100, label_color);
+            make_label(currentpoints, font, 36, 650, 100, label_color);
+            make_label(currentaliens, font, 36, 900, 100, label_color);
+            make_label(currenttiles, font, 36, 1850, 240, label_color);
+
             //for (int z=0; z<(playerlist.Count-1);z++)
             //{
             //    if (t + 1 == playerlist.Count)
@@ -76,11 +104,6 @@ namespace ruigeruben
             //}
 
             Button example = new Button("example", "", new CCPoint(1050, 100), "Fonts/Coalition", 36, this);
-
-            make_label(currentplayer, font, 36, 200, 100, label_color);
-            make_label(currentpoints, font, 36, 650, 100, label_color);
-            make_label(currentaliens, font, 36, 900, 100, label_color);
-            make_label(currenttiles, font, 36, 1850, 240, label_color);
 
             //example.OnClicked+=
 
