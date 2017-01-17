@@ -92,9 +92,9 @@ namespace ruigeruben
                 GameScene gs = new GameScene(m_GameView, (InputGameInfo) o);       
                 m_GameView.Director.ReplaceScene(gs);
 
-                // Task.Run(() => gs.StartGame());
                 gs.StartGame();
-                return;
+
+                id = SceneIds.OpeningMenu;
             }
            
             m_InMenu = true;
