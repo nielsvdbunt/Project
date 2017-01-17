@@ -196,7 +196,7 @@ namespace ruigeruben
             InputPlayer player = new InputPlayer();
             string playername = "Player " + (m_Players.Count + 1);
             player.Name = playername;
-            player.Color = (PlayerColor) m_Players.Count;
+            player.Color = CCColor3B.Red;
             m_Players.Add(player);
             players();
             CCEventListenerKeyboard toetsenboord = new CCEventListenerKeyboard();

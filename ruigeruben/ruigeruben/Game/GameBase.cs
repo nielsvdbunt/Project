@@ -27,12 +27,21 @@ namespace ruigeruben
             m_Scene = Scene;
             m_Board = new Board();
             m_Deck = new Deck(1);
+            Start();
 
         }
 
         public void Start()
         {
-
+            Random r = new Random();
+            for (int n = m_Players.Count- 1; n > 0; --n)
+            {
+                int k = r.Next(n + 1);
+                Player temp = m_Players[n];
+                m_Players[n] = m_Players[k];
+                m_Players[k] = temp;
+            }
+            int y = 5;
         }
         public void NextTurn()
         {

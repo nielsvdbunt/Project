@@ -27,7 +27,7 @@ namespace ruigeruben
             Button rotateright = new Button("rotateright", "", new CCPoint(1300, 100), "Fonts/Coalition", 36, this);
             Button alien_button= new Button("alien", "", new CCPoint(1450, 100), "Fonts/Coalition", 36, this);
             Button next = new Button("next", new CCPoint(1750, 100), "Fonts/Coalition", 70, this);
-
+            
             //rotateleft.OnClicked+=
             //rotateleft.OnClicked+=
             //alien_button.OnClicked+=
@@ -73,6 +73,7 @@ namespace ruigeruben
             CCColor3B currentcolor = CCColor3B.White;
             CCColor3B label_color = CCColor3B.White;
 
+            this.Cleanup();
             int t;
             for (t = 0; t < playerlist.Count; t++) //for loop for creating the values for the currentplayer
             {
