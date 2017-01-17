@@ -33,37 +33,37 @@ namespace ruigeruben
             //alien_button.OnClicked+=
             //next.OnClicked+=
 
-            List<Player> playerlist = new List<Player>();
+            //List<Player> playerlist = new List<Player>();
 
-            Player player1 = new Player();
-            Player player2 = new Player();
-            Player player3 = new Player();
+            //Player player1 = new Player();
+            //Player player2 = new Player();
+            //Player player3 = new Player();
 
-            player1.Name = "gotvet";
-            player1.Turn = true;
-            player1.Points = 30;
-            player1.NumberOfAliens = 7;
-            player1.PlayerColor = CCColor3B.Red;
+            //player1.Name = "gotvet";
+            //player1.Turn = true;
+            //player1.Points = 30;
+            //player1.NumberOfAliens = 7;
+            //player1.PlayerColor = CCColor3B.Red;
 
-            player2.Name = "Ruben";
-            player2.Turn = false;
-            player2.Points = -20;
-            player2.NumberOfAliens = 4;
-            player2.PlayerColor = CCColor3B.Blue;
+            //player2.Name = "Ruben";
+            //player2.Turn = false;
+            //player2.Points = -20;
+            //player2.NumberOfAliens = 4;
+            //player2.PlayerColor = CCColor3B.Blue;
 
-            player3.Name = "Bart";
-            player3.Turn = false;
-            player3.Points = 10;
-            player3.NumberOfAliens = 8;
-            player3.PlayerColor = CCColor3B.Yellow;
+            //player3.Name = "Bart";
+            //player3.Turn = false;
+            //player3.Points = 10;
+            //player3.NumberOfAliens = 8;
+            //player3.PlayerColor = CCColor3B.Yellow;
 
-            playerlist.Add(player1);
-            playerlist.Add(player2);
-            playerlist.Add(player3);
+            //playerlist.Add(player1);
+            //playerlist.Add(player2);
+            //playerlist.Add(player3);
 
-            int numberoftiles = 123;
+            //int numberoftiles = 123;
 
-            update_interface(playerlist, numberoftiles);
+            //update_interface(playerlist, numberoftiles);
         }
         public void update_interface(List<Player> playerlist, int amountoftiles)// in this method the labels and button are made that need to update everytime a player has his turn
         {
