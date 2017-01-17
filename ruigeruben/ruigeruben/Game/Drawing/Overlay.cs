@@ -8,9 +8,9 @@ namespace ruigeruben
     class Overlay : AbstractMenu
     {
         string font = "Fonts/Coalition";
-        int r=0;
+        int gotvet=0;
 
-        public Overlay()
+        public Overlay() //Constructor method for creating the static part of the overlay
         {
             //here the overlay is put on the screen
             CCSprite overlay = new CCSprite("overlay");
@@ -74,7 +74,7 @@ namespace ruigeruben
             CCColor3B label_color = CCColor3B.White;
 
             int t;
-            for (t = 0; t < playerlist.Count; t++)
+            for (t = 0; t < playerlist.Count; t++) //for loop for creating the values for the currentplayer
             {
                 if (playerlist[t].Turn == true)
                 {
@@ -92,6 +92,7 @@ namespace ruigeruben
             make_label(currentaliens, font, 36, 900, 100, label_color);
             make_label(amountoftiles.ToString(), font, 36, 1850, 240, label_color);
 
+            //for loop which makes the players on the right who are next in line
             for (int z=0; z<(playerlist.Count-1);z++)
             {
                if (t + 1 == playerlist.Count)
@@ -118,20 +119,20 @@ namespace ruigeruben
             label.Color = color;
             AddChild(label);
         }
-        public void make_playerlabel(string name, string points, string aliens, CCColor3B color)
+        public void make_playerlabel(string name, string points, string aliens, CCColor3B color)//method for creating a playerlabel
         {
-            make_label(name, font, 20, 1800, 1050-r*100, color);
-            make_label(points, font, 20, 1800, 1000-r*100, color);
-            make_label(aliens, font, 20, 1900, 1000-r*100, color);
+            make_label(name, font, 20, 1800, 1050-gotvet*100, color);
+            make_label(points, font, 20, 1800, 1000-gotvet*100, color);
+            make_label(aliens, font, 20, 1900, 1000-gotvet*100, color);
             CCSprite smallalien = new CCSprite("alien");
             CCSprite smallcoin = new CCSprite("coin");
             smallalien.Scale = 0.25f;
             smallcoin.Scale = 0.25f;
-            smallalien.Position = new CCPoint(1750,1000-r*100);
-            smallcoin.Position = new CCPoint(1860, 1000-r*100);
+            smallalien.Position = new CCPoint(1750,1000-gotvet*100);
+            smallcoin.Position = new CCPoint(1860, 1000-gotvet*100);
             AddChild(smallalien);
             AddChild(smallcoin);
-            r++;
+            gotvet++;
         }
         public override void OnBack()
         {
