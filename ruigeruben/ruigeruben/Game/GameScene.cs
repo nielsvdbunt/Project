@@ -59,7 +59,7 @@ namespace ruigeruben
                 if (touches.Count > 0)
                 {
                     CCPoint location = touches[0].LocationOnScreen;
-
+                   
                     m_BoardLayer.t(location);
                 }
             }
