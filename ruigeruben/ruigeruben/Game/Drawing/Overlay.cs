@@ -8,6 +8,8 @@ namespace ruigeruben
     class Overlay : AbstractMenu
     {
         string font = "Fonts/Coalition";
+        GameBase g;
+        Deck m_Deck;
         List<Button> buttons = new List<Button>();
         List<CCLabel> labels = new List<CCLabel>();
 
@@ -27,8 +29,8 @@ namespace ruigeruben
             Button rotateleft = new Button("rotateleft","",new CCPoint(1200,100), font,36, this);
             Button rotateright = new Button("rotateright", "", new CCPoint(1300, 100), font, 36, this);
             Button alien_button= new Button("alien", "", new CCPoint(1450, 100), font, 36, this);
-            Button next = new Button("next", new CCPoint(1750, 100), font, 70, this);
-
+            Button next = new Button("Next", new CCPoint(1750, 100), font, 70, this);
+            
             buttons.Add(rotateleft);
             buttons.Add(rotateright);
             buttons.Add(alien_button);
@@ -37,9 +39,12 @@ namespace ruigeruben
             //rotateleft.OnClicked+=
             //rotateright.OnClicked+=
             //alien_button.OnClicked+=
+          //  next.OnClicked += new ClickEventHandler(OnNextPlayer);
             next.OnClicked += Scene.OnNextClick;
 
         }
+
+        
         public void update_interface(List<Player> playerlist, int amountoftiles) // in this method the labels and button are made that need to update everytime a player has his turn
         {
             string currentplayer="error";
@@ -54,16 +59,15 @@ namespace ruigeruben
                 RemoveChild(l);
             }
             labels.Clear();
-
-            int t;
-            for (t = 0; t < playerlist.Count; t++) //for loop for creating the values for the currentplayer
+            int t = 0;
+            foreach (Player s in playerlist) //for loop for creating the values for the currentplayer
             {
-                if (playerlist[t].Turn == true)
+                if (s.Turn)
                 {
-                    currentplayer = playerlist[t].Name;
-                    currentpoints = playerlist[t].Points.ToString();
-                    currentaliens = playerlist[t].NumberOfAliens.ToString();
-                    currentcolor = playerlist[t].PlayerColor;
+                    currentplayer = s.Name;
+                    currentpoints = s.Points.ToString();
+                    currentaliens = s.NumberOfAliens.ToString();
+                    currentcolor = s.PlayerColor;
                     break;
                 }
             }

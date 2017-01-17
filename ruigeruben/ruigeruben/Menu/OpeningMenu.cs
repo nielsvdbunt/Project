@@ -40,8 +40,8 @@ namespace ruigeruben
 
             Button SettingsButton = new Button("Settings", new CCPoint(bounds.Center.X, 300), Font, FontSize, this);
             SettingsButton.OnClicked += new ClickEventHandler(OnSettings);
-            m_Buttons.Add(SettingsButton);      
-
+            m_Buttons.Add(SettingsButton);
+            CCAudioEngine.SharedEngine.PlayBackgroundMusic(filename: "FruityFalls",loop: false);
             //  Button Test = new Button("Button", "Test", new CCPoint(bounds.Center.X, 800), Font, FontSize, this);
             // m_Buttons.Add(Test);
             //  Test.GetSprite().ScaleX *= 2;
@@ -61,15 +61,7 @@ namespace ruigeruben
             MainActivity.SwitchToMenu(SceneIds.HelpMenu, 0);
          } 
 
-        // OnHelp(0 steven 
-
-      /*  private void OnHelp()
-        {
-            var newScene = new HelpMenuTest(GameController.GameView);
-            GameController.GoToScene(newScene);
-        }
-        
-    */
+      
         private void OnSettings()
         {
             MainActivity.SwitchToMenu(SceneIds.SettingsMenu, 0);
