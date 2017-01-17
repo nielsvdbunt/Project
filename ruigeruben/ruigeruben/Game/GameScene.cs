@@ -55,6 +55,7 @@ namespace ruigeruben
         public void StartGame()
         {
             m_BoardLayer.DrawRaster();
+            m_Game.Start();
         }
 
            void OnTouchesEnded(List<CCTouch> touches, CCEvent touchEvent)
