@@ -36,8 +36,6 @@ namespace ruigeruben
             }
 
             m_Cards = new Stack<string>(deck);
-
-            int uu = 5;
         }
 
         Card GetNextCard()

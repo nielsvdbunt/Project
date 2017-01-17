@@ -7,12 +7,14 @@ namespace ruigeruben
 {
     class GameBase
     {
+        GameScene m_Scene;
         public List<Player> m_Players;
         Deck m_Deck;
         public Board m_Board;
 
-        public GameBase(InputGameInfo info)
+        public GameBase(GameScene Scene, InputGameInfo info)
         {
+            m_Scene = Scene;
             m_Board = new Board();
             m_Deck = new Deck(1);
 

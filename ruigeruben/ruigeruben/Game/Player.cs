@@ -31,9 +31,6 @@ namespace ruigeruben
         public int NumberOfAliens { get; set; } // aantal mannen in zijn hand
         public int OnField { get; set; }        // aantal mannen op het veld
         public CCColor3B PlayerColor { get; set;}   // kleur van mannen op veld en naam van speler
-      
-
-
     }
 
     

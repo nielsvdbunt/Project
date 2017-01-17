@@ -11,14 +11,10 @@ namespace ruigeruben
     class BoardLayer : CCLayer
     {
         float scale = 1;
-        Board m_board;
-        CCSprite spr2;
 
-        //http://stackoverflow.com/questions/31502314/how-to-zoom-with-two-fingers-on-imageview-in-android
-        public BoardLayer(Board b)
+        public BoardLayer()
         {
             this.AnchorPoint = new CCPoint(0, 0);
-            m_board = b;
         }
 
         public void AddPanda(int x, int y)
@@ -34,39 +30,48 @@ namespace ruigeruben
             AddChild(spr);
         }
 
-        public void t(CCPoint p)
+        public void Zoom(bool In)
         {
-
-
-            scale /= 2f;
-
-            CCPoint NewMiddlePoint = new CCPoint(p);
-            this.Position = NewMiddlePoint;
-            
-          /*  CCPoint old = new CCPoint(p.X * this.ScaleX, p.Y * this.ScaleY);
-
-            this.Scale = scale;
-
-            CCPoint New = new CCPoint(p.X * this.ScaleX, p.Y * this.ScaleY);
-
-            CCPoint delta = old - New;
-
-            this.Position += delta;
-            */
 
         }
 
-        public void AddBoard()
+        public void Move(bool Left)
         {
-            for(int t = 0; t < m_board.m_virCards.Count; t++)
+
+        }
+
+        public void DrawRaster()
+        {
+            var bounds = VisibleBoundsWorldspace;
+            this.ContentSize = new CCSize(300, 300);
+            int HorLines = (int)bounds.Size.Width / 128;
+            int VerLines = (int)bounds.Size.Height / 128;
+
+            for(int i = 0; i < HorLines; i++)
             {
-                AddCard(m_board.m_virCards[t], m_board.m_virLocations[t]);
+                var drawNode = new CCDrawNode();
+                this.AddChild(drawNode);
+                /*var shape = new CCPoint(bounds
+                drawNode.DrawLine()
+
+                drawNode.DrawRect(shape, fillColor: CCColor4B.Transparent,
+                    borderWidth: 4,
+                    borderColor: CCColor4B.White);
+                    */
+
             }
+
+
+           
         }
 
-        public void AddCard(Card card, Point point)
-        { //hier moet de kaart getekent worden en het punt omgezet worden naar pixels
-          //de middelste point in m_virLocation is 0,0 dus 1 plek naar links wordt -1,0 en 1 naar boven 0,1
+        public void DrawCard(string Card, Point point)
+        { 
+            
+        }
+
+        public void DrawShit()
+        {
 
         }
 
