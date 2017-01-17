@@ -9,34 +9,35 @@ namespace ruigeruben
     struct InputPlayer
     {
         public string Name;
-        public PlayerColor Color;
+        public CCColor3B Color;
     }
 
     struct InputGameInfo
     {
         public List<InputPlayer> Players;
         public int CardMultiplier;
+        public int Aliens;
 
     }
 
     class GameScene : CCScene
     {
         BackgroundLayer m_BackgroundLayer;
-        BoardLayer m_BoardLayer;
-        CardAttributeLayer m_CardAttrLayer;
-        Overlay m_Overlay;
-        TexturePool m_TeturePool;
+        public BoardLayer m_BoardLayer;
+        public CardAttributeLayer m_CardAttrLayer;
+        public Overlay m_Overlay;
+        public TexturePool m_TeturePool;
 
         GameBase m_Game;
 
         public GameScene(CCGameView View, InputGameInfo info) : base(View)
         {
-            m_Game = new GameBase(info);
+            m_Game = new GameBase(this, info);
 
             this.AddLayer(m_BackgroundLayer = new BackgroundLayer("achtergrond1"), 0);
-            this.AddLayer(m_BoardLayer = new BoardLayer(m_Game.m_Board), 1);
+            this.AddLayer(m_BoardLayer = new BoardLayer());
             this.AddLayer(m_CardAttrLayer = new CardAttributeLayer(), 2);
-            this.AddLayer(m_Overlay = new Overlay(), 3);
+            this.AddLayer(m_Overlay = new Overlay(this), 3);
 
             m_TeturePool = new TexturePool();
 
@@ -51,6 +52,12 @@ namespace ruigeruben
             //m_BoardLayer.AddPanda(0, 132);
         }
 
+        public void StartGame()
+        {
+            m_BoardLayer.DrawRaster();
+            m_Game.Start();
+        }
+
            void OnTouchesEnded(List<CCTouch> touches, CCEvent touchEvent)
         {
             foreach (CCTouch i in touches)
@@ -58,13 +65,13 @@ namespace ruigeruben
                 if (touches.Count > 0)
                 {
                     CCPoint location = touches[0].LocationOnScreen;
-
-                    m_BoardLayer.t(location);
+                   
+                    
                 }
             }
         }
         
-           void OnTouchesMoved(List<CCTouch> touches, CCEvent touchEvent)
+        void OnTouchesMoved(List<CCTouch> touches, CCEvent touchEvent)
         {
             foreach (CCTouch i in touches)
             {
@@ -73,9 +80,14 @@ namespace ruigeruben
                     float x = touches[0].LocationOnScreen.X;
                     float y = touches[0].LocationOnScreen.Y;
                     CCPoint location = new CCPoint((x - 500),(-y + 700));
-                    m_BoardLayer.t(location);
+                    m_BoardLayer.Position = location;
                 }
             }
+        }
+
+        public void OnNextClick()
+        {
+            m_Game.NextTurn();
         }
         
     }
