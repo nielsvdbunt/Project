@@ -43,7 +43,7 @@ namespace ruigeruben
             m_Players[0].Turn = true;
             m_Scene.m_Overlay.update_interface(m_Players, m_Deck.GetCardsLeft());
         }
-        public void NextTurn()
+            public void NextTurn()
         {
             for(int i=0; i<m_Players.Count; i++ )
             {
@@ -59,7 +59,7 @@ namespace ruigeruben
                 }
             }
             m_Scene.m_Overlay.update_interface(m_Players, m_Deck.GetCardsLeft());
-        }
+        } 
         public void Walktiles(int x, int y)
         {
             for (int i = -1; i <= 2; i += 2)
