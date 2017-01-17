@@ -31,13 +31,13 @@ namespace ruigeruben
         {
             scale /= 2f;
 
-            CCPoint old = new CCPoint(p.X * this.ScaleX, p.Y * this.ScaleY);
+            CCPoint old = new CCPoint(p.X * this.ScaleX, p.Y * this.ScaleY); // 20, 1 = 20
 
-            this.Scale = scale;
+            this.Scale = scale; // 0.5
 
-            CCPoint New = new CCPoint(p.X * this.ScaleX, p.Y * this.ScaleY);
+            CCPoint New = new CCPoint(p.X * this.ScaleX, p.Y * this.ScaleY);// 20, 0.5 = 10
 
-            CCPoint delta = old - New;
+            CCPoint delta = old - New; // 10
 
             this.Position += delta;
             
