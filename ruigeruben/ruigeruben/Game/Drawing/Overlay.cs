@@ -46,9 +46,9 @@ namespace ruigeruben
         }
         public void update_interface()// in this method the labels and button are made that need to update everytime a player has his turn
         {
-            string currentplayer="gotvet";
-            string currentpoints = "500";
-            string currentaliens="8";
+            string currentplayer="error";
+            string currentpoints = "error";
+            string currentaliens="error";
             string currenttiles = "123";
             string font = "Fonts/Coalition";
             CCColor3B label_color = CCColor3B.White;
@@ -56,37 +56,42 @@ namespace ruigeruben
             //PlayMenu playmenu = new PlayMenu();
             //List<Player> playerlist = playmenu.m_Players;
 
-            //List<Player> playerlist = new List<Player>();
-            //playerlist[0].Name = "gotvet";
-            //playerlist[0].Turn = true;
-            //playerlist[0].Points = 30;
-            //playerlist[0].NumberOfAliens = 7;
+            List<Player> playerlist = new List<Player>();
 
-            //playerlist[1].Name = "Ruige Ruben";
-            //playerlist[1].Turn = false;
-            //playerlist[1].Points = -20;
-            //playerlist[1].NumberOfAliens = 4;
+            Player player1 = new Player();
+            Player player2 = new Player();
+            Player player3 = new Player();
 
-            //playerlist[2].Name = "Bart";
-            //playerlist[2].Turn = false;
-            //playerlist[2].Points = 10;
-            //playerlist[2].NumberOfAliens = 8;
+            player1.Name = "gotvet";
+            player1.Turn = false;
+            player1.Points = 30;
+            player1.NumberOfAliens = 7;
 
-            //playerlist.Add(playerlist[0]);
-            //playerlist.Add(playerlist[1]);
-            //playerlist.Add(playerlist[2]);
+            player2.Name = "Ruige Ruben";
+            player2.Turn = true;
+            player2.Points = -20;
+            player2.NumberOfAliens = 4;
 
-            //int t;
-            //for (t = 0; t < playerlist.Count; t++)
-            //{
-            //    if (playerlist[t].Turn == true)
-            //    {
-            //        currentplayer = playerlist[t].Name;
-            //        currentpoints = playerlist[t].Points.ToString();
-            //        currentaliens = playerlist[t].NumberOfAliens.ToString();
-            //    }
-            //    else;
-            //}
+            player3.Name = "Bart";
+            player3.Turn = false;
+            player3.Points = 10;
+            player3.NumberOfAliens = 8;
+
+            playerlist.Add(player1);
+            playerlist.Add(player2);
+            playerlist.Add(player3);
+
+            int t;
+            for (t = 0; t < playerlist.Count; t++)
+            {
+                if (playerlist[t].Turn == true)
+                {
+                    currentplayer = playerlist[t].Name;
+                    currentpoints = playerlist[t].Points.ToString();
+                    currentaliens = playerlist[t].NumberOfAliens.ToString();
+                }
+                else;
+            }
 
             make_label(currentplayer, font, 36, 200, 100, label_color);
             make_label(currentpoints, font, 36, 650, 100, label_color);
@@ -97,15 +102,19 @@ namespace ruigeruben
             //{
             //    if (t + 1 == playerlist.Count)
             //        t = 0;
-            //    make_label(playerlist[t + 1].Name, font, 36, 1900, 1000, label_color);
-            //    make_label(playerlist[t + 1].Points.ToString(), font, 36, 1900, 1000, label_color);
-            //    make_label(playerlist[t + 1].NumberOfAliens.ToString(), font, 36, 1900, 1000, label_color);
+            //    make_label(playerlist[t + 1].Name, font, 36, 1900, 1000-(t*200), label_color);
+            //    make_label(playerlist[t + 1].Points.ToString(), font, 36, 1850, 900-(t*200), label_color);
+            //    make_label(playerlist[t + 1].NumberOfAliens.ToString(), font, 36, 1900, 900-(t*200), label_color);
             //    t++;
             //}
 
             Button example = new Button("example", "", new CCPoint(1050, 100), "Fonts/Coalition", 36, this);
 
             //example.OnClicked+=
+
+        }
+        public void playerlabel()
+        {
 
         }
         public override void OnBack()
