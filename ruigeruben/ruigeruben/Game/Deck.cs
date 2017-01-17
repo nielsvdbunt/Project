@@ -43,7 +43,7 @@ namespace ruigeruben
             return new Card(m_Cards.Pop());
         }
 
-        int GetCardsLeft()
+        public int GetCardsLeft()
         {
             return m_Cards.Count;
         }

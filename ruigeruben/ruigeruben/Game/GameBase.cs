@@ -27,7 +27,6 @@ namespace ruigeruben
             m_Scene = Scene;
             m_Board = new Board();
             m_Deck = new Deck(info.CardMultiplier);
-            Start();
 
         }
 
@@ -41,7 +40,8 @@ namespace ruigeruben
                 m_Players[n] = m_Players[k];
                 m_Players[k] = temp;
             }
-            m_Scene.m_Overlay.update_interface(m_Players, 120);
+            m_Players[0].Turn = true;
+            m_Scene.m_Overlay.update_interface(m_Players, m_Deck.GetCardsLeft());
         }
         public void NextTurn()
         {

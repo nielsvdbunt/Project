@@ -73,7 +73,7 @@ namespace ruigeruben
             CCColor3B currentcolor = CCColor3B.White;
             CCColor3B label_color = CCColor3B.White;
 
-            this.Cleanup();
+            //this.Cleanup();
             int t;
             for (t = 0; t < playerlist.Count; t++) //for loop for creating the values for the currentplayer
             {
