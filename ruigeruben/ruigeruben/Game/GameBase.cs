@@ -45,7 +45,20 @@ namespace ruigeruben
         }
         public void NextTurn()
         {
+            for(int i=0; i<m_Players.Count; i++ )
+            {
+                if (m_Players[i].Turn)
+                {
+                    m_Players[i].Turn = false;
 
+                    int j = 0;
+                    if (i != (m_Players.Count - 1))
+                        j = ++i;
+                    m_Players[j].Turn = true;
+                    break;
+                }
+            }
+            m_Scene.m_Overlay.update_interface(m_Players, m_Deck.GetCardsLeft());
         }
         public void Walktiles(int x, int y)
         {

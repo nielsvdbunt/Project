@@ -8,9 +8,10 @@ namespace ruigeruben
     class Overlay : AbstractMenu
     {
         string font = "Fonts/Coalition";
-        int gotvet=0;
+        List<Button> buttons = new List<Button>();
+        List<CCLabel> labels = new List<CCLabel>();
 
-        public Overlay() //Constructor method for creating the static part of the overlay
+        public Overlay(GameScene Scene) //Constructor method for creating the static part of the overlay
         {
             //here the overlay is put on the screen
             CCSprite overlay = new CCSprite("overlay");
@@ -23,57 +24,37 @@ namespace ruigeruben
             make_sprite("tiles", 1760, 250);
 
             //here buttons are made
-            Button rotateleft = new Button("rotateleft","",new CCPoint(1200,100), "Fonts/Coalition",36, this);
-            Button rotateright = new Button("rotateright", "", new CCPoint(1300, 100), "Fonts/Coalition", 36, this);
-            Button alien_button= new Button("alien", "", new CCPoint(1450, 100), "Fonts/Coalition", 36, this);
-            Button next = new Button("next", new CCPoint(1750, 100), "Fonts/Coalition", 70, this);
-            
+            Button rotateleft = new Button("rotateleft","",new CCPoint(1200,100), font,36, this);
+            Button rotateright = new Button("rotateright", "", new CCPoint(1300, 100), font, 36, this);
+            Button alien_button= new Button("alien", "", new CCPoint(1450, 100), font, 36, this);
+            Button next = new Button("next", new CCPoint(1750, 100), font, 70, this);
+
+            buttons.Add(rotateleft);
+            buttons.Add(rotateright);
+            buttons.Add(alien_button);
+            buttons.Add(next);
+
             //rotateleft.OnClicked+=
-            //rotateleft.OnClicked+=
+            //rotateright.OnClicked+=
             //alien_button.OnClicked+=
-            //next.OnClicked+=
+            next.OnClicked += Scene.OnNextClick;
 
-            //List<Player> playerlist = new List<Player>();
-
-            //Player player1 = new Player();
-            //Player player2 = new Player();
-            //Player player3 = new Player();
-
-            //player1.Name = "gotvet";
-            //player1.Turn = true;
-            //player1.Points = 30;
-            //player1.NumberOfAliens = 7;
-            //player1.PlayerColor = CCColor3B.Red;
-
-            //player2.Name = "Ruben";
-            //player2.Turn = false;
-            //player2.Points = -20;
-            //player2.NumberOfAliens = 4;
-            //player2.PlayerColor = CCColor3B.Blue;
-
-            //player3.Name = "Bart";
-            //player3.Turn = false;
-            //player3.Points = 10;
-            //player3.NumberOfAliens = 8;
-            //player3.PlayerColor = CCColor3B.Yellow;
-
-            //playerlist.Add(player1);
-            //playerlist.Add(player2);
-            //playerlist.Add(player3);
-
-            //int numberoftiles = 123;
-
-            //update_interface(playerlist, numberoftiles);
         }
         public void update_interface(List<Player> playerlist, int amountoftiles) // in this method the labels and button are made that need to update everytime a player has his turn
         {
             string currentplayer="error";
             string currentpoints = "error";
             string currentaliens="error";
+            int gotvet = 0;
             CCColor3B currentcolor = CCColor3B.White;
             CCColor3B label_color = CCColor3B.White;
 
-            //this.Cleanup();
+            foreach(CCLabel l in labels)
+            {
+                RemoveChild(l);
+            }
+            labels.Clear();
+
             int t;
             for (t = 0; t < playerlist.Count; t++) //for loop for creating the values for the currentplayer
             {
@@ -93,11 +74,22 @@ namespace ruigeruben
 
             //for loop which makes the players on the right who are next in line
             for (int z = 0; z < (playerlist.Count - 1); z++)
-                {
-                    if (t + 1 == playerlist.Count)
-                        t = -1;
-                    make_playerlabel(playerlist[t + 1].Name, playerlist[t + 1].Points.ToString(), playerlist[t + 1].NumberOfAliens.ToString(), playerlist[t + 1].PlayerColor);
-                    t++;
+            {
+                if (t + 1 == playerlist.Count)
+                    t = -1;
+                make_label(playerlist[t + 1].Name, font, 20, 1820, 1050 - gotvet * 100, playerlist[t+1].PlayerColor);
+                make_label(playerlist[t + 1].Points.ToString(), font, 20, 1800, 1000 - gotvet * 100, playerlist[t + 1].PlayerColor);
+                make_label(playerlist[t + 1].NumberOfAliens.ToString(), font, 20, 1900, 1000 - gotvet * 100, playerlist[t + 1].PlayerColor);
+                CCSprite smallalien = new CCSprite("alien");
+                CCSprite smallcoin = new CCSprite("coin");
+                smallalien.Scale = 0.25f;
+                smallcoin.Scale = 0.25f;
+                smallalien.Position = new CCPoint(1860, 1000 - gotvet * 100);
+                smallcoin.Position = new CCPoint(1750, 1000 - gotvet * 100);
+                AddChild(smallalien);
+                AddChild(smallcoin);
+                gotvet++;
+                t++;
                 }
 
             Button example = new Button("example", "", new CCPoint(1050, 100), "Fonts/Coalition", 36, this);
@@ -116,31 +108,23 @@ namespace ruigeruben
             CCLabel label = new CCLabel(text, font, textsize, CCLabelFormat.SpriteFont);
             label.Position = new CCPoint(x, y);
             label.Color = color;
+            labels.Add(label);
             AddChild(label);
-        }
-        public void make_playerlabel(string name, string points, string aliens, CCColor3B color)//method for creating a playerlabel
-        {
-            make_label(name, font, 20, 1820, 1050-gotvet*100, color);
-            make_label(points, font, 20, 1800, 1000-gotvet*100, color);
-            make_label(aliens, font, 20, 1900, 1000-gotvet*100, color);
-            CCSprite smallalien = new CCSprite("alien");
-            CCSprite smallcoin = new CCSprite("coin");
-            smallalien.Scale = 0.25f;
-            smallcoin.Scale = 0.25f;
-            smallalien.Position = new CCPoint(1860,1000-gotvet*100);
-            smallcoin.Position = new CCPoint(1750, 1000-gotvet*100);
-            AddChild(smallalien);
-            AddChild(smallcoin);
-            gotvet++;
         }
         public override void OnBack()
         {
             throw new NotImplementedException();
         }
 
-        public override void OnClick(CCPoint Location)//this method is empty because nothing is supposed to happen when you click on it
+        public override void OnClick(CCPoint Location)
         {
-            
+            Location = ScreenToWorldspace(Location);
+
+            foreach (Button b in buttons)
+            {
+                if (b.OnClickEvent(Location))
+                    return;
+            }
         }
     }
 }

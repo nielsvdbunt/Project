@@ -94,7 +94,7 @@ namespace ruigeruben
 
                 gs.StartGame();
 
-                id = SceneIds.OpeningMenu;
+                return;
             }
            
             m_InMenu = true;
