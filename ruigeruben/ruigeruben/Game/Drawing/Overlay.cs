@@ -59,15 +59,15 @@ namespace ruigeruben
                 RemoveChild(l);
             }
             labels.Clear();
-            int t = 0;
-            foreach (Player s in playerlist) //for loop for creating the values for the currentplayer
+            int t;
+            for (t = 0; t < playerlist.Count; t++) //for loop for creating the values for the currentplayer
             {
-                if (s.Turn)
+                if (playerlist[t].Turn == true)
                 {
-                    currentplayer = s.Name;
-                    currentpoints = s.Points.ToString();
-                    currentaliens = s.NumberOfAliens.ToString();
-                    currentcolor = s.PlayerColor;
+                    currentplayer = playerlist[t].Name;
+                    currentpoints = playerlist[t].Points.ToString();
+                    currentaliens = playerlist[t].NumberOfAliens.ToString();
+                    currentcolor = playerlist[t].PlayerColor;
                     break;
                 }
             }
