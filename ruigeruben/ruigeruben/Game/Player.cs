@@ -18,7 +18,7 @@ namespace ruigeruben
         Red,
         Blue,
         Green,
-        Black,
+        White,
         Yellow,
         Purple
     }
