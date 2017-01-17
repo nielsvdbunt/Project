@@ -7,21 +7,35 @@ namespace ruigeruben
 {
     class GameBase
     {
+        GameScene m_Scene;
         public List<Player> m_Players;
         Deck m_Deck;
         public Board m_Board;
 
-        public GameBase(InputGameInfo info)
+        public GameBase(GameScene Scene, InputGameInfo info)
         {
+            foreach(InputPlayer i in info.Players)
+            {
+                Player p = new Player();
+                p.Name = i.Name;
+                p.PlayerColor = i.Color;
+                m_Players.Add(p);
+            }
+
+            m_Scene = Scene;
             m_Board = new Board();
             m_Deck = new Deck(1);
 
         }
 
-        public GameBase()
+        public void Start()
         {
-        }
 
+        }
+        public void NextTurn()
+        {
+
+        }
         public void Walktiles(int x, int y)
         {
             for (int i = -1; i <= 2; i += 2)
