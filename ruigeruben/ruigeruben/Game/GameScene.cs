@@ -16,6 +16,7 @@ namespace ruigeruben
     {
         public List<InputPlayer> Players;
         public int CardMultiplier;
+        public int Aliens;
 
     }
 

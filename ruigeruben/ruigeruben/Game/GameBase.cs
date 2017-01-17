@@ -23,7 +23,10 @@ namespace ruigeruben
         public GameBase()
         {
         }
+        public void NextTurn()
+        {
 
+        }
         public void Walktiles(int x, int y)
         {
             for (int i = -1; i <= 2; i += 2)
