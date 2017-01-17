@@ -80,7 +80,7 @@ namespace ruigeruben
                     float x = touches[0].LocationOnScreen.X;
                     float y = touches[0].LocationOnScreen.Y;
                     CCPoint location = new CCPoint((x - 500),(-y + 700));
-                    
+                    m_BoardLayer.Position = location;
                 }
             }
         }
