@@ -32,7 +32,16 @@ namespace ruigeruben
 
         public void Start()
         {
-
+            Random r = new Random();
+            for (int n = m_Players.Count- 1; n > 0; --n)
+            {
+                int k = r.Next(n + 1);
+                Player temp = m_Players[n];
+                m_Players[n] = m_Players[k];
+                m_Players[k] = temp;
+            }
+            m_Players[0].Turn = true;
+            m_Scene.m_Overlay.update_interface(m_Players, m_Deck.GetCardsLeft());
         }
         public void NextTurn()
         {

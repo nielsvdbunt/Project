@@ -38,9 +38,14 @@ namespace ruigeruben
             m_Cards = new Stack<string>(deck);
         }
 
-        Card GetNextCard()
+        public Card GetNextCard()
         {
             return new Card(m_Cards.Pop());
+        }
+
+        public int GetCardsLeft()
+        {
+            return m_Cards.Count;
         }
 
 
