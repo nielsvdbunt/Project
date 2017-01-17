@@ -13,16 +13,6 @@ using CocosSharp;
 
 namespace ruigeruben
 {
-    enum PlayerColor
-    {
-        Red,
-        Blue,
-        Green,
-        White,
-        Yellow,
-        Purple
-    }
-
     class Player
     {
         public string Name { get; set; }        // naam van de speler 
