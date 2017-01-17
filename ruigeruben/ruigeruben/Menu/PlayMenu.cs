@@ -28,6 +28,7 @@ namespace ruigeruben
         {
             m_GameInfo = new InputGameInfo();
             m_GameInfo.CardMultiplier = 1;
+
       
             m_Buttons = new List<Button>();
             playerbuttons = new List<Button>();
@@ -109,7 +110,10 @@ namespace ruigeruben
                 minus.OnClicked += delegate
                 {
                     if (int.Parse(settings[j].Text) > 1)
+                    {
+                        m_GameInfo.Aliens = int.Parse(settings[j].Text) - 1;
                         settings[j].Text = (int.Parse(settings[j].Text) - 1).ToString();
+                    }
                     if (int.Parse(settings[j].Text) < 10)
                     {
                         minus.SetTextPossition(new CCPoint(1420, 880 - 150*(j)));
@@ -123,7 +127,10 @@ namespace ruigeruben
 
                 plus.OnClicked += delegate {
                     if (int.Parse(settings[j].Text) < 15)
+                    {
+                        m_GameInfo.Aliens = int.Parse(settings[j].Text) + 1;
                         settings[j].Text = (int.Parse(settings[j].Text) + 1).ToString();
+                    }
                     if (int.Parse(settings[j].Text) >= 10)
                     {
                         minus.SetTextPossition(new CCPoint(1400, 880 - 150*(j)));

@@ -18,7 +18,7 @@
     <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
     <AndroidStoreUncompressedFileExtensions />
     <MandroidI18n />
-    <TargetFrameworkVersion>v6.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.4</TargetFrameworkVersion>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -95,6 +95,7 @@
     <AndroidAsset Include="Assets\Content\Fonts\Prototype-28.xnb" />
     <AndroidAsset Include="Assets\Content\Fonts\Coalition-40.xnb" />
     <AndroidAsset Include="Assets\Content\Fonts\Coalition-60.xnb" />
+    <AndroidAsset Include="Assets\Content\Fonts\Coalition-20.xnb" />
     <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
