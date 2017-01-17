@@ -40,7 +40,7 @@ namespace ruigeruben
         protected override void AddedToScene()
         {
             base.AddedToScene();
-
+            
             bounds = VisibleBoundsWorldspace;
 
             // Om te testen? Echte graphics maken?
@@ -105,6 +105,7 @@ namespace ruigeruben
 
                 Button minus = new Button("-", new CCPoint(1420, bounds.MaxY - 200 - i * 150), "Coalition", 70, this);
                 minus.SetTextAnchorpoint(new CCPoint(0, 0));
+
                 minus.OnClicked += delegate
                 {
                     if (int.Parse(settings[j].Text) > 1)
@@ -119,6 +120,7 @@ namespace ruigeruben
 
                 Button plus = new Button("+", new CCPoint(1600, bounds.MaxY - 200 - i*150), "Coalition", 70, this);
                 plus.SetTextAnchorpoint(new CCPoint(0, 0));
+
                 plus.OnClicked += delegate {
                     if (int.Parse(settings[j].Text) < 15)
                         settings[j].Text = (int.Parse(settings[j].Text) + 1).ToString();
@@ -153,7 +155,7 @@ namespace ruigeruben
                 int j = i;
                 DeletePlayer.OnClicked += delegate
                 {
-                    m_Players.RemoveAt(j);
+                    m_Players.RemoveAt(m_Players.Count-1);
                     players();
                 };
                 playerbuttons.Add(DeletePlayer);
