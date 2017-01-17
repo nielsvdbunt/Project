@@ -65,7 +65,7 @@ namespace ruigeruben
 
             //update_interface(playerlist, numberoftiles);
         }
-        public void update_interface(List<Player> playerlist, int amountoftiles)// in this method the labels and button are made that need to update everytime a player has his turn
+        public void update_interface(List<Player> playerlist, int amountoftiles) // in this method the labels and button are made that need to update everytime a player has his turn
         {
             string currentplayer="error";
             string currentpoints = "error";
@@ -86,20 +86,19 @@ namespace ruigeruben
                     break;
                 }
             }
-
             make_label(currentplayer, font, 36, 200, 100, currentcolor);
             make_label(currentpoints, font, 36, 650, 100, label_color);
             make_label(currentaliens, font, 36, 900, 100, label_color);
             make_label(amountoftiles.ToString(), font, 36, 1850, 240, label_color);
 
             //for loop which makes the players on the right who are next in line
-            for (int z=0; z<(playerlist.Count-1);z++)
-            {
-               if (t + 1 == playerlist.Count)
-                   t = -1;
-                make_playerlabel(playerlist[t + 1].Name, playerlist[t + 1].Points.ToString(), playerlist[t + 1].NumberOfAliens.ToString(), playerlist[t+1].PlayerColor);
-                t++;
-            }
+            for (int z = 0; z < (playerlist.Count - 1); z++)
+                {
+                    if (t + 1 == playerlist.Count)
+                        t = -1;
+                    make_playerlabel(playerlist[t + 1].Name, playerlist[t + 1].Points.ToString(), playerlist[t + 1].NumberOfAliens.ToString(), playerlist[t + 1].PlayerColor);
+                    t++;
+                }
 
             Button example = new Button("example", "", new CCPoint(1050, 100), "Fonts/Coalition", 36, this);
 
@@ -121,15 +120,15 @@ namespace ruigeruben
         }
         public void make_playerlabel(string name, string points, string aliens, CCColor3B color)//method for creating a playerlabel
         {
-            make_label(name, font, 20, 1800, 1050-gotvet*100, color);
+            make_label(name, font, 20, 1820, 1050-gotvet*100, color);
             make_label(points, font, 20, 1800, 1000-gotvet*100, color);
             make_label(aliens, font, 20, 1900, 1000-gotvet*100, color);
             CCSprite smallalien = new CCSprite("alien");
             CCSprite smallcoin = new CCSprite("coin");
             smallalien.Scale = 0.25f;
             smallcoin.Scale = 0.25f;
-            smallalien.Position = new CCPoint(1750,1000-gotvet*100);
-            smallcoin.Position = new CCPoint(1860, 1000-gotvet*100);
+            smallalien.Position = new CCPoint(1860,1000-gotvet*100);
+            smallcoin.Position = new CCPoint(1750, 1000-gotvet*100);
             AddChild(smallalien);
             AddChild(smallcoin);
             gotvet++;
