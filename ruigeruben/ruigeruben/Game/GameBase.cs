@@ -27,8 +27,6 @@ namespace ruigeruben
             m_Scene = Scene;
             m_Board = new Board();
             m_Deck = new Deck(1);
-            Start();
-
         }
 
         public void Start()
