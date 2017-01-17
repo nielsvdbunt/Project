@@ -14,10 +14,9 @@ namespace ruigeruben
         CCRect bounds;
         List<Button> m_Buttons;
         List<Button> playerbuttons;
-        public List<Player> m_Players;
+        public List<InputPlayer> m_Players;
         List<CCLabel> playerlabels;
         
-
         Button m_BackMenuButton;
         float m_StartPlayerNames;
         const float m_SpaceBetweenPlayerNames = 150.0f;
@@ -32,7 +31,7 @@ namespace ruigeruben
       
             m_Buttons = new List<Button>();
             playerbuttons = new List<Button>();
-            m_Players = new List<Player>();
+            m_Players = new List<InputPlayer>();
             playerlabels = new List<CCLabel>();
             
             
@@ -194,9 +193,10 @@ namespace ruigeruben
        
         private void OnAddplayer()
         {
-            Player player = new Player();
+            InputPlayer player = new InputPlayer();
             string playername = "Player " + (m_Players.Count + 1);
             player.Name = playername;
+            player.Color = (PlayerColor) m_Players.Count;
             m_Players.Add(player);
             players();
             CCEventListenerKeyboard toetsenboord = new CCEventListenerKeyboard();
@@ -204,6 +204,7 @@ namespace ruigeruben
 
         private void OnPlayGame()
         {
+            m_GameInfo.Players = m_Players;
             MainActivity.SwitchToMenu(SceneIds.Game, m_GameInfo);
         }
        
