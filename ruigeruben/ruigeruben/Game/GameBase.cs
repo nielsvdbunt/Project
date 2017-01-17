@@ -14,6 +14,13 @@ namespace ruigeruben
 
         public GameBase(GameScene Scene, InputGameInfo info)
         {
+            foreach(InputPlayer i in info.Players)
+            {
+                Player p = new Player();
+                p.Name = i.Name;
+                p.PlayerColor = i.Color;
+            }
+
             m_Scene = Scene;
             m_Board = new Board();
             m_Deck = new Deck(1);

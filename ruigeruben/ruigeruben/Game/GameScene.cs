@@ -9,7 +9,7 @@ namespace ruigeruben
     struct InputPlayer
     {
         public string Name;
-        public PlayerColor Color;
+        public CCColor3B Color;
     }
 
     struct InputGameInfo
@@ -54,7 +54,7 @@ namespace ruigeruben
 
         public void StartGame()
         {
-
+            m_BoardLayer.DrawRaster();
         }
 
            void OnTouchesEnded(List<CCTouch> touches, CCEvent touchEvent)
