@@ -7,6 +7,9 @@ namespace ruigeruben
 {
     class Overlay : AbstractMenu
     {
+        string font = "Fonts/Coalition";
+        int r=0;
+
         public Overlay()
         {
             //here the overlay is put on the screen
@@ -49,8 +52,8 @@ namespace ruigeruben
             string currentplayer="error";
             string currentpoints = "error";
             string currentaliens="error";
-            string currenttiles = "123";
-            string font = "Fonts/Coalition";
+            CCColor3B currentcolor = CCColor3B.White;
+            string amountoftiles = "123";
             CCColor3B label_color = CCColor3B.White;
 
             //PlayMenu playmenu = new PlayMenu();
@@ -66,16 +69,19 @@ namespace ruigeruben
             player1.Turn = false;
             player1.Points = 30;
             player1.NumberOfAliens = 7;
+            player1.PlayerColor = CCColor3B.Red;
 
             player2.Name = "Ruige Ruben";
             player2.Turn = true;
             player2.Points = -20;
             player2.NumberOfAliens = 4;
+            player2.PlayerColor = CCColor3B.Blue;
 
             player3.Name = "Bart";
             player3.Turn = false;
             player3.Points = 10;
             player3.NumberOfAliens = 8;
+            player3.PlayerColor = CCColor3B.Yellow;
 
             playerlist.Add(player1);
             playerlist.Add(player2);
@@ -89,33 +95,36 @@ namespace ruigeruben
                     currentplayer = playerlist[t].Name;
                     currentpoints = playerlist[t].Points.ToString();
                     currentaliens = playerlist[t].NumberOfAliens.ToString();
+                    currentcolor = playerlist[t].PlayerColor;
+                    break;
                 }
                 else;
             }
 
-            make_label(currentplayer, font, 36, 200, 100, label_color);
+            make_label(currentplayer, font, 36, 200, 100, currentcolor);
             make_label(currentpoints, font, 36, 650, 100, label_color);
             make_label(currentaliens, font, 36, 900, 100, label_color);
-            make_label(currenttiles, font, 36, 1850, 240, label_color);
+            make_label(amountoftiles, font, 36, 1850, 240, label_color);
 
-            //for (int z=0; z<(playerlist.Count-1);z++)
-            //{
-            //    if (t + 1 == playerlist.Count)
-            //        t = 0;
-            //    make_label(playerlist[t + 1].Name, font, 36, 1900, 1000-(t*200), label_color);
-            //    make_label(playerlist[t + 1].Points.ToString(), font, 36, 1850, 900-(t*200), label_color);
-            //    make_label(playerlist[t + 1].NumberOfAliens.ToString(), font, 36, 1900, 900-(t*200), label_color);
-            //    t++;
-            //}
+            for (int z=0; z<(playerlist.Count-1);z++)
+            {
+               if (t + 1 == playerlist.Count)
+                   t = -1;
+                make_playerlabel(playerlist[t + 1].Name, playerlist[t + 1].Points.ToString(), playerlist[t + 1].NumberOfAliens.ToString(), playerlist[t+1].PlayerColor);
+                t++;
+            }
 
             Button example = new Button("example", "", new CCPoint(1050, 100), "Fonts/Coalition", 36, this);
 
             //example.OnClicked+=
 
         }
-        public void playerlabel()
+        public void make_playerlabel(string name, string points, string aliens, CCColor3B color)
         {
-
+            make_label(name, font, 20, 1800, 1000-r*200, color);
+            make_label(points, font, 20, 1750, 900-r*200, color);
+            make_label(aliens, font, 20, 1800, 900-r*200, color);
+            r++;
         }
         public override void OnBack()
         {

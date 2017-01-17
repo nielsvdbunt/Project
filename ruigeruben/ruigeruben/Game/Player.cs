@@ -9,6 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using CocosSharp;
 
 namespace ruigeruben
 {
@@ -29,7 +30,7 @@ namespace ruigeruben
         public bool Turn { get; set; }          // of de speler aan de beurt is 
         public int NumberOfAliens { get; set; } // aantal mannen in zijn hand
         public int OnField { get; set; }        // aantal mannen op het veld
-        public PlayerColor color { get; set;}
+        public CCColor3B PlayerColor { get; set;}   // kleur van mannen op veld en naam van speler
       
 
 
