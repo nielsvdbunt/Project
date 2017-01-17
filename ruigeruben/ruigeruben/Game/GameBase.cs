@@ -19,6 +19,7 @@ namespace ruigeruben
                 Player p = new Player();
                 p.Name = i.Name;
                 p.PlayerColor = i.Color;
+                m_Players.Add(p);
             }
 
             m_Scene = Scene;
@@ -27,8 +28,9 @@ namespace ruigeruben
 
         }
 
-        public GameBase()
+        public void Start()
         {
+
         }
         public void NextTurn()
         {
