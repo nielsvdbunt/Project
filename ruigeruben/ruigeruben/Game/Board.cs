@@ -8,21 +8,21 @@ namespace ruigeruben
     class Board
     {      
         public List<Card> m_virCards;
-        public List<Point> m_virLocations;
+        public List<CCPoint> m_virLocations;
 
         public List<Player> m_virAliens;
-        public List<Point> m_virAlienLocations;
+        public List<CCPoint> m_virAlienLocations;
 
         public Board()
         {
-            m_virLocations = new List<Point>();
+            m_virLocations = new List<CCPoint>();
             m_virCards = new List<Card>();
 
             m_virAliens = new List<Player>();
-            m_virAlienLocations = new List<Point>();
+            m_virAlienLocations = new List<CCPoint>();
         }
 
-        public void AddCard(Card card, Point point)
+        public void AddCard(Card card, CCPoint point)
         {
             m_virCards.Add(card);
             m_virLocations.Add(point);
@@ -32,7 +32,7 @@ namespace ruigeruben
         {
             int i;
             Card c;
-            Point location = new Point(x, y);
+            CCPoint location = new CCPoint(x, y);
             for (int t = 0; t < m_virLocations.Count; t++)
             {
                 if (m_virLocations[t] == location)
@@ -45,7 +45,7 @@ namespace ruigeruben
             return null;
         }
 
-        public void AddAlien(Player player, Point point)
+        public void AddAlien(Player player, CCPoint point)
         {
             m_virAliens.Add(player);
             m_virAlienLocations.Add(point);
@@ -53,7 +53,7 @@ namespace ruigeruben
 
         public void RemoveAlien(int x, int y)
         {
-            Point location = new Point(x, y);
+            CCPoint location = new CCPoint(x, y);
             for (int t = 0; t < m_virAlienLocations.Count; t++)
             {
                 if(m_virAlienLocations[t] == location)

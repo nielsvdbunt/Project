@@ -61,17 +61,12 @@ namespace ruigeruben
            
         }
 
-        public void DrawCard(string Card, Point point)
-        { 
-            
-        }
-
         public void DrawShit()
         {
 
         }
 
-        public Point toLocation(int x, int y) //from pixels to board location
+        public CCPoint toLocation(int x, int y) //from pixels to board location
         {
             var bounds = VisibleBoundsWorldspace;
 
@@ -81,11 +76,11 @@ namespace ruigeruben
             int diffx = (x - middenx) / tile;
             int diffy = (y - middeny) / tile;
 
-            Point p = new Point(diffx, diffy);
+            CCPoint p = new CCPoint(diffx, diffy);
             return p;
         }
 
-        public Point fromLocation(int x, int y) //from location to pixels
+        public CCPoint fromLocation(float x, float y) //from location to pixels
         {
             var bounds = VisibleBoundsWorldspace;
             int tile = 200;
@@ -93,8 +88,19 @@ namespace ruigeruben
             int middeny = Convert.ToInt32(bounds.Center.X) - (tile / 2);
             x = middenx + (x * tile);
             y = middeny + (y * tile);
-            Point p = new Point(x, y);
+            CCPoint p = new CCPoint(x, y);
             return p;
+        }
+
+        public void DrawCard(Card card, CCPoint point)
+        {
+            float x = point.X;
+            float y = point.Y;
+            CCPoint p = fromLocation(x, y);
+            CCSprite sprite = new CCSprite();
+            sprite.AnchorPoint = new CCPoint(0, 0);
+            sprite.Position = p;
+            AddChild(sprite);
         }
     }
     
