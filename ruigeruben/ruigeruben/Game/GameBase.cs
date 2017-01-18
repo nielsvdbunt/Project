@@ -16,7 +16,7 @@ namespace ruigeruben
         public GameBase(GameScene Scene, InputGameInfo info)
         {
             m_Players = new List<Player>();
-            m_GameInfo = new InputGameInfo();
+            m_GameInfo = info;
             foreach(InputPlayer i in info.Players)
             {
                 Player p = new Player();

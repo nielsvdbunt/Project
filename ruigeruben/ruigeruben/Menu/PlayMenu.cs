@@ -15,7 +15,7 @@ namespace ruigeruben
         CCRect bounds;
         List<Button> m_Buttons;
         List<Button> playerbuttons;
-        public List<InputPlayer> m_Players;
+        List<InputPlayer> m_Players;
         List<CCLabel> playerlabels;
        
         Button m_BackMenuButton;
@@ -113,9 +113,8 @@ namespace ruigeruben
                 {
                     if (int.Parse(settings[j].Text) > 1)
                     {
-                        m_GameInfo.Aliens = int.Parse(settings[j].Text) - 1;
                         settings[j].Text = (int.Parse(settings[j].Text) - 1).ToString();
-                       
+                        m_GameInfo.Aliens = int.Parse(settings[0].Text);
                     }
                     if (int.Parse(settings[j].Text) < 10)
                     {
@@ -131,9 +130,9 @@ namespace ruigeruben
                 plus.OnClicked += delegate {
                     if (int.Parse(settings[j].Text) < 15)
                     {
-                        m_GameInfo.Aliens = int.Parse(settings[j].Text) + 1;
                         settings[j].Text = (int.Parse(settings[j].Text) + 1).ToString();
-                       
+                        m_GameInfo.Aliens = int.Parse(settings[0].Text);
+
                     }
                     if (int.Parse(settings[j].Text) >= 10)
                     {
@@ -214,7 +213,8 @@ namespace ruigeruben
             {
                 m_GameInfo.Players = m_Players;
                 MainActivity.SwitchToMenu(SceneIds.Game, m_GameInfo);
-            }    
+            }
+            
         }
      
         public override void OnClick(CCPoint Location)

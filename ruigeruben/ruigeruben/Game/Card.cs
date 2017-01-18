@@ -68,6 +68,7 @@ namespace ruigeruben
 
         string m_Hash;
         CardAttributes[] m_Attributes = new CardAttributes[5];
+        int m_Rotation = 0;
 
         public Card(string Hash) 
         {
@@ -87,6 +88,30 @@ namespace ruigeruben
             return m_Attributes[Spot];
         }
 
-       
+        void Rotate(int Degrees)
+        {
+            CardAttributes[] Attr = m_Attributes;
+
+            for(int i = 0; i < 4; i++)
+            {
+                if(Degrees > 0)
+                {
+                    if (i == 3)
+                        m_Attributes[0] = m_Attributes[3];
+                    else
+                        m_Attributes[i + 1] = m_Attributes[i];
+                }
+                if(Degrees < 0)
+                {
+
+                }
+            }
+        }
+
+        int GetRotation()
+        {
+            return m_Rotation;
+        }
+
     }
 }

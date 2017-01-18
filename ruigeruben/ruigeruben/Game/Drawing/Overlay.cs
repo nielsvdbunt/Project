@@ -8,8 +8,6 @@ namespace ruigeruben
     class Overlay : AbstractMenu
     {
         string font = "Fonts/Coalition";
-        GameBase g;
-        Deck m_Deck;
         List<Button> buttons = new List<Button>();
         List<CCLabel> labels = new List<CCLabel>();
 
@@ -27,7 +25,8 @@ namespace ruigeruben
 
             //here buttons are made
             Button rotateleft = new Button("rotateleft","",new CCPoint(1200,100), font,36, this);
-            Button rotateright = new Button("rotateright", "", new CCPoint(1300, 100), font, 36, this);
+            Button rotateright = new Button("rotateleft", "", new CCPoint(1300, 100), font, 36, this);
+            rotateright.m_Sprite.FlipX = true;
             Button alien_button= new Button("alien", "", new CCPoint(1450, 100), font, 36, this);
             Button next = new Button("Next", new CCPoint(1750, 100), font, 70, this);
             
@@ -39,12 +38,11 @@ namespace ruigeruben
             //rotateleft.OnClicked+=
             //rotateright.OnClicked+=
             //alien_button.OnClicked+=
-          //  next.OnClicked += new ClickEventHandler(OnNextPlayer);
+            //next.OnClicked += new ClickEventHandler(OnNextPlayer);
             next.OnClicked += Scene.OnNextClick;
 
         }
 
-        
         public void update_interface(List<Player> playerlist, int amountoftiles) // in this method the labels and button are made that need to update everytime a player has his turn
         {
             string currentplayer="error";
@@ -59,6 +57,7 @@ namespace ruigeruben
                 RemoveChild(l);
             }
             labels.Clear();
+
             int t;
             for (t = 0; t < playerlist.Count; t++) //for loop for creating the values for the currentplayer
             {
@@ -71,19 +70,20 @@ namespace ruigeruben
                     break;
                 }
             }
+
             make_label(currentplayer, font, 36, 200, 100, currentcolor);
             make_label(currentpoints, font, 36, 650, 100, label_color);
             make_label(currentaliens, font, 36, 900, 100, label_color);
-            make_label(amountoftiles.ToString(), font, 36, 1850, 240, label_color);
+            make_label("X" + amountoftiles.ToString(), font, 36, 1850, 245, label_color);
 
-            //for loop which makes the players on the right who are next in line
-            for (int z = 0; z < (playerlist.Count - 1); z++)
+            for (int z = 0; z < (playerlist.Count - 1); z++) //for loop which makes the players on the right who are next in line
             {
                 if (t + 1 == playerlist.Count)
                     t = -1;
                 make_label(playerlist[t + 1].Name, font, 20, 1820, 1050 - gotvet * 100, playerlist[t+1].PlayerColor);
                 make_label(playerlist[t + 1].Points.ToString(), font, 20, 1800, 1000 - gotvet * 100, playerlist[t + 1].PlayerColor);
                 make_label(playerlist[t + 1].NumberOfAliens.ToString(), font, 20, 1900, 1000 - gotvet * 100, playerlist[t + 1].PlayerColor);
+
                 CCSprite smallalien = new CCSprite("alien");
                 CCSprite smallcoin = new CCSprite("coin");
                 smallalien.Scale = 0.25f;
@@ -92,6 +92,7 @@ namespace ruigeruben
                 smallcoin.Position = new CCPoint(1750, 1000 - gotvet * 100);
                 AddChild(smallalien);
                 AddChild(smallcoin);
+
                 gotvet++;
                 t++;
                 }
