@@ -15,15 +15,21 @@ namespace ruigeruben
         public BoardLayer()
         {
             this.AnchorPoint = new CCPoint(0, 0);
+            this.ContentSize = new CCSize(5000, 5000);
         }
 
         public void AddPanda(int x, int y)
         {
+            CCSpriteSheet sheet = new CCSpriteSheet("sheet.plist", "sheetimage.png");
+            CCSpriteFrame frame;
+            frame = sheet.Frames.Find(item => item.TextureFilename == "02220.png");
+            CCSprite satteliete = new CCSprite(frame);
             CCSprite spr = new CCSprite("Panda");
+            satteliete.Position = new CCPoint(500, 500);
             spr.PositionX = x;
             spr.PositionY = y;
- 
-            AddChild(spr);
+            AddChild(satteliete);
+           // AddChild(spr);
         }
 
         public void Zoom(bool In)
@@ -56,8 +62,6 @@ namespace ruigeruben
                     */
 
             }
-
-
            
         }
 

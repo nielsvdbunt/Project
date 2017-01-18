@@ -76,18 +76,18 @@ namespace ruigeruben
         
         void OnTouchesMoved(List<CCTouch> touches, CCEvent touchEvent)
         {
+            
             foreach (CCTouch i in touches)
             {
-                if (touches.Count > 0)
-                {
                     //var bounds = VisibleBoundsWorldspace;
 
-                    float x = touches[0].Location.X;
-                    float y = touches[0].Location.Y;
+                    float x = touches[0].LocationOnScreen.X;
+                    float y = touches[0].LocationOnScreen.Y;
+                    CCPoint location = m_BackgroundLayer.ScreenToWorldspace(touches[0].LocationOnScreen);
                     //CCPoint location = new CCPoint((x - bounds.Size.Width),(-y + bounds.Size.Height));
-                    CCPoint location = new CCPoint(x, y);
+                   // CCPoint location = new CCPoint(x, y);
                     m_BoardLayer.Position = location;
-                }
+                
             }
         }
 

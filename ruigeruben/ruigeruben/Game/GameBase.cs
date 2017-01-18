@@ -13,6 +13,8 @@ namespace ruigeruben
         Deck m_Deck;
         public Board m_Board;
         InputGameInfo m_GameInfo;
+        Card NextCard;
+        Board b;
         public GameBase(GameScene Scene, InputGameInfo info)
         {
             m_Players = new List<Player>();
@@ -60,6 +62,7 @@ namespace ruigeruben
                     break;
                 }
             }
+            NextCard = m_Deck.GetNextCard();
             m_Scene.m_Overlay.update_interface(m_Players, m_Deck.GetCardsLeft());
         } 
         public void Walktiles(int x, int y)
@@ -73,12 +76,19 @@ namespace ruigeruben
 
         }
 
-        public void Checktiles(int x, int y)
+        public bool Checktiles(int x, int y)
         {
-            Card CardInHand = m_Deck.GetNextCard(); // get card from stack
+            Card CardInHand = NextCard;
             Card c = m_Board.GetCard(x, y);
-            
-            
+            foreach (Card kaart in b.m_virCards)
+            {
+                if (true)
+                    return true;
+                else
+                    return false;
+            }
+
+            return false;
         }
 
     }
