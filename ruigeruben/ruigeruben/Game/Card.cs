@@ -90,7 +90,7 @@ namespace ruigeruben
         {
             CardAttributes[] Attr = new CardAttributes[5];
             m_Attributes.CopyTo(Attr, 0);
-            m_Rotation = Degrees;
+            m_Rotation += Degrees;
 
             for(int i = 0; i < 4; i++)
             {

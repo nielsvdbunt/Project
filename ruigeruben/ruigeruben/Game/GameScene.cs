@@ -17,6 +17,8 @@ namespace ruigeruben
         public List<InputPlayer> Players;
         public int CardMultiplier;
         public int Aliens;
+        public int CardsLeft;
+        
 
     }
 
@@ -29,6 +31,8 @@ namespace ruigeruben
         public TexturePool m_TeturePool;
 
         GameBase m_Game;
+
+        int m_Touches;
 
         Card test = new Card(Card.CardTypes[10]);
         
@@ -45,7 +49,8 @@ namespace ruigeruben
 
 
             var touchListener = new CCEventListenerTouchAllAtOnce();
-         //   touchListener.OnTouchesEnded = OnTouchesEnded;
+            touchListener.OnTouchesEnded = OnTouchesEnded;
+            touchListener.OnTouchesBegan = OnTouchesBegan;
             touchListener.OnTouchesMoved = OnTouchesMoved;
             AddEventListener(touchListener, this);
 
@@ -61,33 +66,62 @@ namespace ruigeruben
             m_Game.Start();
         }
 
-           void OnTouchesEnded(List<CCTouch> touches, CCEvent touchEvent)
+        public void OnTouchesBegan(List<CCTouch> touches, CCEvent touchEvent)
         {
-            foreach (CCTouch i in touches)
-            {
-                if (touches.Count > 0)
-                {
-                    CCPoint location = touches[0].LocationOnScreen;
-                   
-                    
-                }
-            }
+            m_Touches += touches.Count;
         }
-        
+
+        void OnTouchesEnded(List<CCTouch> touches, CCEvent touchEvent)
+        {
+            m_Touches -= touches.Count;
+
+            if (m_Touches < 0)
+                m_Touches = 0;
+        }
+        float scale = 1;
         void OnTouchesMoved(List<CCTouch> touches, CCEvent touchEvent)
         {
-            
-            foreach (CCTouch i in touches)
+            if (m_Touches == 1) // Pan
             {
-                    //var bounds = VisibleBoundsWorldspace;
+                foreach (CCTouch i in touches)
+                {
+                    var s = m_BoardLayer.Camera.CenterInWorldspace;
+                    s.X += i.PreviousLocationOnScreen.X - i.LocationOnScreen.X;//i.LocationOnScreen.X - i.PreviousLocationOnScreen.X;
+                    s.Y += i.LocationOnScreen.Y - i.PreviousLocationOnScreen.Y;
+                    m_BoardLayer.Camera.CenterInWorldspace = s;
 
-                    float x = touches[0].LocationOnScreen.X;
-                    float y = touches[0].LocationOnScreen.Y;
-                    CCPoint location = m_BackgroundLayer.ScreenToWorldspace(touches[0].LocationOnScreen);
-                    //CCPoint location = new CCPoint((x - bounds.Size.Width),(-y + bounds.Size.Height));
-                   // CCPoint location = new CCPoint(x, y);
-                    m_BoardLayer.Position = location;
-                
+                    var target = m_BoardLayer.Camera.TargetInWorldspace;
+                    target.X = s.X;
+                    target.Y = s.Y;
+                    m_BoardLayer.Camera.TargetInWorldspace = target;
+                }
+            }
+            else if(m_Touches == 2) // Zoom
+            {
+                if (touches.Count < 2)
+                    return;
+
+                for(int i = 0; i < touches.Count; i += 2)
+                {
+                    CCPoint fir = touches[i].LocationOnScreen;
+                    CCPoint sec = touches[i + 1].LocationOnScreen;
+                    
+                    CCPoint mid = m_BackgroundLayer.ConvertToWorldspace(fir - sec);
+
+                    scale += 0.10f;
+                    m_BoardLayer.Scale = scale;
+
+                    var s = m_BoardLayer.Camera.CenterInWorldspace;
+                    s.X = mid.X;//i.LocationOnScreen.X - i.PreviousLocationOnScreen.X;
+                    s.Y = mid.Y;
+                    m_BoardLayer.Camera.CenterInWorldspace = s;
+
+                    var target = m_BoardLayer.Camera.TargetInWorldspace;
+                    target.X = mid.X;
+                    target.Y = mid.Y;
+                    m_BoardLayer.Camera.TargetInWorldspace = target;
+
+                }           
             }
         }
 
