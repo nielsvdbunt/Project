@@ -71,7 +71,7 @@ namespace ruigeruben
 
         }
 
-        public Point toLocation(int x, int y)
+        public Point toLocation(int x, int y) //from pixels to board location
         {
             var bounds = VisibleBoundsWorldspace;
 
@@ -85,7 +85,7 @@ namespace ruigeruben
             return p;
         }
 
-        public Point fromLocation(int x, int y)
+        public Point fromLocation(int x, int y) //from location to pixels
         {
             var bounds = VisibleBoundsWorldspace;
             int tile = 200;
