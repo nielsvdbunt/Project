@@ -21,18 +21,20 @@ namespace ruigeruben
 
             //here sprites are made
             MakeSprite("coin", 500, 100);
-            MakeSprite("alien", 800, 100);
+            MakeSprite("alien", 770, 100);
             MakeSprite("tiles", 1760, 250);
 
-            MakeBox(1155, 55, 90, 90, 1);
-            MakeBox(1255, 55, 90, 90, 1);
+            MakeBox(1125, 55, 90, 90, 1);
+            MakeBox(1245, 55, 90, 90, 1);
+            MakeBox(1370, 5, 110 , 190, 2);
+            MakeBox(1510, 55, 375, 105, 2);
 
             //here buttons are made
-            Button rotateleft = new Button("rotateleft","",new CCPoint(1200,100), font, 36, this);
-            Button rotateright = new Button("rotateleft", "", new CCPoint(1300, 100), font, 36, this);
+            Button rotateleft = new Button("rotateleft","",new CCPoint(1170,100), font, 36, this);
+            Button rotateright = new Button("rotateleft", "", new CCPoint(1290, 100), font, 36, this);
             rotateright.m_Sprite.FlipX = true;
-            Button next = new Button("Next", new CCPoint(1750, 100), font, 70, this);
-            alien_button = new Button("alien1", "", new CCPoint(1450, 100), font, 36, this);
+            Button next = new Button("Next", new CCPoint(1700, 100), font, 70, this);
+            alien_button = new Button("alien1", "", new CCPoint(1420, 100), font, 36, this);
             buttons.Add(rotateleft);
             buttons.Add(rotateright);
             buttons.Add(next);
@@ -75,7 +77,7 @@ namespace ruigeruben
 
             MakeLabel(currentplayer, font, 36, 200, 100, currentcolor);
             MakeLabel(currentpoints, font, 36, 650, 100, label_color);
-            MakeLabel(currentaliens, font, 36, 900, 100, label_color);
+            MakeLabel(currentaliens, font, 36, 870, 100, label_color);
             MakeLabel("X" + amountoftiles.ToString(), font, 36, 1850, 245, label_color);
             alien_button.m_Sprite.Color = currentcolor;
 
@@ -100,7 +102,7 @@ namespace ruigeruben
                 t++;
                 }
 
-            Button example = new Button("example", "", new CCPoint(1050, 100), "Fonts/Coalition", 36, this);
+            Button example = new Button("example", "", new CCPoint(1020, 100), "Fonts/Coalition", 36, this);
             
             alien_button.m_Sprite.Color = currentcolor;
 
