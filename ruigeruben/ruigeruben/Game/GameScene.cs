@@ -30,6 +30,8 @@ namespace ruigeruben
 
         GameBase m_Game;
 
+        int m_Touches;
+
         Card test = new Card(Card.CardTypes[10]);
         
         public GameScene(CCGameView View, InputGameInfo info) : base(View)
@@ -45,7 +47,8 @@ namespace ruigeruben
 
 
             var touchListener = new CCEventListenerTouchAllAtOnce();
-         //   touchListener.OnTouchesEnded = OnTouchesEnded;
+            touchListener.OnTouchesEnded = OnTouchesEnded;
+            touchListener.OnTouchesBegan = OnTouchesBegan;
             touchListener.OnTouchesMoved = OnTouchesMoved;
             AddEventListener(touchListener, this);
 
@@ -61,26 +64,27 @@ namespace ruigeruben
             m_Game.Start();
         }
 
-           void OnTouchesEnded(List<CCTouch> touches, CCEvent touchEvent)
+        public void OnTouchesBegan(List<CCTouch> touches, CCEvent touchEvent)
         {
-            foreach (CCTouch i in touches)
-            {
-                if (touches.Count > 0)
-                {
-                    CCPoint location = touches[0].LocationOnScreen;
-                   
-                    
-                }
-            }
+            m_Touches += touches.Count;
         }
-        
+
+        void OnTouchesEnded(List<CCTouch> touches, CCEvent touchEvent)
+        {
+            m_Touches -= touches.Count;
+
+            if (m_Touches < 0)
+                m_Touches = 0;
+        }
+        float scale = 1;
         void OnTouchesMoved(List<CCTouch> touches, CCEvent touchEvent)
         {
-            foreach (CCTouch i in touches)
+            if (m_Touches == 1) // Pan
             {
-              
+                foreach (CCTouch i in touches)
+                {
                     var s = m_BoardLayer.Camera.CenterInWorldspace;
-                s.X += i.PreviousLocationOnScreen.X - i.LocationOnScreen.X;//i.LocationOnScreen.X - i.PreviousLocationOnScreen.X;
+                    s.X += i.PreviousLocationOnScreen.X - i.LocationOnScreen.X;//i.LocationOnScreen.X - i.PreviousLocationOnScreen.X;
                     s.Y += i.LocationOnScreen.Y - i.PreviousLocationOnScreen.Y;
                     m_BoardLayer.Camera.CenterInWorldspace = s;
 
@@ -88,9 +92,21 @@ namespace ruigeruben
                     target.X = s.X;
                     target.Y = s.Y;
                     m_BoardLayer.Camera.TargetInWorldspace = target;
-               
+                }
+            }
+            else if(m_Touches == 2) // Zoom
+            {
+                if (touches.Count < 2)
+                    return;
 
-              
+                for(int i = 0; i < touches.Count; i++)
+                {
+
+                    //CCPoint Location = i.LocationOnScreen;
+                    //Location = m_BoardLayer.ConvertToWorldspace(Location);
+                    scale += 0.10f;
+                    m_BoardLayer.Scale = scale;
+                }           
             }
         }
 
