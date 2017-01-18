@@ -83,18 +83,6 @@ namespace ruigeruben
             //Do nothing
         }
 
-    /*    void OnTouchesBegan(List<CCTouch> touches, CCEvent touchevent)
-        {
-            foreach (CCTouch i in touches)
-            {
-                if (touches.Count > 0)
-                {
-                    CCPoint location = touches[0].LocationOnScreen;
-                    OnClick(location);
-                    var rect = new CCDrawNode();
-                    rect.DrawRect(location, 100);
-                }
-            }
-        } */
+    
     }
 }
