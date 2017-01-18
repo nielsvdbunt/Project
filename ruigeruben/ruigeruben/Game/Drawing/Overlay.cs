@@ -25,7 +25,8 @@ namespace ruigeruben
 
             //here buttons are made
             Button rotateleft = new Button("rotateleft","",new CCPoint(1200,100), font,36, this);
-            Button rotateright = new Button("rotateright", "", new CCPoint(1300, 100), font, 36, this);
+            Button rotateright = new Button("rotateleft", "", new CCPoint(1300, 100), font, 36, this);
+            rotateright.m_Sprite.FlipX = true;
             Button alien_button= new Button("alien", "", new CCPoint(1450, 100), font, 36, this);
             Button next = new Button("Next", new CCPoint(1750, 100), font, 70, this);
             

@@ -15,7 +15,7 @@ namespace ruigeruben
         CCRect bounds;
         List<Button> m_Buttons;
         List<Button> playerbuttons;
-        public List<InputPlayer> m_Players;
+        List<InputPlayer> m_Players;
         List<CCLabel> playerlabels;
        
         Button m_BackMenuButton;
@@ -213,7 +213,8 @@ namespace ruigeruben
             {
                 m_GameInfo.Players = m_Players;
                 MainActivity.SwitchToMenu(SceneIds.Game, m_GameInfo);
-            }    
+            }
+            
         }
      
         public override void OnClick(CCPoint Location)
