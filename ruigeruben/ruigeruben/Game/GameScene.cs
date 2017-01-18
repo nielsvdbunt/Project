@@ -30,6 +30,8 @@ namespace ruigeruben
 
         GameBase m_Game;
 
+        Card test = new Card(Card.CardTypes[10]);
+        
         public GameScene(CCGameView View, InputGameInfo info) : base(View)
         {
             m_Game = new GameBase(this, info);
@@ -48,7 +50,7 @@ namespace ruigeruben
             AddEventListener(touchListener, this);
 
             m_BoardLayer.AddPanda(500, 500);
-          //  m_BoardLayer.AddPanda(-50, 32);
+            m_BoardLayer.AddPanda(-500, 500);
             //m_BoardLayer.AddPanda(0, 132);
         }
 
@@ -90,5 +92,19 @@ namespace ruigeruben
             m_Game.NextTurn();
         }
         
+        public void OnRotateLeft()
+        {
+            test.Rotate(-90);
+        }
+
+        public void OnRotateRight()
+        {
+            test.Rotate(90);
+        }
+
+        public void OnAlienClick()
+        {
+
+        }
     }
 }

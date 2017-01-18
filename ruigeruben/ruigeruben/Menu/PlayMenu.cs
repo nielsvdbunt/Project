@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using CocosSharp;
 using Microsoft.Xna.Framework;
 using Xamarin;
+using Xamarin.Android;
 using Android.Views.InputMethods;
 using static Android.OS.DropBoxManager;
 using Android.InputMethodServices;
@@ -28,8 +29,8 @@ namespace ruigeruben
         {
             m_GameInfo = new InputGameInfo();
             m_GameInfo.CardMultiplier = 1;
-
-      
+            m_GameInfo.Aliens = 5;
+            
             m_Buttons = new List<Button>();
             playerbuttons = new List<Button>();
             m_Players = new List<InputPlayer>();
@@ -81,7 +82,7 @@ namespace ruigeruben
             List<CCLabel> settings = new List<CCLabel>();
 
             CCLabel Alien_Setting,other_setting;
-            other_setting = new CCLabel("Test", "Coalition", 60);
+            other_setting = new CCLabel("Max. tiles", "Coalition", 60);
             Alien_Setting = new CCLabel("ALIENS","Coalition", 60, CCLabelFormat.SpriteFont);
             settinglabels.Add(Alien_Setting);
             settinglabels.Add(other_setting);
@@ -155,6 +156,7 @@ namespace ruigeruben
                 CCLabel playerlabel = new CCLabel(m_Players[NumberOfPlayers].Name, "Fonts/Coalition", 36, CCLabelFormat.SpriteFont);
                 playerlabel.Position = new CCPoint(164, m_StartPlayerNames - NumberOfPlayers* m_SpaceBetweenPlayerNames);
                 playerlabel.AnchorPoint = new CCPoint(0, 0);
+                playerlabel.Color = m_Players[NumberOfPlayers].Color;
                 playerlabels.Add(playerlabel);
                 AddChild(playerlabel);
                 
@@ -200,7 +202,7 @@ namespace ruigeruben
             InputPlayer player = new InputPlayer();
             string playername = "Player " + (m_Players.Count + 1);
             player.Name = playername;
-            CCColor3B[] Colors = { CCColor3B.Blue, CCColor3B.Red, CCColor3B.Green, CCColor3B.Orange, CCColor3B.White, CCColor3B.Yellow };
+            CCColor3B[] Colors = { new CCColor3B(0,191,255), CCColor3B.Red, CCColor3B.Green, CCColor3B.Magenta, new CCColor3B(200,200,200), CCColor3B.Yellow };
             player.Color =  Colors[m_Players.Count];
             m_Players.Add(player);
             players();
@@ -214,7 +216,10 @@ namespace ruigeruben
                 m_GameInfo.Players = m_Players;
                 MainActivity.SwitchToMenu(SceneIds.Game, m_GameInfo);
             }
-            
+            else
+            {
+                
+            }
         }
      
         public override void OnClick(CCPoint Location)

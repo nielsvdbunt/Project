@@ -10,6 +10,7 @@ namespace ruigeruben
         string font = "Fonts/Coalition";
         List<Button> buttons = new List<Button>();
         List<CCLabel> labels = new List<CCLabel>();
+        Button alien_button;
 
         public Overlay(GameScene Scene) //Constructor method for creating the static part of the overlay
         {
@@ -27,18 +28,16 @@ namespace ruigeruben
             Button rotateleft = new Button("rotateleft","",new CCPoint(1200,100), font,36, this);
             Button rotateright = new Button("rotateleft", "", new CCPoint(1300, 100), font, 36, this);
             rotateright.m_Sprite.FlipX = true;
-            Button alien_button= new Button("alien", "", new CCPoint(1450, 100), font, 36, this);
             Button next = new Button("Next", new CCPoint(1750, 100), font, 70, this);
-            
+            alien_button = new Button("alien1", "", new CCPoint(1450, 100), font, 36, this);
             buttons.Add(rotateleft);
             buttons.Add(rotateright);
-            buttons.Add(alien_button);
             buttons.Add(next);
+            buttons.Add(alien_button);
 
-            //rotateleft.OnClicked+=
-            //rotateright.OnClicked+=
-            //alien_button.OnClicked+=
-            //next.OnClicked += new ClickEventHandler(OnNextPlayer);
+            rotateleft.OnClicked += Scene.OnRotateLeft;
+            rotateright.OnClicked += Scene.OnRotateRight;
+            alien_button.OnClicked += Scene.OnAlienClick;
             next.OnClicked += Scene.OnNextClick;
 
         }
@@ -98,6 +97,8 @@ namespace ruigeruben
                 }
 
             Button example = new Button("example", "", new CCPoint(1050, 100), "Fonts/Coalition", 36, this);
+            
+            alien_button.m_Sprite.Color = currentcolor;
 
             //example.OnClicked+=
 
