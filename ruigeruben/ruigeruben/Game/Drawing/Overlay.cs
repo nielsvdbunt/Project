@@ -74,7 +74,7 @@ namespace ruigeruben
             make_label(currentplayer, font, 36, 200, 100, currentcolor);
             make_label(currentpoints, font, 36, 650, 100, label_color);
             make_label(currentaliens, font, 36, 900, 100, label_color);
-            make_label(amountoftiles.ToString(), font, 36, 1850, 240, label_color);
+            make_label("X" + amountoftiles.ToString(), font, 36, 1850, 245, label_color);
 
             //for loop which makes the players on the right who are next in line
             for (int z = 0; z < (playerlist.Count - 1); z++)
