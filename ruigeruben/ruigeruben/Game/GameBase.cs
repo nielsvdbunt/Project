@@ -8,6 +8,7 @@ namespace ruigeruben
     class GameBase
     {
         GameScene m_Scene;
+        PlayMenu SpeelMenu;
         public List<Player> m_Players;
         Deck m_Deck;
         public Board m_Board;
@@ -21,6 +22,7 @@ namespace ruigeruben
                 Player p = new Player();
                 p.Name = i.Name;
                 p.PlayerColor = i.Color;
+               // p.NumberOfAliens = SpeelMenu.AmountAliens; 
                 m_Players.Add(p);
             }
 
@@ -43,10 +45,23 @@ namespace ruigeruben
             m_Players[0].Turn = true;
             m_Scene.m_Overlay.update_interface(m_Players, m_Deck.GetCardsLeft());
         }
-        public void NextTurn()
+            public void NextTurn()
         {
+            for(int i=0; i<m_Players.Count; i++ )
+            {
+                if (m_Players[i].Turn)
+                {
+                    m_Players[i].Turn = false;
 
-        }
+                    int j = 0;
+                    if (i != (m_Players.Count - 1))
+                        j = ++i;
+                    m_Players[j].Turn = true;
+                    break;
+                }
+            }
+            m_Scene.m_Overlay.update_interface(m_Players, m_Deck.GetCardsLeft());
+        } 
         public void Walktiles(int x, int y)
         {
             for (int i = -1; i <= 2; i += 2)
