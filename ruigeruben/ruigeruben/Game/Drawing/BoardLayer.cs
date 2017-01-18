@@ -84,6 +84,15 @@ namespace ruigeruben
             Point p = new Point(diffx, diffy);
             return p;
         }
+
+        public Point fromLocation(int x, int y)
+        {
+            int tile = 200;
+            x = x * tile;
+            y = y * tile;
+            Point p = new Point(x, y);
+            return p
+        }
     }
     
 }
