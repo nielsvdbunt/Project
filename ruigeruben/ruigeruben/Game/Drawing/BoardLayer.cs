@@ -87,9 +87,12 @@ namespace ruigeruben
 
         public Point fromLocation(int x, int y)
         {
+            var bounds = VisibleBoundsWorldspace;
             int tile = 200;
-            x = x * tile;
-            y = y * tile;
+            int middenx = Convert.ToInt32(bounds.Center.X) - (tile / 2);
+            int middeny = Convert.ToInt32(bounds.Center.X) - (tile / 2);
+            x = middenx + (x * tile);
+            y = middeny + (y * tile);
             Point p = new Point(x, y);
             return p
         }
