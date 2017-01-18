@@ -51,6 +51,7 @@ namespace ruigeruben
 
             m_BoardLayer.AddPanda(500, 500);
             m_BoardLayer.AddPanda(-500, 500);
+            m_BoardLayer.AddPanda(2000, 500);
             //m_BoardLayer.AddPanda(0, 132);
         }
 
@@ -79,9 +80,12 @@ namespace ruigeruben
             {
                 if (touches.Count > 0)
                 {
-                    float x = touches[0].LocationOnScreen.X;
-                    float y = touches[0].LocationOnScreen.Y;
-                    CCPoint location = new CCPoint((x - 500),(-y + 700));
+                    //var bounds = VisibleBoundsWorldspace;
+
+                    float x = touches[0].Location.X;
+                    float y = touches[0].Location.Y;
+                    //CCPoint location = new CCPoint((x - bounds.Size.Width),(-y + bounds.Size.Height));
+                    CCPoint location = new CCPoint(x, y);
                     m_BoardLayer.Position = location;
                 }
             }
