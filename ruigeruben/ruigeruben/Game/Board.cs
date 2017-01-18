@@ -10,6 +10,9 @@ namespace ruigeruben
         public List<Card> m_virCards;
         public List<Point> m_virLocations;
 
+        public List<Player> m_virAliens;
+        public List<Point> m_virAlienLocations;
+
         public Board()
         {
             m_virLocations = new List<Point>();
@@ -37,6 +40,25 @@ namespace ruigeruben
                 }
             }
             return null;
+        }
+
+        public void AddAlien(Player player, Point point)
+        {
+            m_virAliens.Add(player);
+            m_virAlienLocations.Add(point);
+        }
+
+        public void RemoveAlien(int x, int y)
+        {
+            Point location = new Point(x, y);
+            for (int t = 0; t < m_virAlienLocations.Count; t++)
+            {
+                if(m_virAlienLocations[t] == location)
+                {
+                    m_virAliens.RemoveAt(t);
+                    m_virAlienLocations.RemoveAt(t);
+                }
+            }
         }
     }
 }
