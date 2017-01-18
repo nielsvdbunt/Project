@@ -71,6 +71,31 @@ namespace ruigeruben
 
         }
 
+        public Point toLocation(int x, int y) //from pixels to board location
+        {
+            var bounds = VisibleBoundsWorldspace;
+
+            int tile = 200;
+            int middenx = Convert.ToInt32(bounds.Center.X) - (tile / 2);
+            int middeny = Convert.ToInt32(bounds.Center.Y) - (tile / 2);
+            int diffx = (x - middenx) / tile;
+            int diffy = (y - middeny) / tile;
+
+            Point p = new Point(diffx, diffy);
+            return p;
+        }
+
+        public Point fromLocation(int x, int y) //from location to pixels
+        {
+            var bounds = VisibleBoundsWorldspace;
+            int tile = 200;
+            int middenx = Convert.ToInt32(bounds.Center.X) - (tile / 2);
+            int middeny = Convert.ToInt32(bounds.Center.X) - (tile / 2);
+            x = middenx + (x * tile);
+            y = middeny + (y * tile);
+            Point p = new Point(x, y);
+            return p;
+        }
     }
     
 }

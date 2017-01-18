@@ -20,12 +20,15 @@ namespace ruigeruben
             AddChild(overlay);
 
             //here sprites are made
-            make_sprite("coin", 500, 100);
-            make_sprite("alien", 800, 100);
-            make_sprite("tiles", 1760, 250);
+            MakeSprite("coin", 500, 100);
+            MakeSprite("alien", 800, 100);
+            MakeSprite("tiles", 1760, 250);
+
+            MakeBox(1155, 55, 90, 90, 1);
+            MakeBox(1255, 55, 90, 90, 1);
 
             //here buttons are made
-            Button rotateleft = new Button("rotateleft","",new CCPoint(1200,100), font,36, this);
+            Button rotateleft = new Button("rotateleft","",new CCPoint(1200,100), font, 36, this);
             Button rotateright = new Button("rotateleft", "", new CCPoint(1300, 100), font, 36, this);
             rotateright.m_Sprite.FlipX = true;
             Button next = new Button("Next", new CCPoint(1750, 100), font, 70, this);
@@ -70,19 +73,19 @@ namespace ruigeruben
                 }
             }
 
-            make_label(currentplayer, font, 36, 200, 100, currentcolor);
-            make_label(currentpoints, font, 36, 650, 100, label_color);
-            make_label(currentaliens, font, 36, 900, 100, label_color);
-            make_label("X" + amountoftiles.ToString(), font, 36, 1850, 245, label_color);
+            MakeLabel(currentplayer, font, 36, 200, 100, currentcolor);
+            MakeLabel(currentpoints, font, 36, 650, 100, label_color);
+            MakeLabel(currentaliens, font, 36, 900, 100, label_color);
+            MakeLabel("X" + amountoftiles.ToString(), font, 36, 1850, 245, label_color);
             alien_button.m_Sprite.Color = currentcolor;
 
             for (int z = 0; z < (playerlist.Count - 1); z++) //for loop which makes the players on the right who are next in line
             {
                 if (t + 1 == playerlist.Count)
                     t = -1;
-                make_label(playerlist[t + 1].Name, font, 20, 1820, 1050 - gotvet * 100, playerlist[t+1].PlayerColor);
-                make_label(playerlist[t + 1].Points.ToString(), font, 20, 1800, 1000 - gotvet * 100, playerlist[t + 1].PlayerColor);
-                make_label(playerlist[t + 1].NumberOfAliens.ToString(), font, 20, 1900, 1000 - gotvet * 100, playerlist[t + 1].PlayerColor);
+                MakeLabel(playerlist[t + 1].Name, font, 20, 1820, 1050 - gotvet * 100, playerlist[t+1].PlayerColor);
+                MakeLabel(playerlist[t + 1].Points.ToString(), font, 20, 1800, 1000 - gotvet * 100, playerlist[t + 1].PlayerColor);
+                MakeLabel(playerlist[t + 1].NumberOfAliens.ToString(), font, 20, 1900, 1000 - gotvet * 100, playerlist[t + 1].PlayerColor);
 
                 CCSprite smallalien = new CCSprite("alien");
                 CCSprite smallcoin = new CCSprite("coin");
@@ -104,19 +107,27 @@ namespace ruigeruben
             //example.OnClicked+=
 
         }
-        public void make_sprite(string name, int x, int y)//this method is for creating sprites
+        private void MakeSprite(string name, int x, int y)//this method is for creating sprites
         {
             CCSprite sprite = new CCSprite(name);
             sprite.Position = new CCPoint(x, y);
             AddChild(sprite);
         }
-        public void make_label(string text, string font, int textsize, int x, int y, CCColor3B color)//method for creating simple labels
+        private void MakeLabel(string text, string font, int textsize, int x, int y, CCColor3B color)//method for creating simple labels
         {
             CCLabel label = new CCLabel(text, font, textsize, CCLabelFormat.SpriteFont);
             label.Position = new CCPoint(x, y);
             label.Color = color;
             labels.Add(label);
             AddChild(label);
+        }
+        private void MakeBox(int xpos, int ypos, int width, int height, int thickness)
+        {
+
+            var drawNode = new CCDrawNode();
+            var rect = new CCRect(xpos, ypos, width, height);
+            drawNode.DrawRect(rect, fillColor: CCColor4B.Transparent, borderWidth: thickness, borderColor: CCColor4B.White);
+            AddChild(drawNode);
         }
         public override void OnBack()
         {
