@@ -17,6 +17,9 @@ namespace ruigeruben
         {
             m_virLocations = new List<Point>();
             m_virCards = new List<Card>();
+
+            m_virAliens = new List<Player>();
+            m_virAlienLocations = new List<Point>();
         }
 
         public void AddCard(Card card, Point point)
