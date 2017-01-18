@@ -34,6 +34,22 @@ namespace ruigeruben
             m_TexTOnly = true;
         }
 
+        public Button(string ImageName, string Text, CCPoint Possition, string Font, int FontSize, CCLayer Layer, int tag)
+        {
+            m_Sprite = new CCSprite(ImageName);
+            m_Sprite.Position = Possition;
+            Layer.AddChild(m_Sprite);
+
+            m_Label = new CCLabel(Text, Font, FontSize, CCLabelFormat.SpriteFont);
+            m_Label.Position = Possition;
+            Layer.AddChild(m_Label, 1);
+
+            m_TexTOnly = false;
+
+            m_Label.Tag = tag;
+            m_Sprite.Tag = tag;
+        }
+
         public Button(string ImageName, string Text, CCPoint Possition, string Font, int FontSize, CCLayer Layer)
         {
             m_Sprite = new CCSprite(ImageName);
