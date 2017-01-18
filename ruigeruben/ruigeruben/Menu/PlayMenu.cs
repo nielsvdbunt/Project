@@ -35,7 +35,9 @@ namespace ruigeruben
             playerbuttons = new List<Button>();
             m_Players = new List<InputPlayer>();
             playerlabels = new List<CCLabel>();
-            
+
+            OnAddplayer();
+            OnAddplayer();
             
         }
 
@@ -223,7 +225,7 @@ namespace ruigeruben
                 Error.PositionY = bounds.MinY +60;
                 Error.Color = CCColor3B.Red;
                 AddChild(Error);
-                Error.RunActions(new CCDelayTime(2), new CCFadeOut(1));
+                Error.RunActions(new CCDelayTime(2), new CCFadeOut(3));
             }
         }
      
