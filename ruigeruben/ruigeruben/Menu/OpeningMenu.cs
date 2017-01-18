@@ -24,7 +24,7 @@ namespace ruigeruben
 
             CCRect bounds = VisibleBoundsWorldspace;
 
-            CCLabel Titel = new CCLabel("SPACESONNE", "Fonts/Coalition", 100, CCLabelFormat.SpriteFont);
+            CCLabel Titel = new CCLabel("ARCTURUS", "Fonts/Coalition", 100, CCLabelFormat.SpriteFont);
             Titel.Position = new CCPoint(bounds.Center.X, 950);
             AddChild(Titel);
 
@@ -83,18 +83,6 @@ namespace ruigeruben
             //Do nothing
         }
 
-    /*    void OnTouchesBegan(List<CCTouch> touches, CCEvent touchevent)
-        {
-            foreach (CCTouch i in touches)
-            {
-                if (touches.Count > 0)
-                {
-                    CCPoint location = touches[0].LocationOnScreen;
-                    OnClick(location);
-                    var rect = new CCDrawNode();
-                    rect.DrawRect(location, 100);
-                }
-            }
-        } */
+    
     }
 }
