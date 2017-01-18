@@ -17,8 +17,7 @@ namespace ruigeruben
         List<Button> playerbuttons;
         public List<InputPlayer> m_Players;
         List<CCLabel> playerlabels;
-        public  int AmountAliens;
-        public int AmountTest;
+       
         Button m_BackMenuButton;
         float m_StartPlayerNames;
         const float m_SpaceBetweenPlayerNames = 150.0f;
@@ -94,10 +93,9 @@ namespace ruigeruben
                 settinglabels[i].Position = new CCPoint(750, bounds.MaxY - 200 - i*150);
                 AddChild(settinglabels[i]);
             }
-             AmountAliens = 5;
-             AmountTest = 5;
-            CCLabel Alien_count = new CCLabel(""+ AmountAliens, "Coalition", 70);
-            CCLabel Test = new CCLabel("" + AmountTest, "Coalition", 70);
+            
+            CCLabel Alien_count = new CCLabel("5", "Coalition", 70);
+            CCLabel Test = new CCLabel("5" , "Coalition", 70);
             settings.Add(Alien_count);
             settings.Add(Test);
 
@@ -117,8 +115,7 @@ namespace ruigeruben
                     {
                         m_GameInfo.Aliens = int.Parse(settings[j].Text) - 1;
                         settings[j].Text = (int.Parse(settings[j].Text) - 1).ToString();
-                        AmountAliens--;
-                        AmountTest--;
+                       
                     }
                     if (int.Parse(settings[j].Text) < 10)
                     {
@@ -136,8 +133,7 @@ namespace ruigeruben
                     {
                         m_GameInfo.Aliens = int.Parse(settings[j].Text) + 1;
                         settings[j].Text = (int.Parse(settings[j].Text) + 1).ToString();
-                        AmountAliens++;
-                        AmountTest++;
+                       
                     }
                     if (int.Parse(settings[j].Text) >= 10)
                     {
@@ -209,7 +205,7 @@ namespace ruigeruben
             player.Color =  Colors[m_Players.Count];
             m_Players.Add(player);
             players();
-            CCEventListenerKeyboard toetsenboord = new CCEventListenerKeyboard();
+            
         }
 
         private void OnPlayGame()

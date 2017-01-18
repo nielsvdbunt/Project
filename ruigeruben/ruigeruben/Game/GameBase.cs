@@ -12,17 +12,17 @@ namespace ruigeruben
         public List<Player> m_Players;
         Deck m_Deck;
         public Board m_Board;
-
+        InputGameInfo m_GameInfo;
         public GameBase(GameScene Scene, InputGameInfo info)
         {
             m_Players = new List<Player>();
-
+            m_GameInfo = new InputGameInfo();
             foreach(InputPlayer i in info.Players)
             {
                 Player p = new Player();
                 p.Name = i.Name;
                 p.PlayerColor = i.Color;
-               // p.NumberOfAliens = SpeelMenu.AmountAliens; 
+                p.NumberOfAliens = m_GameInfo.Aliens; 
                 m_Players.Add(p);
             }
 
