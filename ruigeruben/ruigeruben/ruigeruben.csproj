@@ -143,9 +143,6 @@
     <AndroidAsset Include="Assets\Content\Images\rotateleft.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\Content\Images\rotateright.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidAsset Include="Assets\Content\Images\tiles.png" />
   </ItemGroup>
   <ItemGroup>

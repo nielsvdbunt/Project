@@ -75,8 +75,9 @@ namespace ruigeruben
 
         public void Checktiles(int x, int y)
         {
-            Card CardInHand = new Card("yolo2");
+            Card CardInHand = m_Deck.GetNextCard(); // get card from stack
             Card c = m_Board.GetCard(x, y);
+            
             
         }
 

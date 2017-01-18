@@ -41,7 +41,6 @@ namespace ruigeruben
 
         }
 
-        
         public void update_interface(List<Player> playerlist, int amountoftiles) // in this method the labels and button are made that need to update everytime a player has his turn
         {
             RemoveAllChildrenByTag(1);
@@ -70,13 +69,13 @@ namespace ruigeruben
                     break;
                 }
             }
+
             make_label(currentplayer, font, 36, 200, 100, currentcolor);
             make_label(currentpoints, font, 36, 650, 100, label_color);
             make_label(currentaliens, font, 36, 900, 100, label_color);
             make_label("X" + amountoftiles.ToString(), font, 36, 1850, 245, label_color);
 
-            //for loop which makes the players on the right who are next in line
-            for (int z = 0; z < (playerlist.Count - 1); z++)
+            for (int z = 0; z < (playerlist.Count - 1); z++) //for loop which makes the players on the right who are next in line
             {
                 if (t + 1 == playerlist.Count)
                     t = -1;

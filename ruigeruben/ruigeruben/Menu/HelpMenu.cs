@@ -61,9 +61,7 @@ namespace ruigeruben
             TitelHelp.Position = new CCPoint(bounds.Center.X, 950);
             AddChild(TitelHelp);
             FillArray();
-          //  CreateText(PageCounter);
-
-
+          
         }
         // er moeten nog sprites aan toegevoegd worden 
         public void FillArray()
@@ -203,8 +201,12 @@ namespace ruigeruben
                     labels.Add(EndofHalp);
                     break;
                 default:
-                    OnBackMenu();
+                    deletelabels();
+                    labels.Clear();
+                    PageCounter = 1;
+                    MainActivity.SwitchToMenu(SceneIds.OpeningMenu, 0);
                     break;
+                    
             }
             paintlabels();
         }
