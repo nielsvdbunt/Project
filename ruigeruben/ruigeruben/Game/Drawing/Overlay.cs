@@ -8,8 +8,6 @@ namespace ruigeruben
     class Overlay : AbstractMenu
     {
         string font = "Fonts/Coalition";
-        GameBase g;
-        Deck m_Deck;
         List<Button> buttons = new List<Button>();
         List<CCLabel> labels = new List<CCLabel>();
 
@@ -39,7 +37,7 @@ namespace ruigeruben
             //rotateleft.OnClicked+=
             //rotateright.OnClicked+=
             //alien_button.OnClicked+=
-          //  next.OnClicked += new ClickEventHandler(OnNextPlayer);
+            //next.OnClicked += new ClickEventHandler(OnNextPlayer);
             next.OnClicked += Scene.OnNextClick;
 
         }
@@ -59,6 +57,7 @@ namespace ruigeruben
                 RemoveChild(l);
             }
             labels.Clear();
+
             int t;
             for (t = 0; t < playerlist.Count; t++) //for loop for creating the values for the currentplayer
             {
@@ -84,6 +83,7 @@ namespace ruigeruben
                 make_label(playerlist[t + 1].Name, font, 20, 1820, 1050 - gotvet * 100, playerlist[t+1].PlayerColor);
                 make_label(playerlist[t + 1].Points.ToString(), font, 20, 1800, 1000 - gotvet * 100, playerlist[t + 1].PlayerColor);
                 make_label(playerlist[t + 1].NumberOfAliens.ToString(), font, 20, 1900, 1000 - gotvet * 100, playerlist[t + 1].PlayerColor);
+
                 CCSprite smallalien = new CCSprite("alien");
                 CCSprite smallcoin = new CCSprite("coin");
                 smallalien.Scale = 0.25f;
@@ -92,6 +92,7 @@ namespace ruigeruben
                 smallcoin.Position = new CCPoint(1750, 1000 - gotvet * 100);
                 AddChild(smallalien);
                 AddChild(smallcoin);
+
                 gotvet++;
                 t++;
                 }
