@@ -101,13 +101,26 @@ namespace ruigeruben
                 if (touches.Count < 2)
                     return;
 
-                for(int i = 0; i < touches.Count; i++)
+                for(int i = 0; i < touches.Count; i += 2)
                 {
+                    CCPoint fir = touches[i].LocationOnScreen;
+                    CCPoint sec = touches[i + 1].LocationOnScreen;
+                    
+                    CCPoint mid = m_BackgroundLayer.ConvertToWorldspace(fir - sec);
 
-                    //CCPoint Location = i.LocationOnScreen;
-                    //Location = m_BoardLayer.ConvertToWorldspace(Location);
                     scale += 0.10f;
                     m_BoardLayer.Scale = scale;
+
+                    var s = m_BoardLayer.Camera.CenterInWorldspace;
+                    s.X = mid.X;//i.LocationOnScreen.X - i.PreviousLocationOnScreen.X;
+                    s.Y = mid.Y;
+                    m_BoardLayer.Camera.CenterInWorldspace = s;
+
+                    var target = m_BoardLayer.Camera.TargetInWorldspace;
+                    target.X = mid.X;
+                    target.Y = mid.Y;
+                    m_BoardLayer.Camera.TargetInWorldspace = target;
+
                 }           
             }
         }
