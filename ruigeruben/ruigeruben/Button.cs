@@ -11,7 +11,7 @@ namespace ruigeruben
         bool m_TexTOnly;
 
         CCLabel m_Label;
-        CCSprite m_Sprite;
+        public CCSprite m_Sprite;
 
         public event ClickEventHandler OnClicked;
 
