@@ -10,6 +10,7 @@ namespace ruigeruben
         string font = "Fonts/Coalition";
         List<Button> buttons = new List<Button>();
         List<CCLabel> labels = new List<CCLabel>();
+        Button alien_button;
 
         public Overlay(GameScene Scene) //Constructor method for creating the static part of the overlay
         {
@@ -28,10 +29,11 @@ namespace ruigeruben
             Button rotateright = new Button("rotateleft", "", new CCPoint(1300, 100), font, 36, this);
             rotateright.m_Sprite.FlipX = true;
             Button next = new Button("Next", new CCPoint(1750, 100), font, 70, this);
-            
+            alien_button = new Button("alien1", "", new CCPoint(1450, 100), font, 36, this);
             buttons.Add(rotateleft);
             buttons.Add(rotateright);
             buttons.Add(next);
+            buttons.Add(alien_button);
 
             //rotateleft.OnClicked+=
             //rotateright.OnClicked+=
@@ -43,7 +45,6 @@ namespace ruigeruben
 
         public void update_interface(List<Player> playerlist, int amountoftiles) // in this method the labels and button are made that need to update everytime a player has his turn
         {
-            RemoveAllChildrenByTag(1);
             string currentplayer="error";
             string currentpoints = "error";
             string currentaliens="error";
@@ -97,9 +98,8 @@ namespace ruigeruben
                 }
 
             Button example = new Button("example", "", new CCPoint(1050, 100), "Fonts/Coalition", 36, this);
-            Button alien_button = new Button("alien1", "", new CCPoint(1450, 100), font, 36, this, 1);
+            
             alien_button.m_Sprite.Color = currentcolor;
-            buttons.Add(alien_button);
 
             //example.OnClicked+=
 

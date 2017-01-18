@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using CocosSharp;
 using Microsoft.Xna.Framework;
 using Xamarin;
+using Xamarin.Android;
 using Android.Views.InputMethods;
 using static Android.OS.DropBoxManager;
 using Android.InputMethodServices;
@@ -29,8 +30,7 @@ namespace ruigeruben
             m_GameInfo = new InputGameInfo();
             m_GameInfo.CardMultiplier = 1;
             m_GameInfo.Aliens = 5;
-
-      
+            
             m_Buttons = new List<Button>();
             playerbuttons = new List<Button>();
             m_Players = new List<InputPlayer>();
@@ -82,7 +82,7 @@ namespace ruigeruben
             List<CCLabel> settings = new List<CCLabel>();
 
             CCLabel Alien_Setting,other_setting;
-            other_setting = new CCLabel("Test", "Coalition", 60);
+            other_setting = new CCLabel("Max. tiles", "Coalition", 60);
             Alien_Setting = new CCLabel("ALIENS","Coalition", 60, CCLabelFormat.SpriteFont);
             settinglabels.Add(Alien_Setting);
             settinglabels.Add(other_setting);
@@ -216,7 +216,10 @@ namespace ruigeruben
                 m_GameInfo.Players = m_Players;
                 MainActivity.SwitchToMenu(SceneIds.Game, m_GameInfo);
             }
-            
+            else
+            {
+                
+            }
         }
      
         public override void OnClick(CCPoint Location)
