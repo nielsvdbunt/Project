@@ -11,7 +11,7 @@ namespace ruigeruben
         {
             var touchListener = new CCEventListenerTouchAllAtOnce();
             touchListener.OnTouchesEnded = OnTouchesEnded;
-            
+            touchListener.OnTouchesBegan = OnTouchesBegan;
             AddEventListener(touchListener, this);
         }
 
@@ -22,13 +22,22 @@ namespace ruigeruben
                 if (touches.Count > 0)
                 {
                     CCPoint location = touches[0].LocationOnScreen;
-
                     OnClick(location);
                 }
             }
         }
 
-       
+       void OnTouchesBegan(List<CCTouch> touches, CCEvent touchevent)
+        {
+            foreach (CCTouch i in touches)
+            {
+                if(touches.Count > 0)
+                {
+                    CCPoint location = touches[0].LocationOnScreen;
+                    OnClick(location);
+                }
+            }
+        }
 
         public abstract void OnClick(CCPoint Location);
         public abstract void OnBack();
