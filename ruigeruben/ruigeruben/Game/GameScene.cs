@@ -80,16 +80,19 @@ namespace ruigeruben
         {
             foreach (CCTouch i in touches)
             {
-                if (touches.Count > 0)
-                {
-                    //var bounds = VisibleBoundsWorldspace;
+              
+                    var s = m_BoardLayer.Camera.CenterInWorldspace;
+                s.X += i.PreviousLocationOnScreen.X - i.LocationOnScreen.X;//i.LocationOnScreen.X - i.PreviousLocationOnScreen.X;
+                    s.Y += i.LocationOnScreen.Y - i.PreviousLocationOnScreen.Y;
+                    m_BoardLayer.Camera.CenterInWorldspace = s;
 
-                    float x = touches[0].Location.X;
-                    float y = touches[0].Location.Y;
-                    //CCPoint location = new CCPoint((x - bounds.Size.Width),(-y + bounds.Size.Height));
-                    CCPoint location = new CCPoint(x, y);
-                    m_BoardLayer.Position = location;
-                }
+                    var target = m_BoardLayer.Camera.TargetInWorldspace;
+                    target.X = s.X;
+                    target.Y = s.Y;
+                    m_BoardLayer.Camera.TargetInWorldspace = target;
+               
+
+              
             }
         }
 
