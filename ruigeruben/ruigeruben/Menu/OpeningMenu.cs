@@ -24,7 +24,7 @@ namespace ruigeruben
 
             CCRect bounds = VisibleBoundsWorldspace;
 
-            CCLabel Titel = new CCLabel("SPACESONNE", "Fonts/Coalition", 100, CCLabelFormat.SpriteFont);
+            CCLabel Titel = new CCLabel("ARCTURUS", "Fonts/Coalition", 100, CCLabelFormat.SpriteFont);
             Titel.Position = new CCPoint(bounds.Center.X, 950);
             AddChild(Titel);
 
