@@ -76,8 +76,8 @@ namespace ruigeruben
             var bounds = VisibleBoundsWorldspace;
 
             int tile = 200;
-            int middenx = Convert.ToInt32(bounds.Center.X);
-            int middeny = Convert.ToInt32(bounds.Center.Y);
+            int middenx = Convert.ToInt32(bounds.Center.X) - (tile / 2);
+            int middeny = Convert.ToInt32(bounds.Center.Y) - (tile / 2);
             int diffx = (x - middenx) / tile;
             int diffy = (y - middeny) / tile;
 
