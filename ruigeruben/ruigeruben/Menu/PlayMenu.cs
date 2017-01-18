@@ -48,12 +48,12 @@ namespace ruigeruben
             // Om te testen? Echte graphics maken?
             var drawNode = new CCDrawNode();
             this.AddChild(drawNode);
-            var shape = new CCRect(140, bounds.MidY - 500, 460, 1000);
+            var shape = new CCRect(140, bounds.MidY - 400, 460, 900);
             drawNode.DrawRect(shape, fillColor: CCColor4B.Transparent,
                 borderWidth: 4,
                 borderColor: CCColor4B.White);
 
-            var shape2 = new CCRect(700, bounds.MidY - 500, 1000, 1000);
+            var shape2 = new CCRect(700, bounds.MidY - 400, 1000, 900);
             drawNode.DrawRect(shape2, fillColor: CCColor4B.Transparent,
                 borderWidth: 4,
                 borderColor: CCColor4B.White);
@@ -218,7 +218,12 @@ namespace ruigeruben
             }
             else
             {
-                
+                CCLabel Error = new CCLabel("You need at least 2 players!", "Coalition", 60);
+                Error.PositionX = bounds.MidX;
+                Error.PositionY = bounds.MinY +60;
+                Error.Color = CCColor3B.Red;
+                AddChild(Error);
+                Error.RunActions(new CCDelayTime(2), new CCFadeOut(1));
             }
         }
      
