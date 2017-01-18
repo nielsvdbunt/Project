@@ -94,7 +94,7 @@ namespace ruigeruben
             x = middenx + (x * tile);
             y = middeny + (y * tile);
             Point p = new Point(x, y);
-            return p
+            return p;
         }
     }
     
