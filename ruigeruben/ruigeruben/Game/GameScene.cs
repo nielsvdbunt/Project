@@ -37,7 +37,7 @@ namespace ruigeruben
             this.AddLayer(m_BackgroundLayer = new BackgroundLayer("achtergrond1"), 0);
             this.AddLayer(m_BoardLayer = new BoardLayer());
             this.AddLayer(m_CardAttrLayer = new CardAttributeLayer(), 2);
-            this.AddLayer(m_Overlay = new Overlay(), 3);
+            this.AddLayer(m_Overlay = new Overlay(this), 3);
 
             m_TeturePool = new TexturePool();
 
@@ -71,7 +71,7 @@ namespace ruigeruben
             }
         }
         
-           void OnTouchesMoved(List<CCTouch> touches, CCEvent touchEvent)
+        void OnTouchesMoved(List<CCTouch> touches, CCEvent touchEvent)
         {
             foreach (CCTouch i in touches)
             {
@@ -83,6 +83,11 @@ namespace ruigeruben
                     m_BoardLayer.Position = location;
                 }
             }
+        }
+
+        public void OnNextClick()
+        {
+            m_Game.NextTurn();
         }
         
     }

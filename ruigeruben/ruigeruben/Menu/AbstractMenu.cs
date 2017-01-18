@@ -22,13 +22,12 @@ namespace ruigeruben
                 if (touches.Count > 0)
                 {
                     CCPoint location = touches[0].LocationOnScreen;
-
                     OnClick(location);
                 }
             }
         }
 
-       
+     
 
         public abstract void OnClick(CCPoint Location);
         public abstract void OnBack();
