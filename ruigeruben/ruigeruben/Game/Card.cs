@@ -79,7 +79,7 @@ namespace ruigeruben
 
             for(int i = 0; i < Hash.Length; i++)
             {
-                m_Attributes[i] = (CardAttributes)Convert.ToInt32(Hash[i]);
+                m_Attributes[i] = (CardAttributes) (Hash[i]- '0');
             }
         }
 
@@ -88,27 +88,32 @@ namespace ruigeruben
             return m_Attributes[Spot];
         }
 
-        void Rotate(int Degrees)
+        public void Rotate(int Degrees)
         {
-            CardAttributes[] Attr = m_Attributes;
+            CardAttributes[] Attr = new CardAttributes[5];
+            m_Attributes.CopyTo(Attr, 0);
+            m_Rotation = Degrees;
 
             for(int i = 0; i < 4; i++)
             {
                 if(Degrees > 0)
                 {
                     if (i == 3)
-                        m_Attributes[0] = m_Attributes[3];
+                        m_Attributes[0] = Attr[3];
                     else
-                        m_Attributes[i + 1] = m_Attributes[i];
+                        m_Attributes[i + 1] = Attr[i];
                 }
                 if(Degrees < 0)
                 {
-
+                    if (i == 0)
+                        m_Attributes[3] = Attr[0];
+                    else
+                        m_Attributes[i - 1] = Attr[i];
                 }
             }
         }
 
-        int GetRotation()
+        public int GetRotation()
         {
             return m_Rotation;
         }

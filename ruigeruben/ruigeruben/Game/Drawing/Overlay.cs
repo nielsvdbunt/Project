@@ -35,10 +35,9 @@ namespace ruigeruben
             buttons.Add(alien_button);
             buttons.Add(next);
 
-            //rotateleft.OnClicked+=
-            //rotateright.OnClicked+=
-            //alien_button.OnClicked+=
-            //next.OnClicked += new ClickEventHandler(OnNextPlayer);
+            rotateleft.OnClicked += Scene.OnRotateLeft;
+            rotateright.OnClicked += Scene.OnRotateRight;
+            alien_button.OnClicked += Scene.OnAlienClick;
             next.OnClicked += Scene.OnNextClick;
 
         }
