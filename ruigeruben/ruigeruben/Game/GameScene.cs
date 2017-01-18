@@ -50,7 +50,7 @@ namespace ruigeruben
             AddEventListener(touchListener, this);
 
             m_BoardLayer.AddPanda(500, 500);
-          //  m_BoardLayer.AddPanda(-50, 32);
+            m_BoardLayer.AddPanda(-500, 500);
             //m_BoardLayer.AddPanda(0, 132);
         }
 
