@@ -44,9 +44,10 @@ namespace ruigeruben
 
         public void update_interface(List<Player> playerlist, int amountoftiles) // in this method the labels and button are made that need to update everytime a player has his turn
         {
-            string currentplayer="error";
+            string currentplayer = "error";
             string currentpoints = "error";
-            string currentaliens="error";
+            string currentaliens = "error";
+            int t;
             int gotvet = 0;
             CCColor3B currentcolor = CCColor3B.White;
             CCColor3B label_color = CCColor3B.White;
@@ -57,7 +58,6 @@ namespace ruigeruben
             }
             labels.Clear();
 
-            int t;
             for (t = 0; t < playerlist.Count; t++) //for loop for creating the values for the currentplayer
             {
                 if (playerlist[t].Turn == true)
@@ -74,6 +74,7 @@ namespace ruigeruben
             make_label(currentpoints, font, 36, 650, 100, label_color);
             make_label(currentaliens, font, 36, 900, 100, label_color);
             make_label("X" + amountoftiles.ToString(), font, 36, 1850, 245, label_color);
+            alien_button.m_Sprite.Color = currentcolor;
 
             for (int z = 0; z < (playerlist.Count - 1); z++) //for loop which makes the players on the right who are next in line
             {
