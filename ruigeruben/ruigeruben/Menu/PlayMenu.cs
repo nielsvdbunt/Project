@@ -113,9 +113,8 @@ namespace ruigeruben
                 {
                     if (int.Parse(settings[j].Text) > 1)
                     {
-                        m_GameInfo.Aliens = int.Parse(settings[j].Text) - 1;
                         settings[j].Text = (int.Parse(settings[j].Text) - 1).ToString();
-                       
+                        m_GameInfo.Aliens = int.Parse(settings[0].Text);
                     }
                     if (int.Parse(settings[j].Text) < 10)
                     {
@@ -131,9 +130,9 @@ namespace ruigeruben
                 plus.OnClicked += delegate {
                     if (int.Parse(settings[j].Text) < 15)
                     {
-                        m_GameInfo.Aliens = int.Parse(settings[j].Text) + 1;
                         settings[j].Text = (int.Parse(settings[j].Text) + 1).ToString();
-                       
+                        m_GameInfo.Aliens = int.Parse(settings[0].Text);
+
                     }
                     if (int.Parse(settings[j].Text) >= 10)
                     {
