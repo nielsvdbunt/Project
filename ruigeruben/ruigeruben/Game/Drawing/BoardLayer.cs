@@ -71,6 +71,19 @@ namespace ruigeruben
 
         }
 
+        public Point toLocation(int x, int y)
+        {
+            var bounds = VisibleBoundsWorldspace;
+
+            int tile = 200;
+            int middenx = Convert.ToInt32(bounds.Center.X);
+            int middeny = Convert.ToInt32(bounds.Center.Y);
+            int diffx = (x - middenx) / tile;
+            int diffy = (y - middeny) / tile;
+
+            Point p = new Point(diffx, diffy);
+            return p;
+        }
     }
     
 }
