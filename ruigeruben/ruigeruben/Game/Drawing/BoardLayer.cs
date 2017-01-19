@@ -10,8 +10,9 @@ namespace ruigeruben
 {
     class BoardLayer : CCLayer
     {
+        GameScene m_GameScene;
         float scale = 1;
-
+        GameBase m_GameBase;
         public BoardLayer()
         {
             this.AnchorPoint = new CCPoint(0, 0);
@@ -63,6 +64,16 @@ namespace ruigeruben
            
         }
 
+       /* public void Dragging()
+        {
+            Card tile = m_GameBase.m_CurrentCard;
+            if (m_GameScene.IsCardDragging)
+            {
+                CCSprite FlyingTile = TexturePool.GetSprite(tile.m_Hash);
+                FlyingTile.Position = m_GameScene.Location;
+            }
+        }
+*/
         public void DrawShit()
         {
 

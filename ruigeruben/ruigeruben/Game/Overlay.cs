@@ -12,7 +12,7 @@ namespace ruigeruben
         List<CCLabel> labels = new List<CCLabel>();
         List<CCSprite> sprites = new List<CCSprite>();
         CCSprite m_AlienButton;
-        CCSprite m_CardButton;
+        public CCSprite m_CardButton;
 
         public Overlay(GameScene Scene) //Constructor method for creating the static part of the overlay
         {
@@ -140,7 +140,6 @@ namespace ruigeruben
         }
         private void MakeBox(int xpos, int ypos, int width, int height, int thickness)
         {
-
             var drawNode = new CCDrawNode();
             var rect = new CCRect(xpos, ypos, width, height);
             drawNode.DrawRect(rect, fillColor: CCColor4B.Transparent, borderWidth: thickness, borderColor: CCColor4B.White);
