@@ -8,13 +8,14 @@ namespace ruigeruben
     class GameBase
     {
         GameScene m_Scene;
-        PlayMenu SpeelMenu;
         public List<Player> m_Players;
         Deck m_Deck;
         public Board m_Board;
+        BoardLayer m_BoardLayer;
         InputGameInfo m_GameInfo;
-        Card NextCard;
-        Board b;
+        TexturePool m_TexturePool;
+        public Card m_CurrentCard;
+
         public GameBase(GameScene Scene, InputGameInfo info)
         {
             m_Players = new List<Player>();
@@ -30,8 +31,7 @@ namespace ruigeruben
 
             m_Scene = Scene;
             m_Board = new Board();
-            m_Deck = new Deck(info.CardMultiplier);
-
+            m_Deck = new Deck(info.CardMultiplier);            
         }
 
         public void Start()
@@ -44,10 +44,19 @@ namespace ruigeruben
                 m_Players[n] = m_Players[k];
                 m_Players[k] = temp;
             }
+
             m_Players[0].Turn = true;
-            m_Scene.m_Overlay.update_interface(m_Players, m_Deck.GetCardsLeft());
+            Card StartTile = new Card("21202");
+            m_CurrentCard = m_Deck.GetNextCard();
+            m_BoardLayer = new BoardLayer();
+            CCPoint PointStartTile = new CCPoint(0, 0);
+            m_BoardLayer.DrawCard(StartTile, PointStartTile);
+            m_Scene.m_Overlay.update_interface(m_Players, m_Deck.GetCardsLeft(), m_CurrentCard);
+
+
         }
-            public void NextTurn()
+
+        public void NextTurn()
         {
             for(int i=0; i<m_Players.Count; i++ )
             {
@@ -62,9 +71,18 @@ namespace ruigeruben
                     break;
                 }
             }
-            NextCard = m_Deck.GetNextCard();
-            m_Scene.m_Overlay.update_interface(m_Players, m_Deck.GetCardsLeft());
+            m_CurrentCard = m_Deck.GetNextCard();
+            m_Scene.m_Overlay.update_interface(m_Players, m_Deck.GetCardsLeft(), m_CurrentCard);
+
         } 
+
+        public void RotateCard(int Rot)
+        {
+            m_CurrentCard.Rotate(Rot);
+            m_Scene.m_Overlay.update_interface(m_Players, m_Deck.GetCardsLeft(), m_CurrentCard);
+
+        }
+
         public void Walktiles(int x, int y)
         {
             for (int i = -1; i <= 2; i += 2)
@@ -76,13 +94,14 @@ namespace ruigeruben
 
         }
 
+
         public bool Checktiles(int x, int y)
         {
-            Card CardInHand = NextCard;
+          
             Card c = m_Board.GetCard(x, y);
-            foreach (Card kaart in b.m_virCards)
+            foreach (Card kaart in m_Board.m_virCards)
             {
-                if (true)
+                if (kaart.GetHashCode() == m_CurrentCard.GetHashCode()  )
                     return true;
                 else
                     return false;
@@ -90,6 +109,8 @@ namespace ruigeruben
 
             return false;
         }
+
+
 
     }
 }

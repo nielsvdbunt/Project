@@ -42,7 +42,7 @@ namespace ruigeruben
         {
             return new Card(m_Cards.Pop());
         }
-
+       
         public int GetCardsLeft()
         {
             return m_Cards.Count;

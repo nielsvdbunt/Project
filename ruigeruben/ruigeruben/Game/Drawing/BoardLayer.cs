@@ -20,16 +20,14 @@ namespace ruigeruben
 
         public void AddPanda(int x, int y)
         {
-            CCSpriteSheet sheet = new CCSpriteSheet("sheet.plist", "sheetimage.png");
-            CCSpriteFrame frame;
-            frame = sheet.Frames.Find(item => item.TextureFilename == "02220.png");
-            CCSprite satteliete = new CCSprite(frame);
+           
+           
             CCSprite spr = new CCSprite("Panda");
-            satteliete.Position = new CCPoint(500, 500);
+           
             spr.PositionX = x;
             spr.PositionY = y;
-            AddChild(satteliete);
-           // AddChild(spr);
+           
+           
         }
 
         public void Zoom(bool In)
@@ -52,7 +50,7 @@ namespace ruigeruben
             for(int i = 0; i < HorLines; i++)
             {
                 var drawNode = new CCDrawNode();
-                this.AddChild(drawNode);
+                AddChild(drawNode);
                 /*var shape = new CCPoint(bounds
                 drawNode.DrawLine()
 
@@ -102,7 +100,7 @@ namespace ruigeruben
         public void DrawCard(Card card, CCPoint point)
         {
             CCPoint p = fromLocation(point);
-            CCSprite sprite = new CCSprite();
+            CCSprite sprite = TexturePool.GetSprite(card.m_Hash);
             sprite.AnchorPoint = new CCPoint(0, 0);
             sprite.Position = p;
             AddChild(sprite);
