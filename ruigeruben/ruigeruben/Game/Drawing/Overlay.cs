@@ -11,6 +11,9 @@ namespace ruigeruben
         List<Button> buttons = new List<Button>();
         List<CCLabel> labels = new List<CCLabel>();
         Button alien_button;
+        GameBase basis;
+        Card c;
+      
 
         public Overlay(GameScene Scene) //Constructor method for creating the static part of the overlay
         {
@@ -47,7 +50,7 @@ namespace ruigeruben
 
         }
 
-        public void update_interface(List<Player> playerlist, int amountoftiles) // in this method the labels and button are made that need to update everytime a player has his turn
+        public void update_interface(List<Player> playerlist, int amountoftiles, CCSprite tile) // in this method the labels and button are made that need to update everytime a player has his turn
         {
             string currentplayer = "error";
             string currentpoints = "error";
@@ -95,14 +98,18 @@ namespace ruigeruben
                 smallcoin.Scale = 0.25f;
                 smallalien.Position = new CCPoint(1860, 1000 - gotvet * 100);
                 smallcoin.Position = new CCPoint(1750, 1000 - gotvet * 100);
+                tile.Position = new CCPoint(1020, 100);
                 AddChild(smallalien);
                 AddChild(smallcoin);
-
+                AddChild(tile);
                 gotvet++;
                 t++;
                 }
-
-            Button example = new Button("example", "", new CCPoint(1020, 100), "Fonts/Coalition", 36, this);
+           
+           
+        
+           
+            //Button example = new Button("example", "", new CCPoint(1020, 100), "Fonts/Coalition", 36, this);
             
             alien_button.m_Sprite.Color = currentcolor;
 

@@ -14,7 +14,6 @@ namespace ruigeruben
         public Board m_Board;
         InputGameInfo m_GameInfo;
         Card NextCard;
-        Board b;
         public GameBase(GameScene Scene, InputGameInfo info)
         {
             m_Players = new List<Player>();
@@ -31,7 +30,8 @@ namespace ruigeruben
             m_Scene = Scene;
             m_Board = new Board();
             m_Deck = new Deck(info.CardMultiplier);
-
+           
+            
         }
 
         public void Start()
@@ -45,7 +45,7 @@ namespace ruigeruben
                 m_Players[k] = temp;
             }
             m_Players[0].Turn = true;
-            m_Scene.m_Overlay.update_interface(m_Players, m_Deck.GetCardsLeft());
+            m_Scene.m_Overlay.update_interface(m_Players, m_Deck.GetCardsLeft(), getSprite("20003"));
         }
             public void NextTurn()
         {
@@ -63,7 +63,7 @@ namespace ruigeruben
                 }
             }
             NextCard = m_Deck.GetNextCard();
-            m_Scene.m_Overlay.update_interface(m_Players, m_Deck.GetCardsLeft());
+            m_Scene.m_Overlay.update_interface(m_Players, m_Deck.GetCardsLeft(), getSprite("20003"));
         } 
         public void Walktiles(int x, int y)
         {
@@ -76,13 +76,22 @@ namespace ruigeruben
 
         }
 
+        public CCSprite getSprite(string n)
+        {
+            CCSprite tile;
+            CCSpriteSheet sheet = new CCSpriteSheet("sheet.plist", "sheetimage.png");
+            CCSpriteFrame frame = sheet.Frames.Find(item => item.TextureFilename == n + ".png");
+            tile = new CCSprite(frame);
+            return tile;
+        }
+
         public bool Checktiles(int x, int y)
         {
             Card CardInHand = NextCard;
             Card c = m_Board.GetCard(x, y);
-            foreach (Card kaart in b.m_virCards)
+            foreach (Card kaart in m_Board.m_virCards)
             {
-                if (true)
+                if (kaart.GetHashCode() == NextCard.GetHashCode()  )
                     return true;
                 else
                     return false;
@@ -90,6 +99,8 @@ namespace ruigeruben
 
             return false;
         }
+
+
 
     }
 }
