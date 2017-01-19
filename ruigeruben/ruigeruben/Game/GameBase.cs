@@ -47,6 +47,9 @@ namespace ruigeruben
 
             Card StartTile = new Card("21202");
             m_Scene.m_BoardLayer.DrawCard(StartTile, new CCPoint(0, 0));
+            m_Scene.m_BoardLayer.DrawCard(StartTile, new CCPoint(1, 0));
+            m_Scene.m_BoardLayer.DrawCard(StartTile, new CCPoint(2, 0));
+            m_Scene.m_BoardLayer.DrawCard(StartTile, new CCPoint(1, 1));
 
             m_CurrentCard = m_Deck.GetNextCard();
             m_Scene.m_Overlay.update_interface(m_Players, m_Deck.GetCardsLeft(), m_CurrentCard);

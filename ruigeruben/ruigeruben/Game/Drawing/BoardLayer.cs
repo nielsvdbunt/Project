@@ -14,8 +14,8 @@ namespace ruigeruben
 
         public BoardLayer()
         {
-            this.AnchorPoint = new CCPoint(0, 0);
-            this.ContentSize = new CCSize(5000, 5000);
+           // this.AnchorPoint = new CCPoint(400, 300);
+            //this.ContentSize = new CCSize(5000, 5000);
         }
 
         public void AddPanda(int x, int y)
@@ -99,7 +99,10 @@ namespace ruigeruben
 
         public void DrawCard(Card card, CCPoint point)
         {
-            CCPoint p = fromLocation(point);
+            //CCPoint p = fromLocation(point);
+            CCPoint p = new CCPoint();
+            p.X = point.X * 100;
+            p.Y = point.Y * 100;
             CCSprite sprite = TexturePool.GetSprite(card.m_Hash);
             sprite.AnchorPoint = new CCPoint(0, 0);
             sprite.Position = p;
