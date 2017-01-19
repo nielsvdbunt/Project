@@ -58,7 +58,7 @@ namespace ruigeruben
          4,
          8,
          3,
-         4, // start tegel erbij dus totaal 4 start tegels
+         3, 
          3,
          3,
          1

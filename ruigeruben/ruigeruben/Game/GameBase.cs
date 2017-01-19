@@ -11,7 +11,9 @@ namespace ruigeruben
         public List<Player> m_Players;
         Deck m_Deck;
         public Board m_Board;
+        BoardLayer m_BoardLayer;
         InputGameInfo m_GameInfo;
+        TexturePool m_TexturePool;
         public Card m_CurrentCard;
 
         public GameBase(GameScene Scene, InputGameInfo info)
@@ -43,7 +45,11 @@ namespace ruigeruben
                 m_Players[k] = temp;
             }
             m_Players[0].Turn = true;
+            Card StartTile = new Card("21202");
             m_CurrentCard = m_Deck.GetNextCard();
+            m_BoardLayer = new BoardLayer();
+            CCPoint PointStartTile = new CCPoint(0, 0);
+            m_BoardLayer.DrawCard(StartTile, PointStartTile);
             m_Scene.m_Overlay.update_interface(m_Players, m_Deck.GetCardsLeft(), m_CurrentCard);
         }
 
@@ -64,6 +70,7 @@ namespace ruigeruben
             }
             m_CurrentCard = m_Deck.GetNextCard();
             m_Scene.m_Overlay.update_interface(m_Players, m_Deck.GetCardsLeft(), m_CurrentCard);
+
         } 
 
         public void RotateCard(int Rot)
@@ -83,15 +90,7 @@ namespace ruigeruben
             
 
         }
-/*
-        public CCSprite getSprite(string n)
-        {
-            CCSprite tile;
-            CCSpriteSheet sheet = new CCSpriteSheet("sheet.plist", "sheetimage.png");
-            CCSpriteFrame frame = sheet.Frames.Find(item => item.TextureFilename == n + ".png");
-            tile = new CCSprite(frame);
-            return tile;
-        }*/
+
 
         public bool Checktiles(int x, int y)
         {
