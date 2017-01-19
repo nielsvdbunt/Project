@@ -74,7 +74,7 @@
     <Compile Include="Game\Drawing\TexturePool.cs" />
     <Compile Include="Game\GameBase.cs" />
     <Compile Include="Game\GameScene.cs" />
-    <Compile Include="Game\Drawing\Overlay.cs" />
+    <Compile Include="Game\Overlay.cs" />
     <Compile Include="Game\Player.cs" />
     <Compile Include="MainActivity.cs">
       <SubType>Code</SubType>

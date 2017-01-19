@@ -17,9 +17,6 @@ namespace ruigeruben
         public List<InputPlayer> Players;
         public int CardMultiplier;
         public int Aliens;
-        public int CardsLeft;
-        
-
     }
 
     class GameScene : CCScene
@@ -28,8 +25,10 @@ namespace ruigeruben
         public BoardLayer m_BoardLayer;
         public CardAttributeLayer m_CardAttrLayer;
         public Overlay m_Overlay;
+        CCPoint LocationEnd;
         public TexturePool m_TeturePool;
-
+        public  bool IsCardDragging = false;
+        public CCPoint Location;
         GameBase m_Game;
 
         int m_Touches;
@@ -68,21 +67,38 @@ namespace ruigeruben
 
         public void OnTouchesBegan(List<CCTouch> touches, CCEvent touchEvent)
         {
-            m_Touches += touches.Count;
+            float x = touches[0].LocationOnScreen.X;
+            float y = touches[0].LocationOnScreen.Y;
+            Location = new CCPoint(x, y);
+            if (y <= 1200 && x <= 2300)
+            {
+                m_Touches += touches.Count;
+            }
+         
+            
         }
 
         void OnTouchesEnded(List<CCTouch> touches, CCEvent touchEvent)
         {
+            if (m_Touches == 2)
+                zooming = false;
+
             m_Touches -= touches.Count;
 
             if (m_Touches < 0)
                 m_Touches = 0;
+              if (IsCardDragging == true)
+                IsCardDragging = false; 
         }
         float scale = 1;
+        CCPoint m_mid = new CCPoint();
+        bool zooming = false;
         void OnTouchesMoved(List<CCTouch> touches, CCEvent touchEvent)
         {
+            float x = touches[0].LocationOnScreen.X;
             if (m_Touches == 1) // Pan
             {
+                
                 foreach (CCTouch i in touches)
                 {
                     var s = m_BoardLayer.Camera.CenterInWorldspace;
@@ -107,8 +123,18 @@ namespace ruigeruben
                     CCPoint sec = touches[i + 1].LocationOnScreen;
                     
                     CCPoint mid = m_BackgroundLayer.ConvertToWorldspace(fir - sec);
+                    mid.X = Math.Abs(mid.X);
+                    mid.Y = Math.Abs(mid.Y);
 
-                    scale += 0.10f;
+                    if (zooming)
+                    {
+                        if (mid.Length < m_mid.Length)
+                        {
+
+                        }
+                    }
+
+                    scale += 0.001f;
                     m_BoardLayer.Scale = scale;
 
                     var s = m_BoardLayer.Camera.CenterInWorldspace;
@@ -123,6 +149,18 @@ namespace ruigeruben
 
                 }           
             }
+            else if (x > 1295 && x < 1430) //Voor het slepen van de kaart in layer
+            {
+
+                Card tile = m_Game.m_CurrentCard;
+                foreach (CCTouch i in touches)
+                {
+                    CCSprite FlyingTile = TexturePool.GetSprite(tile.m_Hash);
+                    FlyingTile.Position = i.LocationOnScreen;
+                    AddChild(FlyingTile);
+                }
+
+            }
         }
 
         public void OnNextClick()
@@ -132,12 +170,12 @@ namespace ruigeruben
         
         public void OnRotateLeft()
         {
-            test.Rotate(-90);
+            m_Game.RotateCard(-90);
         }
 
         public void OnRotateRight()
         {
-            test.Rotate(90);
+            m_Game.RotateCard(90);
         }
 
         public void OnAlienClick()

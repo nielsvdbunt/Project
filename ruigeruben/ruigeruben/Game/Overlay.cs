@@ -7,10 +7,12 @@ namespace ruigeruben
 {
     class Overlay : AbstractMenu
     {
-        string font = "Fonts/Coalition";
-        List<Button> buttons = new List<Button>();
-        List<CCLabel> labels = new List<CCLabel>();
-        Button alien_button;
+        string m_font = "Fonts/Coalition";
+        List<Button> m_buttons = new List<Button>();
+        List<CCLabel> m_labels = new List<CCLabel>();
+        List<CCSprite> m_sprites = new List<CCSprite>();
+        CCSprite m_AlienButton;
+        public CCSprite m_CardButton;
 
         public Overlay(GameScene Scene) //Constructor method for creating the static part of the overlay
         {
@@ -30,24 +32,28 @@ namespace ruigeruben
             MakeBox(1510, 55, 375, 105, 2);
 
             //here buttons are made
-            Button rotateleft = new Button("rotateleft","",new CCPoint(1170,100), font, 36, this);
-            Button rotateright = new Button("rotateleft", "", new CCPoint(1290, 100), font, 36, this);
+            Button rotateleft = new Button("rotateleft","",new CCPoint(1170,100), m_font, 36, this);
+            Button rotateright = new Button("rotateleft", "", new CCPoint(1290, 100), m_font, 36, this);
             rotateright.m_Sprite.FlipX = true;
-            Button next = new Button("Next", new CCPoint(1700, 100), font, 70, this);
-            alien_button = new Button("alien1", "", new CCPoint(1420, 100), font, 36, this);
-            buttons.Add(rotateleft);
-            buttons.Add(rotateright);
-            buttons.Add(next);
-            buttons.Add(alien_button);
+            Button next = new Button("Next", new CCPoint(1700, 100), m_font, 70, this);
+            m_AlienButton = new CCSprite("alien1");
+            m_AlienButton.Position = new CCPoint(1420, 100);
+            AddChild(m_AlienButton);
 
+            m_CardButton = new CCSprite();
+            AddChild(m_CardButton);
+
+            m_buttons.Add(rotateleft);
+            m_buttons.Add(rotateright);
+            m_buttons.Add(next);
+           
             rotateleft.OnClicked += Scene.OnRotateLeft;
             rotateright.OnClicked += Scene.OnRotateRight;
-            alien_button.OnClicked += Scene.OnAlienClick;
             next.OnClicked += Scene.OnNextClick;
 
         }
 
-        public void update_interface(List<Player> playerlist, int amountoftiles) // in this method the labels and button are made that need to update everytime a player has his turn
+        public void UpdateInterface(List<Player> playerlist, int amountoftiles, Card tile) // in this method the labels and button are made that need to update everytime a player has his turn
         {
             string currentplayer = "error";
             string currentpoints = "error";
@@ -57,11 +63,17 @@ namespace ruigeruben
             CCColor3B currentcolor = CCColor3B.White;
             CCColor3B label_color = CCColor3B.White;
 
-            foreach(CCLabel l in labels)
+            foreach(CCLabel l in m_labels)
             {
                 RemoveChild(l);
             }
-            labels.Clear();
+            m_labels.Clear();
+
+            foreach(CCSprite s in m_sprites)
+            {
+                RemoveChild(s);
+            }
+            m_sprites.Clear();
 
             for (t = 0; t < playerlist.Count; t++) //for loop for creating the values for the currentplayer
             {
@@ -75,19 +87,19 @@ namespace ruigeruben
                 }
             }
 
-            MakeLabel(currentplayer, font, 36, 200, 100, currentcolor);
-            MakeLabel(currentpoints, font, 36, 650, 100, label_color);
-            MakeLabel(currentaliens, font, 36, 870, 100, label_color);
-            MakeLabel("X" + amountoftiles.ToString(), font, 36, 1850, 245, label_color);
-            alien_button.m_Sprite.Color = currentcolor;
+            MakeLabel(currentplayer, m_font, 36, 200, 100, currentcolor);
+            MakeLabel(currentpoints, m_font, 36, 650, 100, label_color);
+            MakeLabel(currentaliens, m_font, 36, 870, 100, label_color);
+            MakeLabel("X" + amountoftiles.ToString(), m_font, 36, 1850, 245, label_color);
+            m_AlienButton.Color = currentcolor;
 
             for (int z = 0; z < (playerlist.Count - 1); z++) //for loop which makes the players on the right who are next in line
             {
                 if (t + 1 == playerlist.Count)
                     t = -1;
-                MakeLabel(playerlist[t + 1].Name, font, 20, 1820, 1050 - gotvet * 100, playerlist[t+1].PlayerColor);
-                MakeLabel(playerlist[t + 1].Points.ToString(), font, 20, 1800, 1000 - gotvet * 100, playerlist[t + 1].PlayerColor);
-                MakeLabel(playerlist[t + 1].NumberOfAliens.ToString(), font, 20, 1900, 1000 - gotvet * 100, playerlist[t + 1].PlayerColor);
+                MakeLabel(playerlist[t + 1].Name, m_font, 20, 1820, 1050 - gotvet * 100, playerlist[t+1].PlayerColor);
+                MakeLabel(playerlist[t + 1].Points.ToString(), m_font, 20, 1800, 1000 - gotvet * 100, playerlist[t + 1].PlayerColor);
+                MakeLabel(playerlist[t + 1].NumberOfAliens.ToString(), m_font, 20, 1900, 1000 - gotvet * 100, playerlist[t + 1].PlayerColor);
 
                 CCSprite smallalien = new CCSprite("alien");
                 CCSprite smallcoin = new CCSprite("coin");
@@ -97,35 +109,36 @@ namespace ruigeruben
                 smallcoin.Position = new CCPoint(1750, 1000 - gotvet * 100);
                 AddChild(smallalien);
                 AddChild(smallcoin);
+                m_sprites.Add(smallalien);
+                m_sprites.Add(smallcoin);
 
                 gotvet++;
                 t++;
-                }
-
-            Button example = new Button("example", "", new CCPoint(1020, 100), "Fonts/Coalition", 36, this);
-            
-            alien_button.m_Sprite.Color = currentcolor;
-
-            //example.OnClicked+=
-
+           }
+            RemoveChild(m_CardButton);
+            m_CardButton = TexturePool.GetSprite(tile.m_Hash);
+            m_CardButton.Position = new CCPoint(1020, 100);
+            m_CardButton.Rotation = tile.GetRotation();
+            AddChild(m_CardButton);
         }
+
         private void MakeSprite(string name, int x, int y)//this method is for creating sprites
         {
             CCSprite sprite = new CCSprite(name);
             sprite.Position = new CCPoint(x, y);
             AddChild(sprite);
         }
+
         private void MakeLabel(string text, string font, int textsize, int x, int y, CCColor3B color)//method for creating simple labels
         {
             CCLabel label = new CCLabel(text, font, textsize, CCLabelFormat.SpriteFont);
             label.Position = new CCPoint(x, y);
             label.Color = color;
-            labels.Add(label);
+            m_labels.Add(label);
             AddChild(label);
         }
         private void MakeBox(int xpos, int ypos, int width, int height, int thickness)
         {
-
             var drawNode = new CCDrawNode();
             var rect = new CCRect(xpos, ypos, width, height);
             drawNode.DrawRect(rect, fillColor: CCColor4B.Transparent, borderWidth: thickness, borderColor: CCColor4B.White);
@@ -140,7 +153,7 @@ namespace ruigeruben
         {
             Location = ScreenToWorldspace(Location);
 
-            foreach (Button b in buttons)
+            foreach (Button b in m_buttons)
             {
                 if (b.OnClickEvent(Location))
                     return;
