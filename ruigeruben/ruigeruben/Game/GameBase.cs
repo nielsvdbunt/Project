@@ -11,33 +11,31 @@ namespace ruigeruben
         public List<Player> m_Players;
         Deck m_Deck;
         public Board m_Board;
-        BoardLayer m_BoardLayer;
         InputGameInfo m_GameInfo;
-        TexturePool m_TexturePool;
         public Card m_CurrentCard;
 
         public GameBase(GameScene Scene, InputGameInfo info)
         {
             m_Players = new List<Player>();
             m_GameInfo = info;
-            foreach(InputPlayer i in info.Players)
+            foreach (InputPlayer i in info.Players)
             {
                 Player p = new Player();
                 p.Name = i.Name;
                 p.PlayerColor = i.Color;
-                p.NumberOfAliens = m_GameInfo.Aliens; 
+                p.NumberOfAliens = m_GameInfo.Aliens;
                 m_Players.Add(p);
             }
 
             m_Scene = Scene;
             m_Board = new Board();
-            m_Deck = new Deck(info.CardMultiplier);            
+            m_Deck = new Deck(info.CardMultiplier);
         }
 
         public void Start()
         {
             Random r = new Random();
-            for (int n = m_Players.Count- 1; n > 0; --n)
+            for (int n = m_Players.Count - 1; n > 0; --n)
             {
                 int k = r.Next(n + 1);
                 Player temp = m_Players[n];
@@ -46,16 +44,14 @@ namespace ruigeruben
             }
 
             m_Players[0].Turn = true;
+
             Card StartTile = new Card("21202");
+            m_Scene.m_BoardLayer.DrawCard(StartTile, new CCPoint(0, 0));
+
             m_CurrentCard = m_Deck.GetNextCard();
-            m_BoardLayer = new BoardLayer();
-            CCPoint PointStartTile = new CCPoint(0, 0);
-            m_BoardLayer.DrawCard(StartTile, PointStartTile);
             m_Scene.m_Overlay.update_interface(m_Players, m_Deck.GetCardsLeft(), m_CurrentCard);
-
-
         }
-
+  
         public void NextTurn()
         {
             for(int i=0; i<m_Players.Count; i++ )
