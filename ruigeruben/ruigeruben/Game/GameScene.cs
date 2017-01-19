@@ -17,9 +17,6 @@ namespace ruigeruben
         public List<InputPlayer> Players;
         public int CardMultiplier;
         public int Aliens;
-        public int CardsLeft;
-        
-
     }
 
     class GameScene : CCScene
@@ -73,12 +70,17 @@ namespace ruigeruben
 
         void OnTouchesEnded(List<CCTouch> touches, CCEvent touchEvent)
         {
+            if (m_Touches == 2)
+                zooming = false;
+
             m_Touches -= touches.Count;
 
             if (m_Touches < 0)
                 m_Touches = 0;
         }
         float scale = 1;
+        CCPoint m_mid = new CCPoint();
+        bool zooming = false;
         void OnTouchesMoved(List<CCTouch> touches, CCEvent touchEvent)
         {
             if (m_Touches == 1) // Pan
@@ -107,8 +109,18 @@ namespace ruigeruben
                     CCPoint sec = touches[i + 1].LocationOnScreen;
                     
                     CCPoint mid = m_BackgroundLayer.ConvertToWorldspace(fir - sec);
+                    mid.X = Math.Abs(mid.X);
+                    mid.Y = Math.Abs(mid.Y);
 
-                    scale += 0.10f;
+                    if (zooming)
+                    {
+                        if (mid.Length < m_mid.Length)
+                        {
+
+                        }
+                    }
+
+                    scale += 0.001f;
                     m_BoardLayer.Scale = scale;
 
                     var s = m_BoardLayer.Camera.CenterInWorldspace;
@@ -132,12 +144,12 @@ namespace ruigeruben
         
         public void OnRotateLeft()
         {
-            test.Rotate(-90);
+            m_Game.RotateCard(-90);
         }
 
         public void OnRotateRight()
         {
-            test.Rotate(90);
+            m_Game.RotateCard(90);
         }
 
         public void OnAlienClick()
