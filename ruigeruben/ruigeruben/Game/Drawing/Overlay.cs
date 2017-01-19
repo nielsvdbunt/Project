@@ -10,6 +10,7 @@ namespace ruigeruben
         string font = "Fonts/Coalition";
         List<Button> buttons = new List<Button>();
         List<CCLabel> labels = new List<CCLabel>();
+        List<CCSprite> sprites = new List<CCSprite>();
         CCSprite m_AlienButton;
         CCSprite m_CardButton;
 
@@ -69,6 +70,12 @@ namespace ruigeruben
             }
             labels.Clear();
 
+            foreach(CCSprite s in sprites)
+            {
+                RemoveChild(s);
+            }
+            sprites.Clear();
+
             for (t = 0; t < playerlist.Count; t++) //for loop for creating the values for the currentplayer
             {
                 if (playerlist[t].Turn == true)
@@ -101,9 +108,11 @@ namespace ruigeruben
                 smallcoin.Scale = 0.25f;
                 smallalien.Position = new CCPoint(1860, 1000 - gotvet * 100);
                 smallcoin.Position = new CCPoint(1750, 1000 - gotvet * 100);
-             
                 AddChild(smallalien);
                 AddChild(smallcoin);
+                sprites.Add(smallalien);
+                sprites.Add(smallcoin);
+
                 gotvet++;
                 t++;
            }
