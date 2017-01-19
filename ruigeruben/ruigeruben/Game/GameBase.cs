@@ -44,6 +44,7 @@ namespace ruigeruben
                 m_Players[n] = m_Players[k];
                 m_Players[k] = temp;
             }
+
             m_Players[0].Turn = true;
             Card StartTile = new Card("21202");
             m_CurrentCard = m_Deck.GetNextCard();
@@ -51,6 +52,8 @@ namespace ruigeruben
             CCPoint PointStartTile = new CCPoint(0, 0);
             m_BoardLayer.DrawCard(StartTile, PointStartTile);
             m_Scene.m_Overlay.update_interface(m_Players, m_Deck.GetCardsLeft(), m_CurrentCard);
+
+
         }
 
         public void NextTurn()
