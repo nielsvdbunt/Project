@@ -65,6 +65,9 @@ namespace ruigeruben
 
         public void OnTouchesBegan(List<CCTouch> touches, CCEvent touchEvent)
         {
+            float x = touches[0].LocationOnScreen.X;
+            float y = touches[0].LocationOnScreen.Y;
+            if (y <=1200 && x <= 2300)
             m_Touches += touches.Count;
         }
 
