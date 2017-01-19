@@ -120,6 +120,7 @@ namespace ruigeruben
             sprite.Position = new CCPoint(x, y);
             AddChild(sprite);
         }
+
         private void MakeLabel(string text, string font, int textsize, int x, int y, CCColor3B color)//method for creating simple labels
         {
             CCLabel label = new CCLabel(text, font, textsize, CCLabelFormat.SpriteFont);

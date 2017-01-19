@@ -42,9 +42,12 @@ namespace ruigeruben
                 m_Players[n] = m_Players[k];
                 m_Players[k] = temp;
             }
+
             m_Players[0].Turn = true;
             m_CurrentCard = m_Deck.GetNextCard();
             m_Scene.m_Overlay.update_interface(m_Players, m_Deck.GetCardsLeft(), m_CurrentCard);
+
+
         }
 
         public void NextTurn()

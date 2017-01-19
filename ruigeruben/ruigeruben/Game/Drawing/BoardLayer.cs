@@ -100,7 +100,7 @@ namespace ruigeruben
         public void DrawCard(Card card, CCPoint point)
         {
             CCPoint p = fromLocation(point);
-            CCSprite sprite = new CCSprite();
+            CCSprite sprite = TexturePool.GetSprite(card.m_Hash);
             sprite.AnchorPoint = new CCPoint(0, 0);
             sprite.Position = p;
             AddChild(sprite);
