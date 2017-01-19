@@ -85,10 +85,10 @@ namespace ruigeruben
             var bounds = VisibleBoundsWorldspace;
             int x = Convert.ToInt32(point.X);
             int y = Convert.ToInt32(point.Y);
-            int middenx = Convert.ToInt32(bounds.Center.X) - (tilesize / 2);
-            int middeny = Convert.ToInt32(bounds.Center.Y) - (tilesize / 2);
-            int diffx = (x - middenx) / tilesize;
-            int diffy = (y - middeny) / tilesize;
+            int middenx = Convert.ToInt32(bounds.Center.X) - (m_tilesize / 2);
+            int middeny = Convert.ToInt32(bounds.Center.Y) - (m_tilesize / 2);
+            int diffx = (x - middenx) / m_tilesize;
+            int diffy = (y - middeny) / m_tilesize;
 
             CCPoint p = new CCPoint(diffx, diffy);
             return p;
@@ -99,10 +99,10 @@ namespace ruigeruben
             var bounds = VisibleBoundsWorldspace;
             float x = point.X;
             float y = point.Y;
-            int middenx = Convert.ToInt32(bounds.Center.X) - (tilesize / 2);
-            int middeny = Convert.ToInt32(bounds.Center.X) - (tilesize / 2);
-            x = middenx + (x * tilesize);
-            y = middeny + (y * tilesize);
+            int middenx = Convert.ToInt32(bounds.Center.X) - (m_tilesize / 2);
+            int middeny = Convert.ToInt32(bounds.Center.X) - (m_tilesize / 2);
+            x = middenx + (x * m_tilesize);
+            y = middeny + (y * m_tilesize);
             CCPoint p = new CCPoint(x, y);
             return p;
         }
