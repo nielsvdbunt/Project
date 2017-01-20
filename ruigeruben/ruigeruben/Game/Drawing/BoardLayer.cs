@@ -42,6 +42,9 @@ namespace ruigeruben
 
         }
 
+       
+        
+
         public void DrawRaster()
         {
             var bounds = VisibleBoundsWorldspace;
@@ -62,19 +65,21 @@ namespace ruigeruben
                     */
 
             }
-           
+          
+
+
         }
 
-       /* public void Dragging()
-        {
-            Card tile = m_GameBase.m_CurrentCard;
-            if (m_GameScene.IsCardDragging)
-            {
-                CCSprite FlyingTile = TexturePool.GetSprite(tile.m_Hash);
-                FlyingTile.Position = m_GameScene.Location;
-            }
-        }
-*/
+        /* public void Dragging()
+         {
+             Card tile = m_GameBase.m_CurrentCard;
+             if (m_GameScene.IsCardDragging)
+             {
+                 CCSprite FlyingTile = TexturePool.GetSprite(tile.m_Hash);
+                 FlyingTile.Position = m_GameScene.Location;
+             }
+         }
+ */
         public void DrawShit()
         {
 
