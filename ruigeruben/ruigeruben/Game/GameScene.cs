@@ -47,8 +47,7 @@ namespace ruigeruben
             this.AddLayer(m_CardAttrLayer = new CardAttributeLayer(), 2);
             this.AddLayer(m_Overlay = new Overlay(this), 3);
 
-            //  m_TexturePool = new TexturePool();
-           // m_BoardLayer.AddTile();
+          
            
 
             var touchListener = new CCEventListenerTouchAllAtOnce();
@@ -57,7 +56,7 @@ namespace ruigeruben
             touchListener.OnTouchesMoved = OnTouchesMoved;
             AddEventListener(touchListener, this);
 
-          //  m_BoardLayer.AddTile(m_Game.m_CurrentCard);
+        
             m_BoardLayer.AddPanda(500, 500);
             m_BoardLayer.AddPanda(-500, 500);
             m_BoardLayer.AddPanda(2000, 500);
@@ -121,8 +120,8 @@ namespace ruigeruben
 
             if (IsCardFlying)
             {
-               m_BoardLayer.MoveCardAround(x, y);
-              // tile.RunAction(new CCMoveTo(0f, new CCPoint(touches[0].Location.X, touches[0].Location.Y)));
+               m_BoardLayer.MoveCardAround(x, y, m_Overlay.m_CardButton);
+            
 
             }
             else

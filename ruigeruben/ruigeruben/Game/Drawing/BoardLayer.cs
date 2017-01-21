@@ -21,35 +21,13 @@ namespace ruigeruben
         {
             this.AnchorPoint = new CCPoint(0, 0);
             this.ContentSize = new CCSize(5000, 5000);
-            //testetstetstetstetst
-            tile = TexturePool.GetSprite("00003");
-            tile.Position = new CCPoint(1020, 100);
-            AddChild(tile);
-
-            //tile.PositionX = 400;
-            //panda.PositionY = 500;
-            var touchListener = new CCEventListenerTouchAllAtOnce();
-
-
+           
         }
 
-        /*   public void virtualcard(Card c)
-           {
-               tile = TexturePool.GetSprite(c.m_Hash);
+        public void MoveCardAround(float x, float y, CCSprite tiletest)
+        {
+            tiletest.RunAction(new CCMoveTo(0f, new CCPoint(x, y)));
 
-           }
-               */
-    /* public void AddTile(CCSprite tilefromlayer)
-        {
-            //tile = tilefromlayer;
-          //  tile.Position = new CCPoint(1020, 100);
-          //  AddChild(tile);
-        
-        */
-        public void MoveCardAround(float x, float y)
-        {
-           
-            tile.RunAction(new CCMoveTo(0f, new CCPoint(x, y)));
         }
         
         public void AddPanda(int x, int y)
