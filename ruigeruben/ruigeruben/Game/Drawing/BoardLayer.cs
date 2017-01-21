@@ -10,14 +10,63 @@ namespace ruigeruben
 {
     class BoardLayer : CCLayer
     {
+        CCSprite tile;
         GameScene m_GameScene;
         float scale = 1;
         GameBase m_GameBase;
+        Overlay m_Overlay;
+        bool IsCardFlying = false;
         int m_tilesize = 200;
         public BoardLayer()
         {
             this.AnchorPoint = new CCPoint(0, 0);
             this.ContentSize = new CCSize(5000, 5000);
+            //testetstetstetstetst
+
+           tile = TexturePool.GetSprite("00003");
+           tile.Position = new CCPoint(1020, 100);
+            AddChild(tile);
+            //tile.PositionX = 400;
+            //panda.PositionY = 500;
+            var touchListener = new CCEventListenerTouchAllAtOnce();
+
+            touchListener.OnTouchesBegan = OnTouchesBegan;
+            touchListener.OnTouchesMoved = OnTouchesMoved;
+
+            AddEventListener(touchListener, this);
+
+        }
+
+        /*   public void virtualcard(Card c)
+           {
+               tile = TexturePool.GetSprite(c.m_Hash);
+
+           }
+               */
+        public void OnTouchesBegan(List<CCTouch> touches, CCEvent touchEvent)
+
+        {
+
+            float x = touches[0].LocationOnScreen.X;
+            float y = touches[0].LocationOnScreen.Y;
+            if (x > 1295 && x < 1430 && touches.Count > 0) //Voor het slepen van de kaart in layer
+            {
+                IsCardFlying = true;
+               
+            }
+            else
+                IsCardFlying = false;
+            
+        }
+
+        public void OnTouchesMoved(List<CCTouch> touches, CCEvent touchEvent)
+        {
+            if(IsCardFlying)
+            {
+               tile.RunAction(new CCMoveTo(0.5f, new CCPoint(touches[0].Location.X, touches[0].Location.Y)));
+                
+            }
+          
         }
 
         public void AddPanda(int x, int y)

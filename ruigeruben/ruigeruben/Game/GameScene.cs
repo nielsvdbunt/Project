@@ -24,14 +24,16 @@ namespace ruigeruben
         BackgroundLayer m_BackgroundLayer;
         public BoardLayer m_BoardLayer;
         public CardAttributeLayer m_CardAttrLayer;
+       
         public Overlay m_Overlay;
-        CCPoint LocationEnd;
-        public TexturePool m_TeturePool;
-        public  bool IsCardDragging = false;
+        Deck m_Deck;
+        public TexturePool m_TexturePool;
+       
         public CCPoint Location;
         GameBase m_Game;
-
+        CCCallFuncN walkAnimStop = new CCCallFuncN(node => node.StopAllActions());
         int m_Touches;
+       
 
         Card test = new Card(Card.CardTypes[10]);
         
@@ -44,8 +46,9 @@ namespace ruigeruben
             this.AddLayer(m_CardAttrLayer = new CardAttributeLayer(), 2);
             this.AddLayer(m_Overlay = new Overlay(this), 3);
 
-            m_TeturePool = new TexturePool();
+            m_TexturePool = new TexturePool();
 
+           
 
             var touchListener = new CCEventListenerTouchAllAtOnce();
             touchListener.OnTouchesEnded = OnTouchesEnded;
@@ -56,28 +59,35 @@ namespace ruigeruben
             m_BoardLayer.AddPanda(500, 500);
             m_BoardLayer.AddPanda(-500, 500);
             m_BoardLayer.AddPanda(2000, 500);
+
             //m_BoardLayer.AddPanda(0, 132);
         }
 
+     
         public void StartGame()
         {
             m_BoardLayer.DrawRaster();
             m_Game.Start();
         }
 
+
         public void OnTouchesBegan(List<CCTouch> touches, CCEvent touchEvent)
         {
             float x = touches[0].LocationOnScreen.X;
-            float y = touches[0].LocationOnScreen.Y;
-            Location = new CCPoint(x, y);
-            if (y <= 1200 && x <= 2300)
-            {
-                m_Touches += touches.Count;
-            }
-         
-            
-        }
+            float y = touches[0].LocationOnScreen.Y;     
 
+
+            Location = new CCPoint(x, y);
+            if (touches.Count > 0)
+            {
+                if (y <= 1200 && x <= 2300)
+                {
+                    m_Touches += touches.Count;
+                }
+
+            }
+            
+            }
         void OnTouchesEnded(List<CCTouch> touches, CCEvent touchEvent)
         {
             if (m_Touches == 2)
@@ -87,8 +97,8 @@ namespace ruigeruben
 
             if (m_Touches < 0)
                 m_Touches = 0;
-              if (IsCardDragging == true)
-                IsCardDragging = false; 
+            
+               
         }
         float scale = 1;
         CCPoint m_mid = new CCPoint();
@@ -149,18 +159,7 @@ namespace ruigeruben
 
                 }           
             }
-            else if (x > 1295 && x < 1430) //Voor het slepen van de kaart in layer
-            {
-
-                Card tile = m_Game.m_CurrentCard;
-                foreach (CCTouch i in touches)
-                {
-                    CCSprite FlyingTile = TexturePool.GetSprite(tile.m_Hash);
-                    FlyingTile.Position = i.LocationOnScreen;
-                    AddChild(FlyingTile);
-                }
-
-            }
+               
         }
 
         public void OnNextClick()
