@@ -120,9 +120,10 @@ namespace ruigeruben
             m_CardButton = TexturePool.GetSprite(tile.m_Hash);
             m_CardButton.Position = new CCPoint(1020, 100);
             m_CardButton.Rotation = tile.GetRotation();
+          
             AddChild(m_CardButton);
-           
-            
+
+
         }
 
         private void MakeSprite(string name, int x, int y)//this method is for creating sprites
