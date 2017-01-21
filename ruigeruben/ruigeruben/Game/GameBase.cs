@@ -44,7 +44,8 @@ namespace ruigeruben
 
             m_Players[0].Turn = true;
 
-            Card StartTile = new Card("21202");
+           
+            CCSprite StartTile = TexturePool.GetSprite("21202");
             m_Scene.m_BoardLayer.DrawCard(StartTile, new CCPoint(0, 0));
 
             m_CurrentCard = m_Deck.GetNextCard();

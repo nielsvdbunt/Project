@@ -115,13 +115,14 @@ namespace ruigeruben
 
         void OnTouchesMoved(List<CCTouch> touches, CCEvent touchEvent)
         {
+            
             float x = touches[0].LocationOnScreen.X;
             float y = touches[0].LocationOnScreen.Y;
 
             if (IsCardFlying)
             {
                m_BoardLayer.MoveCardAround(x, y, m_Overlay.m_CardButton);
-            
+               
 
             }
             else

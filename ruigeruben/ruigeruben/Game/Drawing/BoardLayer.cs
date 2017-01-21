@@ -27,6 +27,7 @@ namespace ruigeruben
         public void MoveCardAround(float x, float y, CCSprite tiletest)
         {
             tiletest.RunAction(new CCMoveTo(0f, new CCPoint(x, y)));
+            DrawCard(tiletest, tiletest.Position);
 
         }
         
@@ -122,14 +123,16 @@ namespace ruigeruben
             return p;
         }
 
-        public void DrawCard(Card card, CCPoint point)
+        public void DrawCard(CCSprite c, CCPoint point)
         {
             CCPoint p = fromLocation(point);
-            CCSprite sprite = TexturePool.GetSprite(card.m_Hash);
-            sprite.AnchorPoint = new CCPoint(0, 0);
-            sprite.Position = p;
-            AddChild(sprite);
+            //CCSprite sprite = TexturePool.GetSprite(card.m_Hash);
+            c.AnchorPoint = new CCPoint(0, 0);
+            c.Position = p;
+            AddChild(c);
         }
+
+        
     }
     
 }
