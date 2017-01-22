@@ -24,14 +24,17 @@ namespace ruigeruben
         BackgroundLayer m_BackgroundLayer;
         public BoardLayer m_BoardLayer;
         public CardAttributeLayer m_CardAttrLayer;
+        CCSprite tile;
+        bool IsCardFlying;
         public Overlay m_Overlay;
-        CCPoint LocationEnd;
-        public TexturePool m_TeturePool;
-        public  bool IsCardDragging = false;
+        Deck m_Deck;
+        public TexturePool m_TexturePool;
+       
         public CCPoint Location;
         GameBase m_Game;
-
+        CCCallFuncN walkAnimStop = new CCCallFuncN(node => node.StopAllActions());
         int m_Touches;
+       
 
         Card test = new Card(Card.CardTypes[10]);
         
@@ -44,8 +47,8 @@ namespace ruigeruben
             this.AddLayer(m_CardAttrLayer = new CardAttributeLayer(), 2);
             this.AddLayer(m_Overlay = new Overlay(this), 3);
 
-            m_TeturePool = new TexturePool();
-
+          
+           
 
             var touchListener = new CCEventListenerTouchAllAtOnce();
             touchListener.OnTouchesEnded = OnTouchesEnded;
@@ -53,29 +56,45 @@ namespace ruigeruben
             touchListener.OnTouchesMoved = OnTouchesMoved;
             AddEventListener(touchListener, this);
 
+        
             m_BoardLayer.AddPanda(500, 500);
             m_BoardLayer.AddPanda(-500, 500);
             m_BoardLayer.AddPanda(2000, 500);
+
             //m_BoardLayer.AddPanda(0, 132);
         }
 
+     
         public void StartGame()
         {
             m_BoardLayer.DrawRaster();
             m_Game.Start();
         }
 
+
         public void OnTouchesBegan(List<CCTouch> touches, CCEvent touchEvent)
         {
             float x = touches[0].LocationOnScreen.X;
-            float y = touches[0].LocationOnScreen.Y;
+            float y = touches[0].LocationOnScreen.Y;     
+
+
             Location = new CCPoint(x, y);
-            if (y <= 1200 && x <= 2300)
+            if (touches.Count > 0)
             {
-                m_Touches += touches.Count;
+                if (y <= 1200 && x <= 2300)
+                {
+                    m_Touches += touches.Count;
+                }
+
             }
-         
-            
+            if (x > 1295 && x < 1430 && touches.Count > 0) //Voor het slepen van de kaart in layer
+            {
+                IsCardFlying = true;
+
+            }
+            else
+                IsCardFlying = false;
+
         }
 
         void OnTouchesEnded(List<CCTouch> touches, CCEvent touchEvent)
@@ -87,80 +106,81 @@ namespace ruigeruben
 
             if (m_Touches < 0)
                 m_Touches = 0;
-              if (IsCardDragging == true)
-                IsCardDragging = false; 
+            
+               
         }
         float scale = 1;
         CCPoint m_mid = new CCPoint();
         bool zooming = false;
+
         void OnTouchesMoved(List<CCTouch> touches, CCEvent touchEvent)
         {
+            
             float x = touches[0].LocationOnScreen.X;
-            if (m_Touches == 1) // Pan
-            {
-                
-                foreach (CCTouch i in touches)
-                {
-                    var s = m_BoardLayer.Camera.CenterInWorldspace;
-                    s.X += i.PreviousLocationOnScreen.X - i.LocationOnScreen.X;//i.LocationOnScreen.X - i.PreviousLocationOnScreen.X;
-                    s.Y += i.LocationOnScreen.Y - i.PreviousLocationOnScreen.Y;
-                    m_BoardLayer.Camera.CenterInWorldspace = s;
+            float y = touches[0].LocationOnScreen.Y;
 
-                    var target = m_BoardLayer.Camera.TargetInWorldspace;
-                    target.X = s.X;
-                    target.Y = s.Y;
-                    m_BoardLayer.Camera.TargetInWorldspace = target;
-                }
+            if (IsCardFlying)
+            {
+               m_BoardLayer.MoveCardAround(x, y, m_Overlay.m_CardButton);
+               
+
             }
-            else if(m_Touches == 2) // Zoom
+            else
             {
-                if (touches.Count < 2)
-                    return;
-
-                for(int i = 0; i < touches.Count; i += 2)
+                if (m_Touches == 1) // Pan
                 {
-                    CCPoint fir = touches[i].LocationOnScreen;
-                    CCPoint sec = touches[i + 1].LocationOnScreen;
-                    
-                    CCPoint mid = m_BackgroundLayer.ConvertToWorldspace(fir - sec);
-                    mid.X = Math.Abs(mid.X);
-                    mid.Y = Math.Abs(mid.Y);
 
-                    if (zooming)
+                    foreach (CCTouch i in touches)
                     {
-                        if (mid.Length < m_mid.Length)
-                        {
+                        var s = m_BoardLayer.Camera.CenterInWorldspace;
+                        s.X += i.PreviousLocationOnScreen.X - i.LocationOnScreen.X;//i.LocationOnScreen.X - i.PreviousLocationOnScreen.X;
+                        s.Y += i.LocationOnScreen.Y - i.PreviousLocationOnScreen.Y;
+                        m_BoardLayer.Camera.CenterInWorldspace = s;
 
-                        }
+                        var target = m_BoardLayer.Camera.TargetInWorldspace;
+                        target.X = s.X;
+                        target.Y = s.Y;
+                        m_BoardLayer.Camera.TargetInWorldspace = target;
                     }
-
-                    scale += 0.001f;
-                    m_BoardLayer.Scale = scale;
-
-                    var s = m_BoardLayer.Camera.CenterInWorldspace;
-                    s.X = mid.X;//i.LocationOnScreen.X - i.PreviousLocationOnScreen.X;
-                    s.Y = mid.Y;
-                    m_BoardLayer.Camera.CenterInWorldspace = s;
-
-                    var target = m_BoardLayer.Camera.TargetInWorldspace;
-                    target.X = mid.X;
-                    target.Y = mid.Y;
-                    m_BoardLayer.Camera.TargetInWorldspace = target;
-
-                }           
-            }
-            else if (x > 1295 && x < 1430) //Voor het slepen van de kaart in layer
-            {
-
-                Card tile = m_Game.m_CurrentCard;
-                foreach (CCTouch i in touches)
-                {
-                    CCSprite FlyingTile = TexturePool.GetSprite(tile.m_Hash);
-                    FlyingTile.Position = i.LocationOnScreen;
-                    AddChild(FlyingTile);
                 }
+                else if (m_Touches == 2) // Zoom
+                {
+                    if (touches.Count < 2)
+                        return;
 
-            }
+                    for (int i = 0; i < touches.Count; i += 2)
+                    {
+                        CCPoint fir = touches[i].LocationOnScreen;
+                        CCPoint sec = touches[i + 1].LocationOnScreen;
+
+                        CCPoint mid = m_BackgroundLayer.ConvertToWorldspace(fir - sec);
+                        mid.X = Math.Abs(mid.X);
+                        mid.Y = Math.Abs(mid.Y);
+
+                        if (zooming)
+                        {
+                            if (mid.Length < m_mid.Length)
+                            {
+
+                            }
+                        }
+
+                        scale += 0.001f;
+                        m_BoardLayer.Scale = scale;
+
+                        var s = m_BoardLayer.Camera.CenterInWorldspace;
+                        s.X = mid.X;//i.LocationOnScreen.X - i.PreviousLocationOnScreen.X;
+                        s.Y = mid.Y;
+                        m_BoardLayer.Camera.CenterInWorldspace = s;
+
+                        var target = m_BoardLayer.Camera.TargetInWorldspace;
+                        target.X = mid.X;
+                        target.Y = mid.Y;
+                        m_BoardLayer.Camera.TargetInWorldspace = target;
+
+                    }
+                }
+            } 
         }
 
         public void OnNextClick()
