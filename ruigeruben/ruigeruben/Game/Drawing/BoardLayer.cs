@@ -16,7 +16,7 @@ namespace ruigeruben
         GameBase m_GameBase;
         Overlay m_Overlay;
        
-        int m_tilesize = 200;
+        int m_tilesize = 100;
         public BoardLayer()
         {
             this.AnchorPoint = new CCPoint(0, 0);
@@ -116,7 +116,7 @@ namespace ruigeruben
             float x = point.X;
             float y = point.Y;
             int middenx = Convert.ToInt32(bounds.Center.X) - (m_tilesize / 2);
-            int middeny = Convert.ToInt32(bounds.Center.X) - (m_tilesize / 2);
+            int middeny = Convert.ToInt32(bounds.Center.Y) - (m_tilesize / 2);
             x = middenx + (x * m_tilesize);
             y = middeny + (y * m_tilesize);
             CCPoint p = new CCPoint(x, y);
