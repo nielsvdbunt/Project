@@ -73,6 +73,7 @@ namespace ruigeruben
             m_CurrentCard = m_Deck.GetNextCard();
             m_Scene.m_Overlay.UpdateInterface(m_Players, m_Deck.GetCardsLeft(), m_CurrentCard);
 
+            FindPossibleMoves();
         } 
 
         public void RotateCard(int Rot)
@@ -94,28 +95,43 @@ namespace ruigeruben
         {
             PosiblePos = new List<CCPoint>();
 
-            List<CCPoint> OpenSpots = new List<CCPoint>();
-
-            for(int i = 0; i < m_Board.m_virCards.Count; i++)
+            foreach (CCPoint p in m_Board.m_OpenSpots)
             {
-                CCPoint p = m_Board.m_virLocations[i];
-
                 for (int j = -1; j <= 2; j += 2)
                 {
-                    if (m_Board.GetCard(new CCPoint(p.X + j, p.Y)) == null && new CCPoint(p.X + j, p.Y) != OpenSpots[j])
-                        OpenSpots.Add(new CCPoint(p.X + j, p.Y));
+                    Card c = m_Board.GetCard(new CCPoint(p.X + j, p.Y));
 
-                    if (m_Board.GetCard(new CCPoint(p.X ,  p.Y + j)) == null)
-                        OpenSpots.Add(new CCPoint(p.X , p.Y + j));
+                    if(c != null)
+                    { 
+                        if (j < 0)
+                        {
+                            if (m_CurrentCard.GetAttribute(1) == c.GetAttribute(3))
+                                PosiblePos.Add(p);
+                        }                     
+                        else
+                        {
+                            if (m_CurrentCard.GetAttribute(3) == c.GetAttribute(1))
+                                PosiblePos.Add(p);
+                        }
+                    }
+
+                    c = m_Board.GetCard(new CCPoint(p.X, p.Y + j));
+
+                    if(c != null)
+                    {
+                        if (j < 0)
+                        {
+                            if (m_CurrentCard.GetAttribute(0) == c.GetAttribute(2))
+                                PosiblePos.Add(p);
+                        }
+                        else
+                        {
+                            if (m_CurrentCard.GetAttribute(2) == c.GetAttribute(0))
+                                PosiblePos.Add(p);
+                        }
+                    }
                 }
-
-
             }
-
-            
-
-
-            int x = 2;
         }
 
 
