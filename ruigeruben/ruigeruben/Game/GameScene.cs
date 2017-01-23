@@ -50,24 +50,18 @@ namespace ruigeruben
             touchListener.OnTouchesBegan = OnTouchesBegan;
             touchListener.OnTouchesMoved = OnTouchesMoved;
             AddEventListener(touchListener, this);
-
-            m_BoardLayer.AddPanda(500, 500);
-            m_BoardLayer.AddPanda(-500, 500);
-            m_BoardLayer.AddPanda(2000, 500);
-            //m_BoardLayer.AddPanda(0, 132);
         }
 
         public void StartGame()
         {
-            m_BoardLayer.DrawRaster();
+     
+
             m_Game.Start();
         }
 
         public void OnTouchesBegan(List<CCTouch> touches, CCEvent touchEvent)
         {
-            float x = touches[0].LocationOnScreen.X;
-            float y = touches[0].LocationOnScreen.Y;
-            if (y <=1200 && x <= 2300)
+            
             m_Touches += touches.Count;
         }
 
