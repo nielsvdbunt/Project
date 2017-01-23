@@ -60,10 +60,10 @@ namespace ruigeruben
         public override void OnEnter()
         {
             base.OnEnter();
-
+            
             var s = m_BoardLayer.Camera.CenterInWorldspace;
-            s.X += 500;
-            s.Y += 500;
+            s.X = 0;
+            s.Y = 0;
             m_BoardLayer.Camera.CenterInWorldspace = s;
 
             var target = m_BoardLayer.Camera.TargetInWorldspace;

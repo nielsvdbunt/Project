@@ -12,6 +12,7 @@ namespace ruigeruben
         Deck m_Deck;
         public Board m_Board;
         public Card m_CurrentCard;
+        List<CCPoint> PosiblePos;
 
         public GameBase(GameScene Scene, InputGameInfo info)
         {
@@ -45,7 +46,7 @@ namespace ruigeruben
 
             Card BeginCard = new Card("21202");
             m_Scene.m_BoardLayer.DrawCard(BeginCard, new CCPoint(0, 0));
-
+            m_Board.AddCard(BeginCard, new CCPoint(0,0));
             m_CurrentCard = m_Deck.GetNextCard();
             m_Scene.m_Overlay.UpdateInterface(m_Players, m_Deck.GetCardsLeft(), m_CurrentCard);
         }
@@ -79,6 +80,7 @@ namespace ruigeruben
 
         public void Walktiles(int x, int y)
         {
+         
             for (int i = -1; i <= 2; i += 2)
             {
                 Checktiles(x + i, y);
@@ -91,20 +93,17 @@ namespace ruigeruben
 
         public bool Checktiles(int x, int y)
         {
-          
+            PosiblePos = new List<CCPoint>();
             Card c = m_Board.GetCard(x, y);
             foreach (Card kaart in m_Board.m_virCards)
             {
-                if (kaart.GetHashCode() == m_CurrentCard.GetHashCode()  )
-                    return true;
-                else
-                    return false;
+                
             }
 
-            return false;
+            return true;
         }
 
 
-
+       
     }
 }
