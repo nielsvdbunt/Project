@@ -10,7 +10,7 @@ namespace ruigeruben
 
     class TexturePool
     {
-        public static CCSpriteSheet sheet = new CCSpriteSheet("sheetfinal.plist", "sheetimage.png");
+        public static CCSpriteSheet sheet = new CCSpriteSheet("OldSheetWhite.plist", "OldSheetWhite.png");
 
         public static CCSprite GetSprite(string Name)
         {
