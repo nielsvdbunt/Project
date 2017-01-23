@@ -16,6 +16,10 @@ namespace ruigeruben
         {
             CCSpriteFrame frame = sheet.Frames.Find(item => item.TextureFilename == Name + ".png");
             CCSprite sprite = new CCSprite(frame);
+            sprite.IsColorModifiedByOpacity = true;
+            sprite.IsColorCascaded = true;
+         
+            
             return sprite;
         }
     }
