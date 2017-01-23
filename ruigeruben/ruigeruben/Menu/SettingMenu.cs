@@ -11,6 +11,7 @@ namespace ruigeruben
     {
         CCRect bounds;
         Button m_BackMenuButton;
+        Button m_MusicButton;
         List<Button> m_Buttons;
 
         public SettingMenu()
@@ -34,6 +35,34 @@ namespace ruigeruben
             m_BackMenuButton = new Button("<<<", new CCPoint(bounds.MinX + 70, bounds.MaxY - 100), Font, FontSize, this);
             m_BackMenuButton.OnClicked += new ClickEventHandler(OnBackMenu);
             m_Buttons.Add(m_BackMenuButton);
+
+            CCLabel Music = new CCLabel("Music:", Font, FontSize, CCLabelFormat.SpriteFont);
+            Music.Position = new CCPoint(bounds.Center.X - 200, bounds.Center.Y);
+            AddChild(Music);
+
+            if (CCAudioEngine.SharedEngine.BackgroundMusicPlaying == true)
+                m_MusicButton = new Button("On", new CCPoint(bounds.Center), Font, FontSize, this);
+            else
+            {
+                m_MusicButton = new Button("Off", new CCPoint(bounds.Center), Font, FontSize, this);
+                m_MusicButton.m_Label.Color = CCColor3B.Red;
+            }
+            m_MusicButton.OnClicked += delegate
+            {
+                if (m_MusicButton.m_Label.Text == "On")
+                {
+                    m_MusicButton.m_Label.Text = "Off";
+                    m_MusicButton.m_Label.Color = CCColor3B.Red;
+                    CCAudioEngine.SharedEngine.PauseBackgroundMusic();
+                }
+                else
+                {
+                    m_MusicButton.m_Label.Text = "On";
+                    m_MusicButton.m_Label.Color = CCColor3B.White;
+                    CCAudioEngine.SharedEngine.ResumeBackgroundMusic();
+                }
+            };
+            m_Buttons.Add(m_MusicButton);
 
         }
         public override void OnClick(CCPoint Location)
