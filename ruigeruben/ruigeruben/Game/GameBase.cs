@@ -46,9 +46,13 @@ namespace ruigeruben
 
             Card BeginCard = new Card("21202");
             m_Scene.m_BoardLayer.DrawCard(BeginCard, new CCPoint(0, 0));
-            m_Board.AddCard(BeginCard, new CCPoint(0,0));
+            m_Board.AddCard(BeginCard, new CCPoint(0, 0));
+            m_Board.AddCard(BeginCard, new CCPoint(1, 1));
+
             m_CurrentCard = m_Deck.GetNextCard();
             m_Scene.m_Overlay.UpdateInterface(m_Players, m_Deck.GetCardsLeft(), m_CurrentCard);
+
+            FindPossibleMoves();
         }
   
         public void NextTurn()
@@ -79,28 +83,39 @@ namespace ruigeruben
         }
 
         public void Walktiles(int x, int y)
-        {
-         
-            for (int i = -1; i <= 2; i += 2)
-            {
-                Checktiles(x + i, y);
-                Checktiles(x, y + i);
-            }
+        {       
+        
             
 
         }
 
 
-        public bool Checktiles(int x, int y)
+        public void FindPossibleMoves()
         {
             PosiblePos = new List<CCPoint>();
-            Card c = m_Board.GetCard(x, y);
-            foreach (Card kaart in m_Board.m_virCards)
+
+            List<CCPoint> OpenSpots = new List<CCPoint>();
+
+            for(int i = 0; i < m_Board.m_virCards.Count; i++)
             {
-                
+                CCPoint p = m_Board.m_virLocations[i];
+
+                for (int j = -1; j <= 2; j += 2)
+                {
+                    if (m_Board.GetCard(new CCPoint(p.X + j, p.Y)) == null && new CCPoint(p.X + j, p.Y) != OpenSpots[j])
+                        OpenSpots.Add(new CCPoint(p.X + j, p.Y));
+
+                    if (m_Board.GetCard(new CCPoint(p.X ,  p.Y + j)) == null)
+                        OpenSpots.Add(new CCPoint(p.X , p.Y + j));
+                }
+
+
             }
 
-            return true;
+            
+
+
+            int x = 2;
         }
 
 
