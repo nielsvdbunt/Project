@@ -24,17 +24,13 @@ namespace ruigeruben
         BackgroundLayer m_BackgroundLayer;
         public BoardLayer m_BoardLayer;
         public CardAttributeLayer m_CardAttrLayer;
-        bool IsCardFlying;
+        bool m_IsCardDragging;
         public Overlay m_Overlay;
        
-        public CCPoint Location;
         GameBase m_Game;
-        CCCallFuncN walkAnimStop = new CCCallFuncN(node => node.StopAllActions());
+    
         int m_Touches;
-       
-
-        Card test = new Card(Card.CardTypes[10]);
-        
+      
         public GameScene(CCGameView View, InputGameInfo info) : base(View)
         {
             m_Game = new GameBase(this, info);
@@ -75,26 +71,27 @@ namespace ruigeruben
 
         public void OnTouchesBegan(List<CCTouch> touches, CCEvent touchEvent)
         {
+            if(touches.Count <= 0)
+                return;
+            
             float x = touches[0].LocationOnScreen.X;
             float y = touches[0].LocationOnScreen.Y;     
 
-
-            Location = new CCPoint(x, y);
-            if (touches.Count > 0)
+            CCPoint Location = new CCPoint(x, y);
+ 
+            if (y <= 1200 && x <= 2300) //  Test if click on overlay
             {
-                if (y <= 1200 && x <= 2300)
-                {
-                    m_Touches += touches.Count;
-                }
-
+                m_Touches += touches.Count;
             }
+
+            
             if (x > 1295 && x < 1430 && touches.Count > 0) //Voor het slepen van de kaart in layer
             {
-                IsCardFlying = true;
+                m_IsCardDragging = true;
 
             }
             else
-                IsCardFlying = false;
+                m_IsCardDragging = false;
 
         }
 
@@ -116,15 +113,16 @@ namespace ruigeruben
 
         void OnTouchesMoved(List<CCTouch> touches, CCEvent touchEvent)
         {
-            
+            if (touches.Count <= 0)
+                return;
+
             float x = touches[0].LocationOnScreen.X;
             float y = touches[0].LocationOnScreen.Y;
 
-            if (IsCardFlying)
+            if (m_IsCardDragging)
             {
-             //  m_BoardLayer.MoveCardAround(x, y, m_Overlay.m_CardButton);
-               
-
+                //if(m_Game.m_CurrentCard != null)
+                CCSprite Spr = TexturePool.GetSprite(m_Game.m_CurrentCard.m_Hash);
             }
             else
             {
