@@ -34,7 +34,7 @@ namespace ruigeruben
             if(m_OpenSpots.Count != 0) // Start tile
             {
                 bool b = m_OpenSpots.Remove(p);
-                int x = 2;
+                
                // m_OpenSpots.Find(x => x.X == point.X && x.Y == point.Y);
             }
 
@@ -55,7 +55,7 @@ namespace ruigeruben
                 }
             }
 
-            int t = 2;
+          
         }
 
         public Card GetCard(CCPoint Point)

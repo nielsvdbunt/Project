@@ -93,24 +93,14 @@ namespace ruigeruben
         public void FindPossibleMoves()
         {
             PosiblePos = new List<CCPoint>();
-
-            List<CCPoint> OpenSpots = new List<CCPoint>();
-
-            for(int i = 0; i < m_Board.m_virCards.Count; i++)
+            
+            foreach(CCPoint p in m_Board.m_OpenSpots)
             {
-                CCPoint p = m_Board.m_virLocations[i];
-
-                for (int j = -1; j <= 2; j += 2)
-                {
-                    if (m_Board.GetCard(new CCPoint(p.X + j, p.Y)) == null && new CCPoint(p.X + j, p.Y) != OpenSpots[j])
-                        OpenSpots.Add(new CCPoint(p.X + j, p.Y));
-
-                    if (m_Board.GetCard(new CCPoint(p.X ,  p.Y + j)) == null)
-                        OpenSpots.Add(new CCPoint(p.X , p.Y + j));
-                }
-
 
             }
+           
+
+        }
 
             
 
@@ -121,4 +111,3 @@ namespace ruigeruben
 
        
     }
-}

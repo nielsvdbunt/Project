@@ -26,25 +26,20 @@ namespace ruigeruben
 
         }
 
-        public void DrawRaster()
+        public void DrawRaster(List<CCPoint> AvaliblePointsList)
         {
             var bounds = VisibleBoundsWorldspace;
         
             int HorLines = (int)bounds.Size.Width / 128;
             int VerLines = (int)bounds.Size.Height / 128;
-
-            for(int i = 0; i < HorLines; i++)
+            foreach(CCPoint p in AvaliblePointsList)
             {
                 var drawNode = new CCDrawNode();
-                AddChild(drawNode);
-                /*var shape = new CCPoint(bounds
-                drawNode.DrawLine()
-
+                this.AddChild(drawNode);
+                var shape = new CCRect(p.X*100, p.Y*100, 100, 100);
                 drawNode.DrawRect(shape, fillColor: CCColor4B.Transparent,
-                    borderWidth: 4,
-                    borderColor: CCColor4B.White);
-                    */
-
+                borderWidth: 4,
+                borderColor: CCColor4B.White);
             }
            
         }
