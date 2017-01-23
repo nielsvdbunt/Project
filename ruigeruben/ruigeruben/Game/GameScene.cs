@@ -42,30 +42,34 @@ namespace ruigeruben
             this.AddLayer(m_BackgroundLayer = new BackgroundLayer("achtergrond1"), 0);
             this.AddLayer(m_BoardLayer = new BoardLayer());
             this.AddLayer(m_CardAttrLayer = new CardAttributeLayer(), 2);
-            this.AddLayer(m_Overlay = new Overlay(this), 3);
-
-          
-           
+            this.AddLayer(m_Overlay = new Overlay(this), 3);          
 
             var touchListener = new CCEventListenerTouchAllAtOnce();
             touchListener.OnTouchesEnded = OnTouchesEnded;
             touchListener.OnTouchesBegan = OnTouchesBegan;
             touchListener.OnTouchesMoved = OnTouchesMoved;
             AddEventListener(touchListener, this);
-
-        
-            m_BoardLayer.AddPanda(500, 500);
-            m_BoardLayer.AddPanda(-500, 500);
-            m_BoardLayer.AddPanda(2000, 500);
-
-            //m_BoardLayer.AddPanda(0, 132);
         }
 
      
         public void StartGame()
         {
-            m_BoardLayer.DrawRaster();
             m_Game.Start();
+        }
+
+        public override void OnEnter()
+        {
+            base.OnEnter();
+
+            var s = m_BoardLayer.Camera.CenterInWorldspace;
+            s.X += 500;
+            s.Y += 500;
+            m_BoardLayer.Camera.CenterInWorldspace = s;
+
+            var target = m_BoardLayer.Camera.TargetInWorldspace;
+            target.X = s.X;
+            target.Y = s.Y;
+            m_BoardLayer.Camera.TargetInWorldspace = target;
         }
 
 

@@ -43,11 +43,11 @@ namespace ruigeruben
 
             m_Players[0].Turn = true;
 
-            m_Scene.m_BoardLayer.DrawCard(m_CurrentCard, new CCPoint(0, 0));
+            Card BeginCard = new Card("21202");
+            m_Scene.m_BoardLayer.DrawCard(BeginCard, new CCPoint(0, 0));
 
             m_CurrentCard = m_Deck.GetNextCard();
             m_Scene.m_Overlay.UpdateInterface(m_Players, m_Deck.GetCardsLeft(), m_CurrentCard);
-          //  m_BoardLayer.virtualcard(m_CurrentCard);
         }
   
         public void NextTurn()

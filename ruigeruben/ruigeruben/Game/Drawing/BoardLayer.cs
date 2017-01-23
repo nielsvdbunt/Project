@@ -12,20 +12,8 @@ namespace ruigeruben
     {
         public BoardLayer()
         {
-           // this.AnchorPoint = new CCPoint(400, 300);
+            this.AnchorPoint = new CCPoint(0, 0);
             //this.ContentSize = new CCSize(5000, 5000);
-        }
-
-        public void AddPanda(int x, int y)
-        {
-           
-           
-            CCSprite spr = new CCSprite("Panda");
-           
-            spr.PositionX = x;
-            spr.PositionY = y;
-           
-           
         }
 
         public void Zoom(bool In)
