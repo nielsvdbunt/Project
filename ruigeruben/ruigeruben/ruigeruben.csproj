@@ -143,22 +143,19 @@
     <AndroidAsset Include="Assets\Content\Images\rotateleft.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\Content\Images\tiles.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidAsset Include="Assets\Content\Sounds\sound1.mp3" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\Content\Images\alien1.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Assets\Content\tiles\" />
+  </ItemGroup>
+  <ItemGroup>
     <AndroidAsset Include="Assets\Content\Images\sheetimage.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\Content\Images\sheet.plist" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Assets\Content\tiles\" />
+    <AndroidAsset Include="Assets\Content\Images\sheetfinal.plist" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

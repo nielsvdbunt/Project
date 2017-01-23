@@ -11,6 +11,7 @@ namespace ruigeruben
         public List<Player> m_Players;
         Deck m_Deck;
         public Board m_Board;
+        BoardLayer m_BoardLayer;
         public Card m_CurrentCard;
 
         public GameBase(GameScene Scene, InputGameInfo info)
@@ -43,11 +44,13 @@ namespace ruigeruben
 
             m_Players[0].Turn = true;
 
-            Card StartTile = new Card("21202");
+           
+            CCSprite StartTile = TexturePool.GetSprite("21202");
             m_Scene.m_BoardLayer.DrawCard(StartTile, new CCPoint(0, 0));
 
             m_CurrentCard = m_Deck.GetNextCard();
             m_Scene.m_Overlay.UpdateInterface(m_Players, m_Deck.GetCardsLeft(), m_CurrentCard);
+          //  m_BoardLayer.virtualcard(m_CurrentCard);
         }
   
         public void NextTurn()
