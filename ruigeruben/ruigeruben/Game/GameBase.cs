@@ -11,19 +11,17 @@ namespace ruigeruben
         public List<Player> m_Players;
         Deck m_Deck;
         public Board m_Board;
-        InputGameInfo m_GameInfo;
         public Card m_CurrentCard;
 
         public GameBase(GameScene Scene, InputGameInfo info)
         {
             m_Players = new List<Player>();
-            m_GameInfo = info;
             foreach (InputPlayer i in info.Players)
             {
                 Player p = new Player();
                 p.Name = i.Name;
                 p.PlayerColor = i.Color;
-                p.NumberOfAliens = m_GameInfo.Aliens;
+                p.NumberOfAliens = info.Aliens;
                 m_Players.Add(p);
             }
 
@@ -52,7 +50,7 @@ namespace ruigeruben
             m_Scene.m_BoardLayer.DrawCard(StartTile, new CCPoint(1, 1));
 
             m_CurrentCard = m_Deck.GetNextCard();
-            m_Scene.m_Overlay.update_interface(m_Players, m_Deck.GetCardsLeft(), m_CurrentCard);
+            m_Scene.m_Overlay.UpdateInterface(m_Players, m_Deck.GetCardsLeft(), m_CurrentCard);
         }
   
         public void NextTurn()
@@ -71,14 +69,14 @@ namespace ruigeruben
                 }
             }
             m_CurrentCard = m_Deck.GetNextCard();
-            m_Scene.m_Overlay.update_interface(m_Players, m_Deck.GetCardsLeft(), m_CurrentCard);
+            m_Scene.m_Overlay.UpdateInterface(m_Players, m_Deck.GetCardsLeft(), m_CurrentCard);
 
         } 
 
         public void RotateCard(int Rot)
         {
             m_CurrentCard.Rotate(Rot);
-            m_Scene.m_Overlay.update_interface(m_Players, m_Deck.GetCardsLeft(), m_CurrentCard);
+            m_Scene.m_Overlay.UpdateInterface(m_Players, m_Deck.GetCardsLeft(), m_CurrentCard);
 
         }
 
