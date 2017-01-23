@@ -73,6 +73,7 @@ namespace ruigeruben
             m_CurrentCard = m_Deck.GetNextCard();
             m_Scene.m_Overlay.UpdateInterface(m_Players, m_Deck.GetCardsLeft(), m_CurrentCard);
 
+            FindPossibleMoves();
         } 
 
         public void RotateCard(int Rot)
@@ -93,21 +94,47 @@ namespace ruigeruben
         public void FindPossibleMoves()
         {
             PosiblePos = new List<CCPoint>();
-            
-            foreach(CCPoint p in m_Board.m_OpenSpots)
+
+            foreach (CCPoint p in m_Board.m_OpenSpots)
             {
+                for (int j = -1; j <= 2; j += 2)
+                {
+                    Card c = m_Board.GetCard(new CCPoint(p.X + j, p.Y));
 
+                    if(c != null)
+                    { 
+                        if (j < 0)
+                        {
+                            if (m_CurrentCard.GetAttribute(1) == c.GetAttribute(3))
+                                PosiblePos.Add(p);
+                        }                     
+                        else
+                        {
+                            if (m_CurrentCard.GetAttribute(3) == c.GetAttribute(1))
+                                PosiblePos.Add(p);
+                        }
+                    }
+
+                    c = m_Board.GetCard(new CCPoint(p.X, p.Y + j));
+
+                    if(c != null)
+                    {
+                        if (j < 0)
+                        {
+                            if (m_CurrentCard.GetAttribute(0) == c.GetAttribute(2))
+                                PosiblePos.Add(p);
+                        }
+                        else
+                        {
+                            if (m_CurrentCard.GetAttribute(2) == c.GetAttribute(0))
+                                PosiblePos.Add(p);
+                        }
+                    }
+                }
             }
-           
-
-        }
-
-            
-
-
-            int x = 2;
         }
 
 
        
     }
+}
