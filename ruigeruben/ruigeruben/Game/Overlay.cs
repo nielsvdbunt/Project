@@ -13,7 +13,6 @@ namespace ruigeruben
         List<CCSprite> m_sprites = new List<CCSprite>();
         CCSprite m_AlienButton;
         public CCSprite m_CardButton;
-        BoardLayer m_BoardLayer;
 
         public Overlay(GameScene Scene) //Constructor method for creating the static part of the overlay
         {

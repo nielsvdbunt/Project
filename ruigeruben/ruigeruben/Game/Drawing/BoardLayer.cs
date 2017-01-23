@@ -10,8 +10,6 @@ namespace ruigeruben
 {
     class BoardLayer : CCLayer
     {
-        float scale = 1;
-
         public BoardLayer()
         {
            // this.AnchorPoint = new CCPoint(400, 300);

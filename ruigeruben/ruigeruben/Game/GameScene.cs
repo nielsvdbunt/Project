@@ -24,11 +24,8 @@ namespace ruigeruben
         BackgroundLayer m_BackgroundLayer;
         public BoardLayer m_BoardLayer;
         public CardAttributeLayer m_CardAttrLayer;
-        CCSprite tile;
         bool IsCardFlying;
         public Overlay m_Overlay;
-        Deck m_Deck;
-        public TexturePool m_TexturePool;
        
         public CCPoint Location;
         GameBase m_Game;
@@ -121,7 +118,7 @@ namespace ruigeruben
 
             if (IsCardFlying)
             {
-               m_BoardLayer.MoveCardAround(x, y, m_Overlay.m_CardButton);
+             //  m_BoardLayer.MoveCardAround(x, y, m_Overlay.m_CardButton);
                
 
             }
