@@ -93,8 +93,9 @@ namespace ruigeruben
 
         public bool Checktiles(int x, int y)
         {
+            CCPoint p = new CCPoint(x, y);
             PosiblePos = new List<CCPoint>();
-            Card c = m_Board.GetCard(x, y);
+            Card c = m_Board.GetCard(p);
             foreach (Card kaart in m_Board.m_virCards)
             {
                 
