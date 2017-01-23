@@ -92,7 +92,7 @@ namespace ruigeruben
         public bool Checktiles(int x, int y)
         {
           
-            Card c = m_Board.GetCard(x, y);
+           // Card c = m_Board.GetCard(x, y);
             foreach (Card kaart in m_Board.m_virCards)
             {
                 if (kaart.GetHashCode() == m_CurrentCard.GetHashCode()  )

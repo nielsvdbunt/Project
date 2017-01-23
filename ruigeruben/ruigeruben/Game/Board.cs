@@ -28,18 +28,14 @@ namespace ruigeruben
             m_virLocations.Add(point);
         }
 
-        public Card GetCard(int x, int y)
+        public Card GetCard(CCPoint Point)
         {
-            int i;
-            Card c;
-            CCPoint location = new CCPoint(x, y);
             for (int t = 0; t < m_virLocations.Count; t++)
             {
-                if (m_virLocations[t] == location)
+                if (m_virLocations[t] == Point)
                 {
-                    i = t;
-                    c = m_virCards[i];
-                    return c;
+                    if(t < m_virCards.Count)
+                        return m_virCards[t];
                 }
             }
             return null;
