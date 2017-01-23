@@ -10,9 +10,12 @@ namespace ruigeruben
 {
     class BoardLayer : CCLayer
     {
+        public List<CCDrawNode> Rectangles = new List<CCDrawNode>();
+        CCSprite panda = new CCSprite("Panda");
         public BoardLayer()
         {
             this.AnchorPoint = new CCPoint(0, 0);
+            
             //this.ContentSize = new CCSize(5000, 5000);
         }
 
@@ -28,18 +31,26 @@ namespace ruigeruben
 
         public void DrawRaster(List<CCPoint> AvaliblePointsList)
         {
+
+
+            foreach (CCDrawNode r in Rectangles)
+            {
+                RemoveChild(r);
+            }
+            Rectangles.Clear();
             var bounds = VisibleBoundsWorldspace;
-        
+            
             int HorLines = (int)bounds.Size.Width / 128;
             int VerLines = (int)bounds.Size.Height / 128;
             foreach(CCPoint p in AvaliblePointsList)
             {
                 var drawNode = new CCDrawNode();
                
-                var shape = new CCRect(p.X*100, p.Y*100, 100, 100);
+                var shape = new CCRect(p.X*100, p.Y*100, 100,100 );
                 drawNode.DrawRect(shape, fillColor: CCColor4B.Transparent,
-                borderWidth: 4,
+                borderWidth: 2,
                 borderColor: CCColor4B.White);
+                Rectangles.Add(drawNode);
                 this.AddChild(drawNode);
             }
            
@@ -89,6 +100,10 @@ namespace ruigeruben
             sprite.AnchorPoint = new CCPoint(0, 0);
             sprite.Position = p;
             AddChild(sprite);
+        }
+        public void IsCardDragging()
+        {
+            
         }
     }
     

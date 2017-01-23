@@ -26,7 +26,7 @@ namespace ruigeruben
         public CardAttributeLayer m_CardAttrLayer;
         bool IsCardFlying;
         public Overlay m_Overlay;
-       
+        
         public CCPoint Location;
         GameBase m_Game;
         CCCallFuncN walkAnimStop = new CCCallFuncN(node => node.StopAllActions());
@@ -191,12 +191,16 @@ namespace ruigeruben
         
         public void OnRotateLeft()
         {
+           
             m_Game.RotateCard(-90);
+            
+            m_Game.FindPossibleMoves();
         }
 
         public void OnRotateRight()
         {
             m_Game.RotateCard(90);
+            m_Game.FindPossibleMoves();
         }
 
         public void OnAlienClick()
