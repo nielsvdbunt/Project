@@ -12,7 +12,8 @@ namespace ruigeruben
         List<CCLabel> m_labels = new List<CCLabel>();
         List<CCSprite> m_sprites = new List<CCSprite>();
         CCSprite m_AlienButton;
-        CCSprite m_CardButton;
+        public CCSprite m_CardButton;
+        BoardLayer m_BoardLayer;
 
         public Overlay(GameScene Scene) //Constructor method for creating the static part of the overlay
         {
@@ -119,7 +120,10 @@ namespace ruigeruben
             m_CardButton = TexturePool.GetSprite(tile.m_Hash);
             m_CardButton.Position = new CCPoint(1020, 100);
             m_CardButton.Rotation = tile.GetRotation();
+          
             AddChild(m_CardButton);
+
+
         }
 
         private void MakeSprite(string name, int x, int y)//this method is for creating sprites
@@ -139,7 +143,6 @@ namespace ruigeruben
         }
         private void MakeBox(int xpos, int ypos, int width, int height, int thickness)
         {
-
             var drawNode = new CCDrawNode();
             var rect = new CCRect(xpos, ypos, width, height);
             drawNode.DrawRect(rect, fillColor: CCColor4B.Transparent, borderWidth: thickness, borderColor: CCColor4B.White);
