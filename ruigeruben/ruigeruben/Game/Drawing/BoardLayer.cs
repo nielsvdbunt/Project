@@ -35,11 +35,12 @@ namespace ruigeruben
             foreach(CCPoint p in AvaliblePointsList)
             {
                 var drawNode = new CCDrawNode();
-                this.AddChild(drawNode);
+               
                 var shape = new CCRect(p.X*100, p.Y*100, 100, 100);
                 drawNode.DrawRect(shape, fillColor: CCColor4B.Transparent,
                 borderWidth: 4,
                 borderColor: CCColor4B.White);
+                this.AddChild(drawNode);
             }
            
         }

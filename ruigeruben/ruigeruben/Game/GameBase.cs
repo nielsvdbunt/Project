@@ -108,6 +108,7 @@ namespace ruigeruben
                         {
                             if (m_CurrentCard.GetAttribute(1) == c.GetAttribute(3))
                                 PosiblePos.Add(p);
+                            
                         }                     
                         else
                         {
@@ -133,6 +134,7 @@ namespace ruigeruben
                     }
                 }
             }
+            m_Scene.m_BoardLayer.DrawRaster(PosiblePos);
         }
 
 
