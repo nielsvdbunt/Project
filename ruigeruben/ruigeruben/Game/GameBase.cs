@@ -12,7 +12,7 @@ namespace ruigeruben
         Deck m_Deck;
         public Board m_Board;
         public Card m_CurrentCard;
-        List<CCPoint> PosiblePos;
+        List<CCPoint> m_PosiblePos;
 
         public GameBase(GameScene Scene, InputGameInfo info)
         {
@@ -84,57 +84,40 @@ namespace ruigeruben
 
         }
 
-        public void Walktiles(int x, int y)
-        {       
-        
-            
-
-        }
-
-
         public void FindPossibleMoves()
         {
-            PosiblePos = new List<CCPoint>();
+            m_PosiblePos = new List<CCPoint>();
 
             foreach (CCPoint p in m_Board.m_OpenSpots)
             {
-                for (int j = -1; j <= 2; j += 2)
-                {
-                    Card c = m_Board.GetCard(new CCPoint(p.X + j, p.Y));
+                Card L = m_Board.GetCard(new CCPoint(p.X - 1, p.Y));
+                Card T = m_Board.GetCard(new CCPoint(p.X , p.Y + 1));
+                Card R = m_Board.GetCard(new CCPoint(p.X + 1, p.Y));
+                Card B = m_Board.GetCard(new CCPoint(p.X , p.Y - 1));
 
-                    if(c != null)
-                    { 
-                        if (j < 0)
-                        {
-                            if (m_CurrentCard.GetAttribute(1) == c.GetAttribute(3))
-                                PosiblePos.Add(p);
-                            
-                        }                     
-                        else
-                        {
-                            if (m_CurrentCard.GetAttribute(3) == c.GetAttribute(1))
-                                PosiblePos.Add(p);
-                        }
-                    }
+                bool Add = true;
 
-                    c = m_Board.GetCard(new CCPoint(p.X, p.Y + j));
+                if (L != null)
+                    if (L.GetAttribute(3) != m_CurrentCard.GetAttribute(1))
+                        Add = false;
 
-                    if(c != null)
-                    {
-                        if (j < 0)
-                        {
-                            if (m_CurrentCard.GetAttribute(0) == c.GetAttribute(2))
-                                PosiblePos.Add(p);
-                        }
-                        else
-                        {
-                            if (m_CurrentCard.GetAttribute(2) == c.GetAttribute(0))
-                                PosiblePos.Add(p);
-                        }
-                    }
-                }
+                if (T != null)
+                    if (T.GetAttribute(0) != m_CurrentCard.GetAttribute(2))
+                        Add = false;
+
+                if (R != null)
+                    if (R.GetAttribute(1) != m_CurrentCard.GetAttribute(3))
+                        Add = false;
+
+                if (B != null)
+                    if (B.GetAttribute(2) != m_CurrentCard.GetAttribute(0))
+                        Add = false;
+
+                if (Add)
+                    m_PosiblePos.Add(p);
             }
-            m_Scene.m_BoardLayer.DrawRaster(PosiblePos);
+
+            m_Scene.m_BoardLayer.DrawRaster(m_PosiblePos);
         }
 
 
