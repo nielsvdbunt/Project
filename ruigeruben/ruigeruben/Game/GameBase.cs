@@ -8,46 +8,55 @@ namespace ruigeruben
     class GameBase
     {
         GameScene m_Scene;
-        PlayMenu SpeelMenu;
         public List<Player> m_Players;
         Deck m_Deck;
         public Board m_Board;
-        InputGameInfo m_GameInfo;
-        Card NextCard;
-        Board b;
+        public Card m_CurrentCard;
+        List<CCPoint> m_PosiblePos;
+
         public GameBase(GameScene Scene, InputGameInfo info)
         {
             m_Players = new List<Player>();
-            m_GameInfo = info;
-            foreach(InputPlayer i in info.Players)
+            foreach (InputPlayer i in info.Players)
             {
                 Player p = new Player();
                 p.Name = i.Name;
                 p.PlayerColor = i.Color;
-                p.NumberOfAliens = m_GameInfo.Aliens; 
+                p.NumberOfAliens = info.Aliens;
                 m_Players.Add(p);
             }
 
             m_Scene = Scene;
             m_Board = new Board();
             m_Deck = new Deck(info.CardMultiplier);
-
         }
 
         public void Start()
         {
             Random r = new Random();
-            for (int n = m_Players.Count- 1; n > 0; --n)
+            for (int n = m_Players.Count - 1; n > 0; --n)
             {
                 int k = r.Next(n + 1);
                 Player temp = m_Players[n];
                 m_Players[n] = m_Players[k];
                 m_Players[k] = temp;
             }
+
             m_Players[0].Turn = true;
-            m_Scene.m_Overlay.update_interface(m_Players, m_Deck.GetCardsLeft());
+
+            Card BeginCard = new Card("21202");
+            m_Scene.m_BoardLayer.DrawCard(BeginCard, new CCPoint(0, 0));
+            m_Scene.m_BoardLayer.DrawCard(BeginCard, new CCPoint(1, 1));
+            m_Board.AddCard(BeginCard, new CCPoint(0, 0));
+            m_Board.AddCard(BeginCard, new CCPoint(1, 1));
+
+            m_CurrentCard = m_Deck.GetNextCard();
+            m_Scene.m_Overlay.UpdateInterface(m_Players, m_Deck.GetCardsLeft(), m_CurrentCard);
+
+            FindPossibleMoves();
         }
-            public void NextTurn()
+  
+        public void NextTurn()
         {
             for(int i=0; i<m_Players.Count; i++ )
             {
@@ -62,34 +71,56 @@ namespace ruigeruben
                     break;
                 }
             }
-            NextCard = m_Deck.GetNextCard();
-            m_Scene.m_Overlay.update_interface(m_Players, m_Deck.GetCardsLeft());
+            m_CurrentCard = m_Deck.GetNextCard();
+            m_Scene.m_Overlay.UpdateInterface(m_Players, m_Deck.GetCardsLeft(), m_CurrentCard);
+
+            FindPossibleMoves();
         } 
-        public void Walktiles(int x, int y)
+
+        public void RotateCard(int Rot)
         {
-            for (int i = -1; i <= 2; i += 2)
-            {
-                Checktiles(x + i, y);
-                Checktiles(x, y + i);
-            }
-            
+            m_CurrentCard.Rotate(Rot);
+            m_Scene.m_Overlay.UpdateInterface(m_Players, m_Deck.GetCardsLeft(), m_CurrentCard);
 
         }
 
-        public bool Checktiles(int x, int y)
+        public void FindPossibleMoves()
         {
-            Card CardInHand = NextCard;
-            Card c = m_Board.GetCard(x, y);
-            foreach (Card kaart in b.m_virCards)
+            m_PosiblePos = new List<CCPoint>();
+
+            foreach (CCPoint p in m_Board.m_OpenSpots)
             {
-                if (true)
-                    return true;
-                else
-                    return false;
+                Card L = m_Board.GetCard(new CCPoint(p.X - 1, p.Y));
+                Card T = m_Board.GetCard(new CCPoint(p.X , p.Y + 1));
+                Card R = m_Board.GetCard(new CCPoint(p.X + 1, p.Y));
+                Card B = m_Board.GetCard(new CCPoint(p.X , p.Y - 1));
+
+                bool Add = true;
+
+                if (L != null)
+                    if (L.GetAttribute(3) != m_CurrentCard.GetAttribute(1))
+                        Add = false;
+
+                if (T != null)
+                    if (T.GetAttribute(0) != m_CurrentCard.GetAttribute(2))
+                        Add = false;
+
+                if (R != null)
+                    if (R.GetAttribute(1) != m_CurrentCard.GetAttribute(3))
+                        Add = false;
+
+                if (B != null)
+                    if (B.GetAttribute(2) != m_CurrentCard.GetAttribute(0))
+                        Add = false;
+
+                if (Add)
+                    m_PosiblePos.Add(p);
             }
 
-            return false;
+            m_Scene.m_BoardLayer.DrawRaster(m_PosiblePos);
         }
 
+
+       
     }
 }

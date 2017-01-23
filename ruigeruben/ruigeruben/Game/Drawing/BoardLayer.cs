@@ -10,26 +10,13 @@ namespace ruigeruben
 {
     class BoardLayer : CCLayer
     {
-        float scale = 1;
-
+        public List<CCDrawNode> Rectangles = new List<CCDrawNode>();
+        CCSprite panda = new CCSprite("Panda");
         public BoardLayer()
         {
             this.AnchorPoint = new CCPoint(0, 0);
-            this.ContentSize = new CCSize(5000, 5000);
-        }
-
-        public void AddPanda(int x, int y)
-        {
-            CCSpriteSheet sheet = new CCSpriteSheet("sheet.plist", "sheetimage.png");
-            CCSpriteFrame frame;
-            frame = sheet.Frames.Find(item => item.TextureFilename == "02220.png");
-            CCSprite satteliete = new CCSprite(frame);
-            CCSprite spr = new CCSprite("Panda");
-            satteliete.Position = new CCPoint(500, 500);
-            spr.PositionX = x;
-            spr.PositionY = y;
-            AddChild(satteliete);
-           // AddChild(spr);
+            
+            //this.ContentSize = new CCSize(5000, 5000);
         }
 
         public void Zoom(bool In)
@@ -42,25 +29,29 @@ namespace ruigeruben
 
         }
 
-        public void DrawRaster()
+        public void DrawRaster(List<CCPoint> AvaliblePointsList)
         {
+
+
+            foreach (CCDrawNode r in Rectangles)
+            {
+                RemoveChild(r);
+            }
+            Rectangles.Clear();
             var bounds = VisibleBoundsWorldspace;
-        
+            
             int HorLines = (int)bounds.Size.Width / 128;
             int VerLines = (int)bounds.Size.Height / 128;
-
-            for(int i = 0; i < HorLines; i++)
+            foreach(CCPoint p in AvaliblePointsList)
             {
                 var drawNode = new CCDrawNode();
-                this.AddChild(drawNode);
-                /*var shape = new CCPoint(bounds
-                drawNode.DrawLine()
-
+               
+                var shape = new CCRect(p.X*100, p.Y*100, 100,100 );
                 drawNode.DrawRect(shape, fillColor: CCColor4B.Transparent,
-                    borderWidth: 4,
-                    borderColor: CCColor4B.White);
-                    */
-
+                borderWidth: 2,
+                borderColor: CCColor4B.White);
+                Rectangles.Add(drawNode);
+                this.AddChild(drawNode);
             }
            
         }
@@ -70,10 +61,11 @@ namespace ruigeruben
 
         }
 
-        public CCPoint toLocation(int x, int y) //from pixels to board location
+        public CCPoint toLocation(CCPoint point) //from pixels to board location
         {
             var bounds = VisibleBoundsWorldspace;
-
+            int x = Convert.ToInt32(point.X);
+            int y = Convert.ToInt32(point.Y);
             int tile = 200;
             int middenx = Convert.ToInt32(bounds.Center.X) - (tile / 2);
             int middeny = Convert.ToInt32(bounds.Center.Y) - (tile / 2);
@@ -84,10 +76,12 @@ namespace ruigeruben
             return p;
         }
 
-        public CCPoint fromLocation(float x, float y) //from location to pixels
+        public CCPoint fromLocation(CCPoint point) //from location to pixels
         {
             var bounds = VisibleBoundsWorldspace;
             int tile = 200;
+            float x = point.X;
+            float y = point.Y;
             int middenx = Convert.ToInt32(bounds.Center.X) - (tile / 2);
             int middeny = Convert.ToInt32(bounds.Center.X) - (tile / 2);
             x = middenx + (x * tile);
@@ -98,13 +92,18 @@ namespace ruigeruben
 
         public void DrawCard(Card card, CCPoint point)
         {
-            float x = point.X;
-            float y = point.Y;
-            CCPoint p = fromLocation(x, y);
-            CCSprite sprite = new CCSprite();
+            //CCPoint p = fromLocation(point);
+            CCPoint p = new CCPoint();
+            p.X = point.X * 100;
+            p.Y = point.Y * 100;
+            CCSprite sprite = TexturePool.GetSprite(card.m_Hash);
             sprite.AnchorPoint = new CCPoint(0, 0);
             sprite.Position = p;
             AddChild(sprite);
+        }
+        public void IsCardDragging()
+        {
+            
         }
     }
     

@@ -71,10 +71,10 @@
     <Compile Include="Game\Drawing\BackgrondLayer.cs" />
     <Compile Include="Game\Drawing\BoardLayer.cs" />
     <Compile Include="Game\Drawing\CardAttributeLayer.cs" />
-    <Compile Include="Game\Drawing\TexturePool.cs" />
+    <Compile Include="Game\TexturePool.cs" />
     <Compile Include="Game\GameBase.cs" />
     <Compile Include="Game\GameScene.cs" />
-    <Compile Include="Game\Drawing\Overlay.cs" />
+    <Compile Include="Game\Overlay.cs" />
     <Compile Include="Game\Player.cs" />
     <Compile Include="MainActivity.cs">
       <SubType>Code</SubType>
@@ -143,22 +143,40 @@
     <AndroidAsset Include="Assets\Content\Images\rotateleft.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\Content\Images\tiles.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidAsset Include="Assets\Content\Sounds\sound1.mp3" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\Content\Images\alien1.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Assets\Content\tiles\" />
+  </ItemGroup>
+  <ItemGroup>
     <AndroidAsset Include="Assets\Content\Images\sheetimage.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\Content\Images\sheet.plist" />
+    <AndroidAsset Include="Assets\Content\Images\sheetfinal.plist" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Assets\Content\tiles\" />
+    <AndroidAsset Include="Assets\Content\Images\OldSheetWhite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\Content\Images\OldSheetWhite.plist" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxxhdpi\logoapp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxhdpi\logoapp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xhdpi\logoapp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-mdpi\logoapp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\logoapp.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

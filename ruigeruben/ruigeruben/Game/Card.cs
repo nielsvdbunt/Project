@@ -10,7 +10,7 @@ namespace ruigeruben
         SpaceStation = 1,
         RainbowRoad = 2,
         Satellite = 3,
-        intersection =4, // is dit nodig?
+        intersection = 4, // is dit nodig?
         None = 0
             // doen we we nog die schilden
 
@@ -58,13 +58,13 @@ namespace ruigeruben
          4,
          8,
          3,
-         4, // start tegel erbij dus totaal 4 start tegels
+         3, 
          3,
          3,
          1
         };
 
-        string m_Hash;
+        public string m_Hash;
         CardAttributes[] m_Attributes = new CardAttributes[5];
         int m_Rotation = 0;
 
@@ -81,7 +81,7 @@ namespace ruigeruben
             }
         }
 
-        CardAttributes GetAttribute(int Spot)
+        public CardAttributes GetAttribute(int Spot)
         {
             return m_Attributes[Spot];
         }

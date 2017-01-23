@@ -62,6 +62,7 @@ namespace ruigeruben
 
             m_TexTOnly = false;
         }
+
         public void SetTextPossition(CCPoint Possition)
         {
             m_Label.Position = Possition;
