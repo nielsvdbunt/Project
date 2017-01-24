@@ -78,28 +78,33 @@ namespace ruigeruben
             float y = touches[0].LocationOnScreen.Y;     
 
             CCPoint Location = new CCPoint(x, y);
-            //if(m_Overlay.BoundingBoxTransformedToWorld.ContainsPoint(Location))
-            //{
-            //    m_Touches += touches.Count;
-            //}
+         
             if (y <= 1200 && x <= 2300) //  Test if click on overlay
             {
                 m_Touches += touches.Count;
             }
 
-            
-            if (x > 1295 && x < 1430 && touches.Count > 0) //Voor het slepen van de kaart in layer
+            Location = m_Overlay.ScreenToWorldspace(Location);
+            CCRect p = m_Overlay.m_CardButton.BoundingBox;
+            CCRect r = m_Overlay.m_CardButton.BoundingBoxTransformedToWorld;
+           
+            if (m_Overlay.m_CardButton.BoundingBox.ContainsPoint(Location)) //Voor het slepen van de kaart in layer
             {
                 m_IsCardDragging = true;
 
             }
-            else
-                m_IsCardDragging = false;
+            //else
+                //m_IsCardDragging = false;
 
         }
 
         void OnTouchesEnded(List<CCTouch> touches, CCEvent touchEvent)
         {
+            if (m_IsCardDragging)
+            {
+                m_IsCardDragging = false;
+                m_Overlay.m_CardButton.Position = m_Overlay.m_CardPos;
+            }
             if (m_Touches == 2)
                 zooming = false;
 
@@ -127,8 +132,17 @@ namespace ruigeruben
                 //if(m_Game.m_CurrentCard != null)
                 CCSprite Spr = TexturePool.GetSprite(m_Game.m_CurrentCard.m_Hash);
                 Spr.Position = touches[0].LocationOnScreen;
-               
-                m_Overlay.m_CardButton.RunAction(new CCMoveTo(0f, new CCPoint(x, y)));
+
+                foreach (CCTouch i in touches)
+                {
+
+                    CCPoint p = i.LocationOnScreen;
+                    p = m_Overlay.ScreenToWorldspace(p);
+                    m_Overlay.m_CardButton.RunAction(new CCMoveTo(0f,p));
+                }
+
+
+            //        m_Overlay.m_CardButton.RunAction(new CCMoveTo(0f, new CCPoint(touches[0].PreviousLocation.X - x, y - touches[0].PreviousLocationOnScreen.Y)));
                 //AddChild(Spr);
 
             }

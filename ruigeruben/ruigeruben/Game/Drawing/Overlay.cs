@@ -13,6 +13,7 @@ namespace ruigeruben
         List<CCSprite> m_sprites = new List<CCSprite>();
         CCSprite m_AlienButton;
         public CCSprite m_CardButton;
+        public CCPoint m_CardPos = new CCPoint(1020, 100);
 
         public Overlay(GameScene Scene) //Constructor method for creating the static part of the overlay
         {
@@ -117,7 +118,7 @@ namespace ruigeruben
            }
             RemoveChild(m_CardButton);
             m_CardButton = TexturePool.GetSprite(tile.m_Hash);
-            m_CardButton.Position = new CCPoint(1020, 100);
+            m_CardButton.Position = m_CardPos;
             m_CardButton.Rotation = tile.GetRotation();
           
             AddChild(m_CardButton);
