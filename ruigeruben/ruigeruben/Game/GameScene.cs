@@ -119,7 +119,7 @@ namespace ruigeruben
                 pp.X = p.X - x;
                 pp.Y = p.Y - y;
 
-                p = m_BoardLayer.toLocation(pp);
+                pp = m_BoardLayer.toLocation(pp);
 
                 m_BoardLayer.DrawCard(m_Game.m_CurrentCard, pp);
 

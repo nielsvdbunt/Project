@@ -62,11 +62,16 @@ namespace ruigeruben
         {
             int x = Convert.ToInt32(point.X);
             int y = Convert.ToInt32(point.Y);
-            //int middenx = 0 - (tilesize / 2);
-            //int middeny = 0 - (tilesize / 2);
+            
             int diffx = x / tilesize;
             int diffy = y / tilesize;
 
+            if (x < 0)
+                diffx -= 1;
+
+            if (y < 0)
+                diffy -= 1;
+          
             CCPoint p = new CCPoint(diffx, diffy);
             return p;
         }
