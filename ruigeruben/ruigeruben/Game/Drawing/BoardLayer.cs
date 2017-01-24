@@ -47,8 +47,8 @@ namespace ruigeruben
             foreach(CCPoint p in AvaliblePointsList)
             {
                 var drawNode = new CCDrawNode();
-               
-                var shape = new CCRect(p.X*100, p.Y*100, 100,100 );
+
+                var shape = new CCRect(p.X * tilesize - (tilesize / 2), p.Y * tilesize - (tilesize / 2), 100, 100);
                 drawNode.DrawRect(shape, fillColor: CCColor4B.Transparent,
                 borderWidth: 2,
                 borderColor: CCColor4B.White);
@@ -94,7 +94,7 @@ namespace ruigeruben
             CCSprite sprite = TexturePool.GetSprite(card.m_Hash);      
             sprite.Position = p;
             sprite.Rotation = card.GetRotation();
-            sprite.AnchorPoint = new CCPoint(0, 0);
+            //sprite.AnchorPoint = new CCPoint(0, 0);
             AddChild(sprite);
         }
     }
