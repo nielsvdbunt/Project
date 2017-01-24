@@ -103,8 +103,7 @@ namespace ruigeruben
         }
         public void IsCardDragging()
         {
-            
-        }
+            panda.RunActions(new CCMoveTo(0f, new CCPoint(5, 5)));        }
     }
     
 }
