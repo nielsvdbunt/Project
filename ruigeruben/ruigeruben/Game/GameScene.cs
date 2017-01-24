@@ -78,10 +78,10 @@ namespace ruigeruben
             float y = touches[0].LocationOnScreen.Y;     
 
             CCPoint Location = new CCPoint(x, y);
-            if(m_Overlay.BoundingBoxTransformedToWorld.ContainsPoint(Location))
-            {
-                m_Touches += touches.Count;
-            }
+            //if(m_Overlay.BoundingBoxTransformedToWorld.ContainsPoint(Location))
+            //{
+            //    m_Touches += touches.Count;
+            //}
             if (y <= 1200 && x <= 2300) //  Test if click on overlay
             {
                 m_Touches += touches.Count;
