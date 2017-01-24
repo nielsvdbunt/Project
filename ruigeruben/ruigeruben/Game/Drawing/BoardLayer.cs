@@ -58,11 +58,6 @@ namespace ruigeruben
            
         }
 
-        public void DrawShit()
-        {
-
-        }
-
         public CCPoint toLocation(CCPoint point) //from pixels to board location
         {
             int x = Convert.ToInt32(point.X);
@@ -96,9 +91,6 @@ namespace ruigeruben
             sprite.Position = p;
             AddChild(sprite);
         }
-        public void IsCardDragging()
-        {
-            panda.RunActions(new CCMoveTo(0f, new CCPoint(5, 5)));        }
     }
     
 }

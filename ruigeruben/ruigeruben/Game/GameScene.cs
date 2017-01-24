@@ -138,7 +138,8 @@ namespace ruigeruben
 
                     CCPoint p = i.LocationOnScreen;
                     p = m_Overlay.ScreenToWorldspace(p);
-                    m_Overlay.m_CardButton.RunAction(new CCMoveTo(0f,p));
+                    //   m_Overlay.m_CardButton.RunAction(new CCMoveTo(0f,p));
+                    m_Overlay.m_CardButton.Position = p;
                 }
 
 
