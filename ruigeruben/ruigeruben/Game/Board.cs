@@ -34,7 +34,6 @@ namespace ruigeruben
             if(m_OpenSpots.Count != 0) // Start tile
             {
                 bool b = m_OpenSpots.Remove(p);
-                int  t = 2;
             }
 
             for (int j = -1; j <= 2; j += 2)

@@ -13,6 +13,7 @@ namespace ruigeruben
         public Board m_Board;
         public Card m_CurrentCard;
         List<CCPoint> m_PosiblePos;
+        List<CCPoint> m_CheckedCards;
 
         public GameBase(GameScene Scene, InputGameInfo info)
         {
@@ -29,6 +30,7 @@ namespace ruigeruben
             m_Scene = Scene;
             m_Board = new Board();
             m_Deck = new Deck(info.CardMultiplier);
+            m_CheckedCards = new List<CCPoint>();
         }
 
         public void Start()
@@ -120,7 +122,43 @@ namespace ruigeruben
             m_Scene.m_BoardLayer.DrawRaster(m_PosiblePos);
         }
 
+        public void CheckFinished(CCPoint p, CardAttributes c)
+        {
+            Card cur = m_Board.GetCard(p);
+            Card L = m_Board.GetCard(new CCPoint(p.X - 1, p.Y));
+            Card T = m_Board.GetCard(new CCPoint(p.X, p.Y + 1));
+            Card R = m_Board.GetCard(new CCPoint(p.X + 1, p.Y));
+            Card B = m_Board.GetCard(new CCPoint(p.X, p.Y - 1));
 
+            if (L != null && !m_CheckedCards.Contains(p))
+                if (L.GetAttribute(3) == cur.GetAttribute(1) && L.GetAttribute(3) == c)
+                {
+                    m_CheckedCards.Add(p);
+                    CheckFinished(new CCPoint(p.X - 1, p.Y), c);
+                }            
+
+            if (T != null && !m_CheckedCards.Contains(p))
+                if (T.GetAttribute(0) == cur.GetAttribute(2) && T.GetAttribute(0) == c)
+                {
+                    m_CheckedCards.Add(p);
+                    CheckFinished(new CCPoint(p.X, p.Y + 1), c);
+                }
+
+            if (R != null && !m_CheckedCards.Contains(p))
+                if (R.GetAttribute(1) == cur.GetAttribute(3) && R.GetAttribute(1) == c)
+                {
+                    m_CheckedCards.Add(p);
+                    CheckFinished(new CCPoint(p.X + 1, p.Y), c);
+                }
+
+            if (B != null && !m_CheckedCards.Contains(p))
+                if (B.GetAttribute(2) == cur.GetAttribute(0) && B.GetAttribute(2) == c)
+                {
+                    m_CheckedCards.Add(p);
+                    CheckFinished(new CCPoint(p.X, p.Y - 1), c);
+                }
+
+        }
        
     }
 }
