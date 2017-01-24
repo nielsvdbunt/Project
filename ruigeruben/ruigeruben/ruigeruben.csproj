@@ -110,9 +110,6 @@
     <AndroidResource Include="Resources\drawable-xxxhdpi\Icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\Content\Sounds\sound2.mp3" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -143,9 +140,6 @@
     <AndroidAsset Include="Assets\Content\Images\rotateleft.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\Content\Sounds\sound1.mp3" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidAsset Include="Assets\Content\Images\alien1.png" />
   </ItemGroup>
   <ItemGroup>
@@ -173,10 +167,13 @@
     <AndroidResource Include="Resources\drawable-hdpi\logoapp.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\Content\Images\spritesheetmetzwarterand.png" />
+    <AndroidAsset Include="Assets\Content\Images\final.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\Content\Images\spritesheetmetzwarterand.plist" />
+    <AndroidAsset Include="Assets\Content\Images\final.plist" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\Content\Sounds\mix_6m07s.mp3" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
