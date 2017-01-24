@@ -102,9 +102,30 @@ namespace ruigeruben
         {
             if (m_IsCardDragging)
             {
+                var bounds = m_BoardLayer.VisibleBoundsWorldspace;
+                CCPoint3 ciw = m_BoardLayer.Camera.CenterInWorldspace;
+
+                float x = bounds.MaxX - ciw.X;
+                float y = bounds.MaxY - ciw.Y;
+
                 m_IsCardDragging = false;
+
+                CCPoint p = m_Overlay.ScreenToWorldspace(touches[0].LocationOnScreen);
+
+                //p.X -= x;
+                //p.Y -= y;
+
+                CCPoint pp = new CCPoint();
+                pp.X = p.X - x;
+                pp.Y = p.Y - y;
+
+                pp = m_BoardLayer.toLocation(pp);
+
+                m_BoardLayer.DrawCard(m_Game.m_CurrentCard, pp);
+
                 m_Overlay.m_CardButton.Position = m_Overlay.m_CardPos;
             }
+
             if (m_Touches == 2)
                 zooming = false;
 
@@ -138,7 +159,8 @@ namespace ruigeruben
 
                     CCPoint p = i.LocationOnScreen;
                     p = m_Overlay.ScreenToWorldspace(p);
-                    m_Overlay.m_CardButton.RunAction(new CCMoveTo(0f,p));
+                    //   m_Overlay.m_CardButton.RunAction(new CCMoveTo(0f,p));
+                    m_Overlay.m_CardButton.Position = p;
                 }
 
 

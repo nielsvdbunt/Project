@@ -48,9 +48,7 @@ namespace ruigeruben
 
             Card BeginCard = new Card("21202");
             m_Scene.m_BoardLayer.DrawCard(BeginCard, new CCPoint(0, 0));
-            m_Scene.m_BoardLayer.DrawCard(BeginCard, new CCPoint(1, 1));
             m_Board.AddCard(BeginCard, new CCPoint(0, 0));
-            m_Board.AddCard(BeginCard, new CCPoint(1, 1));
 
             m_CurrentCard = m_Deck.GetNextCard();
             m_Scene.m_Overlay.UpdateInterface(m_Players, m_Deck.GetCardsLeft(), m_CurrentCard);
@@ -122,7 +120,27 @@ namespace ruigeruben
             m_Scene.m_BoardLayer.DrawRaster(m_PosiblePos);
         }
 
-        public void CheckFinished(CCPoint p, CardAttributes c)
+        public int Points(CCPoint p)
+        {
+            int res = 0;
+            if (CheckFinished(p, CardAttributes.SpaceStation))
+            {
+                if (m_CheckedCards.Count <= 2)
+                    res += 2;
+                else
+                    res += m_CheckedCards.Count * 2;
+                m_CheckedCards = new List<CCPoint>();
+            }
+            if (CheckFinished(p, CardAttributes.RainbowRoad))
+            {
+                res += m_CheckedCards.Count;
+                m_CheckedCards = new List<CCPoint>();
+            }
+            return res;
+
+        }
+
+        public bool CheckFinished(CCPoint p, CardAttributes c)
         {
             Card cur = m_Board.GetCard(p);
             Card L = m_Board.GetCard(new CCPoint(p.X - 1, p.Y));
@@ -130,33 +148,67 @@ namespace ruigeruben
             Card R = m_Board.GetCard(new CCPoint(p.X + 1, p.Y));
             Card B = m_Board.GetCard(new CCPoint(p.X, p.Y - 1));
 
-            if (L != null && !m_CheckedCards.Contains(p))
-                if (L.GetAttribute(3) == cur.GetAttribute(1) && L.GetAttribute(3) == c)
-                {
-                    m_CheckedCards.Add(p);
-                    CheckFinished(new CCPoint(p.X - 1, p.Y), c);
-                }            
+            CardAttributes l = cur.GetAttribute(1);
+            CardAttributes t = cur.GetAttribute(2);
+            CardAttributes r = cur.GetAttribute(3);
+            CardAttributes b = cur.GetAttribute(0);
+            CardAttributes m = cur.GetAttribute(4);
 
-            if (T != null && !m_CheckedCards.Contains(p))
-                if (T.GetAttribute(0) == cur.GetAttribute(2) && T.GetAttribute(0) == c)
+            bool ml = true, mt = true, mr = true, mb = true;
+            bool checkl, checkt, checkr, checkb;
+            if (!m_CheckedCards.Contains(p))
+            {
+                m_CheckedCards.Add(p);
+                if (m == c || m == CardAttributes.intersection)
                 {
-                    m_CheckedCards.Add(p);
-                    CheckFinished(new CCPoint(p.X, p.Y + 1), c);
-                }
+                    if (l == c)
+                        if (L == null)
+                            ml = false;
+                        else
+                        {
+                            checkl = CheckFinished(new CCPoint(p.X - 1, p.Y), c);
+                            if (!checkl)
+                                return false;
+                        }
+                    if (t == c)
+                        if (T == null)
+                            mt = false;
+                        else
+                        {
+                            checkt = CheckFinished(new CCPoint(p.X, p.Y + 1), c);
+                            if (!checkt)
+                                return false;
+                        }
+                    if (r == c)
+                        if (R == null)
+                            mr = false;
+                        else
+                        {
+                            checkr = CheckFinished(new CCPoint(p.X + 1, p.Y), c);
+                            if (!checkr)
+                                return false;
+                        }
+                    if (b == c)
+                        if (B == null)
+                            mb = false;
+                        else
+                        {
+                            checkb = CheckFinished(new CCPoint(p.X, p.Y - 1), c);
+                            if (!checkb)
+                                return false;
+                        }
 
-            if (R != null && !m_CheckedCards.Contains(p))
-                if (R.GetAttribute(1) == cur.GetAttribute(3) && R.GetAttribute(1) == c)
-                {
-                    m_CheckedCards.Add(p);
-                    CheckFinished(new CCPoint(p.X + 1, p.Y), c);
-                }
+                    if (ml == false && mt == false && mr == false && mb == false)
+                        return false;
 
-            if (B != null && !m_CheckedCards.Contains(p))
-                if (B.GetAttribute(2) == cur.GetAttribute(0) && B.GetAttribute(2) == c)
-                {
-                    m_CheckedCards.Add(p);
-                    CheckFinished(new CCPoint(p.X, p.Y - 1), c);
+                    return true;
                 }
+                else
+                {
+                    return true;
+                }
+            }
+            return true;
 
         }
        
