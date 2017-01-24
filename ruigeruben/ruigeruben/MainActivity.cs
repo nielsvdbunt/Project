@@ -67,11 +67,12 @@ namespace ruigeruben
                 m_GameView.ContentManager.SearchPaths = contentSearchPaths;
 
                 SwitchToMenu(SceneIds.OpeningMenu, 0);
+                CCAudioEngine.SharedEngine.PlayBackgroundMusic(filename: "sound2", loop: false);
                 //CCScene scene = new MenuScene(gameView);
-               // gameView.RunWithScene(ms);
-                
+                // gameView.RunWithScene(ms);
+
                 //CCScene gameScene = new CCScene(gameView);
-               // gameScene.AddLayer(new GameLayer());
+                // gameScene.AddLayer(new GameLayer());
                 //gameView.RunWithScene(gameScene);
             }
         }

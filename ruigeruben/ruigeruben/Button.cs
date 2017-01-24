@@ -10,7 +10,7 @@ namespace ruigeruben
     {
         bool m_TexTOnly;
 
-        CCLabel m_Label;
+        public CCLabel m_Label;
         public CCSprite m_Sprite;
 
         public event ClickEventHandler OnClicked;
