@@ -81,7 +81,7 @@ namespace ruigeruben
         {
             m_CurrentCard.Rotate(Rot);
             m_Scene.m_Overlay.UpdateInterface(m_Players, m_Deck.GetCardsLeft(), m_CurrentCard);
-
+            FindPossibleMoves();
         }
 
         public void FindPossibleMoves()

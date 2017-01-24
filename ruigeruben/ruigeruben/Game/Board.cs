@@ -75,12 +75,11 @@ namespace ruigeruben
             m_virAlienLocations.Add(point);
         }
 
-        public void RemoveAlien(int x, int y)
+        public void RemoveAlien(CCPoint point)
         {
-            CCPoint location = new CCPoint(x, y);
             for (int t = 0; t < m_virAlienLocations.Count; t++)
             {
-                if(m_virAlienLocations[t] == location)
+                if(m_virAlienLocations[t] == point)
                 {
                     m_virAliens.RemoveAt(t);
                     m_virAlienLocations.RemoveAt(t);
