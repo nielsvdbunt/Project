@@ -25,7 +25,7 @@ namespace ruigeruben
            
     }
 
-    [Activity(Label = "Spacesonne", Theme = "@android:style/Theme.NoTitleBar.Fullscreen", MainLauncher = true, Icon = "@drawable/icon",
+    [Activity(Label = "Spacesonne", Theme = "@android:style/Theme.NoTitleBar.Fullscreen", MainLauncher = true, Icon = "@drawable/logoapp",
         AlwaysRetainTaskState = true,
         ScreenOrientation = ScreenOrientation.SensorLandscape,
         LaunchMode = LaunchMode.SingleInstance,
@@ -67,11 +67,12 @@ namespace ruigeruben
                 m_GameView.ContentManager.SearchPaths = contentSearchPaths;
 
                 SwitchToMenu(SceneIds.OpeningMenu, 0);
+                CCAudioEngine.SharedEngine.PlayBackgroundMusic(filename: "sound2", loop: false);
                 //CCScene scene = new MenuScene(gameView);
-               // gameView.RunWithScene(ms);
-                
+                // gameView.RunWithScene(ms);
+
                 //CCScene gameScene = new CCScene(gameView);
-               // gameScene.AddLayer(new GameLayer());
+                // gameScene.AddLayer(new GameLayer());
                 //gameView.RunWithScene(gameScene);
             }
         }

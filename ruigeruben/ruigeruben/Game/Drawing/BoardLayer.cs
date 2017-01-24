@@ -10,22 +10,15 @@ namespace ruigeruben
 {
     class BoardLayer : CCLayer
     {
+        public List<CCDrawNode> Rectangles = new List<CCDrawNode>();
+        CCSprite panda = new CCSprite("Panda");
+        const int tilesize = 100;
+
         public BoardLayer()
         {
-           // this.AnchorPoint = new CCPoint(400, 300);
+            this.AnchorPoint = new CCPoint(0, 0);
+            
             //this.ContentSize = new CCSize(5000, 5000);
-        }
-
-        public void AddPanda(int x, int y)
-        {
-           
-           
-            CCSprite spr = new CCSprite("Panda");
-           
-            spr.PositionX = x;
-            spr.PositionY = y;
-           
-           
         }
 
         public void Zoom(bool In)
@@ -38,25 +31,29 @@ namespace ruigeruben
 
         }
 
-        public void DrawRaster()
+        public void DrawRaster(List<CCPoint> AvaliblePointsList)
         {
+
+
+            foreach (CCDrawNode r in Rectangles)
+            {
+                RemoveChild(r);
+            }
+            Rectangles.Clear();
             var bounds = VisibleBoundsWorldspace;
-        
+            
             int HorLines = (int)bounds.Size.Width / 128;
             int VerLines = (int)bounds.Size.Height / 128;
-
-            for(int i = 0; i < HorLines; i++)
+            foreach(CCPoint p in AvaliblePointsList)
             {
                 var drawNode = new CCDrawNode();
-                AddChild(drawNode);
-                /*var shape = new CCPoint(bounds
-                drawNode.DrawLine()
-
+               
+                var shape = new CCRect(p.X*100, p.Y*100, 100,100 );
                 drawNode.DrawRect(shape, fillColor: CCColor4B.Transparent,
-                    borderWidth: 4,
-                    borderColor: CCColor4B.White);
-                    */
-
+                borderWidth: 2,
+                borderColor: CCColor4B.White);
+                Rectangles.Add(drawNode);
+                this.AddChild(drawNode);
             }
            
         }
@@ -68,14 +65,12 @@ namespace ruigeruben
 
         public CCPoint toLocation(CCPoint point) //from pixels to board location
         {
-            var bounds = VisibleBoundsWorldspace;
             int x = Convert.ToInt32(point.X);
             int y = Convert.ToInt32(point.Y);
-            int tile = 200;
-            int middenx = Convert.ToInt32(bounds.Center.X) - (tile / 2);
-            int middeny = Convert.ToInt32(bounds.Center.Y) - (tile / 2);
-            int diffx = (x - middenx) / tile;
-            int diffy = (y - middeny) / tile;
+            //int middenx = 0 - (tilesize / 2);
+            //int middeny = 0 - (tilesize / 2);
+            int diffx = x / tilesize;
+            int diffy = y / tilesize;
 
             CCPoint p = new CCPoint(diffx, diffy);
             return p;
@@ -83,29 +78,27 @@ namespace ruigeruben
 
         public CCPoint fromLocation(CCPoint point) //from location to pixels
         {
-            var bounds = VisibleBoundsWorldspace;
-            int tile = 200;
             float x = point.X;
             float y = point.Y;
-            int middenx = Convert.ToInt32(bounds.Center.X) - (tile / 2);
-            int middeny = Convert.ToInt32(bounds.Center.X) - (tile / 2);
-            x = middenx + (x * tile);
-            y = middeny + (y * tile);
+            //int middenx = 0 - (tilesize / 2);
+            //int middeny = 0 - (tilesize / 2);
+            x = x * tilesize;
+            y = y * tilesize;
             CCPoint p = new CCPoint(x, y);
             return p;
         }
 
         public void DrawCard(Card card, CCPoint point)
         {
-            //CCPoint p = fromLocation(point);
-            CCPoint p = new CCPoint();
-            p.X = point.X * 100;
-            p.Y = point.Y * 100;
+            CCPoint p = fromLocation(point);
             CCSprite sprite = TexturePool.GetSprite(card.m_Hash);
             sprite.AnchorPoint = new CCPoint(0, 0);
             sprite.Position = p;
             AddChild(sprite);
         }
+        public void IsCardDragging()
+        {
+            panda.RunActions(new CCMoveTo(0f, new CCPoint(5, 5)));        }
     }
     
 }
