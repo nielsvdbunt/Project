@@ -126,6 +126,11 @@ namespace ruigeruben
             {
                 //if(m_Game.m_CurrentCard != null)
                 CCSprite Spr = TexturePool.GetSprite(m_Game.m_CurrentCard.m_Hash);
+                Spr.Position = touches[0].LocationOnScreen;
+               
+                m_Overlay.m_CardButton.RunAction(new CCMoveTo(0f, new CCPoint(x, y)));
+                //AddChild(Spr);
+
             }
             else
             {
