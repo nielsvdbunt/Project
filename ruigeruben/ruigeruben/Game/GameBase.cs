@@ -12,7 +12,7 @@ namespace ruigeruben
         Deck m_Deck;
         public Board m_Board;
         public Card m_CurrentCard;
-        List<CCPoint> m_PosiblePos;
+        public List<CCPoint> m_PosiblePos;
         List<CCPoint> m_CheckedCards;
 
         public GameBase(GameScene Scene, InputGameInfo info)
