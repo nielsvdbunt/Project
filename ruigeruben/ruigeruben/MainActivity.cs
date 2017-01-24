@@ -67,7 +67,13 @@ namespace ruigeruben
                 m_GameView.ContentManager.SearchPaths = contentSearchPaths;
 
                 SwitchToMenu(SceneIds.OpeningMenu, 0);
-                CCAudioEngine.SharedEngine.PlayBackgroundMusic(filename: "sound2", loop: false);
+
+               
+                    
+                    CCAudioEngine.SharedEngine.PlayBackgroundMusic(filename: "mix_6m07s", loop: true);
+                    
+                   
+               
                 //CCScene scene = new MenuScene(gameView);
                 // gameView.RunWithScene(ms);
 
