@@ -66,12 +66,12 @@ namespace ruigeruben
             int diffx = x / tilesize;
             int diffy = y / tilesize;
 
-            if (x < 0)
+          /*  if (x < 0)
                 diffx -= 1;
 
             if (y < 0)
                 diffy -= 1;
-          
+          */
             CCPoint p = new CCPoint(diffx, diffy);
             return p;
         }
