@@ -22,8 +22,8 @@ namespace ruigeruben
         string[] uitlegdeel4 = new string[1];
         string[] uitlegdeel5 = new string[2];
         string[] uitlegdeel6 = new string[4];
-        string[] uitlegdeel7 = new string[4];
-        string[] uitlegdeel8 = new string[4];
+        string[] uitlegdeel7 = new string[3];
+        string[] uitlegdeel8 = new string[3];
         List<CCLabel> labels = new List<CCLabel>();
         List<CCSprite> plaatjes = new List<CCSprite>();
 
@@ -200,10 +200,8 @@ namespace ruigeruben
                     EndofHalp.Position = new CCPoint(bounds.Center.X, 300);
                     labels.Add(EndofHalp);
                     break;
+
                 default:
-                    deletelabels();
-                    labels.Clear();
-                    PageCounter = 1;
                     MainActivity.SwitchToMenu(SceneIds.OpeningMenu, 0);
                     break;
                     

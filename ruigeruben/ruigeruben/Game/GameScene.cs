@@ -116,13 +116,13 @@ namespace ruigeruben
                 //p.Y -= y;
 
                 CCPoint pp = new CCPoint();
-                pp.X = p.X - x;
-                pp.Y = p.Y - y;
+                pp.X = p.X - x - 50;
+                pp.Y = p.Y - y - 50;
 
-                p = m_BoardLayer.toLocation(pp);
-
-                m_BoardLayer.DrawCard(m_Game.m_CurrentCard, pp);
-
+                pp = m_BoardLayer.toLocation(pp);
+              //  if(!= null)
+                    m_BoardLayer.DrawCard(m_Game.m_CurrentCard, pp);
+                
                 m_Overlay.m_CardButton.Position = m_Overlay.m_CardPos;
             }
 
