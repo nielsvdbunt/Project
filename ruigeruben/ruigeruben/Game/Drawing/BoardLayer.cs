@@ -10,37 +10,16 @@ namespace ruigeruben
 {
     class BoardLayer : CCLayer
     {
-        CCSprite tile;
-        GameScene m_GameScene;
-        float scale = 1;
-        GameBase m_GameBase;
-        Overlay m_Overlay;
-       
-        int m_tilesize = 200;
+        public List<CCDrawNode> Rectangles = new List<CCDrawNode>();
+        CCSprite panda = new CCSprite("Panda");
+        const int tilesize = 100;
+        CCSprite sprite;
+
         public BoardLayer()
         {
             this.AnchorPoint = new CCPoint(0, 0);
-            this.ContentSize = new CCSize(5000, 5000);
-           
-        }
-
-        public void MoveCardAround(float x, float y, CCSprite tiletest)
-        {
-            tiletest.RunAction(new CCMoveTo(0f, new CCPoint(x, y)));
-            DrawCard(tiletest, tiletest.Position);
-
-        }
-        
-        public void AddPanda(int x, int y)
-        {
-           
-           
-            CCSprite spr = new CCSprite("Panda");
-           
-            spr.PositionX = x;
-            spr.PositionY = y;
-           
-           
+            
+            //this.ContentSize = new CCSize(5000, 5000);
         }
 
         public void Zoom(bool In)
@@ -53,86 +32,77 @@ namespace ruigeruben
 
         }
 
-       
-        
-
-        public void DrawRaster()
+        public void DrawRaster(List<CCPoint> AvaliblePointsList)
         {
+
+
+            foreach (CCDrawNode r in Rectangles)
+            {
+                RemoveChild(r);
+            }
+            Rectangles.Clear();
             var bounds = VisibleBoundsWorldspace;
-        
+            
             int HorLines = (int)bounds.Size.Width / 128;
             int VerLines = (int)bounds.Size.Height / 128;
-
-            for(int i = 0; i < HorLines; i++)
+            foreach(CCPoint p in AvaliblePointsList)
             {
                 var drawNode = new CCDrawNode();
-                AddChild(drawNode);
-                /*var shape = new CCPoint(bounds
-                drawNode.DrawLine()
 
+                var shape = new CCRect(p.X * tilesize - (tilesize / 2), p.Y * tilesize - (tilesize / 2), 100, 100);
                 drawNode.DrawRect(shape, fillColor: CCColor4B.Transparent,
-                    borderWidth: 4,
-                    borderColor: CCColor4B.White);
-                    */
-
+                borderWidth: 2,
+                borderColor: CCColor4B.White);
+                Rectangles.Add(drawNode);
+                this.AddChild(drawNode);
             }
-          
-
-
-        }
-
-        /* public void Dragging()
-         {
-             Card tile = m_GameBase.m_CurrentCard;
-             if (m_GameScene.IsCardDragging)
-             {
-                 CCSprite FlyingTile = TexturePool.GetSprite(tile.m_Hash);
-                 FlyingTile.Position = m_GameScene.Location;
-             }
-         }
- */
-        public void DrawShit()
-        {
-
+           
         }
 
         public CCPoint toLocation(CCPoint point) //from pixels to board location
         {
-            var bounds = VisibleBoundsWorldspace;
             int x = Convert.ToInt32(point.X);
             int y = Convert.ToInt32(point.Y);
-            int middenx = Convert.ToInt32(bounds.Center.X) - (m_tilesize / 2);
-            int middeny = Convert.ToInt32(bounds.Center.Y) - (m_tilesize / 2);
-            int diffx = (x - middenx) / m_tilesize;
-            int diffy = (y - middeny) / m_tilesize;
+            
+            int diffx = x / tilesize;
+            int diffy = y / tilesize;
 
+          /*  if (x < 0)
+                diffx -= 1;
+
+            if (y < 0)
+                diffy -= 1;
+          */
             CCPoint p = new CCPoint(diffx, diffy);
             return p;
         }
 
         public CCPoint fromLocation(CCPoint point) //from location to pixels
         {
-            var bounds = VisibleBoundsWorldspace;
             float x = point.X;
             float y = point.Y;
-            int middenx = Convert.ToInt32(bounds.Center.X) - (m_tilesize / 2);
-            int middeny = Convert.ToInt32(bounds.Center.X) - (m_tilesize / 2);
-            x = middenx + (x * m_tilesize);
-            y = middeny + (y * m_tilesize);
+            //int middenx = 0 - (tilesize / 2);
+            //int middeny = 0 - (tilesize / 2);
+            x = x * tilesize;
+            y = y * tilesize;
             CCPoint p = new CCPoint(x, y);
             return p;
         }
 
-        public void DrawCard(CCSprite c, CCPoint point)
+        public void DrawCard(Card card, CCPoint point)
         {
             CCPoint p = fromLocation(point);
-            //CCSprite sprite = TexturePool.GetSprite(card.m_Hash);
-            c.AnchorPoint = new CCPoint(0, 0);
-            c.Position = p;
-            AddChild(c);
+            sprite = TexturePool.GetSprite(card.m_Hash);      
+            sprite.Position = p;
+            sprite.Rotation = card.GetRotation();
+            //sprite.AnchorPoint = new CCPoint(0, 0);
+            AddChild(sprite);
         }
 
-        
+        public void DeleteCard()
+        {
+            RemoveChild(sprite);
+        }
     }
     
 }

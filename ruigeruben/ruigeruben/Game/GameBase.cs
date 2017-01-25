@@ -11,8 +11,9 @@ namespace ruigeruben
         public List<Player> m_Players;
         Deck m_Deck;
         public Board m_Board;
-        BoardLayer m_BoardLayer;
         public Card m_CurrentCard;
+        public List<CCPoint> m_PosiblePos;
+        List<CCPoint> m_CheckedCards;
 
         public GameBase(GameScene Scene, InputGameInfo info)
         {
@@ -29,6 +30,7 @@ namespace ruigeruben
             m_Scene = Scene;
             m_Board = new Board();
             m_Deck = new Deck(info.CardMultiplier);
+            m_CheckedCards = new List<CCPoint>();
         }
 
         public void Start()
@@ -44,13 +46,14 @@ namespace ruigeruben
 
             m_Players[0].Turn = true;
 
-           
-            CCSprite StartTile = TexturePool.GetSprite("21202");
-            m_Scene.m_BoardLayer.DrawCard(StartTile, new CCPoint(0, 0));
+            Card BeginCard = new Card("21202");
+            m_Scene.m_BoardLayer.DrawCard(BeginCard, new CCPoint(0, 0));
+            m_Board.AddCard(BeginCard, new CCPoint(0, 0));
 
             m_CurrentCard = m_Deck.GetNextCard();
             m_Scene.m_Overlay.UpdateInterface(m_Players, m_Deck.GetCardsLeft(), m_CurrentCard);
-          //  m_BoardLayer.virtualcard(m_CurrentCard);
+
+            FindPossibleMoves();
         }
   
         public void NextTurn()
@@ -71,43 +74,207 @@ namespace ruigeruben
             m_CurrentCard = m_Deck.GetNextCard();
             m_Scene.m_Overlay.UpdateInterface(m_Players, m_Deck.GetCardsLeft(), m_CurrentCard);
 
+            FindPossibleMoves();
         } 
 
         public void RotateCard(int Rot)
         {
             m_CurrentCard.Rotate(Rot);
             m_Scene.m_Overlay.UpdateInterface(m_Players, m_Deck.GetCardsLeft(), m_CurrentCard);
-
+            FindPossibleMoves();
         }
 
-        public void Walktiles(int x, int y)
+        public void FindPossibleMoves()
         {
-            for (int i = -1; i <= 2; i += 2)
+            m_PosiblePos = new List<CCPoint>();
+
+            foreach (CCPoint p in m_Board.m_OpenSpots)
             {
-                Checktiles(x + i, y);
-                Checktiles(x, y + i);
+                Card L = m_Board.GetCard(new CCPoint(p.X - 1, p.Y));
+                Card T = m_Board.GetCard(new CCPoint(p.X , p.Y + 1));
+                Card R = m_Board.GetCard(new CCPoint(p.X + 1, p.Y));
+                Card B = m_Board.GetCard(new CCPoint(p.X , p.Y - 1));
+
+                bool Add = true;
+
+                if (L != null)
+                    if (L.GetAttribute(3) != m_CurrentCard.GetAttribute(1))
+                        Add = false;
+
+                if (T != null)
+                    if (T.GetAttribute(0) != m_CurrentCard.GetAttribute(2))
+                        Add = false;
+
+                if (R != null)
+                    if (R.GetAttribute(1) != m_CurrentCard.GetAttribute(3))
+                        Add = false;
+
+                if (B != null)
+                    if (B.GetAttribute(2) != m_CurrentCard.GetAttribute(0))
+                        Add = false;
+
+                if (Add)
+                    m_PosiblePos.Add(p);
             }
-            
 
+            m_Scene.m_BoardLayer.DrawRaster(m_PosiblePos);
         }
 
-
-        public bool Checktiles(int x, int y)
+        public int Points(CCPoint p) //moet nog aangepast worden aan waar aliens staan
         {
-          
-            Card c = m_Board.GetCard(x, y);
-            foreach (Card kaart in m_Board.m_virCards)
+            int res = 0;
+            if (CheckFinished(p, CardAttributes.SpaceStation, true))
             {
-                if (kaart.GetHashCode() == m_CurrentCard.GetHashCode()  )
-                    return true;
+                if (m_CheckedCards.Count <= 2)
+                    res += 2;
                 else
-                    return false;
+                    res += m_CheckedCards.Count * 2;
+                m_CheckedCards = new List<CCPoint>();
             }
+            if (CheckFinished(p, CardAttributes.RainbowRoad, true))
+            {
+                res += m_CheckedCards.Count;
+                m_CheckedCards = new List<CCPoint>();
+            }
+            return res;
 
-            return false;
         }
 
+        public bool CheckFinished(CCPoint p, CardAttributes c, bool firstcard)
+        {
+            Card cur = m_Board.GetCard(p);
+            Card L = m_Board.GetCard(new CCPoint(p.X - 1, p.Y));
+            Card T = m_Board.GetCard(new CCPoint(p.X, p.Y + 1));
+            Card R = m_Board.GetCard(new CCPoint(p.X + 1, p.Y));
+            Card B = m_Board.GetCard(new CCPoint(p.X, p.Y - 1));
 
+            CardAttributes l = cur.GetAttribute(1);
+            CardAttributes t = cur.GetAttribute(2);
+            CardAttributes r = cur.GetAttribute(3);
+            CardAttributes b = cur.GetAttribute(0);
+            CardAttributes m = cur.GetAttribute(4);
 
+            bool ml = true, mt = true, mr = true, mb = true;
+            bool checkl, checkt, checkr, checkb;
+
+            List<bool> middencheck = new List<bool>();
+
+            if (!m_CheckedCards.Contains(p))
+            {
+                m_CheckedCards.Add(p);
+                if (m == c || m == CardAttributes.intersection) //dit klopt nu helemaal volgens mij
+                {
+                    firstcard = false;
+                    if (l == c)
+                    {
+                        if (L == null)
+                            ml = false;
+                        else
+                        {
+                            checkl = CheckFinished(new CCPoint(p.X - 1, p.Y), c, firstcard);
+                            if (!checkl)
+                                return false;
+                        }
+                        middencheck.Add(ml);
+                    }
+                    if (t == c)
+                    {
+                        if (T == null)
+                            mt = false;
+                        else
+                        {
+                            checkt = CheckFinished(new CCPoint(p.X, p.Y + 1), c, firstcard);
+                            if (!checkt)
+                                return false;
+                        }
+                        middencheck.Add(mt);
+                    }
+                    if (r == c)
+                    {
+                        if (R == null)
+                            mr = false;
+                        else
+                        {
+                            checkr = CheckFinished(new CCPoint(p.X + 1, p.Y), c, firstcard);
+                            if (!checkr)
+                                return false;
+                        }
+                        middencheck.Add(mr);
+                    }
+                    if (b == c)
+                    {
+                        if (B == null)
+                            mb = false;
+                        else
+                        {
+                            checkb = CheckFinished(new CCPoint(p.X, p.Y - 1), c, firstcard);
+                            if (!checkb)
+                                return false;
+                        }
+                        middencheck.Add(mb);
+                    }
+
+                    if (middencheck.Contains(false))
+                        return false;
+
+                    return true;
+                }
+                else
+                {
+
+                    if (firstcard) // dit klopt nog niet aangezien er ook twee dingen afgesloten kunnen worden
+                    {
+                        firstcard = false;
+                        if (l == c)
+                            if (L == null)
+                                ml = false;
+                            else
+                            {
+                                checkl = CheckFinished(new CCPoint(p.X - 1, p.Y), c, firstcard);
+                                if (!checkl)
+                                    return false;
+                            }
+                        if (t == c)
+                            if (T == null)
+                                mt = false;
+                            else
+                            {
+                                checkt = CheckFinished(new CCPoint(p.X, p.Y + 1), c, firstcard);
+                                if (!checkt)
+                                    return false;
+                            }
+                        if (r == c)
+                            if (R == null)
+                                mr = false;
+                            else
+                            {
+                                checkr = CheckFinished(new CCPoint(p.X + 1, p.Y), c, firstcard);
+                                if (!checkr)
+                                    return false;
+                            }
+                        if (b == c)
+                            if (B == null)
+                                mb = false;
+                            else
+                            {
+                                checkb = CheckFinished(new CCPoint(p.X, p.Y - 1), c, firstcard);
+                                if (!checkb)
+                                    return false;
+                            }
+
+                    }
+                    return true;
+                }
+            }
+            return true;
+
+        }
+
+        public void refresh()
+        {
+            m_Scene.m_Overlay.UpdateInterface(m_Players, m_Deck.GetCardsLeft(), m_CurrentCard);
+            m_Scene.m_BoardLayer.DrawRaster(m_PosiblePos);
+        }
+       
     }
 }
