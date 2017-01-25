@@ -105,8 +105,8 @@ namespace ruigeruben
                 var bounds = m_BoardLayer.VisibleBoundsWorldspace;
                 CCPoint3 ciw = m_BoardLayer.Camera.CenterInWorldspace;
 
-                float x = bounds.MaxX - ciw.X;
-                float y = bounds.MaxY - ciw.Y;
+                float x = bounds.Size.Width / 2 - ciw.X;//bounds.MaxX;// - ciw.X;
+                float y = bounds.Size.Height /2 - ciw.Y;//bounds.MaxY;// - ciw.Y;
 
                 m_IsCardDragging = false;
 
