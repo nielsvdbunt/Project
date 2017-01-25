@@ -120,22 +120,64 @@ namespace ruigeruben
             m_Scene.m_BoardLayer.DrawRaster(m_PosiblePos);
         }
 
-        public int Points(CCPoint p) //moet nog aangepast worden aan waar aliens staan
+        public int Points(CCPoint p, CardAttributes attr) //moet nog aangepast worden aan waar aliens staan
         {
             int res = 0;
-            if (CheckFinished(p, CardAttributes.SpaceStation, true))
+            if (attr == CardAttributes.SpaceStation || attr == CardAttributes.RainbowRoad)
             {
-                if (m_CheckedCards.Count <= 2)
-                    res += 2;
+                Card card = m_Board.GetCard(p);
+
+                if (card.GetAttribute(4) == CardAttributes.None)
+                {
+                    List<CardAttributes> attrlist = new List<CardAttributes>();
+                    int s = 0, r = 0;
+                    for (int t = 0; t < 4; t++)
+                        attrlist.Add(card.GetAttribute(t));
+                    foreach (CardAttributes c in attrlist)
+                    {
+                        if (c == CardAttributes.SpaceStation)
+                            s += 1;
+                        if (c == CardAttributes.RainbowRoad)
+                            r += 1;
+                    }
+                    if ((s < 2 && attr == CardAttributes.SpaceStation) || (r < 2 && attr == CardAttributes.RainbowRoad))
+                    {
+                        if (CheckFinished(p, attr, true))
+                            if (attr == CardAttributes.SpaceStation)
+                            {
+                                if (m_CheckedCards.Count <= 2)
+                                    res = 2;
+                                else
+                                    res = m_CheckedCards.Count * 2;
+                            }
+                            else
+                                res = m_CheckedCards.Count;
+                    }
+                    else
+                    {
+                        // alles klopt behalve als je twee verschillende dingen met 1 kaart afsluit dat komt hier
+                    }
+                }
                 else
-                    res += m_CheckedCards.Count * 2;
-                m_CheckedCards = new List<CCPoint>();
+                {
+                    if (CheckFinished(p, attr, true))
+                        if (attr == CardAttributes.SpaceStation)
+                        {
+                            if (m_CheckedCards.Count <= 2)
+                                res = 2;
+                            else
+                                res = m_CheckedCards.Count * 2;
+                        }
+                        else
+                            res = m_CheckedCards.Count;
+                }
             }
-            if (CheckFinished(p, CardAttributes.RainbowRoad, true))
+            else
             {
-                res += m_CheckedCards.Count;
-                m_CheckedCards = new List<CCPoint>();
+                if (CheckSatelite(p) == 8)
+                    res = 9;
             }
+            m_CheckedCards = new List<CCPoint>();
             return res;
 
         }
@@ -162,7 +204,7 @@ namespace ruigeruben
             if (!m_CheckedCards.Contains(p))
             {
                 m_CheckedCards.Add(p);
-                if (m == c || m == CardAttributes.intersection) //dit klopt nu helemaal volgens mij
+                if (m == c || m == CardAttributes.intersection || firstcard)
                 {
                     firstcard = false;
                     if (l == c)
@@ -220,54 +262,36 @@ namespace ruigeruben
                     return true;
                 }
                 else
-                {
-
-                    if (firstcard) // dit klopt nog niet aangezien er ook twee dingen afgesloten kunnen worden
-                    {
-                        firstcard = false;
-                        if (l == c)
-                            if (L == null)
-                                ml = false;
-                            else
-                            {
-                                checkl = CheckFinished(new CCPoint(p.X - 1, p.Y), c, firstcard);
-                                if (!checkl)
-                                    return false;
-                            }
-                        if (t == c)
-                            if (T == null)
-                                mt = false;
-                            else
-                            {
-                                checkt = CheckFinished(new CCPoint(p.X, p.Y + 1), c, firstcard);
-                                if (!checkt)
-                                    return false;
-                            }
-                        if (r == c)
-                            if (R == null)
-                                mr = false;
-                            else
-                            {
-                                checkr = CheckFinished(new CCPoint(p.X + 1, p.Y), c, firstcard);
-                                if (!checkr)
-                                    return false;
-                            }
-                        if (b == c)
-                            if (B == null)
-                                mb = false;
-                            else
-                            {
-                                checkb = CheckFinished(new CCPoint(p.X, p.Y - 1), c, firstcard);
-                                if (!checkb)
-                                    return false;
-                            }
-
-                    }
                     return true;
-                }
             }
             return true;
 
+        }
+
+        public int CheckSatelite(CCPoint p)
+        {
+            int i = 0;
+            List<Card> list = new List<Card>();
+            Card l = m_Board.GetCard(new CCPoint(p.X - 1, p.Y));
+            Card lb = m_Board.GetCard(new CCPoint(p.X - 1, p.Y - 1));
+            Card b = m_Board.GetCard(new CCPoint(p.X, p.Y - 1));
+            Card rb = m_Board.GetCard(new CCPoint(p.X + 1, p.Y - 1));
+            Card r = m_Board.GetCard(new CCPoint(p.X + 1, p.Y));
+            Card rt = m_Board.GetCard(new CCPoint(p.X + 1, p.Y + 1));
+            Card t = m_Board.GetCard(new CCPoint(p.X, p.Y + 1));
+            Card lt = m_Board.GetCard(new CCPoint(p.X - 1, p.Y + 1));
+            list.Add(l);
+            list.Add(lb);
+            list.Add(b);
+            list.Add(rb);
+            list.Add(r);
+            list.Add(rt);
+            list.Add(t);
+            list.Add(lt);
+            foreach (Card c in list)
+                if (c != null)
+                    i += 1;
+            return i;
         }
        
     }
