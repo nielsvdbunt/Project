@@ -47,8 +47,8 @@ namespace ruigeruben
             foreach(CCPoint p in AvaliblePointsList)
             {
                 var drawNode = new CCDrawNode();
-               
-                var shape = new CCRect(p.X*100, p.Y*100, 100,100 );
+
+                var shape = new CCRect(p.X * tilesize - (tilesize / 2), p.Y * tilesize - (tilesize / 2), 100, 100);
                 drawNode.DrawRect(shape, fillColor: CCColor4B.Transparent,
                 borderWidth: 2,
                 borderColor: CCColor4B.White);
@@ -62,11 +62,16 @@ namespace ruigeruben
         {
             int x = Convert.ToInt32(point.X);
             int y = Convert.ToInt32(point.Y);
-            //int middenx = 0 - (tilesize / 2);
-            //int middeny = 0 - (tilesize / 2);
+            
             int diffx = x / tilesize;
             int diffy = y / tilesize;
 
+            if (x < 0)
+                diffx -= 1;
+
+            if (y < 0)
+                diffy -= 1;
+          
             CCPoint p = new CCPoint(diffx, diffy);
             return p;
         }
@@ -86,9 +91,10 @@ namespace ruigeruben
         public void DrawCard(Card card, CCPoint point)
         {
             CCPoint p = fromLocation(point);
-            CCSprite sprite = TexturePool.GetSprite(card.m_Hash);
-            sprite.AnchorPoint = new CCPoint(0, 0);
+            CCSprite sprite = TexturePool.GetSprite(card.m_Hash);      
             sprite.Position = p;
+            sprite.Rotation = card.GetRotation();
+            //sprite.AnchorPoint = new CCPoint(0, 0);
             AddChild(sprite);
         }
     }

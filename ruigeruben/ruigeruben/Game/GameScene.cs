@@ -112,18 +112,20 @@ namespace ruigeruben
 
                 CCPoint p = m_Overlay.ScreenToWorldspace(touches[0].LocationOnScreen);
 
-                //p.X -= x;
-                //p.Y -= y;
-
                 CCPoint pp = new CCPoint();
-                pp.X = p.X - x - 50;
-                pp.Y = p.Y - y - 50;
+                pp.X = p.X - x;
+                pp.Y = p.Y - y;
 
                 pp = m_BoardLayer.toLocation(pp);
-              //  if(!= null)
+
+                if(m_Game.m_PosiblePos.Contains(pp))
+                {
                     m_BoardLayer.DrawCard(m_Game.m_CurrentCard, pp);
-                
-                m_Overlay.m_CardButton.Position = m_Overlay.m_CardPos;
+                    m_Overlay.m_CardButton.Visible = false;
+                    m_Game.m_Board.AddCard(m_Game.m_CurrentCard, pp);
+                }
+                else
+                    m_Overlay.m_CardButton.Position = m_Overlay.m_CardPos;
             }
 
             if (m_Touches == 2)
@@ -234,13 +236,11 @@ namespace ruigeruben
         public void OnRotateLeft()
         {
             m_Game.RotateCard(-90);
-            m_Game.FindPossibleMoves();
         }
 
         public void OnRotateRight()
         {
             m_Game.RotateCard(90);
-            m_Game.FindPossibleMoves();
         }
 
         public void OnAlienClick()

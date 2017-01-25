@@ -12,7 +12,7 @@ namespace ruigeruben
         Deck m_Deck;
         public Board m_Board;
         public Card m_CurrentCard;
-        List<CCPoint> m_PosiblePos;
+        public List<CCPoint> m_PosiblePos;
         List<CCPoint> m_CheckedCards;
 
         public GameBase(GameScene Scene, InputGameInfo info)
@@ -48,9 +48,7 @@ namespace ruigeruben
 
             Card BeginCard = new Card("21202");
             m_Scene.m_BoardLayer.DrawCard(BeginCard, new CCPoint(0, 0));
-            m_Scene.m_BoardLayer.DrawCard(BeginCard, new CCPoint(1, 1));
             m_Board.AddCard(BeginCard, new CCPoint(0, 0));
-            m_Board.AddCard(BeginCard, new CCPoint(1, 1));
 
             m_CurrentCard = m_Deck.GetNextCard();
             m_Scene.m_Overlay.UpdateInterface(m_Players, m_Deck.GetCardsLeft(), m_CurrentCard);
