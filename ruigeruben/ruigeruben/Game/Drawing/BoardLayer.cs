@@ -13,6 +13,7 @@ namespace ruigeruben
         public List<CCDrawNode> Rectangles = new List<CCDrawNode>();
         CCSprite panda = new CCSprite("Panda");
         const int tilesize = 100;
+        CCSprite sprite;
 
         public BoardLayer()
         {
@@ -91,11 +92,16 @@ namespace ruigeruben
         public void DrawCard(Card card, CCPoint point)
         {
             CCPoint p = fromLocation(point);
-            CCSprite sprite = TexturePool.GetSprite(card.m_Hash);      
+            sprite = TexturePool.GetSprite(card.m_Hash);      
             sprite.Position = p;
             sprite.Rotation = card.GetRotation();
             //sprite.AnchorPoint = new CCPoint(0, 0);
             AddChild(sprite);
+        }
+
+        public void DeleteCard()
+        {
+            RemoveChild(sprite);
         }
     }
     

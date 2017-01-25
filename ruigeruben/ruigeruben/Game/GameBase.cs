@@ -269,6 +269,12 @@ namespace ruigeruben
             return true;
 
         }
+
+        public void refresh()
+        {
+            m_Scene.m_Overlay.UpdateInterface(m_Players, m_Deck.GetCardsLeft(), m_CurrentCard);
+            m_Scene.m_BoardLayer.DrawRaster(m_PosiblePos);
+        }
        
     }
 }

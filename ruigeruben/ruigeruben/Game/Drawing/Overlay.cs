@@ -11,8 +11,10 @@ namespace ruigeruben
         List<Button> m_buttons = new List<Button>();
         List<CCLabel> m_labels = new List<CCLabel>();
         List<CCSprite> m_sprites = new List<CCSprite>();
+        GameScene m_GameScene;
         CCSprite m_AlienButton;
         public CCSprite m_CardButton;
+
         public CCPoint m_CardPos = new CCPoint(1020, 100);
 
         public Overlay(GameScene Scene) //Constructor method for creating the static part of the overlay
@@ -37,20 +39,25 @@ namespace ruigeruben
             Button rotateright = new Button("rotateleft", "", new CCPoint(1290, 100), m_font, 36, this);
             rotateright.m_Sprite.FlipX = true;
             Button next = new Button("Next", new CCPoint(1700, 100), m_font, 70, this);
+            Button undo = new Button("Undo", new CCPoint(200, 50), m_font, 36, this);
             m_AlienButton = new CCSprite("alien1");
             m_AlienButton.Position = new CCPoint(1420, 100);
             AddChild(m_AlienButton);
-
             m_CardButton = new CCSprite();
             AddChild(m_CardButton);
 
+            m_buttons.Add(undo);
             m_buttons.Add(rotateleft);
             m_buttons.Add(rotateright);
             m_buttons.Add(next);
            
-            rotateleft.OnClicked += Scene.OnRotateLeft;
-            rotateright.OnClicked += Scene.OnRotateRight;
-            next.OnClicked += Scene.OnNextClick;
+                rotateleft.OnClicked += Scene.OnRotateLeft;
+                rotateright.OnClicked += Scene.OnRotateRight;
+            
+          
+                next.OnClicked += Scene.OnNextClick;
+                undo.OnClicked += Scene.OnUndoClick;
+                  
 
         }
 

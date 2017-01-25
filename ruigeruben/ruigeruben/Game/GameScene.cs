@@ -26,9 +26,11 @@ namespace ruigeruben
         public CardAttributeLayer m_CardAttrLayer;
         bool m_IsCardDragging;
         public Overlay m_Overlay;
-       
+        Deck d;
+        GameBase m_GameBase;
+        public bool CardOnBoard = false;
         GameBase m_Game;
-    
+        CCPoint pp;
         int m_Touches;
       
         public GameScene(CCGameView View, InputGameInfo info) : base(View)
@@ -112,7 +114,7 @@ namespace ruigeruben
 
                 CCPoint p = m_Overlay.ScreenToWorldspace(touches[0].LocationOnScreen);
 
-                CCPoint pp = new CCPoint();
+                pp = new CCPoint();
                 pp.X = p.X - x;
                 pp.Y = p.Y - y ;
 
@@ -123,6 +125,7 @@ namespace ruigeruben
                     m_BoardLayer.DrawCard(m_Game.m_CurrentCard, pp);
                     m_Overlay.m_CardButton.Visible = false;
                     m_Game.m_Board.AddCard(m_Game.m_CurrentCard, pp);
+                    CardOnBoard = true;
                 }
                 else
                     m_Overlay.m_CardButton.Position = m_Overlay.m_CardPos;
@@ -230,19 +233,38 @@ namespace ruigeruben
 
         public void OnNextClick()
         {
-            m_Game.NextTurn();
+            if (CardOnBoard)
+            {
+                m_Game.NextTurn();
+                CardOnBoard = false;
+            }
         }
         
         public void OnRotateLeft()
         {
-            m_Game.RotateCard(-90);
+            if(CardOnBoard == false)
+                 m_Game.RotateCard(-90);
         }
 
         public void OnRotateRight()
         {
-            m_Game.RotateCard(90);
+            if(CardOnBoard == false)
+                m_Game.RotateCard(90);
         }
+        public void OnUndoClick()
+        {
+            if (CardOnBoard)
+            {
 
+                CardOnBoard = false;
+                m_Overlay.m_CardButton.Visible = true;
+                m_BoardLayer.DeleteCard();
+                m_Game.m_Board.RemoveCard(m_Game.m_CurrentCard,pp);
+                m_Game.refresh();
+               // Overlay.UpdateInterface(m_GameBase.m_Players, d.GetCardsLeft(), m_GameBase.m_CurrentCard);
+
+            }
+        }
         public void OnAlienClick()
         {
 
