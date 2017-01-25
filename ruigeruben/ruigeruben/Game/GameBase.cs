@@ -120,10 +120,10 @@ namespace ruigeruben
             m_Scene.m_BoardLayer.DrawRaster(m_PosiblePos);
         }
 
-        public int Points(CCPoint p)
+        public int Points(CCPoint p) //moet nog aangepast worden aan waar aliens staan
         {
             int res = 0;
-            if (CheckFinished(p, CardAttributes.SpaceStation))
+            if (CheckFinished(p, CardAttributes.SpaceStation, true))
             {
                 if (m_CheckedCards.Count <= 2)
                     res += 2;
@@ -131,7 +131,7 @@ namespace ruigeruben
                     res += m_CheckedCards.Count * 2;
                 m_CheckedCards = new List<CCPoint>();
             }
-            if (CheckFinished(p, CardAttributes.RainbowRoad))
+            if (CheckFinished(p, CardAttributes.RainbowRoad, true))
             {
                 res += m_CheckedCards.Count;
                 m_CheckedCards = new List<CCPoint>();
@@ -140,7 +140,7 @@ namespace ruigeruben
 
         }
 
-        public bool CheckFinished(CCPoint p, CardAttributes c)
+        public bool CheckFinished(CCPoint p, CardAttributes c, bool firstcard)
         {
             Card cur = m_Board.GetCard(p);
             Card L = m_Board.GetCard(new CCPoint(p.X - 1, p.Y));
@@ -156,55 +156,113 @@ namespace ruigeruben
 
             bool ml = true, mt = true, mr = true, mb = true;
             bool checkl, checkt, checkr, checkb;
+
+            List<bool> middencheck = new List<bool>();
+
             if (!m_CheckedCards.Contains(p))
             {
                 m_CheckedCards.Add(p);
-                if (m == c || m == CardAttributes.intersection)
+                if (m == c || m == CardAttributes.intersection) //dit klopt nu helemaal volgens mij
                 {
+                    firstcard = false;
                     if (l == c)
+                    {
                         if (L == null)
                             ml = false;
                         else
                         {
-                            checkl = CheckFinished(new CCPoint(p.X - 1, p.Y), c);
+                            checkl = CheckFinished(new CCPoint(p.X - 1, p.Y), c, firstcard);
                             if (!checkl)
                                 return false;
                         }
+                        middencheck.Add(ml);
+                    }
                     if (t == c)
+                    {
                         if (T == null)
                             mt = false;
                         else
                         {
-                            checkt = CheckFinished(new CCPoint(p.X, p.Y + 1), c);
+                            checkt = CheckFinished(new CCPoint(p.X, p.Y + 1), c, firstcard);
                             if (!checkt)
                                 return false;
                         }
+                        middencheck.Add(mt);
+                    }
                     if (r == c)
+                    {
                         if (R == null)
                             mr = false;
                         else
                         {
-                            checkr = CheckFinished(new CCPoint(p.X + 1, p.Y), c);
+                            checkr = CheckFinished(new CCPoint(p.X + 1, p.Y), c, firstcard);
                             if (!checkr)
                                 return false;
                         }
+                        middencheck.Add(mr);
+                    }
                     if (b == c)
+                    {
                         if (B == null)
                             mb = false;
                         else
                         {
-                            checkb = CheckFinished(new CCPoint(p.X, p.Y - 1), c);
+                            checkb = CheckFinished(new CCPoint(p.X, p.Y - 1), c, firstcard);
                             if (!checkb)
                                 return false;
                         }
+                        middencheck.Add(mb);
+                    }
 
-                    if (ml == false && mt == false && mr == false && mb == false)
+                    if (middencheck.Contains(false))
                         return false;
 
                     return true;
                 }
                 else
                 {
+
+                    if (firstcard) // dit klopt nog niet aangezien er ook twee dingen afgesloten kunnen worden
+                    {
+                        firstcard = false;
+                        if (l == c)
+                            if (L == null)
+                                ml = false;
+                            else
+                            {
+                                checkl = CheckFinished(new CCPoint(p.X - 1, p.Y), c, firstcard);
+                                if (!checkl)
+                                    return false;
+                            }
+                        if (t == c)
+                            if (T == null)
+                                mt = false;
+                            else
+                            {
+                                checkt = CheckFinished(new CCPoint(p.X, p.Y + 1), c, firstcard);
+                                if (!checkt)
+                                    return false;
+                            }
+                        if (r == c)
+                            if (R == null)
+                                mr = false;
+                            else
+                            {
+                                checkr = CheckFinished(new CCPoint(p.X + 1, p.Y), c, firstcard);
+                                if (!checkr)
+                                    return false;
+                            }
+                        if (b == c)
+                            if (B == null)
+                                mb = false;
+                            else
+                            {
+                                checkb = CheckFinished(new CCPoint(p.X, p.Y - 1), c, firstcard);
+                                if (!checkb)
+                                    return false;
+                            }
+
+                    }
                     return true;
                 }
             }
