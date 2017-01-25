@@ -114,7 +114,7 @@ namespace ruigeruben
 
                 CCPoint pp = new CCPoint();
                 pp.X = p.X - x;
-                pp.Y = p.Y - y;
+                pp.Y = p.Y - y ;
 
                 pp = m_BoardLayer.toLocation(pp);
 
