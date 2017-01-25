@@ -75,6 +75,7 @@ namespace ruigeruben
         {
             m_virCards.Remove(c);
             m_virLocations.Remove(p);
+            m_OpenSpots.Clear();
           
         }
 
