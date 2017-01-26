@@ -12,7 +12,11 @@ namespace ruigeruben
 
         public List<Player> m_virAliens;
         public List<CCPoint> m_virAlienLocations;
-
+        
+        GameBase m_GameBase;
+        Deck d;
+        Overlay m_Overlay;
+        GameScene m_GameScene;
         public List<CCPoint> m_OpenSpots;
 
         public Board()
@@ -26,12 +30,19 @@ namespace ruigeruben
             m_OpenSpots = new List<CCPoint>();
         }
 
+        public void RemoveCard(Card c, CCPoint p)
+        {
+            m_virCards.Remove(c);
+            m_virLocations.Remove(p);
+            m_OpenSpots.Clear();
+        }
+
         public void AddCard(Card card, CCPoint p)
         {
             m_virCards.Add(card);
             m_virLocations.Add(p);
 
-            if(m_OpenSpots.Count != 0) // Start tile
+            if (m_OpenSpots.Count != 0) // Start tile
             {
                 bool b = m_OpenSpots.Remove(p);
             }
@@ -48,7 +59,7 @@ namespace ruigeruben
                 pp = new CCPoint(p.X, p.Y + j);
                 if (GetCard(pp) == null)
                 {
-                    if(!m_OpenSpots.Contains(pp))
+                    if (!m_OpenSpots.Contains(pp))
                         m_OpenSpots.Add(pp);
                 }
             }
