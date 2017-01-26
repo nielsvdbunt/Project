@@ -32,9 +32,15 @@ namespace ruigeruben
 
         public void RemoveCard(Card c, CCPoint p)
         {
+
             m_virCards.Remove(c);
             m_virLocations.Remove(p);
-            m_OpenSpots.Clear();
+            for(int i= -1; i <2; i++)
+                m_OpenSpots.Remove(new CCPoint ((p.X + i), p.Y));
+            for (int j = -1; j < 2; j++)
+                m_OpenSpots.Remove(new CCPoint(p.X, (p.Y + j)));
+            
+           
         }
 
         public void AddCard(Card card, CCPoint p)
