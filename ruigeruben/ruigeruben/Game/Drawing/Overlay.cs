@@ -11,7 +11,6 @@ namespace ruigeruben
         List<Button> m_buttons = new List<Button>();
         List<CCLabel> m_labels = new List<CCLabel>();
         List<CCSprite> m_sprites = new List<CCSprite>();
-        GameScene m_GameScene;
         CCSprite m_AlienButton;
         public CCSprite m_CardButton;
         public CCPoint m_CardPos = new CCPoint(1020, 100);

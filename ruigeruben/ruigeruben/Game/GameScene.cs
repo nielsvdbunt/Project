@@ -26,8 +26,6 @@ namespace ruigeruben
         public CardAttributeLayer m_CardAttrLayer;
         bool m_IsCardDragging;
         public Overlay m_Overlay;
-        Deck d;
-        GameBase m_GameBase;
         public bool CardOnBoard = false;
         GameBase m_Game;
         CCPoint pp;

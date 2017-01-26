@@ -13,10 +13,6 @@ namespace ruigeruben
         public List<Player> m_virAliens;
         public List<CCPoint> m_virAlienLocations;
         
-        GameBase m_GameBase;
-        Deck d;
-        Overlay m_Overlay;
-        GameScene m_GameScene;
         public List<CCPoint> m_OpenSpots;
 
         public Board()
