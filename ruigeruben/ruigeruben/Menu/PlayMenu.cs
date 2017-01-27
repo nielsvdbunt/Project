@@ -81,11 +81,10 @@ namespace ruigeruben
         private void settings()
         {
             List<CCLabel> settinglabels = new List<CCLabel>();
-            List<CCLabel> settings = new List<CCLabel>();
 
             CCLabel Alien_Setting,other_setting;
-            other_setting = new CCLabel("Max. tiles", "Coalition", 60);
             Alien_Setting = new CCLabel("ALIENS","Coalition", 60, CCLabelFormat.SpriteFont);
+            other_setting = new CCLabel("CARDS (X)", "Coalition", 60);
             settinglabels.Add(Alien_Setting);
             settinglabels.Add(other_setting);
 
@@ -97,55 +96,13 @@ namespace ruigeruben
                 AddChild(settinglabels[i]);
             }
             
-            CCLabel Alien_count = new CCLabel("5", "Coalition", 70);
-            CCLabel Test = new CCLabel("5" , "Coalition", 70);
-            settings.Add(Alien_count);
-            settings.Add(Test);
+            CCLabel Alien_count = new CCLabel(m_GameInfo.Aliens.ToString(), "Coalition", 70);
+            CCLabel CardsInDeck = new CCLabel(m_GameInfo.CardMultiplier.ToString(), "Coalition", 70);
 
-            for (int i = 0; i<settings.Count; i++)
-            {
-                int j = i;
-                settings[j].AnchorPoint = new CCPoint(0, 0);
-                settings[j].Position = new CCPoint(1490, bounds.MaxY - 200 - i * 150);
-                AddChild(settings[j]);
+            Setting(Alien_count, ref m_GameInfo.Aliens, 1, 15, 0, 1);
+            Setting(CardsInDeck, ref m_GameInfo.CardMultiplier, 0.5f, 5, 1, 0.5f);
 
-                Button minus = new Button("-", new CCPoint(1420, bounds.MaxY - 200 - i * 150), "Coalition", 70, this);
-                minus.SetTextAnchorpoint(new CCPoint(0, 0));
 
-                minus.OnClicked += delegate
-                {
-                    if (int.Parse(settings[j].Text) > 1)
-                    {
-                        settings[j].Text = (int.Parse(settings[j].Text) - 1).ToString();
-                        m_GameInfo.Aliens = int.Parse(settings[0].Text);
-                    }
-                    if (int.Parse(settings[j].Text) < 10)
-                    {
-                        minus.SetTextPossition(new CCPoint(1420, 880 - 150*(j)));
-                        settings[j].PositionX = 1490;
-                    }
-                };
-                m_Buttons.Add(minus);
-
-                Button plus = new Button("+", new CCPoint(1600, bounds.MaxY - 200 - i*150), "Coalition", 70, this);
-                plus.SetTextAnchorpoint(new CCPoint(0, 0));
-
-                plus.OnClicked += delegate {
-                    if (int.Parse(settings[j].Text) < 15)
-                    {
-                        settings[j].Text = (int.Parse(settings[j].Text) + 1).ToString();
-                        m_GameInfo.Aliens = int.Parse(settings[0].Text);
-
-                    }
-                    if (int.Parse(settings[j].Text) >= 10)
-                    {
-                        minus.SetTextPossition(new CCPoint(1400, 880 - 150*(j)));
-                        settings[j].PositionX = 1460;
-                    }
-                };
-                m_Buttons.Add(plus);
-            }
-            
         }
 
         private void players()
@@ -253,6 +210,99 @@ namespace ruigeruben
         private void OnBackMenu()
         {
             MainActivity.SwitchToMenu(SceneIds.OpeningMenu, 0);
+        }
+
+        private void Setting(CCLabel label, ref float value, float min, float max, int order, float stepsize)
+        {
+            label.AnchorPoint = new CCPoint(0, 0);
+            label.Position = new CCPoint(1490, bounds.MaxY - 200 - order * 150);
+            AddChild(label);
+
+            Button minus = new Button("-", new CCPoint(1420, bounds.MaxY - 200 - order * 150), "Coalition", 70, this);
+            minus.SetTextAnchorpoint(new CCPoint(0, 0));
+            if (value >= 10)
+            {
+                if (value >= 100)
+                {
+                    label.PositionX = 1430;
+                    minus.SetTextPossition(new CCPoint(1380, 880 - 150 * (order)));
+                }
+                else
+                {
+                    minus.SetTextPossition(new CCPoint(1400, 880 - 150 * (order)));
+                    label.PositionX = 1450;
+                }
+            }
+            float temp = value;
+
+            minus.OnClicked += delegate
+            {
+                if (temp > min)
+                {
+                    if (order == 0)
+                    {
+                        m_GameInfo.Aliens -= (int) stepsize;
+                        temp = m_GameInfo.Aliens;
+                    }
+                    else if (order == 1)
+                    {
+                        m_GameInfo.CardMultiplier -= stepsize;
+                        temp = m_GameInfo.CardMultiplier;
+                    }
+                    label.Text = temp.ToString();
+                }
+                if (temp < 100)
+                {
+                    if (temp < 10)
+                    {
+                        minus.SetTextPossition(new CCPoint(1420, 880 - 150 * (order)));
+                        label.PositionX = 1480;
+                    }
+                    else
+                    {
+                        label.PositionX = 1450;
+                        minus.SetTextPossition(new CCPoint(1400, 880 - 150 * (order)));
+                    }
+                }
+            };
+            m_Buttons.Add(minus);
+
+            Button plus = new Button("+", new CCPoint(1600, bounds.MaxY - 200 - order * 150), "Coalition", 70, this);
+            plus.SetTextAnchorpoint(new CCPoint(0, 0));
+            if (temp >= 100)
+                plus.SetTextPossition(new CCPoint(1630, bounds.MaxY - 200 - order * 150));
+
+            plus.OnClicked += delegate {
+                if (temp < max)
+                {
+                    if (order == 0)
+                    {
+                        m_GameInfo.Aliens+= (int) stepsize;
+                        temp = m_GameInfo.Aliens;
+                    }
+                    else if (order == 1)
+                    {
+                        m_GameInfo.CardMultiplier += stepsize;
+                        temp = m_GameInfo.CardMultiplier;
+                    }
+                    label.Text = temp.ToString();
+                }
+                if (temp >= 10)
+                {
+                    if (temp >= 100)
+                    {
+                        label.PositionX = 1430;
+                        minus.SetTextPossition(new CCPoint(1380, 880 - 150 * (order)));
+                        plus.SetTextPossition(new CCPoint(1630, 880 - 150 * order));
+                    }
+                    else
+                    {
+                        minus.SetTextPossition(new CCPoint(1400, 880 - 150 * (order)));
+                        label.PositionX = 1450;
+                    }
+                }
+            };
+            m_Buttons.Add(plus);
         }
     }
 }
