@@ -349,7 +349,9 @@ namespace ruigeruben
 
         private void EndGame()
         {
-            m_Scene.AddLayer(new CCLayer());
+            //Hier moeten de punten nog worden berekend
+
+            m_Scene.AddLayer(new Game.EndLayer(m_Players), 4);
         }
     }
 }
