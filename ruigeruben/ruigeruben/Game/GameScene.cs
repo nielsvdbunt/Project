@@ -15,8 +15,8 @@ namespace ruigeruben
     struct InputGameInfo
     {
         public List<InputPlayer> Players;
-        public int CardMultiplier;
-        public int Aliens;
+        public float CardMultiplier;
+        public float Aliens;
     }
 
     class GameScene : CCScene

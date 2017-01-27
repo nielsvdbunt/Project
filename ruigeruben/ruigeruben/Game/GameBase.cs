@@ -23,7 +23,7 @@ namespace ruigeruben
                 Player p = new Player();
                 p.Name = i.Name;
                 p.PlayerColor = i.Color;
-                p.NumberOfAliens = info.Aliens;
+                p.NumberOfAliens = (int) info.Aliens;
                 m_Players.Add(p);
             }
 

@@ -84,7 +84,7 @@ namespace ruigeruben
 
             CCLabel Alien_Setting,other_setting;
             Alien_Setting = new CCLabel("ALIENS","Coalition", 60, CCLabelFormat.SpriteFont);
-            other_setting = new CCLabel("CARD Multiplier", "Coalition", 60);
+            other_setting = new CCLabel("CARDS (X)", "Coalition", 60);
             settinglabels.Add(Alien_Setting);
             settinglabels.Add(other_setting);
 
@@ -100,7 +100,7 @@ namespace ruigeruben
             CCLabel CardsInDeck = new CCLabel(m_GameInfo.CardMultiplier.ToString(), "Coalition", 70);
 
             Setting(Alien_count, ref m_GameInfo.Aliens, 1, 15, 0, 1);
-            Setting(CardsInDeck, ref m_GameInfo.CardMultiplier, 1, 5, 1, 1);
+            Setting(CardsInDeck, ref m_GameInfo.CardMultiplier, 0.5f, 5, 1, 0.5f);
 
 
         }
@@ -212,7 +212,7 @@ namespace ruigeruben
             MainActivity.SwitchToMenu(SceneIds.OpeningMenu, 0);
         }
 
-        private void Setting(CCLabel label, ref int value, int min, int max, int order, int stepsize)
+        private void Setting(CCLabel label, ref float value, float min, float max, int order, float stepsize)
         {
             label.AnchorPoint = new CCPoint(0, 0);
             label.Position = new CCPoint(1490, bounds.MaxY - 200 - order * 150);
@@ -233,7 +233,7 @@ namespace ruigeruben
                     label.PositionX = 1450;
                 }
             }
-            int temp = value;
+            float temp = value;
 
             minus.OnClicked += delegate
             {
@@ -241,7 +241,7 @@ namespace ruigeruben
                 {
                     if (order == 0)
                     {
-                        m_GameInfo.Aliens-= stepsize;
+                        m_GameInfo.Aliens -= (int) stepsize;
                         temp = m_GameInfo.Aliens;
                     }
                     else if (order == 1)
@@ -277,7 +277,7 @@ namespace ruigeruben
                 {
                     if (order == 0)
                     {
-                        m_GameInfo.Aliens+= stepsize;
+                        m_GameInfo.Aliens+= (int) stepsize;
                         temp = m_GameInfo.Aliens;
                     }
                     else if (order == 1)
