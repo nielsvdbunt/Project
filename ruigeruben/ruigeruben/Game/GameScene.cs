@@ -123,6 +123,7 @@ namespace ruigeruben
                     m_BoardLayer.DrawCard(m_Game.m_CurrentCard, pp);
                     m_Overlay.m_CardButton.Visible = false;
                     m_Game.m_Board.AddCard(m_Game.m_CurrentCard, pp);
+                    m_Game.m_PlacedCard = pp;
                     CardOnBoard = true;
                 }
                 else

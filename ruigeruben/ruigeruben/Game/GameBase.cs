@@ -15,6 +15,9 @@ namespace ruigeruben
         public List<CCPoint> m_PosiblePos;
         List<CCPoint> m_CheckedCards;
 
+        public CCPoint m_PlacedCard;
+        bool connect;
+
         public GameBase(GameScene Scene, InputGameInfo info)
         {
             m_Players = new List<Player>();
@@ -31,6 +34,8 @@ namespace ruigeruben
             m_Board = new Board();
             m_Deck = new Deck(info.CardMultiplier);
             m_CheckedCards = new List<CCPoint>();
+
+            connect = false;
         }
 
         public void Start()
@@ -120,9 +125,10 @@ namespace ruigeruben
             m_Scene.m_BoardLayer.DrawRaster(m_PosiblePos);
         }
 
-        public int Points(CCPoint p, CardAttributes attr) //moet nog aangepast worden aan waar aliens staan
+        public int Points(CCPoint p, CardAttributes attr, out int points2, out int points3, out int points4) //moet nog aangepast worden aan waar aliens staan
         {
-            int res = 0;
+            int points1 = 0;
+            points2 = 0; points3 = 0; points4 = 0;
             if (attr == CardAttributes.SpaceStation || attr == CardAttributes.RainbowRoad)
             {
                 Card card = m_Board.GetCard(p);
@@ -142,47 +148,84 @@ namespace ruigeruben
                     }
                     if ((s < 2 && attr == CardAttributes.SpaceStation) || (r < 2 && attr == CardAttributes.RainbowRoad))
                     {
-                        if (CheckFinished(p, attr, true))
+                        if (CheckFinished(p, attr, true, 4))
                             if (attr == CardAttributes.SpaceStation)
                             {
                                 if (m_CheckedCards.Count <= 2)
-                                    res = 2;
+                                    points1 = 2;
                                 else
-                                    res = m_CheckedCards.Count * 2;
+                                    points1 = m_CheckedCards.Count * 2;
                             }
                             else
-                                res = m_CheckedCards.Count;
+                                points1 = m_CheckedCards.Count;
                     }
                     else
                     {
-                        // alles klopt behalve als je twee verschillende dingen met 1 kaart afsluit dat komt hier
+                        int side1 = 4, side2 = 4, side3 = 4, side0 = 4;
+                        if (card.GetAttribute(1) == attr)
+                            side1 = 1;
+                        if (card.GetAttribute(2) == attr)
+                            side2 = 2;
+                        if (card.GetAttribute(3) == attr)
+                            side3 = 3;
+                        if (card.GetAttribute(0) == attr)
+                            side0 = 0;
+                        List<int> sides = new List<int>();
+                        sides.Add(side1); sides.Add(side2); sides.Add(side3); sides.Add(side0);
+                        foreach(int i in sides)
+                        {
+                            if (i == 4)
+                                sides.Remove(i);
+                        }
+                        if (attr == CardAttributes.SpaceStation)
+                            if (Connected(p, attr, sides[0], sides[1]))
+                            {
+                                if (CheckFinished(p, attr, true, 4))
+                                    if (m_CheckedCards.Count <= 2)
+                                        points1 = 2;
+                                    else
+                                        points1 = m_CheckedCards.Count * 2;
+                            }
+                            else
+                            {
+                                if (CheckFinished(p, attr, sides[0]))
+                                    points1 = m_CheckedCards.Count;
+                                if (CheckFinished(p, attr, sides[1]) && points1 != 0)
+                                    points1 = m_CheckedCards.Count;
+                                else
+                                    points2 = m_CheckedCards.Count;
+                            }
+                        else
+                        {
+                            //midden = none rainbowroadcheck
+                        }
                     }
                 }
                 else
                 {
-                    if (CheckFinished(p, attr, true))
+                    if (CheckFinished(p, attr, true, 4))
                         if (attr == CardAttributes.SpaceStation)
                         {
                             if (m_CheckedCards.Count <= 2)
-                                res = 2;
+                                points1 = 2;
                             else
-                                res = m_CheckedCards.Count * 2;
+                                points1 = m_CheckedCards.Count * 2;
                         }
                         else
-                            res = m_CheckedCards.Count;
+                            points1 = m_CheckedCards.Count;
                 }
             }
             else
             {
                 if (CheckSatelite(p) == 8)
-                    res = 9;
+                    points1 = 9;
             }
             m_CheckedCards = new List<CCPoint>();
-            return res;
+            return points1;
 
         }
 
-        public bool CheckFinished(CCPoint p, CardAttributes c, bool firstcard)
+        public bool CheckFinished(CCPoint p, CardAttributes c, bool firstcard, int side)
         {
             Card cur = m_Board.GetCard(p);
             Card L = m_Board.GetCard(new CCPoint(p.X - 1, p.Y));
@@ -207,49 +250,49 @@ namespace ruigeruben
                 if (m == c || m == CardAttributes.intersection || firstcard)
                 {
                     firstcard = false;
-                    if (l == c)
+                    if (l == c && side != 1)
                     {
                         if (L == null)
                             ml = false;
                         else
                         {
-                            checkl = CheckFinished(new CCPoint(p.X - 1, p.Y), c, firstcard);
+                            checkl = CheckFinished(new CCPoint(p.X - 1, p.Y), c, firstcard, 3);
                             if (!checkl)
                                 return false;
                         }
                         middencheck.Add(ml);
                     }
-                    if (t == c)
+                    if (t == c && side != 2)
                     {
                         if (T == null)
                             mt = false;
                         else
                         {
-                            checkt = CheckFinished(new CCPoint(p.X, p.Y + 1), c, firstcard);
+                            checkt = CheckFinished(new CCPoint(p.X, p.Y + 1), c, firstcard, 0);
                             if (!checkt)
                                 return false;
                         }
                         middencheck.Add(mt);
                     }
-                    if (r == c)
+                    if (r == c && side != 3)
                     {
                         if (R == null)
                             mr = false;
                         else
                         {
-                            checkr = CheckFinished(new CCPoint(p.X + 1, p.Y), c, firstcard);
+                            checkr = CheckFinished(new CCPoint(p.X + 1, p.Y), c, firstcard, 1);
                             if (!checkr)
                                 return false;
                         }
                         middencheck.Add(mr);
                     }
-                    if (b == c)
+                    if (b == c && side != 0)
                     {
                         if (B == null)
                             mb = false;
                         else
                         {
-                            checkb = CheckFinished(new CCPoint(p.X, p.Y - 1), c, firstcard);
+                            checkb = CheckFinished(new CCPoint(p.X, p.Y - 1), c, firstcard, 2);
                             if (!checkb)
                                 return false;
                         }
@@ -258,14 +301,49 @@ namespace ruigeruben
 
                     if (middencheck.Contains(false))
                         return false;
-
-                    return true;
                 }
-                else
-                    return true;
             }
+            if (p == m_PlacedCard && m != c)
+                connect = true;
             return true;
 
+        }
+        
+        public bool CheckFinished(CCPoint p, CardAttributes c, int side)
+        {
+            Card cur = m_Board.GetCard(p);
+            m_CheckedCards.Add(p);
+            if (side == 1)
+            {
+                if (!CheckFinished(new CCPoint(p.X - 1, p.Y), c, false, 3))
+                    return false;
+            }
+            if (side == 2)
+            {
+                if (!CheckFinished(new CCPoint(p.X, p.Y + 1), c, false, 0))
+                    return false;
+            }
+            if (side == 3)
+            {
+                if (!CheckFinished(new CCPoint(p.X + 1, p.Y), c, false, 1))
+                    return false;
+            }
+            if (side == 0)
+            {
+                if (!CheckFinished(new CCPoint(p.X, p.Y - 1), c, false, 2))
+                    return false;
+            }
+            return true;
+        }
+
+        public bool Connected(CCPoint p, CardAttributes c, int side1, int side2)
+        {
+            connect = false;
+            CheckFinished(p, c, 4);
+            if (connect)
+                return true;
+            else
+                return false;
         }
 
         public int CheckSatelite(CCPoint p)
