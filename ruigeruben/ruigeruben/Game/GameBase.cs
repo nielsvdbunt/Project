@@ -71,7 +71,17 @@ namespace ruigeruben
                     break;
                 }
             }
-            m_CurrentCard = m_Deck.GetNextCard();
+
+            do
+            {
+                if (m_Deck.GetCardsLeft() == 0)
+                {
+                    EndGame();
+                    return;
+                }
+                m_CurrentCard = m_Deck.GetNextCard();
+            } while (!AnyMovePossible());
+           
             m_Scene.m_Overlay.UpdateInterface(m_Players, m_Deck.GetCardsLeft(), m_CurrentCard);
 
             FindPossibleMoves();
@@ -118,6 +128,43 @@ namespace ruigeruben
             }
 
             m_Scene.m_BoardLayer.DrawRaster(m_PosiblePos);
+        }
+
+        private bool AnyMovePossible()
+        {
+            for (int rot = 0; rot <= 2; rot++)
+            {
+                foreach (CCPoint p in m_Board.m_OpenSpots)
+                {
+                    Card L = m_Board.GetCard(new CCPoint(p.X - 1, p.Y));
+                    Card T = m_Board.GetCard(new CCPoint(p.X, p.Y + 1));
+                    Card R = m_Board.GetCard(new CCPoint(p.X + 1, p.Y));
+                    Card B = m_Board.GetCard(new CCPoint(p.X, p.Y - 1));
+
+                    bool Add = true;
+
+                    if (L != null)
+                        if (L.GetAttribute(3) != m_CurrentCard.GetAttribute(1))
+                            Add = false;
+
+                    if (T != null)
+                        if (T.GetAttribute(0) != m_CurrentCard.GetAttribute(2))
+                            Add = false;
+
+                    if (R != null)
+                        if (R.GetAttribute(1) != m_CurrentCard.GetAttribute(3))
+                            Add = false;
+
+                    if (B != null)
+                        if (B.GetAttribute(2) != m_CurrentCard.GetAttribute(0))
+                            Add = false;
+
+                    if (Add)
+                        return true;
+                }
+                RotateCard(90);
+            }
+            return false;
         }
 
         public int Points(CCPoint p, CardAttributes attr) //moet nog aangepast worden aan waar aliens staan
@@ -298,6 +345,11 @@ namespace ruigeruben
         {
             m_Scene.m_Overlay.UpdateInterface(m_Players, m_Deck.GetCardsLeft(), m_CurrentCard);
             m_Scene.m_BoardLayer.DrawRaster(m_PosiblePos);
+        }
+
+        private void EndGame()
+        {
+            m_Scene.AddLayer(new CCLayer());
         }
     }
 }
