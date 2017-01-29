@@ -428,8 +428,8 @@ namespace ruigeruben
         private void EndGame()
         {
             //Hier moeten de punten nog worden berekend
-
-            m_Scene.AddLayer(new Game.EndLayer(m_Players), 4);
+            if(m_Deck.GetCardsLeft() == 0)
+                 m_Scene.AddLayer(new Game.EndLayer(m_Players), 4);
         }
     }
 }
