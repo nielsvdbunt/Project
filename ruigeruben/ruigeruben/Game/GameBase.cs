@@ -195,7 +195,7 @@ namespace ruigeruben
                     }
                     if ((s < 2 && attr == CardAttributes.SpaceStation) || (r < 2 && attr == CardAttributes.RainbowRoad))
                     {
-                        if (CheckFinished(p, attr, true, 4))
+                        if (CheckFinished(p, attr, true, 4, 4))
                             if (attr == CardAttributes.SpaceStation)
                             {
                                 if (m_CheckedCards.Count <= 2)
@@ -227,7 +227,7 @@ namespace ruigeruben
                         if (attr == CardAttributes.SpaceStation)
                             if (Connected(p, attr, sides[0], sides[1]))
                             {
-                                if (CheckFinished(p, attr, true, 4))
+                                if (CheckFinished(p, attr, true, 4, 4))
                                     if (m_CheckedCards.Count <= 2)
                                         points1 = 2;
                                     else
@@ -235,22 +235,203 @@ namespace ruigeruben
                             }
                             else
                             {
-                                if (CheckFinished(p, attr, sides[0]))
+                                if (CheckFinished(p, attr, sides[0], 4))
                                     points1 = m_CheckedCards.Count;
-                                if (CheckFinished(p, attr, sides[1]) && points1 != 0)
+                                if (CheckFinished(p, attr, sides[1], 4) && points1 != 0)
                                     points1 = m_CheckedCards.Count;
                                 else
                                     points2 = m_CheckedCards.Count;
                             }
                         else
                         {
-                            //midden = none rainbowroadcheck
+                            if (sides.Count == 2)
+                                if (Connected(p, attr, sides[0], sides[1]))
+                                    if (CheckFinished(p, attr, true, 4, 4))
+                                        points1 = m_CheckedCards.Count;
+                                    else;
+                                else
+                                {
+                                    if (CheckFinished(p, attr, sides[0], 4))
+                                        points1 = m_CheckedCards.Count;
+                                    if (CheckFinished(p, attr, sides[1], 4))
+                                        if (points1 == 0)
+                                            points1 = m_CheckedCards.Count;
+                                        else
+                                            points2 = m_CheckedCards.Count;
+                                }
+                        
+                            if (sides.Count == 3)
+                            {
+                                int first = 4, second = 4;
+                                if (Connected(p, attr, sides[0], sides[1]))
+                                {
+                                    first = 0;
+                                    second = 2;
+                                }
+                                else if (Connected(p, attr, sides[1], sides[2]))
+                                {
+                                    first = 1;
+                                    second = 0;
+                                }
+                                else if (Connected(p, attr, sides[2], sides[0]))
+                                {
+                                    first = 2;
+                                    second = 1;
+                                }
+                                else
+                                {
+                                    if (CheckFinished(p, attr, sides[0], 4))
+                                        points1 = m_CheckedCards.Count;
+                                    if (CheckFinished(p, attr, sides[1], 4))
+                                        if (points1 == 0)
+                                            points1 = m_CheckedCards.Count;
+                                        else
+                                            points2 = m_CheckedCards.Count;
+                                    if (CheckFinished(p, attr, sides[2], 4))
+                                        if (points2 == 0)
+                                            if (points1 == 0)
+                                                points1 = m_CheckedCards.Count;
+                                            else
+                                                points2 = m_CheckedCards.Count;
+                                        else
+                                            points3 = m_CheckedCards.Count;
+                                }
+
+                                if (first != 4 && second != 4)
+                                {
+                                    if (CheckFinished(p, attr, sides[first], 4))
+                                        points1 = m_CheckedCards.Count;
+                                    if (CheckFinished(p, attr, sides[second], 4))
+                                    {
+                                        if (points1 == 0)
+                                            points1 = m_CheckedCards.Count;
+                                        else
+                                            points2 = m_CheckedCards.Count;
+                                    }
+                                }
+                            }
+                            if (sides.Count == 4)
+                            {
+                                int first = 4, second = 4, third = 4;
+                                if (Connected(p, attr, sides[0], sides[1]))
+                                    if (Connected(p, attr, sides[2], sides[3]))
+                                    {
+                                        first = 0;
+                                        second = 2;
+                                    }
+                                    else
+                                    {
+                                        first = 0;
+                                        second = 2;
+                                        third = 3;
+                                    }
+                                else if (Connected(p, attr, sides[2], sides[3]))
+                                {
+                                    first = 2;
+                                    second = 0;
+                                    third = 1;
+                                }
+                                else if (Connected(p, attr, sides[1], sides[2]))
+                                    if (Connected(p, attr, sides[3], sides[0]))
+                                    {
+                                        first = 1;
+                                        second = 3;
+                                    }
+                                    else
+                                    {
+                                        first = 1;
+                                        second = 3;
+                                        third = 0;
+                                    }
+                                else if (Connected(p, attr, sides[3], sides[0]))
+                                {
+                                    first = 3;
+                                    second = 1;
+                                    third = 2;
+                                }
+                                else if (Connected(p, attr, sides[1], sides[3]))
+                                    if (Connected(p, attr, sides[2], sides[0]))
+                                    {
+                                        first = 1;
+                                        second = 2;
+                                    }
+                                    else
+                                    {
+                                        first = 1;
+                                        second = 2;
+                                        third = 0;
+                                    }
+                                else if (Connected(p, attr, sides[2], sides[0]))
+                                {
+                                    first = 2;
+                                    second = 1;
+                                    third = 3;
+                                }
+                                else
+                                {
+                                    if (CheckFinished(p, attr, 0, 4))
+                                        points1 = m_CheckedCards.Count;
+                                    if (CheckFinished(p, attr, 1, 4))
+                                        if (points1 == 0)
+                                            points1 = m_CheckedCards.Count;
+                                        else
+                                            points2 = m_CheckedCards.Count;
+                                    if (CheckFinished(p, attr, 2, 4))
+                                        if (points2 == 0)
+                                            if (points1 == 0)
+                                                points1 = m_CheckedCards.Count;
+                                            else
+                                                points2 = m_CheckedCards.Count;
+                                        else
+                                            points3 = m_CheckedCards.Count;
+                                    if (CheckFinished(p, attr, 3, 4))
+                                        if (points3 == 0)
+                                            if (points2 == 0)
+                                                if (points1 == 0)
+                                                    points1 = m_CheckedCards.Count;
+                                                else
+                                                    points2 = m_CheckedCards.Count;
+                                            else
+                                                points3 = m_CheckedCards.Count;
+                                        else
+                                            points4 = m_CheckedCards.Count;
+                                }
+                                
+                                if (first != 4 && third == 4)
+                                {
+                                    if (CheckFinished(p, attr, sides[first], 4))
+                                        points1 = m_CheckedCards.Count;
+                                    if (CheckFinished(p, attr, sides[second], 4))
+                                        if (points1 == 0)
+                                            points1 = m_CheckedCards.Count;
+                                        else
+                                            points2 = m_CheckedCards.Count;
+                                }
+                                if (third != 4)
+                                {
+                                    if (CheckFinished(p, attr, sides[first], 4))
+                                        points1 = m_CheckedCards.Count;
+                                    if (CheckFinished(p, attr, sides[second], 4))
+                                        if (points1 == 0)
+                                            points1 = m_CheckedCards.Count;
+                                        else
+                                            points2 = m_CheckedCards.Count;
+                                    if (CheckFinished(p, attr, sides[third], 4))
+                                        if (points2 == 0)
+                                            if (points1 == 0)
+                                                points1 = m_CheckedCards.Count;
+                                            else
+                                                points2 = m_CheckedCards.Count;
+                                        else
+                                            points3 = m_CheckedCards.Count;
+                                }
+                            }
                         }
                     }
                 }
                 else
                 {
-                    if (CheckFinished(p, attr, true, 4))
+                    if (CheckFinished(p, attr, true, 4, 4))
                         if (attr == CardAttributes.SpaceStation)
                         {
                             if (m_CheckedCards.Count <= 2)
@@ -272,7 +453,7 @@ namespace ruigeruben
 
         }
 
-        public bool CheckFinished(CCPoint p, CardAttributes c, bool firstcard, int side)
+        public bool CheckFinished(CCPoint p, CardAttributes c, bool firstcard, int side1, int side2)
         {
             Card cur = m_Board.GetCard(p);
             Card L = m_Board.GetCard(new CCPoint(p.X - 1, p.Y));
@@ -297,49 +478,49 @@ namespace ruigeruben
                 if (m == c || m == CardAttributes.intersection || firstcard)
                 {
                     firstcard = false;
-                    if (l == c && side != 1)
+                    if (l == c && side1 != 1)
                     {
                         if (L == null)
                             ml = false;
                         else
                         {
-                            checkl = CheckFinished(new CCPoint(p.X - 1, p.Y), c, firstcard, 3);
+                            checkl = CheckFinished(new CCPoint(p.X - 1, p.Y), c, firstcard, 3, side2);
                             if (!checkl)
                                 return false;
                         }
                         middencheck.Add(ml);
                     }
-                    if (t == c && side != 2)
+                    if (t == c && side1 != 2)
                     {
                         if (T == null)
                             mt = false;
                         else
                         {
-                            checkt = CheckFinished(new CCPoint(p.X, p.Y + 1), c, firstcard, 0);
+                            checkt = CheckFinished(new CCPoint(p.X, p.Y + 1), c, firstcard, 0, side2);
                             if (!checkt)
                                 return false;
                         }
                         middencheck.Add(mt);
                     }
-                    if (r == c && side != 3)
+                    if (r == c && side1 != 3)
                     {
                         if (R == null)
                             mr = false;
                         else
                         {
-                            checkr = CheckFinished(new CCPoint(p.X + 1, p.Y), c, firstcard, 1);
+                            checkr = CheckFinished(new CCPoint(p.X + 1, p.Y), c, firstcard, 1, side2);
                             if (!checkr)
                                 return false;
                         }
                         middencheck.Add(mr);
                     }
-                    if (b == c && side != 0)
+                    if (b == c && side1 != 0)
                     {
                         if (B == null)
                             mb = false;
                         else
                         {
-                            checkb = CheckFinished(new CCPoint(p.X, p.Y - 1), c, firstcard, 2);
+                            checkb = CheckFinished(new CCPoint(p.X, p.Y - 1), c, firstcard, 2, side2);
                             if (!checkb)
                                 return false;
                         }
@@ -351,33 +532,36 @@ namespace ruigeruben
                 }
             }
             if (p == m_PlacedCard && m != c)
-                connect = true;
+            {
+                if ((side1 == 1 && side2 == 3) || (side1 == 2 && side2 == 0) || (side1 == 3 && side2 == 1) || (side1 == 0 && side2 == 2))
+                    connect = true;
+            }
             return true;
 
         }
         
-        public bool CheckFinished(CCPoint p, CardAttributes c, int side)
+        public bool CheckFinished(CCPoint p, CardAttributes c, int side, int side2)
         {
             Card cur = m_Board.GetCard(p);
             m_CheckedCards.Add(p);
             if (side == 1)
             {
-                if (!CheckFinished(new CCPoint(p.X - 1, p.Y), c, false, 3))
+                if (!CheckFinished(new CCPoint(p.X - 1, p.Y), c, false, 3, side2))
                     return false;
             }
             if (side == 2)
             {
-                if (!CheckFinished(new CCPoint(p.X, p.Y + 1), c, false, 0))
+                if (!CheckFinished(new CCPoint(p.X, p.Y + 1), c, false, 0, side2))
                     return false;
             }
             if (side == 3)
             {
-                if (!CheckFinished(new CCPoint(p.X + 1, p.Y), c, false, 1))
+                if (!CheckFinished(new CCPoint(p.X + 1, p.Y), c, false, 1, side2))
                     return false;
             }
             if (side == 0)
             {
-                if (!CheckFinished(new CCPoint(p.X, p.Y - 1), c, false, 2))
+                if (!CheckFinished(new CCPoint(p.X, p.Y - 1), c, false, 2, side2))
                     return false;
             }
             return true;
@@ -386,11 +570,9 @@ namespace ruigeruben
         public bool Connected(CCPoint p, CardAttributes c, int side1, int side2)
         {
             connect = false;
-            CheckFinished(p, c, 4);
-            if (connect)
-                return true;
-            else
-                return false;
+            CheckFinished(p, c, true, side1, side2);
+            m_CheckedCards = new List<CCPoint>();
+            return connect;
         }
 
         public int CheckSatelite(CCPoint p)
