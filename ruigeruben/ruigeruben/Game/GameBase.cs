@@ -172,10 +172,9 @@ namespace ruigeruben
             return false;
         }
 
-        public int Points(CCPoint p, CardAttributes attr, out int points2, out int points3, out int points4) //moet nog aangepast worden aan waar aliens staan
+        public void Points(CCPoint p, CardAttributes attr, out int points1, out int points2, out int points3, out int points4) //moet nog aangepast worden aan waar aliens staan
         {
-            int points1 = 0;
-            points2 = 0; points3 = 0; points4 = 0;
+            points1 = 0;  points2 = 0; points3 = 0; points4 = 0;
             if (attr == CardAttributes.SpaceStation || attr == CardAttributes.RainbowRoad)
             {
                 Card card = m_Board.GetCard(p);
@@ -449,8 +448,6 @@ namespace ruigeruben
                     points1 = 9;
             }
             m_CheckedCards = new List<CCPoint>();
-            return points1;
-
         }
 
         public bool CheckFinished(CCPoint p, CardAttributes c, bool firstcard, int side1, int side2)
