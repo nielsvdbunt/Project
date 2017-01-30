@@ -81,7 +81,7 @@ namespace ruigeruben
             }
         }
 
-        CardAttributes GetAttribute(int Spot)
+        public CardAttributes GetAttribute(int Spot)
         {
             return m_Attributes[Spot];
         }

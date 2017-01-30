@@ -71,15 +71,17 @@
     <Compile Include="Game\Drawing\BackgrondLayer.cs" />
     <Compile Include="Game\Drawing\BoardLayer.cs" />
     <Compile Include="Game\Drawing\CardAttributeLayer.cs" />
-    <Compile Include="Game\Drawing\TexturePool.cs" />
+    <Compile Include="Game\EndLayer.cs" />
     <Compile Include="Game\GameBase.cs" />
     <Compile Include="Game\GameScene.cs" />
-    <Compile Include="Game\Overlay.cs" />
+    <Compile Include="Game\Drawing\Overlay.cs" />
     <Compile Include="Game\Player.cs" />
+    <Compile Include="Game\TexturePool.cs" />
     <Compile Include="MainActivity.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Menu\AbstractMenu.cs" />
+    <Compile Include="Menu\EndingMenu.cs" />
     <Compile Include="Menu\SettingMenu.cs" />
     <Compile Include="Menu\HelpMenu.cs" />
     <Compile Include="Menu\OpeningMenu.cs" />
@@ -108,9 +110,6 @@
     <AndroidResource Include="Resources\drawable-xhdpi\Icon.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\Icon.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\Icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidAsset Include="Assets\Content\Sounds\sound2.mp3" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
@@ -143,19 +142,40 @@
     <AndroidAsset Include="Assets\Content\Images\rotateleft.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\Content\Sounds\sound1.mp3" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidAsset Include="Assets\Content\Images\alien1.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\Content\tiles\" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\Content\Images\sheetimage.png" />
+    <AndroidAsset Include="Assets\Content\Images\OldSheetWhite.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\Content\Images\sheetfinal.plist" />
+    <AndroidAsset Include="Assets\Content\Images\OldSheetWhite.plist" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxxhdpi\logoapp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxhdpi\logoapp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xhdpi\logoapp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-mdpi\logoapp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\logoapp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\Content\Images\final.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\Content\Images\final.plist" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\Content\Sounds\mix_6m07s.mp3" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
