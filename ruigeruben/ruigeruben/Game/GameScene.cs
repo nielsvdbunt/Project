@@ -28,7 +28,7 @@ namespace ruigeruben
         public Overlay m_Overlay;
         public bool CardOnBoard = false;
         GameBase m_Game;
-        CCPoint pp;
+
         int m_Touches;
       
         public GameScene(CCGameView View, InputGameInfo info) : base(View)
@@ -102,21 +102,12 @@ namespace ruigeruben
         {
             if (m_IsCardDragging)
             {
-                var bounds = m_BoardLayer.VisibleBoundsWorldspace;
-                CCPoint3 ciw = m_BoardLayer.Camera.CenterInWorldspace;
-
-                float x = bounds.Size.Width / 2 - ciw.X;//bounds.MaxX;// - ciw.X;
-                float y = bounds.Size.Height /2 - ciw.Y;//bounds.MaxY;// - ciw.Y;
-
                 m_IsCardDragging = false;
 
-                CCPoint p = m_Overlay.ScreenToWorldspace(touches[0].LocationOnScreen);
-
-                pp = new CCPoint();
-                pp.X = p.X - x;
-                pp.Y = p.Y - y ;
-
-                pp = m_BoardLayer.toLocation(pp);
+                CCPoint p = m_BoardLayer.ScreenToWorldspace(touches[0].LocationOnScreen);
+                p.X += 50;
+                p.Y -= 50;
+                CCPoint pp = m_BoardLayer.toLocation(p);
 
                 if(m_Game.m_PosiblePos.Contains(pp))
                 {
@@ -163,14 +154,8 @@ namespace ruigeruben
 
                     CCPoint p = i.LocationOnScreen;
                     p = m_Overlay.ScreenToWorldspace(p);
-                    //   m_Overlay.m_CardButton.RunAction(new CCMoveTo(0f,p));
                     m_Overlay.m_CardButton.Position = p;
                 }
-
-
-            //        m_Overlay.m_CardButton.RunAction(new CCMoveTo(0f, new CCPoint(touches[0].PreviousLocation.X - x, y - touches[0].PreviousLocationOnScreen.Y)));
-                //AddChild(Spr);
-
             }
             else
             {
@@ -180,7 +165,7 @@ namespace ruigeruben
                     foreach (CCTouch i in touches)
                     {
                         var s = m_BoardLayer.Camera.CenterInWorldspace;
-                        s.X += i.PreviousLocationOnScreen.X - i.LocationOnScreen.X;//i.LocationOnScreen.X - i.PreviousLocationOnScreen.X;
+                        s.X += i.PreviousLocationOnScreen.X - i.LocationOnScreen.X;
                         s.Y += i.LocationOnScreen.Y - i.PreviousLocationOnScreen.Y;
                         m_BoardLayer.Camera.CenterInWorldspace = s;
 
@@ -258,7 +243,7 @@ namespace ruigeruben
                 CardOnBoard = false;
                 m_Overlay.m_CardButton.Visible = true;
                 m_BoardLayer.DeleteCard();
-                m_Game.m_Board.RemoveCard(m_Game.m_CurrentCard,pp);
+               // m_Game.m_Board.RemoveCard(m_Game.m_CurrentCard, pp);
                 m_Game.refresh();
                // Overlay.UpdateInterface(m_GameBase.m_Players, d.GetCardsLeft(), m_GameBase.m_CurrentCard);
 
