@@ -70,7 +70,6 @@
     <Compile Include="Game\Deck.cs" />
     <Compile Include="Game\Drawing\BackgrondLayer.cs" />
     <Compile Include="Game\Drawing\BoardLayer.cs" />
-    <Compile Include="Game\Drawing\CardAttributeLayer.cs" />
     <Compile Include="Game\EndLayer.cs" />
     <Compile Include="Game\GameBase.cs" />
     <Compile Include="Game\GameScene.cs" />

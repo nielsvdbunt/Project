@@ -20,6 +20,14 @@ namespace ruigeruben
             this.AnchorPoint = new CCPoint(0, 0);
         }
 
+        public void RemoveRaster()
+        {
+            foreach (CCDrawNode r in Rectangles)
+            {
+                RemoveChild(r);
+            }
+        }
+
         public void DrawRaster(List<CCPoint> AvaliblePointsList)
         {
             foreach (CCDrawNode r in Rectangles)
