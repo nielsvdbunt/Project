@@ -28,14 +28,14 @@ namespace ruigeruben
         public bool m_CardPutDown = false;
         GameBase m_Game;
         int m_Touches;
-      
+
         public GameScene(CCGameView View, InputGameInfo info) : base(View)
         {
             m_Game = new GameBase(this, info);
 
             this.AddLayer(m_BackgroundLayer = new BackgroundLayer("achtergrond1"), 0);
-            this.AddLayer(m_BoardLayer = new BoardLayer(),1);
-            this.AddLayer(m_Overlay = new Overlay(this), 2);          
+            this.AddLayer(m_BoardLayer = new BoardLayer(), 1);
+            this.AddLayer(m_Overlay = new Overlay(this), 2);
 
             var touchListener = new CCEventListenerTouchAllAtOnce();
             touchListener.OnTouchesEnded = OnTouchesEnded;
@@ -44,7 +44,7 @@ namespace ruigeruben
             AddEventListener(touchListener, this);
         }
 
-     
+
         public void StartGame()
         {
             m_Game.Start();
@@ -53,7 +53,7 @@ namespace ruigeruben
         public override void OnEnter()
         {
             base.OnEnter();
-            
+
             var s = m_BoardLayer.Camera.CenterInWorldspace;
             s.X = 0;
             s.Y = 0;
@@ -68,14 +68,14 @@ namespace ruigeruben
 
         public void OnTouchesBegan(List<CCTouch> touches, CCEvent touchEvent)
         {
-            if(touches.Count <= 0)
+            if (touches.Count <= 0)
                 return;
-            
+
             float x = touches[0].LocationOnScreen.X;
-            float y = touches[0].LocationOnScreen.Y;     
+            float y = touches[0].LocationOnScreen.Y;
 
             CCPoint Location = new CCPoint(x, y);
-         
+
             if (y <= 1200 && x <= 2300) //  Test if click on overlay
             {
                 m_Touches += touches.Count;
@@ -84,10 +84,10 @@ namespace ruigeruben
             Location = m_Overlay.ScreenToWorldspace(Location);
             CCRect p = m_Overlay.m_CardButton.BoundingBox;
             CCRect r = m_Overlay.m_CardButton.BoundingBoxTransformedToWorld;
-           
+
             if (m_Overlay.m_CardButton.BoundingBox.ContainsPoint(Location)) //Voor het slepen van de kaart in layer
             {
-                if(!m_CardPutDown)
+                if (!m_CardPutDown)
                     m_IsCardDragging = true;
 
             }
@@ -123,8 +123,8 @@ namespace ruigeruben
 
             if (m_Touches < 0)
                 m_Touches = 0;
-            
-               
+
+
         }
         float scale = 1;
         CCPoint m_mid = new CCPoint();
@@ -207,7 +207,7 @@ namespace ruigeruben
 
                     }
                 }
-            } 
+            }
         }
 
         public void OnNextClick()
@@ -219,16 +219,16 @@ namespace ruigeruben
                 m_CardPutDown = false;
             }
         }
-        
+
         public void OnRotateLeft()
         {
-            if(m_CardPutDown == false)
-                 m_Game.RotateCard(-90);
+            if (m_CardPutDown == false)
+                m_Game.RotateCard(-90);
         }
 
         public void OnRotateRight()
         {
-            if(m_CardPutDown == false)
+            if (m_CardPutDown == false)
                 m_Game.RotateCard(90);
         }
         public void OnUndoClick()

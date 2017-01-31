@@ -70,7 +70,6 @@
     <Compile Include="Game\Deck.cs" />
     <Compile Include="Game\Drawing\BackgrondLayer.cs" />
     <Compile Include="Game\Drawing\BoardLayer.cs" />
-    <Compile Include="Game\Drawing\CardAttributeLayer.cs" />
     <Compile Include="Game\EndLayer.cs" />
     <Compile Include="Game\GameBase.cs" />
     <Compile Include="Game\GameScene.cs" />
@@ -81,7 +80,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Menu\AbstractMenu.cs" />
-    <Compile Include="Menu\EndingMenu.cs" />
     <Compile Include="Menu\SettingMenu.cs" />
     <Compile Include="Menu\HelpMenu.cs" />
     <Compile Include="Menu\OpeningMenu.cs" />
