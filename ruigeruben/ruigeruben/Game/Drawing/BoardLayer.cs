@@ -11,8 +11,9 @@ namespace ruigeruben
     class BoardLayer : CCLayer
     {
         public List<CCDrawNode> Rectangles = new List<CCDrawNode>();
-        const int tilesize = 100;
-        CCSprite m_LastSprite;
+        const int m_tilesize = 100;
+        CCSprite m_LastCard;
+        CCSprite m_LastAlien;
         float m_Scale = 1;
         public List<CCSprite> PossiblePositionsAliens = new List<CCSprite>();
  
@@ -55,7 +56,7 @@ namespace ruigeruben
             {
                 var drawNode = new CCDrawNode();
 
-                var shape = new CCRect(p.X * tilesize - (tilesize / 2), p.Y * tilesize - (tilesize / 2), 100, 100);
+                var shape = new CCRect(p.X * m_tilesize - (m_tilesize / 2), p.Y * m_tilesize - (m_tilesize / 2), 100, 100);
                 drawNode.DrawRect(shape, fillColor: CCColor4B.Transparent,
                 borderWidth: 2,
                 borderColor: CCColor4B.White);
@@ -66,8 +67,13 @@ namespace ruigeruben
 
         public CCPoint toLocation(CCPoint point) //from pixels to board location
         {
+            int tilesize = Convert.ToInt32(m_tilesize * m_Scale);
+
             int x = Convert.ToInt32(point.X);
             int y = Convert.ToInt32(point.Y);
+
+            x += Convert.ToInt32(50 * m_Scale);
+            y -= Convert.ToInt32(50 * m_Scale);
 
             int diffx = x / tilesize;
             int diffy = y / tilesize;
@@ -86,8 +92,8 @@ namespace ruigeruben
         {
             float x = point.X;
             float y = point.Y;
-            x = x * tilesize;
-            y = y * tilesize;
+            x = x * m_tilesize;
+            y = y * m_tilesize;
             CCPoint p = new CCPoint(x, y);
             return p;
         }
@@ -113,15 +119,29 @@ namespace ruigeruben
         public void DrawCard(Card card, CCPoint point)
         {
             CCPoint p = fromLocation(point);
-            m_LastSprite = TexturePool.GetSprite(card.m_Hash);
-            m_LastSprite.Position = p;
-            m_LastSprite.Rotation = card.GetRotation();
-            AddChild(m_LastSprite);
+            m_LastCard = TexturePool.GetSprite(card.m_Hash);
+            m_LastCard.Position = p;
+            m_LastCard.Rotation = card.GetRotation();
+            AddChild(m_LastCard);
+        }
+
+        public void DrawAlien(CCPoint point, CCColor3B color)
+        {
+            m_LastAlien = new CCSprite("alien1");
+            m_LastAlien.Position = point;
+            m_LastAlien.Color = color;
+            m_LastAlien.Scale = 0.2f;
+            AddChild(m_LastAlien);
         }
 
         public void DeleteLastCard()
         {
-            RemoveChild(m_LastSprite);
+            RemoveChild(m_LastCard);
+        }
+
+        public void DeleteLastAlien()
+        {
+            RemoveChild(m_LastAlien);
         }
 
         public void FillCircleList(CCPoint p, int x, int y)
@@ -132,7 +152,7 @@ namespace ruigeruben
             CCSprite spr = new CCSprite("alien1");
             spr.Position = DrawPoint;
             spr.Color = CCColor3B.Red;
-            spr.Scale = 0.25f;
+            spr.Scale = 0.20f;
             PossiblePositionsAliens.Add(spr);
 
         }

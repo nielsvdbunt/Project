@@ -99,7 +99,10 @@ namespace ruigeruben
                     
                     if(i.BoundingBoxTransformedToWorld.ContainsPoint(pos))
                     {
-                        int yyy = 3;
+                        m_AllienPutDown = true;
+                        m_BoardLayer.DrawAlien(i.PositionWorldspace, m_Game.m_CurrentPlayer.PlayerColor);
+                        m_BoardLayer.DeleteCircles();
+                        return;
                     }
                 }
             }
@@ -112,8 +115,6 @@ namespace ruigeruben
                 m_IsCardDragging = false;
 
                 CCPoint p = m_BoardLayer.ScreenToWorldspace(touches[0].LocationOnScreen);
-                p.X += 50;
-                p.Y -= 50;
                 CCPoint pp = m_BoardLayer.toLocation(p);
 
                 if (m_Game.m_PosiblePos.Contains(pp))
@@ -210,8 +211,13 @@ namespace ruigeruben
             if (m_CardPutDown)
             {
                 m_Game.m_Board.AddCard(m_Game.m_CurrentCard, m_Game.m_PlacedCard);
+                if (m_AllienPutDown)
+                    m_Game.m_Board.AddAlien(m_Game.m_CurrentPlayer, ); // FIX DIT NOG
+
+                m_BoardLayer.DeleteCircles();
                 m_Game.NextTurn();
                 m_CardPutDown = false;
+                m_AllienPutDown = false;
             }
         }
 
@@ -231,10 +237,20 @@ namespace ruigeruben
         {   
             if (m_CardPutDown )
             {
-                m_CardPutDown = false;
-                m_Overlay.m_CardButton.Visible = true;
-                m_BoardLayer.DeleteLastCard();
-                m_Game.refresh();
+                if (m_AllienPutDown)
+                {
+                    m_BoardLayer.DeleteLastAlien();
+                    m_BoardLayer.DrawAlienPossiblePosition(m_Game.m_CurrentCard, m_Game.m_PlacedCard);
+                    m_AllienPutDown = false;
+                }
+                else
+                {
+                    m_CardPutDown = false;
+                    m_Overlay.m_CardButton.Visible = true;
+                    m_BoardLayer.DeleteLastCard();
+                    m_BoardLayer.DeleteCircles();
+                    m_Game.refresh();
+                }
             }
           
         }

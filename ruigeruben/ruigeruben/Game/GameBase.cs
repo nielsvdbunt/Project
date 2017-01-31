@@ -14,7 +14,7 @@ namespace ruigeruben
         public Card m_CurrentCard;
         public List<CCPoint> m_PosiblePos;
         List<CCPoint> m_CheckedCards;
-
+        public Player m_CurrentPlayer;
         public CCPoint m_PlacedCard;
         bool connect;
 
@@ -50,6 +50,7 @@ namespace ruigeruben
             }
 
             m_Players[0].Turn = true;
+            m_CurrentPlayer = m_Players[0];
 
             Card BeginCard = new Card("21202");
             m_Scene.m_BoardLayer.DrawCard(BeginCard, new CCPoint(0, 0));
@@ -73,6 +74,7 @@ namespace ruigeruben
                     if (i != (m_Players.Count - 1))
                         j = ++i;
                     m_Players[j].Turn = true;
+                    m_CurrentPlayer = m_Players[j];
                     break;
                 }
             }
