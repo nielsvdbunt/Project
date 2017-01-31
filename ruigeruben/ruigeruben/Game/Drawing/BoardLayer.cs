@@ -70,6 +70,9 @@ namespace ruigeruben
             int x = Convert.ToInt32(point.X);
             int y = Convert.ToInt32(point.Y);
 
+            x += 50;
+            y -= 50;
+
             int diffx = x / tilesize;
             int diffy = y / tilesize;
 
