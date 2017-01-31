@@ -402,7 +402,7 @@ namespace ruigeruben
             }
             else
             {
-                if (CheckSatelite(p) == 8)
+                if (CheckSateliteFinished(p) == 8)
                     points1 = 9;
             }
             m_CheckedCards = new List<CCPoint>();
@@ -530,39 +530,49 @@ namespace ruigeruben
             return connect;
         }
 
-        public int CheckSatelite(CCPoint p)
+        public int CheckSateliteFinished(CCPoint p)
         {
-            /*
-             * @bart, dis is hetelfde als deze lange functie
-            for(int i = -1; i <= 1; i++)
+            List<Card> list = new List<Card>();
+            int t = 0;
+
+            for(int i = -1; i<=1; i++)
             {
                 for (int j = -1; j <= 1; j++)
-                    if(m_Board.GetCard(new CCPoint(p.X + i, p.Y + j)) == null)
-                        int t = 2;
-            }*/
+                    list.Add(m_Board.GetCard(new CCPoint(p.X + i, p.Y + j)));
+            }
 
-            int i = 0;
-            List<Card> list = new List<Card>();
-            Card l = m_Board.GetCard(new CCPoint(p.X - 1, p.Y));
-            Card lb = m_Board.GetCard(new CCPoint(p.X - 1, p.Y - 1));
-            Card b = m_Board.GetCard(new CCPoint(p.X, p.Y - 1));
-            Card rb = m_Board.GetCard(new CCPoint(p.X + 1, p.Y - 1));
-            Card r = m_Board.GetCard(new CCPoint(p.X + 1, p.Y));
-            Card rt = m_Board.GetCard(new CCPoint(p.X + 1, p.Y + 1));
-            Card t = m_Board.GetCard(new CCPoint(p.X, p.Y + 1));
-            Card lt = m_Board.GetCard(new CCPoint(p.X - 1, p.Y + 1));
-            list.Add(l);
-            list.Add(lb);
-            list.Add(b);
-            list.Add(rb);
-            list.Add(r);
-            list.Add(rt);
-            list.Add(t);
-            list.Add(lt);
             foreach (Card c in list)
                 if (c != null)
-                    i += 1;
-            return i;
+                    t += 1;
+            return t;
+        }
+
+        public List<CCPoint> CheckSatelite(CCPoint p)
+        {
+            List<Card> list = new List<Card>();
+            List<CCPoint> list2 = new List<CCPoint>();
+            List<CCPoint> res = new List<CCPoint>();
+
+            for (int i = -1; i <= 1; i++)
+            {
+                for (int j = -1; j <= 1; j++)
+                {
+                    list.Add(m_Board.GetCard(new CCPoint(p.X + i, p.Y + j)));
+                    list2.Add(new CCPoint(p.X + i, p.Y + j));
+                }
+            }
+
+            foreach (Card c in list)
+                if (c != null)
+                    if (c.GetAttribute(4) == CardAttributes.Satellite)
+                        //if () hier moet gecheckt worden of er een alien op positie 4 staat
+                        {
+                            int index = list.IndexOf(c);
+                            res.Add(list2[index]);
+                        }
+
+            return res;
+
         }
 
         public void refresh()

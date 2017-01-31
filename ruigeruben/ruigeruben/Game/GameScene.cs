@@ -26,6 +26,7 @@ namespace ruigeruben
         bool m_IsCardDragging;
         public Overlay m_Overlay;
         public bool m_CardPutDown = false;
+        public bool m_AllienPutDown = false;
         GameBase m_Game;
         int m_Touches;
 
@@ -82,14 +83,25 @@ namespace ruigeruben
             }
 
             Location = m_Overlay.ScreenToWorldspace(Location);
-            CCRect p = m_Overlay.m_CardButton.BoundingBox;
-            CCRect r = m_Overlay.m_CardButton.BoundingBoxTransformedToWorld;
-
+           
             if (m_Overlay.m_CardButton.BoundingBox.ContainsPoint(Location)) //Voor het slepen van de kaart in layer
             {
                 if (!m_CardPutDown)
                     m_IsCardDragging = true;
 
+            }
+
+            if(m_CardPutDown && m_AllienPutDown == false)
+            {
+                foreach(CCSprite i in m_BoardLayer.PossiblePositionsAliens)
+                {
+                    CCPoint pos = m_BoardLayer.ScreenToWorldspace(touches[0].LocationOnScreen);
+                    
+                    if(i.BoundingBoxTransformedToWorld.ContainsPoint(pos))
+                    {
+                        int yyy = 3;
+                    }
+                }
             }
         }
 
