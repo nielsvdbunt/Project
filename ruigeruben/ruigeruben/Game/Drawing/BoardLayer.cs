@@ -14,10 +14,17 @@ namespace ruigeruben
         CCSprite panda = new CCSprite("Panda");
         const int tilesize = 100;
         CCSprite m_LastSprite;
+        float m_Scale = 1;
 
         public BoardLayer()
         {
             this.AnchorPoint = new CCPoint(0, 0);
+        }
+
+        public void UpdateScale(float Scale)
+        {
+            m_Scale += Scale;
+            this.Scale = m_Scale;
         }
 
         public void RemoveRaster()
@@ -102,8 +109,8 @@ namespace ruigeruben
                 {
                     var drawNode = new CCDrawNode();
                     drawNode.DrawEllipse(
-                    rect: new CCRect(p.X * 100, p.Y * 100, 130, 130),
-                    lineWidth: 5,
+                    rect: new CCRect(p.X * 100 + i * 25, p.Y * 100 + i * 25, 10, 10),
+                    lineWidth: 1,
                     color: CCColor4B.Red);
                     AddChild(drawNode);
                 }
