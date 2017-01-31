@@ -227,14 +227,16 @@ namespace ruigeruben
                 m_Game.RotateCard(90);
         }
         public void OnUndoClick()
-        {
-            if (m_CardPutDown)
+
+        {   
+            if (m_CardPutDown )
             {
                 m_CardPutDown = false;
                 m_Overlay.m_CardButton.Visible = true;
                 m_BoardLayer.DeleteLastCard();
                 m_Game.refresh();
             }
+          
         }
         public void OnAlienClick()
         {
