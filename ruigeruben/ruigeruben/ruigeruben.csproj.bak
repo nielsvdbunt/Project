@@ -18,7 +18,7 @@
     <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
     <AndroidStoreUncompressedFileExtensions />
     <MandroidI18n />
-    <TargetFrameworkVersion>v4.4</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v6.0</TargetFrameworkVersion>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -70,12 +70,12 @@
     <Compile Include="Game\Deck.cs" />
     <Compile Include="Game\Drawing\BackgrondLayer.cs" />
     <Compile Include="Game\Drawing\BoardLayer.cs" />
-    <Compile Include="Game\EndLayer.cs" />
+    <Compile Include="Game\Drawing\EndLayer.cs" />
     <Compile Include="Game\GameBase.cs" />
     <Compile Include="Game\GameScene.cs" />
     <Compile Include="Game\Drawing\Overlay.cs" />
     <Compile Include="Game\Player.cs" />
-    <Compile Include="Game\TexturePool.cs" />
+    <Compile Include="Game\Drawing\TexturePool.cs" />
     <Compile Include="MainActivity.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -176,7 +176,7 @@ namespace ruigeruben
             InputPlayer player = new InputPlayer();
             string playername = "Player " + (m_Players.Count + 1);
             player.Name = playername;
-            CCColor3B[] Colors = { new CCColor3B(0,191,255), CCColor3B.Red, CCColor3B.Green, CCColor3B.Magenta, new CCColor3B(200,200,200), CCColor3B.Yellow };
+            CCColor3B[] Colors = { new CCColor3B(0,191,255), CCColor3B.Red, CCColor3B.Green, CCColor3B.Magenta, CCColor3B.Orange, CCColor3B.Yellow };
             player.Color =  Colors[m_Players.Count];
             m_Players.Add(player);
             players();
