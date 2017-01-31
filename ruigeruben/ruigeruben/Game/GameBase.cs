@@ -532,6 +532,15 @@ namespace ruigeruben
 
         public int CheckSatelite(CCPoint p)
         {
+            /*
+             * @bart, dis is hetelfde als deze lange functie
+            for(int i = -1; i <= 1; i++)
+            {
+                for (int j = -1; j <= 1; j++)
+                    if(m_Board.GetCard(new CCPoint(p.X + i, p.Y + j)) == null)
+                        int t = 2;
+            }*/
+
             int i = 0;
             List<Card> list = new List<Card>();
             Card l = m_Board.GetCard(new CCPoint(p.X - 1, p.Y));
