@@ -11,7 +11,7 @@ namespace ruigeruben
     class BoardLayer : CCLayer
     {
         public List<CCDrawNode> Rectangles = new List<CCDrawNode>();
-        const int tilesize = 100;
+        const int m_tilesize = 100;
         CCSprite m_LastCard;
         CCSprite m_LastAlien;
         float m_Scale = 1;
@@ -56,7 +56,7 @@ namespace ruigeruben
             {
                 var drawNode = new CCDrawNode();
 
-                var shape = new CCRect(p.X * tilesize - (tilesize / 2), p.Y * tilesize - (tilesize / 2), 100, 100);
+                var shape = new CCRect(p.X * m_tilesize - (m_tilesize / 2), p.Y * m_tilesize - (m_tilesize / 2), 100, 100);
                 drawNode.DrawRect(shape, fillColor: CCColor4B.Transparent,
                 borderWidth: 2,
                 borderColor: CCColor4B.White);
@@ -67,11 +67,13 @@ namespace ruigeruben
 
         public CCPoint toLocation(CCPoint point) //from pixels to board location
         {
+            int tilesize = Convert.ToInt32(m_tilesize * m_Scale);
+
             int x = Convert.ToInt32(point.X);
             int y = Convert.ToInt32(point.Y);
 
-            x += 50;
-            y -= 50;
+            x += Convert.ToInt32(50 * m_Scale);
+            y -= Convert.ToInt32(50 * m_Scale);
 
             int diffx = x / tilesize;
             int diffy = y / tilesize;
@@ -90,8 +92,8 @@ namespace ruigeruben
         {
             float x = point.X;
             float y = point.Y;
-            x = x * tilesize;
-            y = y * tilesize;
+            x = x * m_tilesize;
+            y = y * m_tilesize;
             CCPoint p = new CCPoint(x, y);
             return p;
         }

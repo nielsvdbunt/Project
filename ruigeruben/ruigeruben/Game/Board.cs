@@ -5,13 +5,19 @@ using Microsoft.Xna.Framework;
 
 namespace ruigeruben
 {
+    struct Allien
+    {
+        public CCPoint m_Point;
+        public int m_CardAttr;
+        public Player m_Player;
+    }
+
     class Board
     {      
         public List<Card> m_virCards;
         public List<CCPoint> m_virLocations;
 
-        public List<Player> m_virAliens;
-        public List<CCPoint> m_virAlienLocations;
+        public List<Allien> m_Aliens;
         
         public List<CCPoint> m_OpenSpots;
 
@@ -20,8 +26,7 @@ namespace ruigeruben
             m_virLocations = new List<CCPoint>();
             m_virCards = new List<Card>();
 
-            m_virAliens = new List<Player>();
-            m_virAlienLocations = new List<CCPoint>();
+            m_Aliens = new List<Allien>();
 
             m_OpenSpots = new List<CCPoint>();
         }
@@ -82,22 +87,28 @@ namespace ruigeruben
             return null;
         }
 
-        public void AddAlien(Player player, CCPoint point)
+        public void AddAlien(Player player, CCPoint point, int CardAttr)
         {
-            m_virAliens.Add(player);
-            m_virAlienLocations.Add(point);
+            Allien all = new Allien();
+            all.m_CardAttr = CardAttr;
+            all.m_Point = point;
+            all.m_Player = player;
+            m_Aliens.Add(all);
         }
 
         public void RemoveAlien(CCPoint point)
         {
-            for (int t = 0; t < m_virAlienLocations.Count; t++)
+            int i = -1;
+            for (int t = 0; t < m_Aliens.Count; t++)
             {
-                if(m_virAlienLocations[t] == point)
+                if(m_Aliens[t].m_Point == point)
                 {
-                    m_virAliens.RemoveAt(t);
-                    m_virAlienLocations.RemoveAt(t);
+                    i = t;
                 }
             }
+
+            if (i != -1)
+                m_Aliens.RemoveAt(i);
         }
     }
 }

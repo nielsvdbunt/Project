@@ -212,7 +212,7 @@ namespace ruigeruben
             {
                 m_Game.m_Board.AddCard(m_Game.m_CurrentCard, m_Game.m_PlacedCard);
                 if (m_AllienPutDown)
-                    m_Game.m_Board.AddAlien(m_Game.m_CurrentPlayer, new CCPoint(0,0)); // FIX DIT NOG
+                    m_Game.m_Board.AddAlien(m_Game.m_CurrentPlayer, ); // FIX DIT NOG
 
                 m_BoardLayer.DeleteCircles();
 
@@ -245,8 +245,9 @@ namespace ruigeruben
                 m_Game.RotateCard(90);
         }
         public void OnUndoClick()
-        {
-            if (m_CardPutDown)
+
+        {   
+            if (m_CardPutDown )
             {
                 if (m_AllienPutDown)
                 {
@@ -263,6 +264,7 @@ namespace ruigeruben
                     m_Game.refresh();
                 }
             }
+          
         }
         public void OnAlienClick()
         {
