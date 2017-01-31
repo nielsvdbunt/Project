@@ -92,6 +92,23 @@ namespace ruigeruben
             return p;
         }
 
+        public void DrawAlienPossiblePosition(Card c, CCPoint p)
+        {
+            if (c.GetAttribute(0) != 0)
+                FillCircleList(p, 0, -30);
+            if (c.GetAttribute(1) != 0)
+                FillCircleList(p, -30, 0);
+            if (c.GetAttribute(2) != 0)
+                FillCircleList(p, 0, 30);
+            if (c.GetAttribute(3) != 0)
+                FillCircleList(p, 30, 0);
+            if (c.GetAttribute(4) != 0)
+                FillCircleList(p, 0, 0);
+
+            DrawCircles();
+
+        }
+
         public void DrawCard(Card card, CCPoint point)
         {
             CCPoint p = fromLocation(point);

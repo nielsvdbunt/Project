@@ -111,9 +111,11 @@ namespace ruigeruben
                     m_BoardLayer.RemoveRaster();
                     m_Game.m_PlacedCard = pp;
                     m_CardPutDown = true;
+                    m_BoardLayer.DrawAlienPossiblePosition(m_Game.m_CurrentCard, pp);
+
                 }
 
-                m_Overlay.m_CardButton.Position = m_Overlay.m_CardPos;
+    m_Overlay.m_CardButton.Position = m_Overlay.m_CardPos;
             }
 
        //     if (m_Touches == 2)
