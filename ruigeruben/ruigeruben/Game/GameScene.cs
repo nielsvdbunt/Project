@@ -108,7 +108,7 @@ namespace ruigeruben
                 {
                     m_BoardLayer.DrawCard(m_Game.m_CurrentCard, pp);
                     m_Overlay.m_CardButton.Visible = false;
-                    m_Game.m_Board.AddCard(m_Game.m_CurrentCard, pp);
+                    m_BoardLayer.RemoveRaster();
                     m_Game.m_PlacedCard = pp;
                     m_CardPutDown = true;
                 }
@@ -214,6 +214,7 @@ namespace ruigeruben
         {
             if (m_CardPutDown)
             {
+                m_Game.m_Board.AddCard(m_Game.m_CurrentCard, m_Game.m_PlacedCard);
                 m_Game.NextTurn();
                 m_CardPutDown = false;
             }
