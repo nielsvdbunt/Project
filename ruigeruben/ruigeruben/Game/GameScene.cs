@@ -30,6 +30,7 @@ namespace ruigeruben
         public int m_AllienCardSpot = 0;
         GameBase m_Game;
         int m_Touches;
+        public CCPoint m_PlacedCard;
 
         public GameScene(CCGameView View, InputGameInfo info) : base(View)
         {
@@ -124,9 +125,9 @@ namespace ruigeruben
                 if (m_Game.m_PosiblePos.Contains(pp))
                 {
                     m_BoardLayer.DrawCard(m_Game.m_CurrentCard, pp);
+                    m_PlacedCard = pp;
                     m_Overlay.m_CardButton.Visible = false;
                     m_BoardLayer.RemoveRaster();
-                    m_Game.m_PlacedCard = pp;
                     m_CardPutDown = true;
                     m_BoardLayer.DrawAlienPossiblePosition(m_Game.m_CurrentCard, pp);
 
@@ -261,6 +262,11 @@ namespace ruigeruben
         public void OnAlienClick()
         {
 
+        }
+
+        public CCPoint GetPlacedCard()
+        {
+            return m_PlacedCard; 
         }
     }
 }

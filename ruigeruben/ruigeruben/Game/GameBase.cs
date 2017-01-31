@@ -67,6 +67,9 @@ namespace ruigeruben
 
             int points1; int points2; int points3; int points4;
             List<Player> playerlist = new List<Player>();
+
+            m_PlacedCard = m_Scene.GetPlacedCard();
+
             List<CardAttributes> attrlist = new List<CardAttributes>();
             for (int t = 0; t < 4; t++)
                 attrlist.Add(m_Board.GetCard(m_PlacedCard).GetAttribute(t));
