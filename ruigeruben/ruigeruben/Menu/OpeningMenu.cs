@@ -51,7 +51,7 @@ namespace ruigeruben
 
         private void OnPlayGame()
         {
-            MainActivity.SwitchToMenu(SceneIds.PlayMenu, 0);    
+            MainActivity.SwitchToMenu(SceneIds.PlayMenu, null);    
         }
 
            private void OnHelp()
