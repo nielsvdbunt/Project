@@ -174,6 +174,11 @@ namespace ruigeruben
             return false;
         }
 
+        /*public void Aliens(CCPoint p, out int left, out int top, out int right, out int bottom)
+        {
+
+        }*/
+
         public void Points(CCPoint p, CardAttributes attr, out int points1, out int points2, out int points3, out int points4) //moet nog aangepast worden aan waar aliens staan
         {
             points1 = 0;  points2 = 0; points3 = 0; points4 = 0;
@@ -404,7 +409,7 @@ namespace ruigeruben
             }
             else
             {
-                if (CheckSateliteFinished(p) == 8)
+                if (CheckSatelliteFinished(p) == 8)
                     points1 = 9;
             }
             m_CheckedCards = new List<CCPoint>();
@@ -532,7 +537,7 @@ namespace ruigeruben
             return connect;
         }
 
-        public int CheckSateliteFinished(CCPoint p)
+        public int CheckSatelliteFinished(CCPoint p)
         {
             List<Card> list = new List<Card>();
             int t = 0;
@@ -549,7 +554,7 @@ namespace ruigeruben
             return t;
         }
 
-        public List<CCPoint> CheckSatelite(CCPoint p)
+        public List<CCPoint> CheckSatellite(CCPoint p)
         {
             List<Card> list = new List<Card>();
             List<CCPoint> list2 = new List<CCPoint>();
