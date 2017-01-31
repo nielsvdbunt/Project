@@ -23,6 +23,9 @@ namespace ruigeruben
 
         public void UpdateScale(float Scale)
         {
+            if (m_Scale < 0.5 || m_Scale > 3)
+                return;
+
             m_Scale += Scale;
             this.Scale = m_Scale;
         }
