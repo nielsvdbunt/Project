@@ -26,7 +26,7 @@ namespace ruigeruben
         public CardAttributeLayer m_CardAttrLayer;
         bool m_IsCardDragging;
         public Overlay m_Overlay;
-        public bool CardOnBoard = false;
+        public bool m_CardPutDown = false;
         GameBase m_Game;
         CCPoint pp;
         int m_Touches;
@@ -115,7 +115,7 @@ namespace ruigeruben
                     m_Overlay.m_CardButton.Visible = false;
                     m_Game.m_Board.AddCard(m_Game.m_CurrentCard, pp);
                     m_Game.m_PlacedCard = pp;
-                    CardOnBoard = true;
+                    m_CardPutDown = true;
                 }
                 else
                     m_Overlay.m_CardButton.Position = m_Overlay.m_CardPos;
@@ -201,7 +201,7 @@ namespace ruigeruben
                         m_BoardLayer.Scale = scale;
 
                         var s = m_BoardLayer.Camera.CenterInWorldspace;
-                        s.X = mid.X;//i.LocationOnScreen.X - i.PreviousLocationOnScreen.X;
+                        s.X = mid.X;
                         s.Y = mid.Y;
                         m_BoardLayer.Camera.CenterInWorldspace = s;
 
@@ -217,36 +217,33 @@ namespace ruigeruben
 
         public void OnNextClick()
         {
-            if (CardOnBoard)
+            if (m_CardPutDown)
             {
                 m_Game.NextTurn();
-                CardOnBoard = false;
+                m_CardPutDown = false;
             }
         }
         
         public void OnRotateLeft()
         {
-            if(CardOnBoard == false)
+            if(m_CardPutDown == false)
                  m_Game.RotateCard(-90);
         }
 
         public void OnRotateRight()
         {
-            if(CardOnBoard == false)
+            if(m_CardPutDown == false)
                 m_Game.RotateCard(90);
         }
         public void OnUndoClick()
         {
-            if (CardOnBoard)
+            if (m_CardPutDown)
             {
-
-                CardOnBoard = false;
+                m_CardPutDown = false;
                 m_Overlay.m_CardButton.Visible = true;
-                m_BoardLayer.DeleteCard();
+                m_BoardLayer.DeleteLastCard();
                 m_Game.m_Board.RemoveCard(m_Game.m_CurrentCard, pp);
                 m_Game.refresh();
-              
-
             }
         }
         public void OnAlienClick()

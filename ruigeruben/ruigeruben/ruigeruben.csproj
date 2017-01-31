@@ -81,7 +81,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Menu\AbstractMenu.cs" />
-    <Compile Include="Menu\EndingMenu.cs" />
     <Compile Include="Menu\SettingMenu.cs" />
     <Compile Include="Menu\HelpMenu.cs" />
     <Compile Include="Menu\OpeningMenu.cs" />
