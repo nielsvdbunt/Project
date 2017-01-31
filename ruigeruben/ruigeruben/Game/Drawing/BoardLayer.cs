@@ -11,11 +11,11 @@ namespace ruigeruben
     class BoardLayer : CCLayer
     {
         public List<CCDrawNode> Rectangles = new List<CCDrawNode>();
-        CCSprite panda = new CCSprite("Panda");
         const int tilesize = 100;
         CCSprite m_LastSprite;
         float m_Scale = 1;
-        List<CCDrawNode> PossiblePositionsAliens = new List<CCDrawNode>();
+        public List<CCSprite> PossiblePositionsAliens = new List<CCSprite>();
+ 
         public BoardLayer()
         {
             this.AnchorPoint = new CCPoint(0, 0);
@@ -94,15 +94,16 @@ namespace ruigeruben
 
         public void DrawAlienPossiblePosition(Card c, CCPoint p)
         {
-            if (c.GetAttribute(0) != 0)
+        
+            if (c.GetAttribute(0) != 0 )
                 FillCircleList(p, 0, -30);
             if (c.GetAttribute(1) != 0)
-                FillCircleList(p, -30, 0);
+                FillCircleList(p, -40, 0);
             if (c.GetAttribute(2) != 0)
-                FillCircleList(p, 0, 30);
+                FillCircleList(p, 0, 40);
             if (c.GetAttribute(3) != 0)
                 FillCircleList(p, 30, 0);
-            if (c.GetAttribute(4) != 0)
+            if (c.GetAttribute(4) != 0 && c.GetAttribute(4) != CardAttributes.intersection && c.GetAttribute(4) != CardAttributes.SpaceStation)
                 FillCircleList(p, 0, 0);
 
             DrawCircles();
@@ -125,28 +126,28 @@ namespace ruigeruben
 
         public void FillCircleList(CCPoint p, int x, int y)
         {
-
             p *= 100;
             CCPoint DrawPoint = new CCPoint(p.X + x, p.Y + y);
-            var drawNode = new CCDrawNode();
-            drawNode.DrawEllipse(
-            rect: new CCRect(DrawPoint.X, DrawPoint.Y, 10, 10),
-            lineWidth: 1,
-            color: CCColor4B.Red);
-            PossiblePositionsAliens.Add(drawNode);
+
+            CCSprite spr = new CCSprite("alien1");
+            spr.Position = DrawPoint;
+            spr.Color = CCColor3B.Red;
+            spr.Scale = 0.25f;
+            PossiblePositionsAliens.Add(spr);
 
         }
 
         public void DrawCircles()
         {
-            foreach (CCDrawNode d in PossiblePositionsAliens)
+            foreach (CCSprite d in PossiblePositionsAliens)
                 AddChild(d);
         }
 
         public void DeleteCircles()
         {
-            foreach (CCDrawNode d in PossiblePositionsAliens)
+            foreach (CCSprite d in PossiblePositionsAliens)
                 RemoveChild(d);
+
             PossiblePositionsAliens.Clear();
 
         }

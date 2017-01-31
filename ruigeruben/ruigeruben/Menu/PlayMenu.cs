@@ -41,6 +41,21 @@ namespace ruigeruben
             
         }
 
+        public PlayMenu(List<InputPlayer> PlayerInput)
+        {
+            m_GameInfo = new InputGameInfo();
+            m_GameInfo.CardMultiplier = 1;
+            m_GameInfo.Aliens = 5;
+
+            m_Buttons = new List<Button>();
+            playerbuttons = new List<Button>();
+            m_Players = PlayerInput;
+            playerlabels = new List<CCLabel>();
+
+            
+
+        }
+
         protected override void AddedToScene()
         {
             base.AddedToScene();

@@ -115,7 +115,10 @@ namespace ruigeruben
             if (id == SceneIds.PlayMenu)
             {
                 scene.AddLayer(new BackgroundLayer("achtergrond1"));
-                scene.AddLayer(m_CurrentMenu = new PlayMenu());
+                if (o == null)
+                    scene.AddLayer(m_CurrentMenu = new PlayMenu());
+                else
+                    scene.AddLayer(m_CurrentMenu = new PlayMenu((List<InputPlayer>) o));
             }
             if (id == SceneIds.HelpMenu)
             {
