@@ -57,7 +57,7 @@ namespace ruigeruben
 
             if (y > 0)
                 diffy += 1;
-            
+
             CCPoint p = new CCPoint(diffx, diffy);
             return p;
         }
@@ -84,6 +84,21 @@ namespace ruigeruben
         {
             RemoveChild(sprite);
         }
+
+        public void DrawAlienPossiblePosition(Card c, CCPoint p)
+        {
+
+            for (int i = 0; i < 6; i++)
+                if (c.GetAttribute(i) != 0)
+                {
+                    var drawNode = new CCDrawNode();
+                    drawNode.DrawEllipse(
+                    rect: new CCRect(p.X * 100, p.Y * 100, 130, 130),
+                    lineWidth: 5,
+                    color: CCColor4B.Red);
+                    AddChild(drawNode);
+                }
+        }
+
     }
-    
 }

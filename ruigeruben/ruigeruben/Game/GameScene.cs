@@ -23,7 +23,7 @@ namespace ruigeruben
     {
         BackgroundLayer m_BackgroundLayer;
         public BoardLayer m_BoardLayer;
-        public CardAttributeLayer m_CardAttrLayer;
+     
         bool m_IsCardDragging;
         public Overlay m_Overlay;
         public bool CardOnBoard = false;
@@ -37,7 +37,7 @@ namespace ruigeruben
 
             this.AddLayer(m_BackgroundLayer = new BackgroundLayer("achtergrond1"), 0);
             this.AddLayer(m_BoardLayer = new BoardLayer(),1);
-            this.AddLayer(m_CardAttrLayer = new CardAttributeLayer(), 2);
+           
             this.AddLayer(m_Overlay = new Overlay(this), 3);          
 
             var touchListener = new CCEventListenerTouchAllAtOnce();
@@ -117,7 +117,7 @@ namespace ruigeruben
                     m_Game.m_Board.AddCard(m_Game.m_CurrentCard, pp);
                     m_Game.m_PlacedCard = pp;
                     CardOnBoard = true;
-                    m_CardAttrLayer.DrawAliens(m_Game.m_CurrentCard, pp);
+                    m_BoardLayer.DrawAlienPossiblePosition(m_Game.m_CurrentCard, pp);
                 }
 
                 else
