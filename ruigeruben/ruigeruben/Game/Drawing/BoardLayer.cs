@@ -14,10 +14,17 @@ namespace ruigeruben
         CCSprite panda = new CCSprite("Panda");
         const int tilesize = 100;
         CCSprite m_LastSprite;
+        float m_Scale = 1;
 
         public BoardLayer()
         {
             this.AnchorPoint = new CCPoint(0, 0);
+        }
+
+        public void UpdateScale(float Scale)
+        {
+            m_Scale += Scale;
+            this.Scale = m_Scale;
         }
 
         public void RemoveRaster()

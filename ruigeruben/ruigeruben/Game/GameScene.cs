@@ -116,8 +116,8 @@ namespace ruigeruben
                 m_Overlay.m_CardButton.Position = m_Overlay.m_CardPos;
             }
 
-            if (m_Touches == 2)
-                zooming = false;
+       //     if (m_Touches == 2)
+         //       zooming = false;
 
             m_Touches -= touches.Count;
 
@@ -126,9 +126,6 @@ namespace ruigeruben
 
 
         }
-        float scale = 1;
-        CCPoint m_mid = new CCPoint();
-        bool zooming = false;
 
         void OnTouchesMoved(List<CCTouch> touches, CCEvent touchEvent)
         {
@@ -172,39 +169,23 @@ namespace ruigeruben
                 }
                 else if (m_Touches == 2) // Zoom
                 {
-                    if (touches.Count < 2)
+                    if (touches.Count < 4)
                         return;
 
-                    for (int i = 0; i < touches.Count; i += 2)
+                    for (int i = 0; i < touches.Count; i += 4)
                     {
                         CCPoint fir = touches[i].LocationOnScreen;
                         CCPoint sec = touches[i + 1].LocationOnScreen;
+                        CCPoint third = touches[i + 2].LocationOnScreen;
+                        CCPoint four = touches[i + 3].LocationOnScreen;
 
-                        CCPoint mid = m_BackgroundLayer.ConvertToWorldspace(fir - sec);
-                        mid.X = Math.Abs(mid.X);
-                        mid.Y = Math.Abs(mid.Y);
+                        float one = fir.DistanceSquared(ref sec);
+                        float two = third.DistanceSquared(ref four);
 
-                        if (zooming)
-                        {
-                            if (mid.Length < m_mid.Length)
-                            {
-
-                            }
-                        }
-
-                        scale += 0.001f;
-                        m_BoardLayer.Scale = scale;
-
-                        var s = m_BoardLayer.Camera.CenterInWorldspace;
-                        s.X = mid.X;
-                        s.Y = mid.Y;
-                        m_BoardLayer.Camera.CenterInWorldspace = s;
-
-                        var target = m_BoardLayer.Camera.TargetInWorldspace;
-                        target.X = mid.X;
-                        target.Y = mid.Y;
-                        m_BoardLayer.Camera.TargetInWorldspace = target;
-
+                        if (one < two)
+                            m_BoardLayer.UpdateScale(0.2f);
+                        else
+                            m_BoardLayer.UpdateScale(-0.2f);
                     }
                 }
             }
