@@ -16,7 +16,8 @@ namespace ruigeruben
         CCSprite m_LastAlien;
         float m_Scale = 1;
         public List<CCSprite> PossiblePositionsAliens = new List<CCSprite>();
- 
+        public List<int> m_AllienCardPos = new List<int>();
+
         public BoardLayer()
         {
             this.AnchorPoint = new CCPoint(0, 0);
@@ -100,17 +101,33 @@ namespace ruigeruben
 
         public void DrawAlienPossiblePosition(Card c, CCPoint p)
         {
-        
-            if (c.GetAttribute(0) != 0 )
+            m_AllienCardPos.Clear();
+
+            if (c.GetAttribute(0) != 0)
+            {
                 FillCircleList(p, 0, -30);
+                m_AllienCardPos.Add(0);
+            }
             if (c.GetAttribute(1) != 0)
+            {
                 FillCircleList(p, -40, 0);
+                m_AllienCardPos.Add(1);
+            }
             if (c.GetAttribute(2) != 0)
+            {
                 FillCircleList(p, 0, 40);
+                m_AllienCardPos.Add(2);
+            }
             if (c.GetAttribute(3) != 0)
+            {
                 FillCircleList(p, 30, 0);
+                m_AllienCardPos.Add(3);
+            }
             if (c.GetAttribute(4) != 0 && c.GetAttribute(4) != CardAttributes.intersection && c.GetAttribute(4) != CardAttributes.SpaceStation)
+            {
                 FillCircleList(p, 0, 0);
+                m_AllienCardPos.Add(4);
+            }
 
             DrawCircles();
 

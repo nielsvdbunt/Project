@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 
 namespace ruigeruben
 {
-    struct Allien
+    struct Alien
     {
         public CCPoint m_Point;
         public int m_CardAttr;
@@ -17,7 +17,7 @@ namespace ruigeruben
         public List<Card> m_virCards;
         public List<CCPoint> m_virLocations;
 
-        public List<Allien> m_Aliens;
+        public List<Alien> m_Aliens;
         
         public List<CCPoint> m_OpenSpots;
 
@@ -26,7 +26,7 @@ namespace ruigeruben
             m_virLocations = new List<CCPoint>();
             m_virCards = new List<Card>();
 
-            m_Aliens = new List<Allien>();
+            m_Aliens = new List<Alien>();
 
             m_OpenSpots = new List<CCPoint>();
         }
@@ -89,7 +89,7 @@ namespace ruigeruben
 
         public void AddAlien(Player player, CCPoint point, int CardAttr)
         {
-            Allien all = new Allien();
+            Alien all = new Alien();
             all.m_CardAttr = CardAttr;
             all.m_Point = point;
             all.m_Player = player;
@@ -109,6 +109,19 @@ namespace ruigeruben
 
             if (i != -1)
                 m_Aliens.RemoveAt(i);
+        }
+
+        public Player HasAlien(CCPoint CardPoint, int AlienPoint)
+        {
+            foreach(Alien i in m_Aliens)
+            {
+                if(i.m_Point == CardPoint)
+                {
+                    if (i.m_CardAttr == AlienPoint)
+                        return i.m_Player;
+                }
+            }
+            return null;
         }
     }
 }
