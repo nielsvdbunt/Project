@@ -102,8 +102,8 @@ namespace ruigeruben
                 {
                     var drawNode = new CCDrawNode();
                     drawNode.DrawEllipse(
-                    rect: new CCRect(p.X * 100, p.Y * 100, 130, 130),
-                    lineWidth: 5,
+                    rect: new CCRect(p.X * 100 + i * 25, p.Y * 100 + i * 25, 10, 10),
+                    lineWidth: 1,
                     color: CCColor4B.Red);
                     AddChild(drawNode);
                 }
