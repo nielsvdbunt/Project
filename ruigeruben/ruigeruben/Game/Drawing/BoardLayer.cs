@@ -23,7 +23,9 @@ namespace ruigeruben
 
         public void UpdateScale(float Scale)
         {
-            if (m_Scale < 0.5 || m_Scale > 3)
+            if (Scale > 0 && m_Scale > 3)
+                return;
+            else if (Scale < 0 && m_Scale < 0.5)
                 return;
 
             m_Scale += Scale;
