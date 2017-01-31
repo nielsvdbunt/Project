@@ -23,12 +23,10 @@ namespace ruigeruben
     {
         BackgroundLayer m_BackgroundLayer;
         public BoardLayer m_BoardLayer;
-        public CardAttributeLayer m_CardAttrLayer;
         bool m_IsCardDragging;
         public Overlay m_Overlay;
-        public bool CardOnBoard = false;
+        public bool m_CardPutDown = false;
         GameBase m_Game;
-        CCPoint pp;
         int m_Touches;
       
         public GameScene(CCGameView View, InputGameInfo info) : base(View)
@@ -37,8 +35,7 @@ namespace ruigeruben
 
             this.AddLayer(m_BackgroundLayer = new BackgroundLayer("achtergrond1"), 0);
             this.AddLayer(m_BoardLayer = new BoardLayer(),1);
-            this.AddLayer(m_CardAttrLayer = new CardAttributeLayer(), 2);
-            this.AddLayer(m_Overlay = new Overlay(this), 3);          
+            this.AddLayer(m_Overlay = new Overlay(this), 2);          
 
             var touchListener = new CCEventListenerTouchAllAtOnce();
             touchListener.OnTouchesEnded = OnTouchesEnded;
@@ -90,13 +87,10 @@ namespace ruigeruben
            
             if (m_Overlay.m_CardButton.BoundingBox.ContainsPoint(Location)) //Voor het slepen van de kaart in layer
             {
-                m_IsCardDragging = true;
+                if(!m_CardPutDown)
+                    m_IsCardDragging = true;
 
             }
-
-            //else
-                //m_IsCardDragging = false;
-
         }
 
         void OnTouchesEnded(List<CCTouch> touches, CCEvent touchEvent)
@@ -108,7 +102,7 @@ namespace ruigeruben
                 CCPoint p = m_BoardLayer.ScreenToWorldspace(touches[0].LocationOnScreen);
                 p.X += 50;
                 p.Y -= 50;
-                pp = m_BoardLayer.toLocation(p);
+                CCPoint pp = m_BoardLayer.toLocation(p);
 
                 if (m_Game.m_PosiblePos.Contains(pp))
                 {
@@ -116,12 +110,10 @@ namespace ruigeruben
                     m_Overlay.m_CardButton.Visible = false;
                     m_Game.m_Board.AddCard(m_Game.m_CurrentCard, pp);
                     m_Game.m_PlacedCard = pp;
-                    CardOnBoard = true;
-                    m_CardAttrLayer.DrawAliens(m_Game.m_CurrentCard, pp);
+                    m_CardPutDown = true;
                 }
 
-                else
-                    m_Overlay.m_CardButton.Position = m_Overlay.m_CardPos;
+                m_Overlay.m_CardButton.Position = m_Overlay.m_CardPos;
             }
 
             if (m_Touches == 2)
@@ -204,7 +196,7 @@ namespace ruigeruben
                         m_BoardLayer.Scale = scale;
 
                         var s = m_BoardLayer.Camera.CenterInWorldspace;
-                        s.X = mid.X;//i.LocationOnScreen.X - i.PreviousLocationOnScreen.X;
+                        s.X = mid.X;
                         s.Y = mid.Y;
                         m_BoardLayer.Camera.CenterInWorldspace = s;
 
@@ -220,37 +212,34 @@ namespace ruigeruben
 
         public void OnNextClick()
         {
-            if (CardOnBoard)
+            if (m_CardPutDown)
             {
                 m_Game.NextTurn();
-                CardOnBoard = false;
+                m_CardPutDown = false;
             }
         }
         
         public void OnRotateLeft()
         {
-            if(CardOnBoard == false)
+            if(m_CardPutDown == false)
                  m_Game.RotateCard(-90);
         }
 
         public void OnRotateRight()
         {
-            if(CardOnBoard == false)
+            if(m_CardPutDown == false)
                 m_Game.RotateCard(90);
         }
         public void OnUndoClick()
         {
-            if (CardOnBoard)
+            if (m_CardPutDown)
             {
-                CardOnBoard = false;
+                m_CardPutDown = false;
                 m_Overlay.m_CardButton.Visible = true;
-                m_BoardLayer.DeleteCard();
-                m_Game.m_Board.RemoveCard(m_Game.m_CurrentCard, pp);
+                m_BoardLayer.DeleteLastCard();
                 m_Game.refresh();
             }
         }
-
-     
         public void OnAlienClick()
         {
 
