@@ -64,7 +64,7 @@ namespace ruigeruben
   
         public void NextTurn()
         {
-
+            
             int points1; int points2; int points3; int points4;
             Points(m_PlacedCard, CardAttributes.SpaceStation, out points1, out points2, out points3, out points4);
             // points voor afgemaakte spacestation
@@ -76,7 +76,7 @@ namespace ruigeruben
                 int satellitepoints = CheckSatelliteFinished(point);
             }
 
-
+            
             for (int i=0; i<m_Players.Count; i++ )
             {
                 if (m_Players[i].Turn)
@@ -238,11 +238,11 @@ namespace ruigeruben
                             side0 = 0;
                         List<int> sides = new List<int>();
                         sides.Add(side1); sides.Add(side2); sides.Add(side3); sides.Add(side0);
-                        foreach(int i in sides)
+                       /* foreach(int i in sides)
                         {
-                            if (i == 4)
-                                sides.Remove(i);
-                        }
+                            /*if (i == 4)
+                                sides.Remove(i); 
+                        } */
                         if (attr == CardAttributes.SpaceStation)
                             if (Connected(p, attr, sides[0], sides[1]))
                             {
