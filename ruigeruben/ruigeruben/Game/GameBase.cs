@@ -299,12 +299,14 @@ namespace ruigeruben
                         if (card.GetAttribute(0) == attr)
                             side0 = 0;
                         List<int> sides = new List<int>();
-                        sides.Add(side1); sides.Add(side2); sides.Add(side3); sides.Add(side0);
-                        foreach(int i in sides)
-                        {
-                            if (i == 4)
-                                sides.Remove(i);
-                        }
+                        if (side1 != 4)
+                            sides.Add(side1);
+                        if (side2 != 4)
+                            sides.Add(side2);
+                        if (side3 != 4)
+                            sides.Add(side3);
+                        if (side0 != 4)
+                            sides.Add(side0);
                         if (attr == CardAttributes.SpaceStation)
                             if (Connected(p, attr, sides[0], sides[1]))
                             {
