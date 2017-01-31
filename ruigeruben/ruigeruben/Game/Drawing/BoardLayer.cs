@@ -95,15 +95,16 @@ namespace ruigeruben
 
         public void DrawAlienPossiblePosition(Card c, CCPoint p)
         {
-            if (c.GetAttribute(0) != 0)
+        
+            if (c.GetAttribute(0) != 0 )
                 FillCircleList(p, 0, -30);
             if (c.GetAttribute(1) != 0)
-                FillCircleList(p, -30, 0);
+                FillCircleList(p, -40, 0);
             if (c.GetAttribute(2) != 0)
-                FillCircleList(p, 0, 30);
+                FillCircleList(p, 0, 40);
             if (c.GetAttribute(3) != 0)
                 FillCircleList(p, 30, 0);
-            if (c.GetAttribute(4) != 0)
+            if (c.GetAttribute(4) != 0 && c.GetAttribute(4) != CardAttributes.intersection && c.GetAttribute(4) != CardAttributes.SpaceStation)
                 FillCircleList(p, 0, 0);
 
             DrawCircles();
