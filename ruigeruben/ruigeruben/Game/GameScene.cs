@@ -28,14 +28,14 @@ namespace ruigeruben
         public bool m_CardPutDown = false;
         GameBase m_Game;
         int m_Touches;
-      
+
         public GameScene(CCGameView View, InputGameInfo info) : base(View)
         {
             m_Game = new GameBase(this, info);
 
             this.AddLayer(m_BackgroundLayer = new BackgroundLayer("achtergrond1"), 0);
-            this.AddLayer(m_BoardLayer = new BoardLayer(),1);
-            this.AddLayer(m_Overlay = new Overlay(this), 2);          
+            this.AddLayer(m_BoardLayer = new BoardLayer(), 1);
+            this.AddLayer(m_Overlay = new Overlay(this), 2);
 
             var touchListener = new CCEventListenerTouchAllAtOnce();
             touchListener.OnTouchesEnded = OnTouchesEnded;
@@ -44,7 +44,7 @@ namespace ruigeruben
             AddEventListener(touchListener, this);
         }
 
-     
+
         public void StartGame()
         {
             m_Game.Start();
@@ -53,7 +53,7 @@ namespace ruigeruben
         public override void OnEnter()
         {
             base.OnEnter();
-            
+
             var s = m_BoardLayer.Camera.CenterInWorldspace;
             s.X = 0;
             s.Y = 0;
@@ -68,14 +68,14 @@ namespace ruigeruben
 
         public void OnTouchesBegan(List<CCTouch> touches, CCEvent touchEvent)
         {
-            if(touches.Count <= 0)
+            if (touches.Count <= 0)
                 return;
-            
+
             float x = touches[0].LocationOnScreen.X;
-            float y = touches[0].LocationOnScreen.Y;     
+            float y = touches[0].LocationOnScreen.Y;
 
             CCPoint Location = new CCPoint(x, y);
-         
+
             if (y <= 1200 && x <= 2300) //  Test if click on overlay
             {
                 m_Touches += touches.Count;
@@ -84,10 +84,10 @@ namespace ruigeruben
             Location = m_Overlay.ScreenToWorldspace(Location);
             CCRect p = m_Overlay.m_CardButton.BoundingBox;
             CCRect r = m_Overlay.m_CardButton.BoundingBoxTransformedToWorld;
-           
+
             if (m_Overlay.m_CardButton.BoundingBox.ContainsPoint(Location)) //Voor het slepen van de kaart in layer
             {
-                if(!m_CardPutDown)
+                if (!m_CardPutDown)
                     m_IsCardDragging = true;
 
             }
@@ -108,28 +108,24 @@ namespace ruigeruben
                 {
                     m_BoardLayer.DrawCard(m_Game.m_CurrentCard, pp);
                     m_Overlay.m_CardButton.Visible = false;
-                    m_Game.m_Board.AddCard(m_Game.m_CurrentCard, pp);
+                    m_BoardLayer.RemoveRaster();
                     m_Game.m_PlacedCard = pp;
                     m_CardPutDown = true;
-                    m_BoardLayer.DrawAlienPossiblePosition(m_Game.m_CurrentCard, pp);
                 }
 
                 m_Overlay.m_CardButton.Position = m_Overlay.m_CardPos;
             }
 
-            if (m_Touches == 2)
-                zooming = false;
+       //     if (m_Touches == 2)
+         //       zooming = false;
 
             m_Touches -= touches.Count;
 
             if (m_Touches < 0)
                 m_Touches = 0;
-            
-               
+
+
         }
-        float scale = 1;
-        CCPoint m_mid = new CCPoint();
-        bool zooming = false;
 
         void OnTouchesMoved(List<CCTouch> touches, CCEvent touchEvent)
         {
@@ -180,55 +176,40 @@ namespace ruigeruben
                     {
                         CCPoint fir = touches[i].LocationOnScreen;
                         CCPoint sec = touches[i + 1].LocationOnScreen;
+                        CCPoint third = touches[i ].PreviousLocationOnScreen;
+                        CCPoint four = touches[i + 1].PreviousLocationOnScreen;
 
-                        CCPoint mid = m_BackgroundLayer.ConvertToWorldspace(fir - sec);
-                        mid.X = Math.Abs(mid.X);
-                        mid.Y = Math.Abs(mid.Y);
+                        float one = CCPoint.Distance(fir, sec);
+                        float two = CCPoint.Distance(third, four);
 
-                        if (zooming)
-                        {
-                            if (mid.Length < m_mid.Length)
-                            {
-
-                            }
-                        }
-
-                        scale += 0.001f;
-                        m_BoardLayer.Scale = scale;
-
-                        var s = m_BoardLayer.Camera.CenterInWorldspace;
-                        s.X = mid.X;
-                        s.Y = mid.Y;
-                        m_BoardLayer.Camera.CenterInWorldspace = s;
-
-                        var target = m_BoardLayer.Camera.TargetInWorldspace;
-                        target.X = mid.X;
-                        target.Y = mid.Y;
-                        m_BoardLayer.Camera.TargetInWorldspace = target;
-
+                        if (one < two)
+                            m_BoardLayer.UpdateScale(-0.05f);
+                        else
+                            m_BoardLayer.UpdateScale(0.05f);
                     }
                 }
-            } 
+            }
         }
 
         public void OnNextClick()
         {
             if (m_CardPutDown)
             {
+                m_Game.m_Board.AddCard(m_Game.m_CurrentCard, m_Game.m_PlacedCard);
                 m_Game.NextTurn();
                 m_CardPutDown = false;
             }
         }
-        
+
         public void OnRotateLeft()
         {
-            if(m_CardPutDown == false)
-                 m_Game.RotateCard(-90);
+            if (m_CardPutDown == false)
+                m_Game.RotateCard(-90);
         }
 
         public void OnRotateRight()
         {
-            if(m_CardPutDown == false)
+            if (m_CardPutDown == false)
                 m_Game.RotateCard(90);
         }
         public void OnUndoClick()
