@@ -28,7 +28,7 @@ namespace ruigeruben
         public Overlay m_Overlay;
         public bool CardOnBoard = false;
         GameBase m_Game;
-
+        CCPoint pp;
         int m_Touches;
       
         public GameScene(CCGameView View, InputGameInfo info) : base(View)
@@ -107,7 +107,7 @@ namespace ruigeruben
                 CCPoint p = m_BoardLayer.ScreenToWorldspace(touches[0].LocationOnScreen);
                 p.X += 50;
                 p.Y -= 50;
-                CCPoint pp = m_BoardLayer.toLocation(p);
+                pp = m_BoardLayer.toLocation(p);
 
                 if(m_Game.m_PosiblePos.Contains(pp))
                 {
@@ -243,9 +243,9 @@ namespace ruigeruben
                 CardOnBoard = false;
                 m_Overlay.m_CardButton.Visible = true;
                 m_BoardLayer.DeleteCard();
-               // m_Game.m_Board.RemoveCard(m_Game.m_CurrentCard, pp);
+                m_Game.m_Board.RemoveCard(m_Game.m_CurrentCard, pp);
                 m_Game.refresh();
-               // Overlay.UpdateInterface(m_GameBase.m_Players, d.GetCardsLeft(), m_GameBase.m_CurrentCard);
+              
 
             }
         }
