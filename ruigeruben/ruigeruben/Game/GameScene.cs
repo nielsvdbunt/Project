@@ -111,9 +111,11 @@ namespace ruigeruben
                     m_BoardLayer.RemoveRaster();
                     m_Game.m_PlacedCard = pp;
                     m_CardPutDown = true;
+                    m_BoardLayer.DrawAlienPossiblePosition(m_Game.m_CurrentCard, pp);
+
                 }
 
-                m_Overlay.m_CardButton.Position = m_Overlay.m_CardPos;
+    m_Overlay.m_CardButton.Position = m_Overlay.m_CardPos;
             }
 
        //     if (m_Touches == 2)
@@ -160,7 +162,7 @@ namespace ruigeruben
                         s.X += i.PreviousLocationOnScreen.X - i.LocationOnScreen.X;
                         s.Y += i.LocationOnScreen.Y - i.PreviousLocationOnScreen.Y;
                         m_BoardLayer.Camera.CenterInWorldspace = s;
-
+  
                         var target = m_BoardLayer.Camera.TargetInWorldspace;
                         target.X = s.X;
                         target.Y = s.Y;
