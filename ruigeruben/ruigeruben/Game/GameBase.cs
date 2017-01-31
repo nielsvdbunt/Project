@@ -299,7 +299,11 @@ namespace ruigeruben
             Card card = m_Board.GetCard(p);
             sides = new List<int>();
             if (m_Board.HasAlien(p, side) != null)
+            {
                 res.Add(m_Board.HasAlien(p, side));
+                m_Board.HasAlien(p, side).NumberOfAliens += 1;
+                m_Board.RemoveAlien(p, side);
+            }
             if (card.GetAttribute(4) == c || card.GetAttribute(4) == CardAttributes.intersection)
             {
                 for (int i = 0; i <= 4; i++)
@@ -307,7 +311,11 @@ namespace ruigeruben
                         if (card.GetAttribute(i) == c)
                         {
                             if (m_Board.HasAlien(p, i) != null)
+                            {
                                 res.Add(m_Board.HasAlien(p, i));
+                                m_Board.HasAlien(p, side).NumberOfAliens += 1;
+                                m_Board.RemoveAlien(p, side);
+                            }
                             sides.Add(i);
                         }
             }
