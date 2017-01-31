@@ -172,20 +172,20 @@ namespace ruigeruben
                     if (touches.Count < 2)
                         return;
 
-                    for (int i = 0; i < touches.Count; i += 4)
+                    for (int i = 0; i < touches.Count; i += 2)
                     {
                         CCPoint fir = touches[i].LocationOnScreen;
                         CCPoint sec = touches[i + 1].LocationOnScreen;
-                        CCPoint third = touches[i + 2].PreviousLocationOnScreen;
-                        CCPoint four = touches[i + 3].PreviousLocationOnScreen;
+                        CCPoint third = touches[i ].PreviousLocationOnScreen;
+                        CCPoint four = touches[i + 1].PreviousLocationOnScreen;
 
-                        float one = fir.DistanceSquared(ref sec);
-                        float two = third.DistanceSquared(ref four);
+                        float one = CCPoint.Distance(fir, sec);
+                        float two = CCPoint.Distance(third, four);
 
                         if (one < two)
-                            m_BoardLayer.UpdateScale(0.2f);
+                            m_BoardLayer.UpdateScale(0.05f);
                         else
-                            m_BoardLayer.UpdateScale(-0.2f);
+                            m_BoardLayer.UpdateScale(-0.05f);
                     }
                 }
             }
