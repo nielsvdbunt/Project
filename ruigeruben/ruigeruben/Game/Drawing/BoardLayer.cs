@@ -15,7 +15,7 @@ namespace ruigeruben
         const int tilesize = 100;
         CCSprite m_LastSprite;
         float m_Scale = 1;
-
+        List<CCDrawNode> PossiblePositionsAliens = new List<CCDrawNode>();
         public BoardLayer()
         {
             this.AnchorPoint = new CCPoint(0, 0);
@@ -106,19 +106,32 @@ namespace ruigeruben
             RemoveChild(m_LastSprite);
         }
 
-        public void DrawAlienPossiblePosition(Card c, CCPoint p)
+        public void FillCircleList(CCPoint p, int x, int y)
         {
 
-            for (int i = 0; i < 6; i++)
-                if (c.GetAttribute(i) != 0)
-                {
-                    var drawNode = new CCDrawNode();
-                    drawNode.DrawEllipse(
-                    rect: new CCRect(p.X * 100 + i * 25, p.Y * 100 + i * 25, 10, 10),
-                    lineWidth: 1,
-                    color: CCColor4B.Red);
-                    AddChild(drawNode);
-                }
+            p *= 100;
+            CCPoint DrawPoint = new CCPoint(p.X + x, p.Y + y);
+            var drawNode = new CCDrawNode();
+            drawNode.DrawEllipse(
+            rect: new CCRect(DrawPoint.X, DrawPoint.Y, 10, 10),
+            lineWidth: 1,
+            color: CCColor4B.Red);
+            PossiblePositionsAliens.Add(drawNode);
+
+        }
+
+        public void DrawCircles()
+        {
+            foreach (CCDrawNode d in PossiblePositionsAliens)
+                AddChild(d);
+        }
+
+        public void DeleteCircles()
+        {
+            foreach (CCDrawNode d in PossiblePositionsAliens)
+                RemoveChild(d);
+            PossiblePositionsAliens.Clear();
+
         }
 
     }
