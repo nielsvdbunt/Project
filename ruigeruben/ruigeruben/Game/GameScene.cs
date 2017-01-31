@@ -183,9 +183,9 @@ namespace ruigeruben
                         float two = CCPoint.Distance(third, four);
 
                         if (one < two)
-                            m_BoardLayer.UpdateScale(0.05f);
-                        else
                             m_BoardLayer.UpdateScale(-0.05f);
+                        else
+                            m_BoardLayer.UpdateScale(0.05f);
                     }
                 }
             }
