@@ -10,7 +10,7 @@ namespace ruigeruben
     {
         Stack<string> m_Cards;
 
-        public Deck(int CardMultiplier)
+        public Deck(float CardMultiplier)
         {
             List<string> buf = new List<string>();
 
@@ -18,9 +18,13 @@ namespace ruigeruben
             {
                 string Name = Card.CardTypes[i];
                 int Quantity = Card.CardQuantity[i];
-                Quantity *= CardMultiplier;
+                if ((int)(Quantity * CardMultiplier) != Quantity * CardMultiplier)
+                {
+                    Quantity = (int)(Quantity * CardMultiplier) + 1;
+                }
+                else Quantity = (int)(Quantity * CardMultiplier);
 
-                buf.AddRange(Enumerable.Repeat(Name, Quantity));
+                 buf.AddRange(Enumerable.Repeat(Name, Quantity));
             }
 
             string[] deck = buf.ToArray();

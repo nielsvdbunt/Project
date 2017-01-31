@@ -18,7 +18,7 @@
     <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
     <AndroidStoreUncompressedFileExtensions />
     <MandroidI18n />
-    <TargetFrameworkVersion>v7.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v6.0</TargetFrameworkVersion>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -71,16 +71,16 @@
     <Compile Include="Game\Drawing\BackgrondLayer.cs" />
     <Compile Include="Game\Drawing\BoardLayer.cs" />
     <Compile Include="Game\Drawing\CardAttributeLayer.cs" />
-    <Compile Include="Game\TexturePool.cs" />
+    <Compile Include="Game\EndLayer.cs" />
     <Compile Include="Game\GameBase.cs" />
     <Compile Include="Game\GameScene.cs" />
     <Compile Include="Game\Drawing\Overlay.cs" />
     <Compile Include="Game\Player.cs" />
+    <Compile Include="Game\TexturePool.cs" />
     <Compile Include="MainActivity.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Menu\AbstractMenu.cs" />
-    <Compile Include="Menu\EndingMenu.cs" />
     <Compile Include="Menu\SettingMenu.cs" />
     <Compile Include="Menu\HelpMenu.cs" />
     <Compile Include="Menu\OpeningMenu.cs" />
@@ -175,6 +175,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\Content\Sounds\mix_6m07s.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\Content\Images\Finished sateliette.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

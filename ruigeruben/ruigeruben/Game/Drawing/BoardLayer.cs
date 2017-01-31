@@ -13,38 +13,33 @@ namespace ruigeruben
         public List<CCDrawNode> Rectangles = new List<CCDrawNode>();
         CCSprite panda = new CCSprite("Panda");
         const int tilesize = 100;
+        CCSprite m_LastSprite;
 
         public BoardLayer()
         {
             this.AnchorPoint = new CCPoint(0, 0);
-            
-            //this.ContentSize = new CCSize(5000, 5000);
         }
 
-        public void Zoom(bool In)
+        public void RemoveRaster()
         {
-
-        }
-
-        public void Move(bool Left)
-        {
-
+            foreach (CCDrawNode r in Rectangles)
+            {
+                RemoveChild(r);
+            }
         }
 
         public void DrawRaster(List<CCPoint> AvaliblePointsList)
         {
-
-
             foreach (CCDrawNode r in Rectangles)
             {
                 RemoveChild(r);
             }
             Rectangles.Clear();
             var bounds = VisibleBoundsWorldspace;
-            
+
             int HorLines = (int)bounds.Size.Width / 128;
             int VerLines = (int)bounds.Size.Height / 128;
-            foreach(CCPoint p in AvaliblePointsList)
+            foreach (CCPoint p in AvaliblePointsList)
             {
                 var drawNode = new CCDrawNode();
 
@@ -55,23 +50,22 @@ namespace ruigeruben
                 Rectangles.Add(drawNode);
                 this.AddChild(drawNode);
             }
-           
         }
 
         public CCPoint toLocation(CCPoint point) //from pixels to board location
         {
             int x = Convert.ToInt32(point.X);
             int y = Convert.ToInt32(point.Y);
-            
+
             int diffx = x / tilesize;
             int diffy = y / tilesize;
 
-          /*  if (x < 0)
+            if (x < 0)
                 diffx -= 1;
 
-            if (y < 0)
-                diffy -= 1;
-          */
+            if (y > 0)
+                diffy += 1;
+
             CCPoint p = new CCPoint(diffx, diffy);
             return p;
         }
@@ -80,8 +74,6 @@ namespace ruigeruben
         {
             float x = point.X;
             float y = point.Y;
-            //int middenx = 0 - (tilesize / 2);
-            //int middeny = 0 - (tilesize / 2);
             x = x * tilesize;
             y = y * tilesize;
             CCPoint p = new CCPoint(x, y);
@@ -91,12 +83,31 @@ namespace ruigeruben
         public void DrawCard(Card card, CCPoint point)
         {
             CCPoint p = fromLocation(point);
-            CCSprite sprite = TexturePool.GetSprite(card.m_Hash);      
-            sprite.Position = p;
-            sprite.Rotation = card.GetRotation();
-            //sprite.AnchorPoint = new CCPoint(0, 0);
-            AddChild(sprite);
+            m_LastSprite = TexturePool.GetSprite(card.m_Hash);
+            m_LastSprite.Position = p;
+            m_LastSprite.Rotation = card.GetRotation();
+            AddChild(m_LastSprite);
         }
+
+        public void DeleteLastCard()
+        {
+            RemoveChild(m_LastSprite);
+        }
+
+        public void DrawAlienPossiblePosition(Card c, CCPoint p)
+        {
+
+            for (int i = 0; i < 6; i++)
+                if (c.GetAttribute(i) != 0)
+                {
+                    var drawNode = new CCDrawNode();
+                    drawNode.DrawEllipse(
+                    rect: new CCRect(p.X * 100, p.Y * 100, 130, 130),
+                    lineWidth: 5,
+                    color: CCColor4B.Red);
+                    AddChild(drawNode);
+                }
+        }
+
     }
-    
 }
