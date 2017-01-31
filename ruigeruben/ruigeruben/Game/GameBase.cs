@@ -66,14 +66,74 @@ namespace ruigeruben
         {
 
             int points1; int points2; int points3; int points4;
+            List<Player> playerlist = new List<Player>();
+
             Points(m_PlacedCard, CardAttributes.SpaceStation, out points1, out points2, out points3, out points4);
             // points voor afgemaakte spacestation
+            if (points1 != 0)
+            {
+                playerlist = CheckAliens(m_PlacedCard, 1);
+                foreach (Player ply in playerlist)
+                {
+                    ply.Points += points1;
+                }
+            }
+            if (points2 != 0)
+            {
+                playerlist = CheckAliens(m_PlacedCard, 2);
+                foreach (Player ply in playerlist)
+                {
+                    ply.Points += points2;
+                }
+            }
+
             Points(m_PlacedCard, CardAttributes.RainbowRoad, out points1, out points2, out points3, out points4);
             // points voor afgemaakte rainbowroad
+            if (points1 != 0)
+            {
+                playerlist = CheckAliens(m_PlacedCard, 1);
+                foreach (Player ply in playerlist)
+                {
+                    ply.Points += points1;
+                }
+            }
+            if (points2 != 0)
+            {
+                playerlist = CheckAliens(m_PlacedCard, 2);
+                foreach (Player ply in playerlist)
+                {
+                    ply.Points += points2;
+                }
+            }
+            if (points3 != 0)
+            {
+                playerlist = CheckAliens(m_PlacedCard, 3);
+                foreach (Player ply in playerlist)
+                {
+                    ply.Points += points3;
+                }
+            }
+            if (points4 != 0)
+            {
+                playerlist = CheckAliens(m_PlacedCard, 0);
+                foreach (Player ply in playerlist)
+                {
+                    ply.Points += points4;
+                }
+            }
+
             List<CCPoint> satellitelist = CheckSatellite(m_PlacedCard);
+            Player player;
             foreach (CCPoint point in satellitelist)
             {
                 int satellitepoints = CheckSatelliteFinished(point);
+                if (satellitepoints == 8)
+                {
+                    player = m_Board.HasAlien(point, 4);
+                    if (player != null)
+                        player.Points += 9;
+                }
+
             }
 
 
@@ -187,10 +247,12 @@ namespace ruigeruben
             return false;
         }
 
-        /*public void Aliens(CCPoint p, out int left, out int top, out int right, out int bottom)
+        public List<Player> CheckAliens(CCPoint p, int side)
         {
+            List<Player> res = new List<Player>();
 
-        }*/
+            return res;
+        }
 
         public void Points(CCPoint p, CardAttributes attr, out int points1, out int points2, out int points3, out int points4) //moet nog aangepast worden aan waar aliens staan
         {
@@ -256,9 +318,7 @@ namespace ruigeruben
                             {
                                 if (CheckFinished(p, attr, sides[0], 4))
                                     points1 = m_CheckedCards.Count;
-                                if (CheckFinished(p, attr, sides[1], 4) && points1 != 0)
-                                    points1 = m_CheckedCards.Count;
-                                else
+                                if (CheckFinished(p, attr, sides[1], 4))
                                     points2 = m_CheckedCards.Count;
                             }
                         else
@@ -585,11 +645,11 @@ namespace ruigeruben
             foreach (Card c in list)
                 if (c != null)
                     if (c.GetAttribute(4) == CardAttributes.Satellite)
-                        //if () hier moet gecheckt worden of er een alien op positie 4 staat
-                        {
-                            int index = list.IndexOf(c);
-                            res.Add(list2[index]);
-                        }
+                    //if () hier moet gecheckt worden of er een alien op positie 4 staat
+                    {
+                        int index = list.IndexOf(c);
+                        res.Add(list2[index]);
+                    }
 
             return res;
 
