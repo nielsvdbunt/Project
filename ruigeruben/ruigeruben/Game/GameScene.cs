@@ -162,7 +162,7 @@ namespace ruigeruben
                         s.X += i.PreviousLocationOnScreen.X - i.LocationOnScreen.X;
                         s.Y += i.LocationOnScreen.Y - i.PreviousLocationOnScreen.Y;
                         m_BoardLayer.Camera.CenterInWorldspace = s;
-
+  
                         var target = m_BoardLayer.Camera.TargetInWorldspace;
                         target.X = s.X;
                         target.Y = s.Y;
