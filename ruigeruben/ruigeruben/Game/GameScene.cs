@@ -169,15 +169,15 @@ namespace ruigeruben
                 }
                 else if (m_Touches == 2) // Zoom
                 {
-                    if (touches.Count < 4)
+                    if (touches.Count < 2)
                         return;
 
                     for (int i = 0; i < touches.Count; i += 4)
                     {
                         CCPoint fir = touches[i].LocationOnScreen;
                         CCPoint sec = touches[i + 1].LocationOnScreen;
-                        CCPoint third = touches[i + 2].LocationOnScreen;
-                        CCPoint four = touches[i + 3].LocationOnScreen;
+                        CCPoint third = touches[i + 2].PreviousLocationOnScreen;
+                        CCPoint four = touches[i + 3].PreviousLocationOnScreen;
 
                         float one = fir.DistanceSquared(ref sec);
                         float two = third.DistanceSquared(ref four);
