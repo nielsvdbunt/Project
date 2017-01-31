@@ -115,8 +115,6 @@ namespace ruigeruben
                 m_IsCardDragging = false;
 
                 CCPoint p = m_BoardLayer.ScreenToWorldspace(touches[0].LocationOnScreen);
-                p.X += 50;
-                p.Y -= 50;
                 CCPoint pp = m_BoardLayer.toLocation(p);
 
                 if (m_Game.m_PosiblePos.Contains(pp))
