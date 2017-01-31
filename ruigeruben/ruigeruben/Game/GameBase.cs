@@ -67,58 +67,66 @@ namespace ruigeruben
 
             int points1; int points2; int points3; int points4;
             List<Player> playerlist = new List<Player>();
+            List<CardAttributes> attrlist = new List<CardAttributes>();
+            for (int t = 0; t < 4; t++)
+                attrlist.Add(m_Board.GetCard(m_PlacedCard).GetAttribute(t));
+            if (attrlist.Contains(CardAttributes.SpaceStation))
+            {
+                Points(m_PlacedCard, CardAttributes.SpaceStation, out points1, out points2, out points3, out points4);
+                // points voor afgemaakte spacestation
+                if (points1 != 0)
+                {
+                    playerlist = CheckAliens(m_PlacedCard, 1, CardAttributes.SpaceStation);
+                    foreach (Player ply in playerlist)
+                    {
+                        ply.Points += points1;
+                    }
+                }
+                if (points2 != 0)
+                {
+                    playerlist = CheckAliens(m_PlacedCard, 2, CardAttributes.SpaceStation);
+                    foreach (Player ply in playerlist)
+                    {
+                        ply.Points += points2;
+                    }
+                }
+            }
 
-            Points(m_PlacedCard, CardAttributes.SpaceStation, out points1, out points2, out points3, out points4);
-            // points voor afgemaakte spacestation
-            if (points1 != 0)
+            if (attrlist.Contains(CardAttributes.RainbowRoad))
             {
-                playerlist = CheckAliens(m_PlacedCard, 1, CardAttributes.SpaceStation);
-                foreach (Player ply in playerlist)
+                Points(m_PlacedCard, CardAttributes.RainbowRoad, out points1, out points2, out points3, out points4);
+                // points voor afgemaakte rainbowroad
+                if (points1 != 0)
                 {
-                    ply.Points += points1;
+                    playerlist = CheckAliens(m_PlacedCard, 1, CardAttributes.RainbowRoad);
+                    foreach (Player ply in playerlist)
+                    {
+                        ply.Points += points1;
+                    }
                 }
-            }
-            if (points2 != 0)
-            {
-                playerlist = CheckAliens(m_PlacedCard, 2, CardAttributes.SpaceStation);
-                foreach (Player ply in playerlist)
+                if (points2 != 0)
                 {
-                    ply.Points += points2;
+                    playerlist = CheckAliens(m_PlacedCard, 2, CardAttributes.RainbowRoad);
+                    foreach (Player ply in playerlist)
+                    {
+                        ply.Points += points2;
+                    }
                 }
-            }
-
-            Points(m_PlacedCard, CardAttributes.RainbowRoad, out points1, out points2, out points3, out points4);
-            // points voor afgemaakte rainbowroad
-            if (points1 != 0)
-            {
-                playerlist = CheckAliens(m_PlacedCard, 1, CardAttributes.RainbowRoad);
-                foreach (Player ply in playerlist)
+                if (points3 != 0)
                 {
-                    ply.Points += points1;
+                    playerlist = CheckAliens(m_PlacedCard, 3, CardAttributes.RainbowRoad);
+                    foreach (Player ply in playerlist)
+                    {
+                        ply.Points += points3;
+                    }
                 }
-            }
-            if (points2 != 0)
-            {
-                playerlist = CheckAliens(m_PlacedCard, 2, CardAttributes.RainbowRoad);
-                foreach (Player ply in playerlist)
+                if (points4 != 0)
                 {
-                    ply.Points += points2;
-                }
-            }
-            if (points3 != 0)
-            {
-                playerlist = CheckAliens(m_PlacedCard, 3, CardAttributes.RainbowRoad);
-                foreach (Player ply in playerlist)
-                {
-                    ply.Points += points3;
-                }
-            }
-            if (points4 != 0)
-            {
-                playerlist = CheckAliens(m_PlacedCard, 0, CardAttributes.RainbowRoad);
-                foreach (Player ply in playerlist)
-                {
-                    ply.Points += points4;
+                    playerlist = CheckAliens(m_PlacedCard, 0, CardAttributes.RainbowRoad);
+                    foreach (Player ply in playerlist)
+                    {
+                        ply.Points += points4;
+                    }
                 }
             }
 
