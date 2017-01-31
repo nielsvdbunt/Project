@@ -104,6 +104,7 @@ namespace ruigeruben
                         m_AllienPutDown = true;
                         m_BoardLayer.DrawAlien(m_BoardLayer.PossiblePositionsAliens[i].PositionWorldspace, m_Game.m_CurrentPlayer.PlayerColor);
                         m_BoardLayer.DeleteCircles();
+                        m_Game.m_CurrentPlayer.NumberOfAliens = m_Game.m_CurrentPlayer.NumberOfAliens - 1;
                         return;
                     }
                 }
