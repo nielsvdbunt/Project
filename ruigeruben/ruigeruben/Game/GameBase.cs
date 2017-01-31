@@ -172,10 +172,9 @@ namespace ruigeruben
             return false;
         }
 
-        public int Points(CCPoint p, CardAttributes attr, out int points2, out int points3, out int points4) //moet nog aangepast worden aan waar aliens staan
+        public void Points(CCPoint p, CardAttributes attr, out int points1, out int points2, out int points3, out int points4) //moet nog aangepast worden aan waar aliens staan
         {
-            int points1 = 0;
-            points2 = 0; points3 = 0; points4 = 0;
+            points1 = 0;  points2 = 0; points3 = 0; points4 = 0;
             if (attr == CardAttributes.SpaceStation || attr == CardAttributes.RainbowRoad)
             {
                 Card card = m_Board.GetCard(p);
@@ -254,10 +253,7 @@ namespace ruigeruben
                                     if (CheckFinished(p, attr, sides[0], 4))
                                         points1 = m_CheckedCards.Count;
                                     if (CheckFinished(p, attr, sides[1], 4))
-                                        if (points1 == 0)
-                                            points1 = m_CheckedCards.Count;
-                                        else
-                                            points2 = m_CheckedCards.Count;
+                                        points2 = m_CheckedCards.Count;
                                 }
                         
                             if (sides.Count == 3)
@@ -283,18 +279,9 @@ namespace ruigeruben
                                     if (CheckFinished(p, attr, sides[0], 4))
                                         points1 = m_CheckedCards.Count;
                                     if (CheckFinished(p, attr, sides[1], 4))
-                                        if (points1 == 0)
-                                            points1 = m_CheckedCards.Count;
-                                        else
-                                            points2 = m_CheckedCards.Count;
+                                        points2 = m_CheckedCards.Count;
                                     if (CheckFinished(p, attr, sides[2], 4))
-                                        if (points2 == 0)
-                                            if (points1 == 0)
-                                                points1 = m_CheckedCards.Count;
-                                            else
-                                                points2 = m_CheckedCards.Count;
-                                        else
-                                            points3 = m_CheckedCards.Count;
+                                        points3 = m_CheckedCards.Count;
                                 }
 
                                 if (first != 4 && second != 4)
@@ -372,29 +359,11 @@ namespace ruigeruben
                                     if (CheckFinished(p, attr, 0, 4))
                                         points1 = m_CheckedCards.Count;
                                     if (CheckFinished(p, attr, 1, 4))
-                                        if (points1 == 0)
-                                            points1 = m_CheckedCards.Count;
-                                        else
-                                            points2 = m_CheckedCards.Count;
+                                        points2 = m_CheckedCards.Count;
                                     if (CheckFinished(p, attr, 2, 4))
-                                        if (points2 == 0)
-                                            if (points1 == 0)
-                                                points1 = m_CheckedCards.Count;
-                                            else
-                                                points2 = m_CheckedCards.Count;
-                                        else
-                                            points3 = m_CheckedCards.Count;
+                                        points3 = m_CheckedCards.Count;
                                     if (CheckFinished(p, attr, 3, 4))
-                                        if (points3 == 0)
-                                            if (points2 == 0)
-                                                if (points1 == 0)
-                                                    points1 = m_CheckedCards.Count;
-                                                else
-                                                    points2 = m_CheckedCards.Count;
-                                            else
-                                                points3 = m_CheckedCards.Count;
-                                        else
-                                            points4 = m_CheckedCards.Count;
+                                        points4 = m_CheckedCards.Count;
                                 }
                                 
                                 if (first != 4 && third == 4)
@@ -402,28 +371,16 @@ namespace ruigeruben
                                     if (CheckFinished(p, attr, sides[first], 4))
                                         points1 = m_CheckedCards.Count;
                                     if (CheckFinished(p, attr, sides[second], 4))
-                                        if (points1 == 0)
-                                            points1 = m_CheckedCards.Count;
-                                        else
-                                            points2 = m_CheckedCards.Count;
+                                        points2 = m_CheckedCards.Count;
                                 }
                                 if (third != 4)
                                 {
                                     if (CheckFinished(p, attr, sides[first], 4))
                                         points1 = m_CheckedCards.Count;
                                     if (CheckFinished(p, attr, sides[second], 4))
-                                        if (points1 == 0)
-                                            points1 = m_CheckedCards.Count;
-                                        else
-                                            points2 = m_CheckedCards.Count;
+                                        points2 = m_CheckedCards.Count;
                                     if (CheckFinished(p, attr, sides[third], 4))
-                                        if (points2 == 0)
-                                            if (points1 == 0)
-                                                points1 = m_CheckedCards.Count;
-                                            else
-                                                points2 = m_CheckedCards.Count;
-                                        else
-                                            points3 = m_CheckedCards.Count;
+                                        points3 = m_CheckedCards.Count;
                                 }
                             }
                         }
@@ -449,8 +406,6 @@ namespace ruigeruben
                     points1 = 9;
             }
             m_CheckedCards = new List<CCPoint>();
-            return points1;
-
         }
 
         public bool CheckFinished(CCPoint p, CardAttributes c, bool firstcard, int side1, int side2)

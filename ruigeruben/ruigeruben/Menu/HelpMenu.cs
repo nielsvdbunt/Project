@@ -73,7 +73,7 @@ namespace ruigeruben
             uitlegdeel1[3] = "For those who played the board game “Carcassonne” it is very easy, our game has just a different lay-out..";
             uitlegdeel1[4] = "For those who never played the game “Carcassonne” here is a quick explanation.";
             uitlegdeel2[0] = "The game is made out of different playing material.";
-            uitlegdeel2[1] = "-   72 board tiles\n- 40 astronauts divided 5 different colours ";
+            uitlegdeel2[1] = "-   72 board tiles\n- 40 Aliens divided 5 different colours ";
             uitlegdeel3[0] = "Your goal is to get more points than your opponents. Each player lays down a tile on his turn.";
             uitlegdeel3[1] = "These tiles can make: Roads, space stations and satellites.";
             uitlegdeel3[2] = "if you put a new tile on the board you can choose to put an astronaut on it to get points. "; 
@@ -81,11 +81,11 @@ namespace ruigeruben
             uitlegdeel3[4] = " but for the curious player we will give a summary of the point distribution goes.";
             uitlegdeel4[0] = "1  Each turn you will get a board tile\n2  you have to put the tile on a legit place on the board\n3  the player chooses whether he plays an alien on his tile or not and on which side of the tile.\n4  If the tile you have put on the board completes a road, space station or satellite\nyou will get points and get your astronauts back.";
             uitlegdeel5[0] = "A road is finished if it has a continuous connection between two points.\nSo for example a road can start in a city and end on a intersection"; // plaatje toevogen 
-            uitlegdeel5[1] = "If a player finishes a road the player with the most astronauts on it gets the points the number of points is equal to the number of connected tiles.";
+            uitlegdeel5[1] = "If a player finishes a road the player with the most astronauts on it gets the points the number of points is equal to the number of connected tiles.\nIn this scenario the player with the most aliens on the road will get 3 points. ";
             uitlegdeel6[0] = "A space station is finished when it is completely closed. A space station can contain as many tiles as you want.";
             uitlegdeel6[1] = "You get the points from a space station if you have the most astronauts in it. ";
             uitlegdeel6[2] = "If there are a equal amount of astronauts from two different players both players get all the points.";
-            uitlegdeel6[3] = "For a space station you get 2 points per tile. So in the example below the player gets xxxxxxx points"; // sprite toevoegen van spacestation 
+            uitlegdeel6[3] = "For a space station you get 2 points per tile. So in the example below the player gets 6 points"; // sprite toevoegen van spacestation 
             uitlegdeel7[0] = "A satellite is finished when it is surrounded by 8 tiles.";
             uitlegdeel7[1] = "It doesn’t matter what kind of tiles these are it just needs to be surrounded and the player that placed the satellite and placed a astronaut in it gets the points.";
             uitlegdeel7[2] = "For a satellite you get 9 points. If the game is over and you don’t have 8 tiles surrounding your satellite you get 1 point per tile at the end of the game."; //sprite van satelite toevogen 
@@ -106,6 +106,8 @@ namespace ruigeruben
             int FontSize = 36, SubFontSize = 22;
             deletelabels();
             labels.Clear();
+            plaatjes.Clear();
+            
             switch (PageCounter)
             {
                 case 1:
@@ -122,6 +124,8 @@ namespace ruigeruben
                 case 2:
                     CCLabel components = new CCLabel("Components", Font, FontSize, CCLabelFormat.SpriteFont);
                     components.Position = new CCPoint(bounds.Center.X, 700);
+                   //CCSprite Sateliette =  TexturePool.GetSprite("10003");
+                   // Sateliette.Position = new CCPoint();
                     labels.Add(components);
                     for (int i = 0; i < uitlegdeel2.Length; i++)
                     {
@@ -156,10 +160,17 @@ namespace ruigeruben
                     CCLabel FinishedRoad = new CCLabel("How to finish a road?", Font, FontSize, CCLabelFormat.SpriteFont);
                     FinishedRoad.Position = new CCPoint(bounds.Center.X, 700);
                     labels.Add(FinishedRoad);
+                    CCSprite Road1 = TexturePool.GetSprite("21111");
+                    Road1.Rotation = -90; Road1.Position = new CCPoint(850, 400); plaatjes.Add(Road1);
+                    CCSprite Road2 = TexturePool.GetSprite("20202");
+                    Road2.Rotation = 90; Road2.Position = new CCPoint(950, 400);  plaatjes.Add(Road2);
+                    CCSprite Road3 = TexturePool.GetSprite("02220");
+                    Road3.Position = new CCPoint(1050, 400); plaatjes.Add(Road3);
+
                     for (int i = 0; i < uitlegdeel5.Length; i++)
                     {
                         CCLabel cclabel = new CCLabel(uitlegdeel5[i], SubFont, SubFontSize, CCLabelFormat.SpriteFont);
-                        cclabel.Position = new CCPoint((bounds.MidX), (600 - (i * 400)));
+                        cclabel.Position = new CCPoint((bounds.MidX), (600 - (i * 350)));
                         labels.Add(cclabel);
                     }
                     break;
@@ -167,6 +178,12 @@ namespace ruigeruben
                     CCLabel FinishedSpacestation = new CCLabel("How to finish a spacestation?", Font, FontSize, CCLabelFormat.SpriteFont);
                     FinishedSpacestation.Position = new CCPoint(bounds.Center.X, 700);
                     labels.Add(FinishedSpacestation);
+                    CCSprite SpaceStation1 = TexturePool.GetSprite("21202");
+                    SpaceStation1.Rotation = 180; SpaceStation1.Position = new CCPoint(850, 400); plaatjes.Add(SpaceStation1);
+                    CCSprite SpaceStation2 = TexturePool.GetSprite("10101");
+                    SpaceStation2.Rotation = 90; SpaceStation2.Position = new CCPoint(950, 400); plaatjes.Add(SpaceStation2);
+                    CCSprite SpaceStation3 = TexturePool.GetSprite("01000");
+                    SpaceStation3.Position = new CCPoint(1050, 400); plaatjes.Add(SpaceStation3);
                     for (int i = 0; i < uitlegdeel6.Length; i++)
                     {
                         CCLabel cclabel = new CCLabel(uitlegdeel6[i], SubFont, SubFontSize, CCLabelFormat.SpriteFont);
@@ -177,6 +194,9 @@ namespace ruigeruben
                 case 7:
                     CCLabel FinishedSatalite = new CCLabel("How to finish a satelite?", Font, FontSize, CCLabelFormat.SpriteFont);
                     FinishedSatalite.Position = new CCPoint(bounds.Center.X, 700);
+                    CCSprite Finished = new CCSprite("Finished sateliette");
+                    Finished.Position = new CCPoint(800, 250);
+                    plaatjes.Add(Finished);
                     labels.Add(FinishedSatalite);
                     for (int i = 0; i < uitlegdeel7.Length; i++)
                     {
@@ -213,12 +233,16 @@ namespace ruigeruben
         {
             foreach (CCLabel p in labels)
                 AddChild(p);
+            foreach (CCSprite spr in plaatjes)
+                AddChild(spr);
         }
 
         private void deletelabels()
         {
             foreach (CCLabel p in labels)
                 RemoveChild(p);
+            foreach (CCSprite spr in plaatjes)
+                RemoveChild(spr);
         }
 
         private void OnBackMenu()
