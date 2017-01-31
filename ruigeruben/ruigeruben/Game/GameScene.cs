@@ -27,8 +27,10 @@ namespace ruigeruben
         public Overlay m_Overlay;
         public bool m_CardPutDown = false;
         public bool m_AllienPutDown = false;
+        public int m_AllienCardSpot = 0;
         GameBase m_Game;
         int m_Touches;
+        public CCPoint m_PlacedCard;
 
         public GameScene(CCGameView View, InputGameInfo info) : base(View)
         {
@@ -93,18 +95,21 @@ namespace ruigeruben
 
             if(m_CardPutDown && m_AllienPutDown == false)
             {
-                foreach(CCSprite i in m_BoardLayer.PossiblePositionsAliens)
+                for(int i = 0; i < m_BoardLayer.PossiblePositionsAliens.Count; i++)
                 {
                     CCPoint pos = m_BoardLayer.ScreenToWorldspace(touches[0].LocationOnScreen);
-                    
-                    if(i.BoundingBoxTransformedToWorld.ContainsPoint(pos))
+
+                    if (m_BoardLayer.PossiblePositionsAliens[i].BoundingBoxTransformedToWorld.ContainsPoint(pos))
                     {
+                        m_AllienCardSpot = m_BoardLayer.m_AllienCardPos[i];
                         m_AllienPutDown = true;
-                        m_BoardLayer.DrawAlien(i.PositionWorldspace, m_Game.m_CurrentPlayer.PlayerColor);
+                        m_BoardLayer.DrawAlien(m_BoardLayer.PossiblePositionsAliens[i].PositionWorldspace, m_Game.m_CurrentPlayer.PlayerColor);
                         m_BoardLayer.DeleteCircles();
+                        m_Game.m_CurrentPlayer.NumberOfAliens = m_Game.m_CurrentPlayer.NumberOfAliens - 1;
                         return;
                     }
                 }
+               
             }
         }
 
@@ -120,9 +125,9 @@ namespace ruigeruben
                 if (m_Game.m_PosiblePos.Contains(pp))
                 {
                     m_BoardLayer.DrawCard(m_Game.m_CurrentCard, pp);
+                    m_PlacedCard = pp;
                     m_Overlay.m_CardButton.Visible = false;
                     m_BoardLayer.RemoveRaster();
-                    m_Game.m_PlacedCard = pp;
                     m_CardPutDown = true;
                     m_BoardLayer.DrawAlienPossiblePosition(m_Game.m_CurrentCard, pp);
 
@@ -212,7 +217,7 @@ namespace ruigeruben
             {
                 m_Game.m_Board.AddCard(m_Game.m_CurrentCard, m_Game.m_PlacedCard);
                 if (m_AllienPutDown)
-                    m_Game.m_Board.AddAlien(m_Game.m_CurrentPlayer, new CCPoint(0,0)); // FIX DIT NOG
+                    m_Game.m_Board.AddAlien(m_Game.m_CurrentPlayer, m_Game.m_PlacedCard, m_AllienCardSpot); // FIX DIT NOG
 
                 m_BoardLayer.DeleteCircles();
                 m_Game.NextTurn();
@@ -233,8 +238,9 @@ namespace ruigeruben
                 m_Game.RotateCard(90);
         }
         public void OnUndoClick()
-        {
-            if (m_CardPutDown)
+
+        {   
+            if (m_CardPutDown )
             {
                 if (m_AllienPutDown)
                 {
@@ -251,10 +257,16 @@ namespace ruigeruben
                     m_Game.refresh();
                 }
             }
+          
         }
         public void OnAlienClick()
         {
 
+        }
+
+        public CCPoint GetPlacedCard()
+        {
+            return m_PlacedCard; 
         }
     }
 }
