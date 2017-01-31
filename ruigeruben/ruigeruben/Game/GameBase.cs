@@ -402,7 +402,7 @@ namespace ruigeruben
             }
             else
             {
-                if (CheckSatelite(p) == 8)
+                if (CheckSateliteFinished(p) == 8)
                     points1 = 9;
             }
             m_CheckedCards = new List<CCPoint>();
@@ -530,7 +530,7 @@ namespace ruigeruben
             return connect;
         }
 
-        public int CheckSatelite(CCPoint p)
+        public int CheckSateliteFinished(CCPoint p)
         {
             List<Card> list = new List<Card>();
             int t = 0;
@@ -545,6 +545,34 @@ namespace ruigeruben
                 if (c != null)
                     t += 1;
             return t;
+        }
+
+        public List<CCPoint> CheckSatelite(CCPoint p)
+        {
+            List<Card> list = new List<Card>();
+            List<CCPoint> list2 = new List<CCPoint>();
+            List<CCPoint> res = new List<CCPoint>();
+
+            for (int i = -1; i <= 1; i++)
+            {
+                for (int j = -1; j <= 1; j++)
+                {
+                    list.Add(m_Board.GetCard(new CCPoint(p.X + i, p.Y + j)));
+                    list2.Add(new CCPoint(p.X + i, p.Y + j));
+                }
+            }
+
+            foreach (Card c in list)
+                if (c != null)
+                    if (c.GetAttribute(4) == CardAttributes.Satellite)
+                        //if () hier moet gecheckt worden of er een alien op positie 4 staat
+                        {
+                            int index = list.IndexOf(c);
+                            res.Add(list2[index]);
+                        }
+
+            return res;
+
         }
 
         public void refresh()
