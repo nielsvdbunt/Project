@@ -14,7 +14,7 @@ namespace ruigeruben
         CCSprite panda = new CCSprite("Panda");
         const int tilesize = 100;
         CCSprite m_LastSprite;
-
+       List<CCDrawNode> PossiblePositionsAliens = new List<CCDrawNode>();
         public BoardLayer()
         {
             this.AnchorPoint = new CCPoint(0, 0);
@@ -96,18 +96,47 @@ namespace ruigeruben
 
         public void DrawAlienPossiblePosition(Card c, CCPoint p)
         {
+            if (c.GetAttribute(0) != 0)
+               FillCircleList(p, 0, -30);
+            if (c.GetAttribute(1) != 0)
+                FillCircleList(p,-30,0);
+            if (c.GetAttribute(2) != 0)
+                FillCircleList(p, 0, 30);
+            if (c.GetAttribute(3) != 0)
+                FillCircleList(p, 30, 0);
+            if (c.GetAttribute(4) != 0)
+                FillCircleList(p,0, 0);
 
-            for (int i = 0; i < 6; i++)
-                if (c.GetAttribute(i) != 0)
-                {
-                    var drawNode = new CCDrawNode();
-                    drawNode.DrawEllipse(
-                    rect: new CCRect(p.X * 100 + i * 25, p.Y * 100 + i * 25, 10, 10),
-                    lineWidth: 1,
-                    color: CCColor4B.Red);
-                    AddChild(drawNode);
-                }
+            DrawCircles();
+
         }
 
+        public void FillCircleList(CCPoint p, int x, int y)
+        {
+          
+            p *= 100;
+            CCPoint DrawPoint = new CCPoint(p.X + x, p.Y + y);
+            var drawNode = new CCDrawNode();
+            drawNode.DrawEllipse(
+            rect: new CCRect(DrawPoint.X, DrawPoint.Y, 10, 10),
+            lineWidth: 1,
+            color: CCColor4B.Red);
+            PossiblePositionsAliens.Add(drawNode);
+           
+        }
+ 
+        public void DrawCircles()
+        {
+            foreach (CCDrawNode d in PossiblePositionsAliens)
+                AddChild(d); 
+        } 
+
+        public void DeleteCircles()
+        {
+            foreach (CCDrawNode d in PossiblePositionsAliens)
+                RemoveChild(d);
+            PossiblePositionsAliens.Clear();
+            
+        }
     }
 }
