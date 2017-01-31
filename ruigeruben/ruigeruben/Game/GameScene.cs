@@ -236,8 +236,9 @@ namespace ruigeruben
                 m_Game.RotateCard(90);
         }
         public void OnUndoClick()
-        {
-            if (m_CardPutDown)
+
+        {   
+            if (m_CardPutDown )
             {
                 if (m_AllienPutDown)
                 {
@@ -254,6 +255,7 @@ namespace ruigeruben
                     m_Game.refresh();
                 }
             }
+          
         }
         public void OnAlienClick()
         {
