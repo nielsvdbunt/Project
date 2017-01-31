@@ -67,9 +67,6 @@ namespace ruigeruben
 
         public CCPoint toLocation(CCPoint point) //from pixels to board location
         {
-            point.X *= m_Scale;
-            point.Y *= m_Scale;
-
             int tilesize = Convert.ToInt32(m_tilesize * m_Scale);
 
             int x = Convert.ToInt32(point.X);
