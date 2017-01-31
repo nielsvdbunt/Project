@@ -93,6 +93,7 @@ namespace ruigeruben
                 m_IsCardDragging = true;
 
             }
+
             //else
                 //m_IsCardDragging = false;
 
@@ -109,14 +110,16 @@ namespace ruigeruben
                 p.Y -= 50;
                 pp = m_BoardLayer.toLocation(p);
 
-                if(m_Game.m_PosiblePos.Contains(pp))
+                if (m_Game.m_PosiblePos.Contains(pp))
                 {
                     m_BoardLayer.DrawCard(m_Game.m_CurrentCard, pp);
                     m_Overlay.m_CardButton.Visible = false;
                     m_Game.m_Board.AddCard(m_Game.m_CurrentCard, pp);
                     m_Game.m_PlacedCard = pp;
                     CardOnBoard = true;
+                    m_CardAttrLayer.DrawAliens(m_Game.m_CurrentCard, pp);
                 }
+
                 else
                     m_Overlay.m_CardButton.Position = m_Overlay.m_CardPos;
             }
@@ -239,16 +242,15 @@ namespace ruigeruben
         {
             if (CardOnBoard)
             {
-
                 CardOnBoard = false;
                 m_Overlay.m_CardButton.Visible = true;
                 m_BoardLayer.DeleteCard();
                 m_Game.m_Board.RemoveCard(m_Game.m_CurrentCard, pp);
                 m_Game.refresh();
-              
-
             }
         }
+
+     
         public void OnAlienClick()
         {
 
