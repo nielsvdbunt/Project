@@ -64,7 +64,20 @@ namespace ruigeruben
   
         public void NextTurn()
         {
-            for(int i=0; i<m_Players.Count; i++ )
+
+            int points1; int points2; int points3; int points4;
+            Points(m_PlacedCard, CardAttributes.SpaceStation, out points1, out points2, out points3, out points4);
+            // points voor afgemaakte spacestation
+            Points(m_PlacedCard, CardAttributes.RainbowRoad, out points1, out points2, out points3, out points4);
+            // points voor afgemaakte rainbowroad
+            List<CCPoint> satellitelist = CheckSatellite(m_PlacedCard);
+            foreach (CCPoint point in satellitelist)
+            {
+                int satellitepoints = CheckSatelliteFinished(point);
+            }
+
+
+            for (int i=0; i<m_Players.Count; i++ )
             {
                 if (m_Players[i].Turn)
                 {

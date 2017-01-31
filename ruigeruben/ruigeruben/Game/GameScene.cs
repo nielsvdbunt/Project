@@ -215,18 +215,6 @@ namespace ruigeruben
                     m_Game.m_Board.AddAlien(m_Game.m_CurrentPlayer, ); // FIX DIT NOG
 
                 m_BoardLayer.DeleteCircles();
-
-                int points1; int points2; int points3; int points4;
-                m_Game.Points(m_Game.m_PlacedCard, CardAttributes.SpaceStation, out points1, out points2, out points3, out points4);
-                // points voor afgemaakte spacestation
-                m_Game.Points(m_Game.m_PlacedCard, CardAttributes.RainbowRoad, out points1, out points2, out points3, out points4);
-                // points voor afgemaakte rainbowroad
-                List<CCPoint> satellitelist = m_Game.CheckSatellite(m_Game.m_PlacedCard);
-                foreach(CCPoint point in satellitelist)
-                {
-                    int satellitepoints = m_Game.CheckSatelliteFinished(point);
-                }
-
                 m_Game.NextTurn();
                 m_CardPutDown = false;
                 m_AllienPutDown = false;
