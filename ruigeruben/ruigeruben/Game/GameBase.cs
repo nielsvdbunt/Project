@@ -72,7 +72,7 @@ namespace ruigeruben
             // points voor afgemaakte spacestation
             if (points1 != 0)
             {
-                playerlist = CheckAliens(m_PlacedCard, 1);
+                playerlist = CheckAliens(m_PlacedCard, 1, CardAttributes.SpaceStation);
                 foreach (Player ply in playerlist)
                 {
                     ply.Points += points1;
@@ -80,7 +80,7 @@ namespace ruigeruben
             }
             if (points2 != 0)
             {
-                playerlist = CheckAliens(m_PlacedCard, 2);
+                playerlist = CheckAliens(m_PlacedCard, 2, CardAttributes.SpaceStation);
                 foreach (Player ply in playerlist)
                 {
                     ply.Points += points2;
@@ -91,7 +91,7 @@ namespace ruigeruben
             // points voor afgemaakte rainbowroad
             if (points1 != 0)
             {
-                playerlist = CheckAliens(m_PlacedCard, 1);
+                playerlist = CheckAliens(m_PlacedCard, 1, CardAttributes.RainbowRoad);
                 foreach (Player ply in playerlist)
                 {
                     ply.Points += points1;
@@ -99,7 +99,7 @@ namespace ruigeruben
             }
             if (points2 != 0)
             {
-                playerlist = CheckAliens(m_PlacedCard, 2);
+                playerlist = CheckAliens(m_PlacedCard, 2, CardAttributes.RainbowRoad);
                 foreach (Player ply in playerlist)
                 {
                     ply.Points += points2;
@@ -107,7 +107,7 @@ namespace ruigeruben
             }
             if (points3 != 0)
             {
-                playerlist = CheckAliens(m_PlacedCard, 3);
+                playerlist = CheckAliens(m_PlacedCard, 3, CardAttributes.RainbowRoad);
                 foreach (Player ply in playerlist)
                 {
                     ply.Points += points3;
@@ -115,7 +115,7 @@ namespace ruigeruben
             }
             if (points4 != 0)
             {
-                playerlist = CheckAliens(m_PlacedCard, 0);
+                playerlist = CheckAliens(m_PlacedCard, 0, CardAttributes.RainbowRoad);
                 foreach (Player ply in playerlist)
                 {
                     ply.Points += points4;
@@ -247,10 +247,62 @@ namespace ruigeruben
             return false;
         }
 
-        public List<Player> CheckAliens(CCPoint p, int side)
+        public List<Player> CheckAliens(CCPoint p, int side, CardAttributes c)
         {
             List<Player> res = new List<Player>();
+            List<CCPoint> checkedcards = new List<CCPoint>();
+            List<Player> cardlist = new List<Player>();
+            List<int> sides = new List<int>();
 
+            if (!checkedcards.Contains(p))
+            {
+                checkedcards.Add(p);
+                foreach (Player player in CheckAliensCard(p, side, c, out sides))
+                    res.Add(player);
+                foreach (int i in sides)
+                {
+                    switch (i)
+                    {
+                        case 0:
+                            foreach (Player player in CheckAliens(new CCPoint(p.X, p.Y - 1), 2, c))
+                                res.Add(player);
+                            break;
+                        case 1:
+                            foreach (Player player in CheckAliens(new CCPoint(p.X - 1, p.Y), 3, c))
+                                res.Add(player);
+                            break;
+                        case 2:
+                            foreach (Player player in CheckAliens(new CCPoint(p.X, p.Y + 1), 0, c))
+                                res.Add(player);
+                            break;
+                        case 3:
+                            foreach (Player player in CheckAliens(new CCPoint(p.X + 1, p.Y), 1, c))
+                                res.Add(player);
+                            break;
+                    }
+                }
+            }
+            return res;
+        }
+
+        public List<Player> CheckAliensCard(CCPoint p, int side, CardAttributes c, out List<int> sides)
+        {
+            List<Player> res = new List<Player>();
+            Card card = m_Board.GetCard(p);
+            sides = new List<int>();
+            if (m_Board.HasAlien(p, side) != null)
+                res.Add(m_Board.HasAlien(p, side));
+            if (card.GetAttribute(4) == c || card.GetAttribute(4) == CardAttributes.intersection)
+            {
+                for (int i = 0; i <= 4; i++)
+                    if (i != side)
+                        if (card.GetAttribute(i) == c)
+                        {
+                            if (m_Board.HasAlien(p, i) != null)
+                                res.Add(m_Board.HasAlien(p, i));
+                            sides.Add(i);
+                        }
+            }
             return res;
         }
 
@@ -647,7 +699,6 @@ namespace ruigeruben
             foreach (Card c in list)
                 if (c != null)
                     if (c.GetAttribute(4) == CardAttributes.Satellite)
-                    //if () hier moet gecheckt worden of er een alien op positie 4 staat
                     {
                         int index = list.IndexOf(c);
                         res.Add(list2[index]);
