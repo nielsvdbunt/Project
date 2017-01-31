@@ -35,7 +35,7 @@ namespace ruigeruben
 
             this.AddLayer(m_BackgroundLayer = new BackgroundLayer("achtergrond1"), 0);
             this.AddLayer(m_BoardLayer = new BoardLayer(),1);
-            this.AddLayer(m_Overlay = new Overlay(this), 2);          
+            this.AddLayer(m_Overlay = new Overlay(this), 3);          
 
             var touchListener = new CCEventListenerTouchAllAtOnce();
             touchListener.OnTouchesEnded = OnTouchesEnded;
@@ -87,10 +87,13 @@ namespace ruigeruben
            
             if (m_Overlay.m_CardButton.BoundingBox.ContainsPoint(Location)) //Voor het slepen van de kaart in layer
             {
-                if(!m_CardPutDown)
-                    m_IsCardDragging = true;
+                m_IsCardDragging = true;
 
             }
+
+            //else
+                //m_IsCardDragging = false;
+
         }
 
         void OnTouchesEnded(List<CCTouch> touches, CCEvent touchEvent)
@@ -102,19 +105,19 @@ namespace ruigeruben
                 CCPoint p = m_BoardLayer.ScreenToWorldspace(touches[0].LocationOnScreen);
                 p.X += 50;
                 p.Y -= 50;
-                CCPoint pp = m_BoardLayer.toLocation(p);
+                pp = m_BoardLayer.toLocation(p);
 
                 if (m_Game.m_PosiblePos.Contains(pp))
                 {
                     m_BoardLayer.DrawCard(m_Game.m_CurrentCard, pp);
                     m_Overlay.m_CardButton.Visible = false;
-                    m_BoardLayer.RemoveRaster();
+                    m_Game.m_Board.AddCard(m_Game.m_CurrentCard, pp);
                     m_Game.m_PlacedCard = pp;
-                    m_CardPutDown = true;
-                    m_BoardLayer.DrawAlienPossiblePosition(m_Game.m_CurrentCard, pp);
+                    CardOnBoard = true;
                 }
 
-                m_Overlay.m_CardButton.Position = m_Overlay.m_CardPos;
+                else
+                    m_Overlay.m_CardButton.Position = m_Overlay.m_CardPos;
             }
 
             if (m_Touches == 2)
@@ -215,7 +218,6 @@ namespace ruigeruben
         {
             if (m_CardPutDown)
             {
-                m_Game.m_Board.AddCard(m_Game.m_CurrentCard, m_Game.m_PlacedCard);
                 m_Game.NextTurn();
                 m_CardPutDown = false;
             }
@@ -236,10 +238,14 @@ namespace ruigeruben
         {
             if (m_CardPutDown)
             {
-                m_CardPutDown = false;
+
+                CardOnBoard = false;
                 m_Overlay.m_CardButton.Visible = true;
                 m_BoardLayer.DeleteLastCard();
+                m_Game.m_Board.RemoveCard(m_Game.m_CurrentCard, pp);
                 m_Game.refresh();
+              
+
             }
         }
         public void OnAlienClick()
