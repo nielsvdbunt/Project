@@ -86,7 +86,7 @@ namespace ruigeruben
 
             Location = m_Overlay.ScreenToWorldspace(Location);
            
-            if (m_Overlay.m_CardButton.BoundingBox.ContainsPoint(Location)) //Voor het slepen van de kaart in layer
+            if (m_Overlay.m_CardButton.BoundingBox.ContainsPoint(Location)) //for draging
             {
                 if (!m_CardPutDown)
                     m_IsCardDragging = true;
@@ -138,10 +138,6 @@ namespace ruigeruben
 
     m_Overlay.m_CardButton.Position = m_Overlay.m_CardPos;
             }
-
-       //     if (m_Touches == 2)
-         //       zooming = false;
-
             m_Touches -= touches.Count;
 
             if (m_Touches < 0)
@@ -160,7 +156,6 @@ namespace ruigeruben
 
             if (m_IsCardDragging)
             {
-                //if(m_Game.m_CurrentCard != null)
                 CCSprite Spr = TexturePool.GetSprite(m_Game.m_CurrentCard.m_Hash);
                 Spr.Position = touches[0].LocationOnScreen;
 

@@ -10,9 +10,8 @@ namespace ruigeruben
         SpaceStation = 1,
         RainbowRoad = 2,
         Satellite = 3,
-        intersection = 4, // is dit nodig?
+        intersection = 4,
         None = 0
-            // doen we we nog die schilden
 
     }
 
@@ -28,16 +27,16 @@ namespace ruigeruben
           "10101",
           "11001",
           "11111",
-          "11224", //hoekbocht met dicht kasteel over twee zijde 
+          "11224", 
           "20003",
-          "20122", //
-          "10111", //
-          "20202",//
-          "21111",//
-          "21202", // start tegel
-          "21220", //
-          "22102", //
-          "22220", //
+          "20122", 
+          "10111", 
+          "20202",
+          "21111",
+          "21202",
+          "21220", 
+          "22102", 
+          "22220", 
 
               
         };
