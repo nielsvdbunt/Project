@@ -826,11 +826,11 @@ namespace ruigeruben
                             Cards.Add(m_PlacedCard);
                             Done = FindCastleOpenSpots(NextCardpos, CardSpot, ref Cards);
 
-                            if (!Done)
+                            if (Done)
                                 break;
                         }
                     }
-                    if(Done)
+                    if(!Done)
                     {
                         int yy = 2;
                     }
