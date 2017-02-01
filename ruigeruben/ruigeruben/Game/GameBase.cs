@@ -74,32 +74,49 @@ namespace ruigeruben
             List<CardAttributes> attrlist = new List<CardAttributes>();
             for (int t = 0; t < 4; t++)
                 attrlist.Add(m_Board.GetCard(m_PlacedCard).GetAttribute(t));
+            int whichside1 = 1;
+            int whichside2 = 1;
+            bool notdone = true;
             if (attrlist.Contains(CardAttributes.SpaceStation))
             {
                 Points(m_PlacedCard, CardAttributes.SpaceStation, out points1, out points2, out points3, out points4);
-                // points voor afgemaakte spacestation
-                if (points1 != 0)
+                // points voor afgemaakte spacestation (klopt niet)
+                while(notdone)
                 {
-                    playerlist = CheckAliens(m_PlacedCard, 1, CardAttributes.SpaceStation);
-                    foreach (Player ply in playerlist)
+                    if (points1 != 0 && m_Board.GetCard(m_PlacedCard).GetAttribute(whichside1) == CardAttributes.SpaceStation)
                     {
-                        ply.Points += points1;
+                        playerlist = CheckAliens(m_PlacedCard, 1, CardAttributes.SpaceStation);
+                        foreach (Player ply in playerlist)
+                        {
+                            ply.Points += points1;
+                            points1 = 0;
+                            if (points2 == 0)
+                                notdone = false;
+                        }
+                        if (whichside1 != 3)
+                            whichside1++;
+                        else
+                            whichside1 = 0;
                     }
-                }
-                if (points2 != 0)
-                {
-                    playerlist = CheckAliens(m_PlacedCard, 2, CardAttributes.SpaceStation);
-                    foreach (Player ply in playerlist)
+                    if (points2 != 0 && whichside1 != whichside2)
                     {
-                        ply.Points += points2;
+                        playerlist = CheckAliens(m_PlacedCard, 2, CardAttributes.SpaceStation);
+                        foreach (Player ply in playerlist)
+                        {
+                            ply.Points += points2;
+                            points2 = 0;
+                            notdone = false;
+                        }
                     }
+                    if (points1 == 0)
+                        notdone = false;
                 }
             }
-
+            
             if (attrlist.Contains(CardAttributes.RainbowRoad))
             {
                 Points(m_PlacedCard, CardAttributes.RainbowRoad, out points1, out points2, out points3, out points4);
-                // points voor afgemaakte rainbowroad
+                // points voor afgemaakte rainbowroad (klopt niet)
                 if (points1 != 0)
                 {
                     playerlist = CheckAliens(m_PlacedCard, 1, CardAttributes.RainbowRoad);
@@ -133,21 +150,25 @@ namespace ruigeruben
                     }
                 }
             }
-
+            */
             List<CCPoint> satellitelist = CheckSatellite(m_PlacedCard);
             Player player;
             foreach (CCPoint point in satellitelist)
             {
                 int satellitepoints = CheckSatelliteFinished(point);
-                if (satellitepoints == 8)
+                if (satellitepoints == 9)
                 {
                     player = m_Board.HasAlien(point, 4);
                     if (player != null)
+                    {
                         player.Points += 9;
+                        m_Board.RemoveAlien(point, 4);
+                        m_Scene.m_BoardLayer.RemoveAlien(point);
+                    }
                 }
 
             }
-            */
+            
 
             HandlePoints();
 
@@ -328,7 +349,7 @@ namespace ruigeruben
             return res;
         }
 
-        public void Points(CCPoint p, CardAttributes attr, out int points1, out int points2, out int points3, out int points4) //moet nog aangepast worden aan waar aliens staan
+        public void Points(CCPoint p, CardAttributes attr, out int points1, out int points2, out int points3, out int points4) //dit werkt allemaal als het goed is
         {
             points1 = 0;  points2 = 0; points3 = 0; points4 = 0;
             if (attr == CardAttributes.SpaceStation || attr == CardAttributes.RainbowRoad)
@@ -350,7 +371,7 @@ namespace ruigeruben
                     }
                     if ((s < 2 && attr == CardAttributes.SpaceStation) || (r < 2 && attr == CardAttributes.RainbowRoad))
                     {
-                        if (CheckFinished(p, attr, true, 4, 4))
+                        if (CheckFinished(p, attr, 4, 4))
                             if (attr == CardAttributes.SpaceStation)
                             {
                                 if (m_CheckedCards.Count <= 2)
@@ -360,7 +381,7 @@ namespace ruigeruben
                             }
                             else
                                 points1 = m_CheckedCards.Count;
-                    }
+                    /*}
                     else
                     {
                         int side1 = 4, side2 = 4, side3 = 4, side0 = 4;
@@ -677,7 +698,7 @@ namespace ruigeruben
             }
             return true;
         }
-
+        
         public bool Connected(CCPoint p, CardAttributes c, int side1, int side2)
         {
             connect = false;
@@ -685,7 +706,7 @@ namespace ruigeruben
             m_CheckedCards = new List<CCPoint>();
             return connect;
         }
-
+        */
         public int CheckSatelliteFinished(CCPoint p)
         {
             List<Card> list = new List<Card>();
@@ -702,7 +723,7 @@ namespace ruigeruben
                     t += 1;
             return t;
         }
-
+        
         public List<CCPoint> CheckSatellite(CCPoint p)
         {
             List<Card> list = new List<Card>();
@@ -730,7 +751,7 @@ namespace ruigeruben
 
         }
 
-    */
+    
 
         public void refresh()
         {
