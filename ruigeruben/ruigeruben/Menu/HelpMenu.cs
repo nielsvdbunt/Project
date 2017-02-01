@@ -179,11 +179,11 @@ namespace ruigeruben
                     FinishedSpacestation.Position = new CCPoint(bounds.Center.X, 700);
                     labels.Add(FinishedSpacestation);
                     CCSprite SpaceStation1 = TexturePool.GetSprite("21202");
-                    SpaceStation1.Rotation = 180; SpaceStation1.Position = new CCPoint(850, 400); plaatjes.Add(SpaceStation1);
+                    SpaceStation1.Rotation = 180; SpaceStation1.Position = new CCPoint(850, 350); plaatjes.Add(SpaceStation1);
                     CCSprite SpaceStation2 = TexturePool.GetSprite("10101");
-                    SpaceStation2.Rotation = 90; SpaceStation2.Position = new CCPoint(950, 400); plaatjes.Add(SpaceStation2);
+                    SpaceStation2.Rotation = 90; SpaceStation2.Position = new CCPoint(950, 350); plaatjes.Add(SpaceStation2);
                     CCSprite SpaceStation3 = TexturePool.GetSprite("01000");
-                    SpaceStation3.Position = new CCPoint(1050, 400); plaatjes.Add(SpaceStation3);
+                    SpaceStation3.Position = new CCPoint(1050, 350); plaatjes.Add(SpaceStation3);
                     for (int i = 0; i < uitlegdeel6.Length; i++)
                     {
                         CCLabel cclabel = new CCLabel(uitlegdeel6[i], SubFont, SubFontSize, CCLabelFormat.SpriteFont);
@@ -195,7 +195,7 @@ namespace ruigeruben
                     CCLabel FinishedSatalite = new CCLabel("How to finish a satelite?", Font, FontSize, CCLabelFormat.SpriteFont);
                     FinishedSatalite.Position = new CCPoint(bounds.Center.X, 700);
                     CCSprite Finished = new CCSprite("Finished sateliette");
-                    Finished.Position = new CCPoint(800, 250);
+                    Finished.Position = new CCPoint(900, 300);
                     plaatjes.Add(Finished);
                     labels.Add(FinishedSatalite);
                     for (int i = 0; i < uitlegdeel7.Length; i++)

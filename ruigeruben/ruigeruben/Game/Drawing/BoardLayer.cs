@@ -8,6 +8,13 @@ using CocosSharp;
 
 namespace ruigeruben
 {
+    struct BoardAlien
+    {
+       public CCSprite AlienOnBoard;
+        public CCPoint PlaceAlienOnBoard;
+
+    }
+        
     class BoardLayer : CCLayer
     {
         public List<CCDrawNode> Rectangles = new List<CCDrawNode>();
@@ -17,7 +24,7 @@ namespace ruigeruben
         float m_Scale = 1;
         public List<CCSprite> PossiblePositionsAliens = new List<CCSprite>();
         public List<int> m_AllienCardPos = new List<int>();
-
+        List<BoardAlien> ALiensDrawed = new List<BoardAlien>();
         public BoardLayer()
         {
             this.AnchorPoint = new CCPoint(0, 0);
@@ -149,6 +156,11 @@ namespace ruigeruben
             m_LastAlien.Color = color;
             m_LastAlien.Scale = 0.2f;
             AddChild(m_LastAlien);
+            BoardAlien b = new BoardAlien();
+            b.AlienOnBoard = m_LastAlien;
+            CCPoint RealPoint = toLocation(point);
+            b.PlaceAlienOnBoard = RealPoint;
+            ALiensDrawed.Add(b);
         }
 
         public void DeleteLastCard()
@@ -172,6 +184,7 @@ namespace ruigeruben
             spr.Scale = 0.20f;
             PossiblePositionsAliens.Add(spr);
 
+
         }
 
         public void DrawCircles()
@@ -187,6 +200,23 @@ namespace ruigeruben
 
             PossiblePositionsAliens.Clear();
 
+        }
+
+        public void RemoveAlien(CCPoint p)
+        {
+            int j = -1;
+            
+            for(int  i = 0; i< ALiensDrawed.Count; i++)
+            {
+                if(ALiensDrawed[i].PlaceAlienOnBoard == p)
+                {
+                    RemoveChild(ALiensDrawed[i].AlienOnBoard);
+                    j = i;
+                }
+            }
+
+            if (j != -1)
+                ALiensDrawed.RemoveAt(j);
         }
 
     }
