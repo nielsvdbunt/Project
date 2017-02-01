@@ -829,6 +829,11 @@ namespace ruigeruben
                             if (Done)
                                 break;
                         }
+                        else
+                        {
+                            Done = true;
+                            break;
+                        }
                     }
                     if(!Done)
                     {
