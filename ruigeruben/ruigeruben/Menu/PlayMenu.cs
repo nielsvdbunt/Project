@@ -29,7 +29,7 @@ namespace ruigeruben
         {
             m_GameInfo = new InputGameInfo();
             m_GameInfo.CardMultiplier = 1;
-            m_GameInfo.Aliens = 5;
+            m_GameInfo.Aliens = 8;
             
             m_Buttons = new List<Button>();
             playerbuttons = new List<Button>();
@@ -45,7 +45,7 @@ namespace ruigeruben
         {
             m_GameInfo = new InputGameInfo();
             m_GameInfo.CardMultiplier = 1;
-            m_GameInfo.Aliens = 5;
+            m_GameInfo.Aliens = 8;
 
             m_Buttons = new List<Button>();
             playerbuttons = new List<Button>();
