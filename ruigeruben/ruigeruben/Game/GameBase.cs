@@ -22,7 +22,7 @@ namespace ruigeruben
         List<CCPoint> m_CheckedCards;
         public Player m_CurrentPlayer;
         public CCPoint m_PlacedCard;
-      //  bool connect;
+        //  bool connect;
 
         public GameBase(GameScene Scene, InputGameInfo info)
         {
@@ -32,7 +32,7 @@ namespace ruigeruben
                 Player p = new Player();
                 p.Name = i.Name;
                 p.PlayerColor = i.Color;
-                p.NumberOfAliens = (int) info.Aliens;
+                p.NumberOfAliens = (int)info.Aliens;
                 m_Players.Add(p);
             }
 
@@ -67,118 +67,14 @@ namespace ruigeruben
 
             FindPossibleMoves();
         }
-  
+
         public void NextTurn()
         {
             m_PlacedCard = m_Scene.GetPlacedCard();
 
-            /*int points1; int points2; int points3; int points4;
-            List<Player> playerlist = new List<Player>();
-
-            m_PlacedCard = m_Scene.GetPlacedCard();
-
-            List<CardAttributes> attrlist = new List<CardAttributes>();
-            for (int t = 0; t < 4; t++)
-                attrlist.Add(m_Board.GetCard(m_PlacedCard).GetAttribute(t));
-            int whichside1 = 1;
-            int whichside2 = 1;
-            bool notdone = true;
-            if (attrlist.Contains(CardAttributes.SpaceStation))
-            {
-                Points(m_PlacedCard, CardAttributes.SpaceStation, out points1, out points2, out points3, out points4);
-                // points voor afgemaakte spacestation (klopt niet)
-                while(notdone)
-                {
-                    if (points1 != 0 && m_Board.GetCard(m_PlacedCard).GetAttribute(whichside1) == CardAttributes.SpaceStation)
-                    {
-                        playerlist = CheckAliens(m_PlacedCard, 1, CardAttributes.SpaceStation);
-                        foreach (Player ply in playerlist)
-                        {
-                            ply.Points += points1;
-                            points1 = 0;
-                            if (points2 == 0)
-                                notdone = false;
-                        }
-                        if (whichside1 != 3)
-                            whichside1++;
-                        else
-                            whichside1 = 0;
-                    }
-                    if (points2 != 0 && whichside1 != whichside2)
-                    {
-                        playerlist = CheckAliens(m_PlacedCard, 2, CardAttributes.SpaceStation);
-                        foreach (Player ply in playerlist)
-                        {
-                            ply.Points += points2;
-                            points2 = 0;
-                            notdone = false;
-                        }
-                    }
-                    if (points1 == 0)
-                        notdone = false;
-                }
-            }
-            
-            if (attrlist.Contains(CardAttributes.RainbowRoad))
-            {
-                Points(m_PlacedCard, CardAttributes.RainbowRoad, out points1, out points2, out points3, out points4);
-                // points voor afgemaakte rainbowroad (klopt niet)
-                if (points1 != 0)
-                {
-                    playerlist = CheckAliens(m_PlacedCard, 1, CardAttributes.RainbowRoad);
-                    foreach (Player ply in playerlist)
-                    {
-                        ply.Points += points1;
-                    }
-                }
-                if (points2 != 0)
-                {
-                    playerlist = CheckAliens(m_PlacedCard, 2, CardAttributes.RainbowRoad);
-                    foreach (Player ply in playerlist)
-                    {
-                        ply.Points += points2;
-                    }
-                }
-                if (points3 != 0)
-                {
-                    playerlist = CheckAliens(m_PlacedCard, 3, CardAttributes.RainbowRoad);
-                    foreach (Player ply in playerlist)
-                    {
-                        ply.Points += points3;
-                    }
-                }
-                if (points4 != 0)
-                {
-                    playerlist = CheckAliens(m_PlacedCard, 0, CardAttributes.RainbowRoad);
-                    foreach (Player ply in playerlist)
-                    {
-                        ply.Points += points4;
-                    }
-                }
-            }
-            *//*
-            List<CCPoint> satellitelist = CheckSatellite(m_PlacedCard);
-            Player player;
-            foreach (CCPoint point in satellitelist)
-            {
-                int satellitepoints = CheckSatelliteFinished(point);
-                if (satellitepoints == 9)
-                {
-                    player = m_Board.HasAlien(point, 4);
-                    if (player != null)
-                    {
-                        player.Points += 9;
-                        m_Board.RemoveAlien(point, 4);
-                        m_Scene.m_BoardLayer.RemoveAlien(point);
-                    }
-                }
-
-            }
-            */
-
             HandlePoints();
 
-            for (int i=0; i<m_Players.Count; i++ )
+            for (int i = 0; i < m_Players.Count; i++)
             {
                 if (m_Players[i].Turn)
                 {
@@ -202,11 +98,11 @@ namespace ruigeruben
                 }
                 m_CurrentCard = m_Deck.GetNextCard();
             } while (!AnyMovePossible());
-           
+
             m_Scene.m_Overlay.UpdateInterface(m_Players, m_Deck.GetCardsLeft(), m_CurrentCard);
 
             FindPossibleMoves();
-        } 
+        }
 
         public void RotateCard(int Rot)
         {
@@ -222,9 +118,9 @@ namespace ruigeruben
             foreach (CCPoint p in m_Board.m_OpenSpots)
             {
                 Card L = m_Board.GetCard(new CCPoint(p.X - 1, p.Y));
-                Card T = m_Board.GetCard(new CCPoint(p.X , p.Y + 1));
+                Card T = m_Board.GetCard(new CCPoint(p.X, p.Y + 1));
                 Card R = m_Board.GetCard(new CCPoint(p.X + 1, p.Y));
-                Card B = m_Board.GetCard(new CCPoint(p.X , p.Y - 1));
+                Card B = m_Board.GetCard(new CCPoint(p.X, p.Y - 1));
 
                 bool Add = true;
 
@@ -287,477 +183,9 @@ namespace ruigeruben
             }
             return false;
         }
-        /*
-        public List<Player> CheckAliens(CCPoint p, int side, CardAttributes c)
-        {
-            List<Player> res = new List<Player>();
-            List<CCPoint> checkedcards = new List<CCPoint>();
-            List<Player> cardlist = new List<Player>();
-            List<int> sides = new List<int>();
 
-            if (!checkedcards.Contains(p))
-            {
-                checkedcards.Add(p);
-                foreach (Player player in CheckAliensCard(p, side, c, out sides))
-                    res.Add(player);
-                foreach (int i in sides)
-                {
-                    switch (i)
-                    {
-                        case 0:
-                            foreach (Player player in CheckAliens(new CCPoint(p.X, p.Y - 1), 2, c))
-                                res.Add(player);
-                            break;
-                        case 1:
-                            foreach (Player player in CheckAliens(new CCPoint(p.X - 1, p.Y), 3, c))
-                                res.Add(player);
-                            break;
-                        case 2:
-                            foreach (Player player in CheckAliens(new CCPoint(p.X, p.Y + 1), 0, c))
-                                res.Add(player);
-                            break;
-                        case 3:
-                            foreach (Player player in CheckAliens(new CCPoint(p.X + 1, p.Y), 1, c))
-                                res.Add(player);
-                            break;
-                    }
-                }
-            }
-            return res;
-        }
 
-        public List<Player> CheckAliensCard(CCPoint p, int side, CardAttributes c, out List<int> sides)
-        {
-            List<Player> res = new List<Player>();
-            Card card = m_Board.GetCard(p);
-            sides = new List<int>();
-            if (m_Board.HasAlien(p, side) != null)
-            {
-                res.Add(m_Board.HasAlien(p, side));
-                m_Board.HasAlien(p, side).NumberOfAliens += 1;
-                m_Board.RemoveAlien(p, side);
-            }
-            if (card.GetAttribute(4) == c || card.GetAttribute(4) == CardAttributes.intersection)
-            {
-                for (int i = 0; i <= 4; i++)
-                    if (i != side)
-                        if (card.GetAttribute(i) == c)
-                        {
-                            if (m_Board.HasAlien(p, i) != null)
-                            {
-                                res.Add(m_Board.HasAlien(p, i));
-                                m_Board.HasAlien(p, side).NumberOfAliens += 1;
-                                m_Board.RemoveAlien(p, side);
-                            }
-                            sides.Add(i);
-                        }
-            }
-            return res;
-        }
 
-        public void Points(CCPoint p, CardAttributes attr, out int points1, out int points2, out int points3, out int points4) //dit werkt allemaal als het goed is
-        {
-            points1 = 0;  points2 = 0; points3 = 0; points4 = 0;
-            if (attr == CardAttributes.SpaceStation || attr == CardAttributes.RainbowRoad)
-            {
-                Card card = m_Board.GetCard(p);
-
-                if (card.GetAttribute(4) == CardAttributes.None)
-                {
-                    List<CardAttributes> attrlist = new List<CardAttributes>();
-                    int s = 0, r = 0;
-                    for (int t = 0; t < 4; t++)
-                        attrlist.Add(card.GetAttribute(t));
-                    foreach (CardAttributes c in attrlist)
-                    {
-                        if (c == CardAttributes.SpaceStation)
-                            s += 1;
-                        if (c == CardAttributes.RainbowRoad)
-                            r += 1;
-                    }
-                    if ((s < 2 && attr == CardAttributes.SpaceStation) || (r < 2 && attr == CardAttributes.RainbowRoad))
-                    {
-                        if (CheckFinished(p, attr, 4, 4))
-                            if (attr == CardAttributes.SpaceStation)
-                            {
-                                if (m_CheckedCards.Count <= 2)
-                                    points1 = 2;
-                                else
-                                    points1 = m_CheckedCards.Count * 2;
-                            }
-                            else
-                                points1 = m_CheckedCards.Count;
-                    /*}
-                    else
-                    {
-                        int side1 = 4, side2 = 4, side3 = 4, side0 = 4;
-                        if (card.GetAttribute(1) == attr)
-                            side1 = 1;
-                        if (card.GetAttribute(2) == attr)
-                            side2 = 2;
-                        if (card.GetAttribute(3) == attr)
-                            side3 = 3;
-                        if (card.GetAttribute(0) == attr)
-                            side0 = 0;
-                        List<int> sides = new List<int>();
-                        if (side1 != 4)
-                            sides.Add(side1);
-                        if (side2 != 4)
-                            sides.Add(side2);
-                        if (side3 != 4)
-                            sides.Add(side3);
-                        if (side0 != 4)
-                            sides.Add(side0);
-                        if (attr == CardAttributes.SpaceStation)
-                            if (Connected(p, attr, sides[0], sides[1]))
-                            {
-                                if (CheckFinished(p, attr, true, 4, 4))
-                                    if (m_CheckedCards.Count <= 2)
-                                        points1 = 2;
-                                    else
-                                        points1 = m_CheckedCards.Count * 2;
-                            }
-                            else
-                            {
-                                if (CheckFinished(p, attr, sides[0], 4))
-                                    points1 = m_CheckedCards.Count;
-                                if (CheckFinished(p, attr, sides[1], 4))
-                                    points2 = m_CheckedCards.Count;
-                            }
-                        else
-                        {
-                            if (sides.Count == 2)
-                                if (Connected(p, attr, sides[0], sides[1]))
-                                    if (CheckFinished(p, attr, true, 4, 4))
-                                        points1 = m_CheckedCards.Count;
-                                    else;
-                                else
-                                {
-                                    if (CheckFinished(p, attr, sides[0], 4))
-                                        points1 = m_CheckedCards.Count;
-                                    if (CheckFinished(p, attr, sides[1], 4))
-                                        points2 = m_CheckedCards.Count;
-                                }
-                        
-                            if (sides.Count == 3)
-                            {
-                                int first = 4, second = 4;
-                                if (Connected(p, attr, sides[0], sides[1]))
-                                {
-                                    first = 0;
-                                    second = 2;
-                                }
-                                else if (Connected(p, attr, sides[1], sides[2]))
-                                {
-                                    first = 1;
-                                    second = 0;
-                                }
-                                else if (Connected(p, attr, sides[2], sides[0]))
-                                {
-                                    first = 2;
-                                    second = 1;
-                                }
-                                else
-                                {
-                                    if (CheckFinished(p, attr, sides[0], 4))
-                                        points1 = m_CheckedCards.Count;
-                                    if (CheckFinished(p, attr, sides[1], 4))
-                                        points2 = m_CheckedCards.Count;
-                                    if (CheckFinished(p, attr, sides[2], 4))
-                                        points3 = m_CheckedCards.Count;
-                                }
-
-                                if (first != 4 && second != 4)
-                                {
-                                    if (CheckFinished(p, attr, sides[first], 4))
-                                        points1 = m_CheckedCards.Count;
-                                    if (CheckFinished(p, attr, sides[second], 4))
-                                    {
-                                        if (points1 == 0)
-                                            points1 = m_CheckedCards.Count;
-                                        else
-                                            points2 = m_CheckedCards.Count;
-                                    }
-                                }
-                            }
-                            if (sides.Count == 4)
-                            {
-                                int first = 4, second = 4, third = 4;
-                                if (Connected(p, attr, sides[0], sides[1]))
-                                    if (Connected(p, attr, sides[2], sides[3]))
-                                    {
-                                        first = 0;
-                                        second = 2;
-                                    }
-                                    else
-                                    {
-                                        first = 0;
-                                        second = 2;
-                                        third = 3;
-                                    }
-                                else if (Connected(p, attr, sides[2], sides[3]))
-                                {
-                                    first = 2;
-                                    second = 0;
-                                    third = 1;
-                                }
-                                else if (Connected(p, attr, sides[1], sides[2]))
-                                    if (Connected(p, attr, sides[3], sides[0]))
-                                    {
-                                        first = 1;
-                                        second = 3;
-                                    }
-                                    else
-                                    {
-                                        first = 1;
-                                        second = 3;
-                                        third = 0;
-                                    }
-                                else if (Connected(p, attr, sides[3], sides[0]))
-                                {
-                                    first = 3;
-                                    second = 1;
-                                    third = 2;
-                                }
-                                else if (Connected(p, attr, sides[1], sides[3]))
-                                    if (Connected(p, attr, sides[2], sides[0]))
-                                    {
-                                        first = 1;
-                                        second = 2;
-                                    }
-                                    else
-                                    {
-                                        first = 1;
-                                        second = 2;
-                                        third = 0;
-                                    }
-                                else if (Connected(p, attr, sides[2], sides[0]))
-                                {
-                                    first = 2;
-                                    second = 1;
-                                    third = 3;
-                                }
-                                else
-                                {
-                                    if (CheckFinished(p, attr, 0, 4))
-                                        points1 = m_CheckedCards.Count;
-                                    if (CheckFinished(p, attr, 1, 4))
-                                        points2 = m_CheckedCards.Count;
-                                    if (CheckFinished(p, attr, 2, 4))
-                                        points3 = m_CheckedCards.Count;
-                                    if (CheckFinished(p, attr, 3, 4))
-                                        points4 = m_CheckedCards.Count;
-                                }
-                                
-                                if (first != 4 && third == 4)
-                                {
-                                    if (CheckFinished(p, attr, sides[first], 4))
-                                        points1 = m_CheckedCards.Count;
-                                    if (CheckFinished(p, attr, sides[second], 4))
-                                        points2 = m_CheckedCards.Count;
-                                }
-                                if (third != 4)
-                                {
-                                    if (CheckFinished(p, attr, sides[first], 4))
-                                        points1 = m_CheckedCards.Count;
-                                    if (CheckFinished(p, attr, sides[second], 4))
-                                        points2 = m_CheckedCards.Count;
-                                    if (CheckFinished(p, attr, sides[third], 4))
-                                        points3 = m_CheckedCards.Count;
-                                }
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    if (CheckFinished(p, attr, true, 4, 4))
-                        if (attr == CardAttributes.SpaceStation)
-                        {
-                            if (m_CheckedCards.Count <= 2)
-                                points1 = 2;
-                            else
-                                points1 = m_CheckedCards.Count * 2;
-                        }
-                        else
-                            points1 = m_CheckedCards.Count;
-                }
-            }
-            else
-            {
-                if (CheckSatelliteFinished(p) == 8)
-                    points1 = 9;
-            }
-            m_CheckedCards = new List<CCPoint>();
-        }
-
-        public bool CheckFinished(CCPoint p, CardAttributes c, bool firstcard, int side1, int side2)
-        {
-            Card cur = m_Board.GetCard(p);
-            Card L = m_Board.GetCard(new CCPoint(p.X - 1, p.Y));
-            Card T = m_Board.GetCard(new CCPoint(p.X, p.Y + 1));
-            Card R = m_Board.GetCard(new CCPoint(p.X + 1, p.Y));
-            Card B = m_Board.GetCard(new CCPoint(p.X, p.Y - 1));
-
-            CardAttributes l = cur.GetAttribute(1);
-            CardAttributes t = cur.GetAttribute(2);
-            CardAttributes r = cur.GetAttribute(3);
-            CardAttributes b = cur.GetAttribute(0);
-            CardAttributes m = cur.GetAttribute(4);
-
-            bool ml = true, mt = true, mr = true, mb = true;
-            bool checkl, checkt, checkr, checkb;
-
-            List<bool> middencheck = new List<bool>();
-
-            if (!m_CheckedCards.Contains(p))
-            {
-                m_CheckedCards.Add(p);
-                if (m == c || m == CardAttributes.intersection || firstcard)
-                {
-                    firstcard = false;
-                    if (l == c && side1 != 1)
-                    {
-                        if (L == null)
-                            ml = false;
-                        else
-                        {
-                            checkl = CheckFinished(new CCPoint(p.X - 1, p.Y), c, firstcard, 3, side2);
-                            if (!checkl)
-                                return false;
-                        }
-                        middencheck.Add(ml);
-                    }
-                    if (t == c && side1 != 2)
-                    {
-                        if (T == null)
-                            mt = false;
-                        else
-                        {
-                            checkt = CheckFinished(new CCPoint(p.X, p.Y + 1), c, firstcard, 0, side2);
-                            if (!checkt)
-                                return false;
-                        }
-                        middencheck.Add(mt);
-                    }
-                    if (r == c && side1 != 3)
-                    {
-                        if (R == null)
-                            mr = false;
-                        else
-                        {
-                            checkr = CheckFinished(new CCPoint(p.X + 1, p.Y), c, firstcard, 1, side2);
-                            if (!checkr)
-                                return false;
-                        }
-                        middencheck.Add(mr);
-                    }
-                    if (b == c && side1 != 0)
-                    {
-                        if (B == null)
-                            mb = false;
-                        else
-                        {
-                            checkb = CheckFinished(new CCPoint(p.X, p.Y - 1), c, firstcard, 2, side2);
-                            if (!checkb)
-                                return false;
-                        }
-                        middencheck.Add(mb);
-                    }
-
-                    if (middencheck.Contains(false))
-                        return false;
-                }
-            }
-            if (p == m_PlacedCard && m != c)
-            {
-                if ((side1 == 1 && side2 == 3) || (side1 == 2 && side2 == 0) || (side1 == 3 && side2 == 1) || (side1 == 0 && side2 == 2))
-                    connect = true;
-            }
-            return true;
-
-        }
-        
-        public bool CheckFinished(CCPoint p, CardAttributes c, int side, int side2)
-        {
-            Card cur = m_Board.GetCard(p);
-            m_CheckedCards.Add(p);
-            if (side == 1)
-            {
-                if (!CheckFinished(new CCPoint(p.X - 1, p.Y), c, false, 3, side2))
-                    return false;
-            }
-            if (side == 2)
-            {
-                if (!CheckFinished(new CCPoint(p.X, p.Y + 1), c, false, 0, side2))
-                    return false;
-            }
-            if (side == 3)
-            {
-                if (!CheckFinished(new CCPoint(p.X + 1, p.Y), c, false, 1, side2))
-                    return false;
-            }
-            if (side == 0)
-            {
-                if (!CheckFinished(new CCPoint(p.X, p.Y - 1), c, false, 2, side2))
-                    return false;
-            }
-            return true;
-        }
-        
-        public bool Connected(CCPoint p, CardAttributes c, int side1, int side2)
-        {
-            connect = false;
-            CheckFinished(p, c, true, side1, side2);
-            m_CheckedCards = new List<CCPoint>();
-            return connect;
-        }
-        */
-        public int CheckSatelliteFinished(CCPoint p)
-        {
-            List<Card> list = new List<Card>();
-            int t = 0;
-
-            for(int i = -1; i<=1; i++)
-            {
-                for (int j = -1; j <= 1; j++)
-                    list.Add(m_Board.GetCard(new CCPoint(p.X + i, p.Y + j)));
-            }
-
-            foreach (Card c in list)
-                if (c != null)
-                    t += 1;
-            return t;
-        }
-        
-        public List<CCPoint> CheckSatellite(CCPoint p)
-        {
-            List<Card> list = new List<Card>();
-            List<CCPoint> list2 = new List<CCPoint>();
-            List<CCPoint> res = new List<CCPoint>();
-
-            for (int i = -1; i <= 1; i++)
-            {
-                for (int j = -1; j <= 1; j++)
-                {
-                    list.Add(m_Board.GetCard(new CCPoint(p.X + i, p.Y + j)));
-                    list2.Add(new CCPoint(p.X + i, p.Y + j));
-                }
-            }
-
-            foreach (Card c in list)
-                if (c != null)
-                    if (c.GetAttribute(4) == CardAttributes.Satellite)
-                    {
-                        int index = list.IndexOf(c);
-                        res.Add(list2[index]);
-                    }
-
-            return res;
-
-        }
-
-    
 
         public void refresh()
         {
@@ -768,13 +196,13 @@ namespace ruigeruben
         private void EndGame()
         {
             //Hier moeten de punten nog worden berekend
-            if(m_Deck.GetCardsLeft() == 0)
-                 m_Scene.AddLayer(new Game.EndLayer(m_Players), 4);
+            if (m_Deck.GetCardsLeft() == 0)
+                m_Scene.AddLayer(new Game.EndLayer(m_Players), 4);
         }
 
 
 
-    
+
 
 
 
@@ -893,9 +321,10 @@ namespace ruigeruben
 
             else
             {
-               // List<CCPoint> Cards = new List<CCPoint>();
-               // List<PLayerScore> Score = new List<PLayerScore>();
-               // bool Done = false;
+                List<CCPoint> Cards = new List<CCPoint>();
+                List<PLayerScore> Score = new List<PLayerScore>();
+                bool Done = false;
+
                 for (int i = 0; i <= 3; i++)
                 {
                     if (m_CurrentCard.GetAttribute(i) == CardAttributes.RainbowRoad)
@@ -922,65 +351,70 @@ namespace ruigeruben
                         if (m_Board.GetCard(NextCardpos) == null)
                             continue;
 
-                        List<CCPoint> Cards = new List<CCPoint>();
-                        Cards.Add(m_PlacedCard);
-                        List<PLayerScore> Score = new List<PLayerScore>();
-                        Player pl = m_Board.HasAlien(m_PlacedCard, i);
-                        if (pl != null)
+                        if (!Cards.Contains(m_PlacedCard))
                         {
-                            PLayerScore PS = new PLayerScore();
-                            PS.m_Player = pl;
-                            PS.m_Punt = m_PlacedCard;
-                            Score.Add(PS);
+                            Cards.Add(m_PlacedCard);
+                            Player pl = m_Board.HasAlien(m_PlacedCard, i);
+
+                            if (pl != null)
+                            {
+                                PLayerScore PS = new PLayerScore();
+                                PS.m_Player = pl;
+                                PS.m_Punt = m_PlacedCard;
+                                Score.Add(PS);
+                            }
                         }
-                        if (FindRoadSpots(NextCardpos, i, ref Cards, ref Score) == false)
-                        {
-                            int CardScore = Cards.Count;
 
-                            Dictionary<Player, int> Dic = new Dictionary<Player, int>();
+                        Done = FindRoadSpots(NextCardpos, i, ref Cards, ref Score);
 
-                            foreach (PLayerScore ps in Score)
-                            {
-                                if (!Dic.ContainsKey(ps.m_Player))
-                                    Dic.Add(ps.m_Player, 0);
-                            }
-
-
-                            foreach (PLayerScore ps in Score)
-                            {
-                                Dic[ps.m_Player] += 1;
-
-                                ps.m_Player.NumberOfAliens++;
-                                m_Board.RemoveAlien(ps.m_Punt);
-                                m_Scene.m_BoardLayer.RemoveAlien(ps.m_Punt);
-                            }
-
-                            List<Player> player = new List<Player>();
-                            int HighestScore = 0;
-
-                            foreach (var v in Dic)
-                            {
-                                if (v.Value > HighestScore)
-                                {
-                                    player.Clear();
-                                    HighestScore = v.Value;
-                                    player.Add(v.Key);
-                                }
-                                else if (v.Value == HighestScore)
-                                    player.Add(v.Key);
-                            }
-
-                            foreach (Player p in player)
-                            {
-                                p.Points += CardScore;
-                            }
-
-                        }
+                        if (Done)
+                            break;
                     }
                 }
-            } 
-             
+                if (Done == false)
+                {
+                    int CardScore = Cards.Count;
 
+                    Dictionary<Player, int> Dic = new Dictionary<Player, int>();
+
+                    foreach (PLayerScore ps in Score)
+                    {
+                        if (!Dic.ContainsKey(ps.m_Player))
+                            Dic.Add(ps.m_Player, 0);
+                    }
+
+
+                    foreach (PLayerScore ps in Score)
+                    {
+                        Dic[ps.m_Player] += 1;
+
+                        ps.m_Player.NumberOfAliens++;
+                        m_Board.RemoveAlien(ps.m_Punt);
+                        m_Scene.m_BoardLayer.RemoveAlien(ps.m_Punt);
+                    }
+
+                    List<Player> player = new List<Player>();
+                    int HighestScore = 0;
+
+                    foreach (var v in Dic)
+                    {
+                        if (v.Value > HighestScore)
+                        {
+                            player.Clear();
+                            HighestScore = v.Value;
+                            player.Add(v.Key);
+                        }
+                        else if (v.Value == HighestScore)
+                            player.Add(v.Key);
+                    }
+
+                    foreach (Player p in player)
+                    {
+                        p.Points += CardScore;
+                    }
+                }
+
+            }
 
             //Handle Castle
             bool FoundCastle = false;
