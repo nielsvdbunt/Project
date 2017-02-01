@@ -15,12 +15,12 @@ namespace ruigeruben
 {
     class Player //this class is for a player with simple properties
     {
-        public string Name { get; set; }        // naam van de speler 
-        public int Points { get; set; }         // het aantal punten dat een speler heeft
-        public bool Turn { get; set; }          // of de speler aan de beurt is 
-        public int NumberOfAliens { get; set; } // aantal mannen in zijn hand
-        public int OnField { get; set; }        // aantal mannen op het veld
-        public CCColor3B PlayerColor { get; set;}   // kleur van mannen op veld en naam van speler
+        public string Name { get; set; }        // name of players
+        public int Points { get; set; }         // points of players
+        public bool Turn { get; set; }          // if it is their turn
+        public int NumberOfAliens { get; set; } // number of aliens of players
+        public int OnField { get; set; }        // number of aliens on field
+        public CCColor3B PlayerColor { get; set;}   // color of the player
     }
 
     
