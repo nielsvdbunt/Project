@@ -96,12 +96,12 @@ namespace ruigeruben
             m_Aliens.Add(all);
         }
 
-        public void RemoveAlien(CCPoint point, int side)
+        public void RemoveAlien(CCPoint point)
         {
             int i = -1;
             for (int t = 0; t < m_Aliens.Count; t++)
             {
-                if(m_Aliens[t].m_Point == point && m_Aliens[t].m_CardAttr == side)
+                if(m_Aliens[t].m_Point == point)
                 {
                     i = t;
                 }
