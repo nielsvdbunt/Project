@@ -19,7 +19,7 @@ namespace ruigeruben
         public float Aliens;
     }
 
-    class GameScene : CCScene
+    class GameScene : CCScene //gamescene displays all the layers and handles all the toucheventhandlers
     {
         BackgroundLayer m_BackgroundLayer;
         public BoardLayer m_BoardLayer;

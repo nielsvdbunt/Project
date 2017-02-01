@@ -8,7 +8,7 @@ using CocosSharp;
 namespace ruigeruben
 {
 
-    class TexturePool
+    class TexturePool //texturepool makes a spritesheet and makes the seperate pictures from the spritesheet
     {
         public static CCSpriteSheet sheet = new CCSpriteSheet("final.plist", "final.png");
 

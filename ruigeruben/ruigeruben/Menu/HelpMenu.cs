@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace ruigeruben
 {
-    class HelpMenu : AbstractMenu
+    class HelpMenu : AbstractMenu //this class is for the help menu
     {
         Button m_NextPageButton;
         Button m_PrevPageButton;

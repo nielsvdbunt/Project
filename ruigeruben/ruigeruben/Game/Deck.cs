@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace ruigeruben
 {
-    class Deck
+    class Deck //this clas handles the deck of carfds
     {
         Stack<string> m_Cards;
 

@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using CocosSharp;
 using Microsoft.Xna.Framework;
 
-
-// de instellingen voordat het spel gaat beginnen
 namespace ruigeruben
 {
-    class SettingMenu : AbstractMenu
+    class SettingMenu : AbstractMenu //this class is for settings menu
     {
         CCRect bounds;
         Button m_BackMenuButton;

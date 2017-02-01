@@ -13,7 +13,7 @@ using CocosSharp;
 
 namespace ruigeruben
 {
-    class Player
+    class Player //this class is for a player with simple properties
     {
         public string Name { get; set; }        // naam van de speler 
         public int Points { get; set; }         // het aantal punten dat een speler heeft

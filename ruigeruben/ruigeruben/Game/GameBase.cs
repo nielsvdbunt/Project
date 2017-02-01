@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 
 namespace ruigeruben
 {
-    class GameBase
+    class GameBase //hidden stuff about the game
     {
         GameScene m_Scene;
         public List<Player> m_Players;

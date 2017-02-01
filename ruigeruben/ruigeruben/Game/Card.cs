@@ -16,7 +16,7 @@ namespace ruigeruben
 
     }
 
-    class Card
+    class Card // in this class all the cards are made and can get rotated
     {
         public static readonly string[] CardTypes = {
           "00003", 
