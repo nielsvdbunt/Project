@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -13,7 +12,7 @@ using CocosSharp;
 
 namespace ruigeruben.Game
 {
-    class EndLayer : CCLayerColor
+    class EndLayer : CCLayerColor //this class is for the end screen
     {
         List<Button> m_buttons;
         List<Player> players;

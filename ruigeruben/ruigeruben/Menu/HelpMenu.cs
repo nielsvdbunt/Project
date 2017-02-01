@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace ruigeruben
 {
-    class HelpMenu : AbstractMenu
+    class HelpMenu : AbstractMenu //this class is for the help menu
     {
         Button m_NextPageButton;
         Button m_PrevPageButton;
@@ -67,15 +67,15 @@ namespace ruigeruben
         public void FillArray()
         {
             
-            uitlegdeel1[0] = "First we would like to thank you for downloading our app and hope you have fun playing it!";
+            uitlegdeel1[0] = "First we would like to thank you for downloading our app, we hope you have fun playing it!";
             uitlegdeel1[1] = "Assuming this is the first time you are playing this game we would advise you to take a quick look at the rules.";
             uitlegdeel1[2] = "By pressing the arrow buttons on the bottom left and right you can walk through the rules of this amazing game!";
-            uitlegdeel1[3] = "For those who played the board game “Carcassonne” it is very easy, our game has just a different lay-out..";
-            uitlegdeel1[4] = "For those who never played the game “Carcassonne” here is a quick explanation.";
+            uitlegdeel1[3] = "For those who played the board game “Carcassonne” it is very easy, our game only has a different lay-out..";
+            uitlegdeel1[4] = "For those who never played the game “Carcassonne” here is a quick explanation:";
             uitlegdeel2[0] = "The game is made out of different playing material.";
-            uitlegdeel2[1] = "-   72 board tiles\n- 40 Aliens divided 5 different colours ";
+            uitlegdeel2[1] = "-   72 board tiles (multiplied by \"Cards (x)\")\n- Aliens (between 1 and 15 for each player)";
             uitlegdeel3[0] = "Your goal is to get more points than your opponents. Each player lays down a tile on his turn.";
-            uitlegdeel3[1] = "These tiles can make: Roads, space stations and satellites.";
+            uitlegdeel3[1] = "These are the tiles you can make: Roads, space stations and satellites.";
             uitlegdeel3[2] = "if you put a new tile on the board you can choose to put an astronaut on it to get points. "; 
             uitlegdeel3[3] = "The point distribution goes automatic in the app and you can see everyone score";
             uitlegdeel3[4] = " but for the curious player we will give a summary of the point distribution goes.";
@@ -130,7 +130,7 @@ namespace ruigeruben
                     for (int i = 0; i < uitlegdeel2.Length; i++)
                     {
                         CCLabel cclabel = new CCLabel(uitlegdeel2[i], SubFont, SubFontSize, CCLabelFormat.SpriteFont);
-                        cclabel.Position = new CCPoint(400, (600 - (i * 100)));
+                        cclabel.Position = new CCPoint(bounds.MidX, (600 - (i * 100)));
                         labels.Add(cclabel);
                     }
                     break;

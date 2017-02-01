@@ -12,7 +12,7 @@ namespace ruigeruben
         public Player m_Player;
     }
 
-    class Board
+    class Board //this class handles all the tiles and aliens
     {      
         public List<Card> m_virCards;
         public List<CCPoint> m_virLocations;

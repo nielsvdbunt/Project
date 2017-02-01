@@ -15,7 +15,7 @@ namespace ruigeruben
 
     }
         
-    class BoardLayer : CCLayer
+    class BoardLayer : CCLayer //draws the board
     {
         public List<CCDrawNode> Rectangles = new List<CCDrawNode>();
         const int m_tilesize = 100;
