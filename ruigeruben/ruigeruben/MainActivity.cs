@@ -25,7 +25,7 @@ namespace ruigeruben
            
     }
 
-    [Activity(Label = "Spacesonne", Theme = "@android:style/Theme.NoTitleBar.Fullscreen", MainLauncher = true, Icon = "@drawable/logoapp",
+    [Activity(Label = "Arcturus", Theme = "@android:style/Theme.NoTitleBar.Fullscreen", MainLauncher = true, Icon = "@drawable/logoapp",
         AlwaysRetainTaskState = true,
         ScreenOrientation = ScreenOrientation.SensorLandscape,
         LaunchMode = LaunchMode.SingleInstance,
