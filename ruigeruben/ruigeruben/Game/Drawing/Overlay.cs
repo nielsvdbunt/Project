@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 
 namespace ruigeruben
 {
-    class Overlay : AbstractMenu
+    class Overlay : AbstractMenu //overlay makes the ingame user interface
     {
         string m_font = "Fonts/Coalition";
         List<Button> m_buttons = new List<Button>();
@@ -140,7 +140,7 @@ namespace ruigeruben
             m_labels.Add(label);
             AddChild(label);
         }
-        private void MakeBox(int xpos, int ypos, int width, int height, int thickness)
+        private void MakeBox(int xpos, int ypos, int width, int height, int thickness)//Method for creating boxes
         {
             var drawNode = new CCDrawNode();
             var rect = new CCRect(xpos, ypos, width, height);
@@ -152,7 +152,7 @@ namespace ruigeruben
            
         }
 
-        public override void OnClick(CCPoint Location)
+        public override void OnClick(CCPoint Location) //if a button  is clicked this method will be called
         {
             Location = ScreenToWorldspace(Location);
 

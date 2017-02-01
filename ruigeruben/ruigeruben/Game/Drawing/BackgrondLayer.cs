@@ -7,7 +7,7 @@ using CocosSharp;
 
 namespace ruigeruben
 {
-    class BackgroundLayer : CCLayer
+    class BackgroundLayer : CCLayer //this class is for creating the background
     {
         public BackgroundLayer(string filename)
         {

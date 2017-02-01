@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 
 namespace ruigeruben
 {
-    abstract class AbstractMenu : CCLayerColor
+    abstract class AbstractMenu : CCLayerColor// this abstract class is the base for all the other menus
     {
         public AbstractMenu() : base()
         {

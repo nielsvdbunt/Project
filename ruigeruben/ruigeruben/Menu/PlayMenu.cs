@@ -10,7 +10,7 @@ using Android.InputMethodServices;
 
 namespace ruigeruben
 {
-     class PlayMenu : AbstractMenu
+     class PlayMenu : AbstractMenu //this class is for the play menu
     {
         int NumberOfPlayers;
         CCRect bounds;

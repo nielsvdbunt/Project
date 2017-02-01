@@ -5,6 +5,12 @@ using Microsoft.Xna.Framework;
 
 namespace ruigeruben
 {
+    struct PLayerScore
+    {
+        public Player m_Player;
+        public CCPoint m_Punt;
+    }
+
     class GameBase
     {
         GameScene m_Scene;
@@ -150,7 +156,7 @@ namespace ruigeruben
                     }
                 }
             }
-            */
+            *//*
             List<CCPoint> satellitelist = CheckSatellite(m_PlacedCard);
             Player player;
             foreach (CCPoint point in satellitelist)
@@ -168,7 +174,7 @@ namespace ruigeruben
                 }
 
             }
-            
+            */
 
             HandlePoints();
 
@@ -797,7 +803,183 @@ namespace ruigeruben
             }
 
             //Handle rainbow road, dit nog doen, is makkelijker denk ik
+            if (m_CurrentCard.GetAttribute(4) == CardAttributes.None ||
+                m_CurrentCard.GetAttribute(4) == CardAttributes.SpaceStation ||
+                m_CurrentCard.GetAttribute(4) == CardAttributes.Satellite)
+            {
+                for (int i = 0; i <= 3; i++)
+                {
+                    if (m_CurrentCard.GetAttribute(i) == CardAttributes.RainbowRoad)
+                    {
+                        CCPoint NextCardpos = m_PlacedCard;
 
+                        if (i == 0)
+                        {
+                            NextCardpos.Y -= 1;
+                        }
+                        else if (i == 1)
+                        {
+                            NextCardpos.X -= 1;
+                        }
+                        else if (i == 2)
+                        {
+                            NextCardpos.Y += 1;
+                        }
+                        else if (i == 3)
+                        {
+                            NextCardpos.X += 1;
+                        }
+
+                        if (m_Board.GetCard(NextCardpos) == null)
+                            continue;
+
+                        List<CCPoint> Cards = new List<CCPoint>();
+                        Cards.Add(m_PlacedCard);
+                        List<PLayerScore> Score = new List<PLayerScore>();
+                        Player pl = m_Board.HasAlien(m_PlacedCard, i);
+                        if (pl != null)
+                        {
+                            PLayerScore PS = new PLayerScore();
+                            PS.m_Player = pl;
+                            PS.m_Punt = m_PlacedCard;
+                            Score.Add(PS);
+                        }
+                        if (FindRoadSpots(NextCardpos, i, ref Cards, ref Score) == false)
+                        {
+                            int CardScore = Cards.Count;
+
+                            Dictionary<Player, int> Dic = new Dictionary<Player, int>();
+
+                            foreach (PLayerScore ps in Score)
+                            {
+                                if (!Dic.ContainsKey(ps.m_Player))
+                                    Dic.Add(ps.m_Player, 0);
+                            }
+
+
+                            foreach (PLayerScore ps in Score)
+                            {
+                                Dic[ps.m_Player] += 1;
+
+                                ps.m_Player.NumberOfAliens++;
+                                m_Board.RemoveAlien(ps.m_Punt);
+                                m_Scene.m_BoardLayer.RemoveAlien(ps.m_Punt);
+                            }
+
+                            List<Player> player = new List<Player>();
+                            int HighestScore = 0;
+
+                            foreach (var v in Dic)
+                            {
+                                if (v.Value > HighestScore)
+                                {
+                                    player.Clear();
+                                    HighestScore = v.Value;
+                                    player.Add(v.Key);
+                                }
+                                else if (v.Value == HighestScore)
+                                    player.Add(v.Key);
+                            }
+
+                            foreach (Player p in player)
+                            {
+                                p.Points += CardScore;
+                            }
+
+                        }
+                    }
+                }
+            }
+
+            else
+            {
+               // List<CCPoint> Cards = new List<CCPoint>();
+               // List<PLayerScore> Score = new List<PLayerScore>();
+               // bool Done = false;
+                for (int i = 0; i <= 3; i++)
+                {
+                    if (m_CurrentCard.GetAttribute(i) == CardAttributes.RainbowRoad)
+                    {
+                        CCPoint NextCardpos = m_PlacedCard;
+
+                        if (i == 0)
+                        {
+                            NextCardpos.Y -= 1;
+                        }
+                        else if (i == 1)
+                        {
+                            NextCardpos.X -= 1;
+                        }
+                        else if (i == 2)
+                        {
+                            NextCardpos.Y += 1;
+                        }
+                        else if (i == 3)
+                        {
+                            NextCardpos.X += 1;
+                        }
+
+                        if (m_Board.GetCard(NextCardpos) == null)
+                            continue;
+
+                        List<CCPoint> Cards = new List<CCPoint>();
+                        Cards.Add(m_PlacedCard);
+                        List<PLayerScore> Score = new List<PLayerScore>();
+                        Player pl = m_Board.HasAlien(m_PlacedCard, i);
+                        if (pl != null)
+                        {
+                            PLayerScore PS = new PLayerScore();
+                            PS.m_Player = pl;
+                            PS.m_Punt = m_PlacedCard;
+                            Score.Add(PS);
+                        }
+                        if (FindRoadSpots(NextCardpos, i, ref Cards, ref Score) == false)
+                        {
+                            int CardScore = Cards.Count;
+
+                            Dictionary<Player, int> Dic = new Dictionary<Player, int>();
+
+                            foreach (PLayerScore ps in Score)
+                            {
+                                if (!Dic.ContainsKey(ps.m_Player))
+                                    Dic.Add(ps.m_Player, 0);
+                            }
+
+
+                            foreach (PLayerScore ps in Score)
+                            {
+                                Dic[ps.m_Player] += 1;
+
+                                ps.m_Player.NumberOfAliens++;
+                                m_Board.RemoveAlien(ps.m_Punt);
+                                m_Scene.m_BoardLayer.RemoveAlien(ps.m_Punt);
+                            }
+
+                            List<Player> player = new List<Player>();
+                            int HighestScore = 0;
+
+                            foreach (var v in Dic)
+                            {
+                                if (v.Value > HighestScore)
+                                {
+                                    player.Clear();
+                                    HighestScore = v.Value;
+                                    player.Add(v.Key);
+                                }
+                                else if (v.Value == HighestScore)
+                                    player.Add(v.Key);
+                            }
+
+                            foreach (Player p in player)
+                            {
+                                p.Points += CardScore;
+                            }
+
+                        }
+                    }
+                }
+            } 
+             
 
 
             //Handle Castle
@@ -817,6 +999,7 @@ namespace ruigeruben
                     m_CurrentCard.GetAttribute(4) == CardAttributes.intersection) //Als midden een stations is dan moeten er meerdere kaarten bekeken worden, anders niet
                 {
                     List<CCPoint> Cards = new List<CCPoint>();
+                    List<PLayerScore> Score = new List<PLayerScore>();
                     bool Done = false;
                     foreach (int i in CastleSides) // Gewoon alle hokenen afgaan, in theorie kan dit dubbelop zijn, maar maakt opzich niet uit, zolang we de aliens optijd verwijderen is de 2e keer puntloos
                     {
@@ -845,7 +1028,16 @@ namespace ruigeruben
                         if (NextCard != null)
                         {
                             Cards.Add(m_PlacedCard);
-                            Done = FindCastleOpenSpots(NextCardpos, CardSpot, ref Cards);
+                            Player pl = m_Board.HasAlien(m_PlacedCard, CardSpot);
+                            if (pl != null)
+                            {
+                                PLayerScore PS = new PLayerScore();
+                                PS.m_Player = pl;
+                                PS.m_Punt = m_PlacedCard;
+                                Score.Add(PS);
+                            }
+
+                            Done = FindCastleOpenSpots(NextCardpos, CardSpot, ref Cards, ref Score);
 
                             if (Done)
                                 break;
@@ -858,7 +1050,50 @@ namespace ruigeruben
                     }
                     if(!Done)
                     {
-                        int yy = 2;
+                        int CardScore = 0;
+
+                        if (Cards.Count == 2)
+                            CardScore = 2;
+                        else
+                            CardScore = Cards.Count * 2;
+
+                        Dictionary<Player, int> Dic = new Dictionary<Player, int>();
+
+                        foreach (PLayerScore ps in Score)
+                        {
+                            if (!Dic.ContainsKey(ps.m_Player))
+                                Dic.Add(ps.m_Player, 0);
+                        }
+
+
+                        foreach (PLayerScore ps in Score)
+                        {
+                            Dic[ps.m_Player] += 1;
+
+                            ps.m_Player.NumberOfAliens++;
+                            m_Board.RemoveAlien(ps.m_Punt);
+                            m_Scene.m_BoardLayer.RemoveAlien(ps.m_Punt);
+                        }
+
+                        List<Player> player = new List<Player>();
+                        int HighestScore = 0;
+
+                        foreach (var v in Dic)
+                        {
+                            if (v.Value > HighestScore)
+                            {
+                                player.Clear();
+                                HighestScore = v.Value;
+                                player.Add(v.Key);
+                            }
+                            else if (v.Value == HighestScore)
+                                player.Add(v.Key);
+                        }
+
+                        foreach (Player p in player)
+                        {
+                            p.Points += CardScore;
+                        }
                     }
 
                 }
@@ -890,14 +1125,67 @@ namespace ruigeruben
 
                         if (NextCard != null)
                         {
+                            List<PLayerScore> Score = new List<PLayerScore>();
+                            Player pl = m_Board.HasAlien(m_PlacedCard, CardSpot);
+                            if (pl != null)
+                            {
+                                PLayerScore PS = new PLayerScore();
+                                PS.m_Player = pl;
+                                PS.m_Punt = m_PlacedCard;
+                                Score.Add(PS);
+                            }
+
                             List<CCPoint> Cards = new List<CCPoint>();
                             Cards.Add(m_PlacedCard);
-                            bool b = FindCastleOpenSpots(NextCardpos, CardSpot, ref Cards);
+                            bool b = FindCastleOpenSpots(NextCardpos, CardSpot, ref Cards, ref Score);
 
                             if(!b) // dus Kasteel heeft geen open dingen, check score
                             {
-                                //Kateeel is nu helemeel af
-                                int tt = 2;
+                                int CardScore = 0;
+
+                                if (Cards.Count == 2)
+                                    CardScore = 2;
+                                else
+                                    CardScore = Cards.Count * 2;
+
+                                Dictionary<Player, int> Dic = new Dictionary<Player, int>();
+
+                                foreach (PLayerScore ps in Score)
+                                {
+                                    if(!Dic.ContainsKey(ps.m_Player))
+                                        Dic.Add(ps.m_Player, 0);
+                                }
+                                    
+
+                                foreach (PLayerScore ps in Score)
+                                {
+                                    Dic[ps.m_Player] += 1;
+
+                                    ps.m_Player.NumberOfAliens++;
+                                    m_Board.RemoveAlien(ps.m_Punt);
+                                    m_Scene.m_BoardLayer.RemoveAlien(ps.m_Punt);
+                                }
+
+                                List<Player> player = new List<Player>();
+                                int HighestScore = 0;
+
+                                foreach(var v in Dic)
+                                {
+                                    if (v.Value > HighestScore)
+                                    {
+                                        player.Clear();
+                                        HighestScore = v.Value;
+                                        player.Add(v.Key);
+                                    }
+                                    else if (v.Value == HighestScore)
+                                        player.Add(v.Key);
+                                }
+
+                                foreach(Player p in player)
+                                {
+                                    p.Points += CardScore;
+                                }
+
                             }
                      
                         }
@@ -915,7 +1203,15 @@ namespace ruigeruben
                 {
                     if(IsSateliteDone(p))
                     {
-                        int tt = 2; // Sateliet is klaar, handel punten en alien etc
+                        Player play = m_Board.HasAlien(p, 4);
+
+                        if(play != null)
+                        {
+                            play.Points += 9;
+                            play.NumberOfAliens++;
+                            m_Board.RemoveAlien(p);
+                            m_Scene.m_BoardLayer.RemoveAlien(p);
+                        }
                     }
                 }
             }
@@ -935,9 +1231,10 @@ namespace ruigeruben
             return true; // alle kaarten zijn gelegd.
         }  
 
-        private bool FindCastleOpenSpots(CCPoint p, int FromCardSpot, ref List<CCPoint> CardList)
+        private bool FindCastleOpenSpots(CCPoint p, int FromCardSpot, ref List<CCPoint> CardList, ref List<PLayerScore> Score)
         {
             CardList.Add(p);
+
             int CardSpot = 0;
 
             if (FromCardSpot == 0)
@@ -949,13 +1246,24 @@ namespace ruigeruben
             if (FromCardSpot == 3)
                 CardSpot = 1;
 
-            if (m_Board.GetCard(p).GetAttribute(4) == CardAttributes.SpaceStation ||
+            
+
+                if (m_Board.GetCard(p).GetAttribute(4) == CardAttributes.SpaceStation ||
                     m_Board.GetCard(p).GetAttribute(4) == CardAttributes.intersection)
             {
                 for(int i = 0; i <= 3; i++)
                 {
                     if(i != CardSpot && m_Board.GetCard(p).GetAttribute(i) == CardAttributes.SpaceStation)
                     {
+                        Player pll = m_Board.HasAlien(p, i);
+                        if (pll != null)
+                        {
+                            PLayerScore PS = new PLayerScore();
+                            PS.m_Player = pll;
+                            PS.m_Punt = p;
+                            Score.Add(PS);
+                        }
+
                         CCPoint NextCardpos = p;
 
                         if (i == 0)
@@ -981,7 +1289,7 @@ namespace ruigeruben
                         {
                             if (!CardList.Contains(NextCardpos))
                             {
-                                if (FindCastleOpenSpots(NextCardpos, i, ref CardList))
+                                if (FindCastleOpenSpots(NextCardpos, i, ref CardList, ref Score))
                                     return true;
                             }
                         }
@@ -991,7 +1299,99 @@ namespace ruigeruben
                 }
             }
 
+            Player pl = m_Board.HasAlien(p, CardSpot);
+            if (pl != null)
+            {
+                PLayerScore PS = new PLayerScore();
+                PS.m_Player = pl;
+                PS.m_Punt = p;
+                Score.Add(PS);
+            }
+
             return false;
+        }
+
+        private bool FindRoadSpots(CCPoint p, int FromCardSpot, ref List<CCPoint> CardList, ref List<PLayerScore> Score)
+        {
+            CardList.Add(p);
+
+            int CardSpot = 0;
+
+            if (FromCardSpot == 0)
+                CardSpot = 2;
+            if (FromCardSpot == 1)
+                CardSpot = 3;
+            if (FromCardSpot == 2)
+                CardSpot = 0;
+            if (FromCardSpot == 3)
+                CardSpot = 1;
+
+            Player pl = m_Board.HasAlien(p, CardSpot);
+            if (pl != null)
+            {
+                PLayerScore PS = new PLayerScore();
+                PS.m_Player = pl;
+                PS.m_Punt = m_PlacedCard;
+                Score.Add(PS);
+            }
+  
+            if (m_Board.GetCard(p).GetAttribute(4) == CardAttributes.None ||
+                m_Board.GetCard(p).GetAttribute(4) == CardAttributes.SpaceStation ||
+                m_Board.GetCard(p).GetAttribute(4) == CardAttributes.Satellite)
+            {
+                return false;
+            }
+
+            for(int i = 0; i <=3; i++)
+            {
+                if(i != CardSpot && m_CurrentCard.GetAttribute(i) == CardAttributes.RainbowRoad)
+                {
+                    Player pll = m_Board.HasAlien(p, i);
+                    if (pll != null)
+                    {
+                        PLayerScore PS = new PLayerScore();
+                        PS.m_Player = pll;
+                        PS.m_Punt = m_PlacedCard;
+                        Score.Add(PS);
+                    }
+
+                    CCPoint NextCardpos = p;
+
+                    if (i == 0)
+                    {
+                        NextCardpos.Y -= 1;
+                    }
+                    else if (i == 1)
+                    {
+                        NextCardpos.X -= 1;
+                    }
+                    else if (i == 2)
+                    {
+                        NextCardpos.Y += 1;
+                    }
+                    else if (i == 3)
+                    {
+                        NextCardpos.X += 1;
+                    }
+
+                    Card NextCard = m_Board.GetCard(NextCardpos);
+
+                    if (NextCard != null)
+                    {
+                        if (!CardList.Contains(NextCardpos))
+                        {
+                            if (FindRoadSpots(NextCardpos, i, ref CardList, ref Score))
+                                return true;
+                        }
+                        else
+                            return false;
+                    }
+                    else
+                        return true;
+                }
+            }
+
+                return true;
         }
     }
 }

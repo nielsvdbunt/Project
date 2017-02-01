@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 
 namespace ruigeruben
 {
-    class OpeningMenu   : AbstractMenu
+    class OpeningMenu   : AbstractMenu //this class is for the main menu
     {
         List<Button> m_Buttons;
 

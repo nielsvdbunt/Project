@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 namespace ruigeruben
 {
     public delegate void ClickEventHandler();
-    class Button
+    class Button //this class can be used to create simple buttons
     {
         bool m_TexTOnly;
 

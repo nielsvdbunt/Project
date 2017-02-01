@@ -30,7 +30,7 @@ namespace ruigeruben
         ScreenOrientation = ScreenOrientation.SensorLandscape,
         LaunchMode = LaunchMode.SingleInstance,
         ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize | ConfigChanges.Keyboard | ConfigChanges.KeyboardHidden)]
-    public class MainActivity : Activity
+    public class MainActivity : Activity // this class is in every Cocossharp app and starts the game
     {
         static CCGameView m_GameView;
         static bool m_InMenu;
