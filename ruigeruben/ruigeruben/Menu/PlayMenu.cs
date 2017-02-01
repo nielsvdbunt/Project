@@ -230,24 +230,16 @@ namespace ruigeruben
         private void Setting(CCLabel label, ref float value, float min, float max, int order, float stepsize)
         {
             label.AnchorPoint = new CCPoint(0, 0);
-            label.Position = new CCPoint(1490, bounds.MaxY - 200 - order * 150);
+            label.Position = new CCPoint(1575-label.ContentSize.Width, bounds.MaxY - 200 - order * 150);
             AddChild(label);
 
-            Button minus = new Button("-", new CCPoint(1420, bounds.MaxY - 200 - order * 150), "Coalition", 70, this);
+            
+            Button minus = new Button("-", new CCPoint(1,1), "Coalition", 70, this);
+            CCPoint Minuspos = new CCPoint((1550 - label.ContentSize.Width - minus.m_Label.ContentSize.Width), bounds.MaxY - 200 - order * 150);
+            minus.SetTextPossition(Minuspos);
             minus.SetTextAnchorpoint(new CCPoint(0, 0));
-            if (value >= 10)
-            {
-                if (value >= 100)
-                {
-                    label.PositionX = 1430;
-                    minus.SetTextPossition(new CCPoint(1380, 880 - 150 * (order)));
-                }
-                else
-                {
-                    minus.SetTextPossition(new CCPoint(1400, 880 - 150 * (order)));
-                    label.PositionX = 1450;
-                }
-            }
+            
+            
             float temp = value;
 
             minus.OnClicked += delegate
@@ -266,19 +258,10 @@ namespace ruigeruben
                     }
                     label.Text = temp.ToString();
                 }
-                if (temp < 100)
-                {
-                    if (temp < 10)
-                    {
-                        minus.SetTextPossition(new CCPoint(1420, 880 - 150 * (order)));
-                        label.PositionX = 1480;
-                    }
-                    else
-                    {
-                        label.PositionX = 1450;
-                        minus.SetTextPossition(new CCPoint(1400, 880 - 150 * (order)));
-                    }
-                }
+
+                label.Position = new CCPoint(1575 - label.ContentSize.Width, bounds.MaxY - 200 - order * 150);
+                Minuspos = new CCPoint((1550 - label.ContentSize.Width - minus.m_Label.ContentSize.Width), bounds.MaxY - 200 - order * 150);
+                minus.SetTextPossition(Minuspos);
             };
             m_Buttons.Add(minus);
 
@@ -302,20 +285,10 @@ namespace ruigeruben
                     }
                     label.Text = temp.ToString();
                 }
-                if (temp >= 10)
-                {
-                    if (temp >= 100)
-                    {
-                        label.PositionX = 1430;
-                        minus.SetTextPossition(new CCPoint(1380, 880 - 150 * (order)));
-                        plus.SetTextPossition(new CCPoint(1630, 880 - 150 * order));
-                    }
-                    else
-                    {
-                        minus.SetTextPossition(new CCPoint(1400, 880 - 150 * (order)));
-                        label.PositionX = 1450;
-                    }
-                }
+
+                label.Position = new CCPoint(1575 - label.ContentSize.Width, bounds.MaxY - 200 - order * 150);
+                Minuspos = new CCPoint((1550 - label.ContentSize.Width - minus.m_Label.ContentSize.Width), bounds.MaxY - 200 - order * 150);
+                minus.SetTextPossition(Minuspos);
             };
             m_Buttons.Add(plus);
         }
