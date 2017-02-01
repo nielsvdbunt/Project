@@ -65,7 +65,7 @@ namespace ruigeruben
         };
 
         public string m_Hash;
-        CardAttributes[] m_Attributes = new CardAttributes[5];
+        public CardAttributes[] m_Attributes = new CardAttributes[5];
         int m_Rotation = 0;
 
         public Card(string Hash) 

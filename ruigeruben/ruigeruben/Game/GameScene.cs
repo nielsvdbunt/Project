@@ -215,10 +215,9 @@ namespace ruigeruben
         {
             if (m_CardPutDown)
             {
-                m_Game.m_Board.AddCard(m_Game.m_CurrentCard, m_Game.m_PlacedCard);
+                m_Game.m_Board.AddCard(m_Game.m_CurrentCard, m_PlacedCard);
                 if (m_AllienPutDown)
-                    m_Game.m_Board.AddAlien(m_Game.m_CurrentPlayer, m_Game.m_PlacedCard, m_AllienCardSpot); // FIX DIT NOG
-
+                    m_Game.m_Board.AddAlien(m_Game.m_CurrentPlayer, m_PlacedCard, m_AllienCardSpot); 
                 m_BoardLayer.DeleteCircles();
                 m_Game.NextTurn();
                 m_CardPutDown = false;

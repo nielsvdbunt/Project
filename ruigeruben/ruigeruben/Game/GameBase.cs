@@ -16,7 +16,7 @@ namespace ruigeruben
         List<CCPoint> m_CheckedCards;
         public Player m_CurrentPlayer;
         public CCPoint m_PlacedCard;
-        bool connect;
+      //  bool connect;
 
         public GameBase(GameScene Scene, InputGameInfo info)
         {
@@ -35,7 +35,7 @@ namespace ruigeruben
             m_Deck = new Deck(info.CardMultiplier);
             m_CheckedCards = new List<CCPoint>();
 
-            connect = false;
+            //connect = false;
         }
 
         public void Start()
@@ -64,8 +64,9 @@ namespace ruigeruben
   
         public void NextTurn()
         {
+            m_PlacedCard = m_Scene.GetPlacedCard();
 
-            int points1; int points2; int points3; int points4;
+            /*int points1; int points2; int points3; int points4;
             List<Player> playerlist = new List<Player>();
 
             m_PlacedCard = m_Scene.GetPlacedCard();
@@ -146,7 +147,9 @@ namespace ruigeruben
                 }
 
             }
+            */
 
+            HandlePoints();
 
             for (int i=0; i<m_Players.Count; i++ )
             {
@@ -257,7 +260,7 @@ namespace ruigeruben
             }
             return false;
         }
-
+        /*
         public List<Player> CheckAliens(CCPoint p, int side, CardAttributes c)
         {
             List<Player> res = new List<Player>();
@@ -727,6 +730,8 @@ namespace ruigeruben
 
         }
 
+    */
+
         public void refresh()
         {
             //m_Scene.m_Overlay.UpdateInterface(m_Players, m_Deck.GetCardsLeft(), m_CurrentCard);
@@ -738,6 +743,229 @@ namespace ruigeruben
             //Hier moeten de punten nog worden berekend
             if(m_Deck.GetCardsLeft() == 0)
                  m_Scene.AddLayer(new Game.EndLayer(m_Players), 4);
+        }
+
+
+
+    
+
+
+
+
+
+
+
+        //Ruben's commented punten ding
+
+
+        private void HandlePoints()
+        {
+            //Dit is een check om de kaart zelf + de 8 omringen kaarten te checken of er een satelite is en of ie klaar is
+            for (int i = -1; i <= 1; i++) // doorloop de x waardes (-1 tot 1)
+            {
+                for (int j = -1; j <= 1; j++) // doorloop de y waardes (-1 tot 1)
+                {
+                    CCPoint NewP = new CCPoint(m_PlacedCard.X + i, m_PlacedCard.Y + j); // PlacedCard is de laatste neergelegde card, dus daar lopoen we omheen + zichtzelf
+                    Card c = m_Board.GetCard(NewP);
+
+                    if (c != null)
+                    {
+                        HandleSateliteCard(NewP, c);
+                    }
+                }
+            }
+
+            //Handle rainbow road, dit nog doen, is makkelijker denk ik
+
+
+
+            //Handle Castle
+            bool FoundCastle = false;
+            List<int> CastleSides = new List<int>();
+            for(int i = 0; i <= 3; i++) 
+            {
+                if(m_CurrentCard.GetAttribute(i) == CardAttributes.SpaceStation)
+                {
+                    FoundCastle = true;
+                    CastleSides.Add(i);
+                }                    
+            }
+            if(FoundCastle)
+            {
+                if(m_CurrentCard.GetAttribute(4) == CardAttributes.SpaceStation ||
+                    m_CurrentCard.GetAttribute(4) == CardAttributes.intersection) //Als midden een stations is dan moeten er meerdere kaarten bekeken worden, anders niet
+                {
+                    List<CCPoint> Cards = new List<CCPoint>();
+                    bool Done = false;
+                    foreach (int i in CastleSides) // Gewoon alle hokenen afgaan, in theorie kan dit dubbelop zijn, maar maakt opzich niet uit, zolang we de aliens optijd verwijderen is de 2e keer puntloos
+                    {
+                        int CardSpot = i;
+                        CCPoint NextCardpos = m_PlacedCard;
+
+                        if (CardSpot == 0)
+                        {
+                            NextCardpos.Y -= 1;
+                        }
+                        else if (CardSpot == 1)
+                        {
+                            NextCardpos.X -= 1;
+                        }
+                        else if (CardSpot == 2)
+                        {
+                            NextCardpos.Y += 1;
+                        }
+                        else if (CardSpot == 3)
+                        {
+                            NextCardpos.X += 1;
+                        }
+
+                        Card NextCard = m_Board.GetCard(NextCardpos);
+
+                        if (NextCard != null)
+                        {
+                            Cards.Add(m_PlacedCard);
+                            Done = FindCastleOpenSpots(NextCardpos, CardSpot, ref Cards);
+
+                            if (!Done)
+                                break;
+                        }
+                    }
+                    if(Done)
+                    {
+                        int yy = 2;
+                    }
+
+                }
+                else // Alleen zeides zijn stations, makkelijker
+                {
+                    foreach (int i in CastleSides) // Gewoon alle hokenen afgaan, in theorie kan dit dubbelop zijn, maar maakt opzich niet uit, zolang we de aliens optijd verwijderen is de 2e keer puntloos
+                    {
+                        int CardSpot = i;
+                        CCPoint NextCardpos = m_PlacedCard;
+
+                        if (CardSpot == 0)
+                        {
+                            NextCardpos.Y -= 1;
+                        }
+                        else if (CardSpot == 1)
+                        {
+                            NextCardpos.X -= 1;
+                        }
+                        else if (CardSpot == 2)
+                        {
+                            NextCardpos.Y += 1;
+                        }
+                        else if (CardSpot == 3)
+                        {
+                            NextCardpos.X += 1;
+                        }
+
+                        Card NextCard = m_Board.GetCard(NextCardpos);
+
+                        if (NextCard != null)
+                        {
+                            List<CCPoint> Cards = new List<CCPoint>();
+                            Cards.Add(m_PlacedCard);
+                            bool b = FindCastleOpenSpots(NextCardpos, CardSpot, ref Cards);
+
+                            if(!b) // dus Kasteel heeft geen open dingen, check score
+                            {
+                                //Kateeel is nu helemeel af
+                                int tt = 2;
+                            }
+                     
+                        }
+                    }
+                       
+                }
+            }
+        }
+
+        private void HandleSateliteCard(CCPoint p, Card c) // Functie die checked of kaart een satelite is
+        {
+            foreach(var i in c.m_Attributes)
+            {
+                if(i == CardAttributes.Satellite)
+                {
+                    if(IsSateliteDone(p))
+                    {
+                        int tt = 2; // Sateliet is klaar, handel punten en alien etc
+                    }
+                }
+            }
+        }
+
+        private bool IsSateliteDone(CCPoint p)
+        {
+            for (int i = -1; i <= 1; i++) // doorloop de x waardes
+            {
+                for (int j = -1; j <= 1; j++) // doorloop de y waardes
+                {
+                    if (m_Board.GetCard(new CCPoint(p.X + i, p.Y + j)) == null) // als er een kaart omheen null is, niet done, dus return false
+                        return false;
+                }
+            }
+
+            return true; // alle kaarten zijn gelegd.
+        }  
+
+        private bool FindCastleOpenSpots(CCPoint p, int FromCardSpot, ref List<CCPoint> CardList)
+        {
+            CardList.Add(p);
+            int CardSpot = 0;
+
+            if (FromCardSpot == 0)
+                CardSpot = 2;
+            if (FromCardSpot == 1)
+                CardSpot = 3;
+            if (FromCardSpot == 2)
+                CardSpot = 0;
+            if (FromCardSpot == 3)
+                CardSpot = 1;
+
+            if (m_Board.GetCard(p).GetAttribute(4) == CardAttributes.SpaceStation ||
+                    m_Board.GetCard(p).GetAttribute(4) == CardAttributes.intersection)
+            {
+                for(int i = 0; i <= 3; i++)
+                {
+                    if(i != CardSpot && m_Board.GetCard(p).GetAttribute(i) == CardAttributes.SpaceStation)
+                    {
+                        CCPoint NextCardpos = p;
+
+                        if (i == 0)
+                        {
+                            NextCardpos.Y -= 1;
+                        }
+                        else if (i == 1)
+                        {
+                            NextCardpos.X -= 1;
+                        }
+                        else if (i == 2)
+                        {
+                            NextCardpos.Y += 1;
+                        }
+                        else if (i == 3)
+                        {
+                            NextCardpos.X += 1;
+                        }
+
+                        Card NextCard = m_Board.GetCard(NextCardpos);
+
+                        if (NextCard != null)
+                        {
+                            if (!CardList.Contains(NextCardpos))
+                            {
+                                if (FindCastleOpenSpots(NextCardpos, i, ref CardList))
+                                    return true;
+                            }
+                        }
+                        else
+                            return true;
+                    }
+                }
+            }
+
+            return false;
         }
     }
 }
