@@ -93,7 +93,7 @@ namespace ruigeruben
 
             }
 
-            if(m_CardPutDown && m_AllienPutDown == false)
+            if(m_CardPutDown && m_AllienPutDown == false && m_Game.m_CurrentPlayer.NumberOfAliens > 0)
             {
                 for(int i = 0; i < m_BoardLayer.PossiblePositionsAliens.Count; i++)
                 {
@@ -129,8 +129,11 @@ namespace ruigeruben
                     m_Overlay.m_CardButton.Visible = false;
                     m_BoardLayer.RemoveRaster();
                     m_CardPutDown = true;
-                    m_BoardLayer.DrawAlienPossiblePosition(m_Game.m_CurrentCard, pp);
-
+                    if (m_Game.m_CurrentPlayer.NumberOfAliens > 0)
+                    {
+                        m_BoardLayer.DrawAlienPossiblePosition(m_Game.m_CurrentCard, pp);
+                    }
+    
                 }
 
     m_Overlay.m_CardButton.Position = m_Overlay.m_CardPos;
@@ -244,7 +247,7 @@ namespace ruigeruben
                 if (m_AllienPutDown)
                 {
                     m_BoardLayer.DeleteLastAlien();
-                    m_BoardLayer.DrawAlienPossiblePosition(m_Game.m_CurrentCard, m_Game.m_PlacedCard);
+                    m_BoardLayer.DrawAlienPossiblePosition(m_Game.m_CurrentCard, m_PlacedCard);
                     m_AllienPutDown = false;
                 }
                 else
