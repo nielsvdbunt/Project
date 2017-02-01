@@ -72,14 +72,6 @@ namespace ruigeruben
                     
                     CCAudioEngine.SharedEngine.PlayBackgroundMusic(filename: "mix_6m07s", loop: true);
                     
-                   
-               
-                //CCScene scene = new MenuScene(gameView);
-                // gameView.RunWithScene(ms);
-
-                //CCScene gameScene = new CCScene(gameView);
-                // gameScene.AddLayer(new GameLayer());
-                //gameView.RunWithScene(gameScene);
             }
         }
 
